@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -30,13 +32,35 @@ ActionBarDrawerToggle drawerToggle;
 CoordinatorLayout rootLayout;
 FloatingActionButton fabBtn;
 
+Activity thisActivity;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	Fabric.with(this, new Crashlytics());
-	setContentView(R.layout.activity_main);
-	initToolbar();
-	initInstances();
+	Fabric.with ( this, new Crashlytics () );
+	setContentView ( R.layout.activity_main );
+	thisActivity=this;
+	initToolbar ();
+	initInstances ();
+	setMaterialBtnClickListener ( getWindow().getDecorView().findViewById(android.R.id.content) );
+}
+
+private void setMaterialBtnClickListener(View view){
+	com.getbase.floatingactionbutton.FloatingActionButton newListBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_a);
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_b);
+
+	newListBtn.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			CustomDialog.showPassCodeChangeOrTurnOff (thisActivity );
+		}
+	} );
+	toDoBtn.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			CustomDialog.showPassCodeChangeOrTurnOff (thisActivity );
+		}
+	} );
 }
 
 private void initToolbar() {
@@ -47,7 +71,7 @@ private void initToolbar() {
 private void initInstances() {
 	drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 	drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world);
-	drawerLayout.setDrawerListener(drawerToggle);
+	drawerLayout.setDrawerListener ( drawerToggle );
 
 	getSupportActionBar().setHomeButtonEnabled(true);
 	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
