@@ -1,43 +1,88 @@
 package com.vi8e.um.wunderlist;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.View;
 
 
 public
 class MainActivity extends AppCompatActivity {
 
 
+Toolbar                 toolbar;
+CollapsingToolbarLayout collapsingToolbarLayout;
 
+CoordinatorLayout    rootLayout;
+FloatingActionButton fabBtn;
 
 @Override
-protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	//setContentView(R.layout.activity_my);
+protected
+void onCreate ( Bundle savedInstanceState ) {
+	super.onCreate ( savedInstanceState );
+	setContentView ( R.layout.activity_main );
 
-	setContentView(R.layout.activity_my);
-	RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-	recList.setHasFixedSize ( true );
-	LinearLayoutManager llm = new LinearLayoutManager(this);
-	llm.setOrientation ( LinearLayoutManager.VERTICAL );
-	recList.setLayoutManager ( llm );
-
-	ContactAdapter ca = new ContactAdapter(createList(30));
-	recList.setAdapter ( ca );
+	initToolbar ();
+	initInstances ();
 }
 
+private
+void initToolbar () {
+	//toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
+//	setSupportActionBar ( toolbar );
+}
+
+private
+void initInstances () {
+	//drawerLayout = ( DrawerLayout ) findViewById ( R.id.drawerLayout );
+	//drawerToggle = new ActionBarDrawerToggle ( MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
+	//drawerLayout.setDrawerListener ( drawerToggle );
+
+	getSupportActionBar ().setHomeButtonEnabled ( true );
+	getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+
+	rootLayout = ( CoordinatorLayout) findViewById(R.id.rootLayout);
+
+	fabBtn = (FloatingActionButton) findViewById(R.id.fabBtn);
+	fabBtn.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Snackbar.make ( rootLayout, "Hello. I am Snackbar!", Snackbar.LENGTH_SHORT )
+							.setAction("Undo", new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+
+								}
+							})
+							.show();
+		}
+	});
+
+	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+	collapsingToolbarLayout.setTitle("Design Library");
+}
+
+@Override
+public void onPostCreate(Bundle savedInstanceState) {
+	super.onPostCreate ( savedInstanceState );
+}
+
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+	super.onConfigurationChanged(newConfig);
+}
 
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
 	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.my, menu);
+	getMenuInflater().inflate(R.menu.menu_main, menu);
 	return true;
 }
 
@@ -47,28 +92,12 @@ public boolean onOptionsItemSelected(MenuItem item) {
 	// automatically handle clicks on the Home/Up button, so long
 	// as you specify a parent activity in AndroidManifest.xml.
 	int id = item.getItemId();
+
+	//noinspection SimplifiableIfStatement
 	if (id == R.id.action_settings) {
 		return true;
 	}
+
 	return super.onOptionsItemSelected(item);
-}
-
-
-
-private
-List<ContactInfo> createList(int size) {
-
-	List<ContactInfo> result = new ArrayList<ContactInfo> ();
-	for (int i=1; i <= size; i++) {
-		ContactInfo ci = new ContactInfo();
-		ci.name = ContactInfo.NAME_PREFIX + i;
-		ci.surname = ContactInfo.SURNAME_PREFIX + i;
-		ci.email = ContactInfo.EMAIL_PREFIX + i + "@test.com";
-
-		result.add(ci);
-
-	}
-
-	return result;
 }
 }
