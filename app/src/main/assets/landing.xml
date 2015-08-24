@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storevisit>
+
+    <header>
+        <id>0</id>
+        <actionbartext>Home</actionbartext>
+        <title>Tampines</title>
+        <description>21 Tampines North Drive 2 #03-01 Singapore 528765</description>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+        <color>#FFFFFF</color>
+        <color2>#f8b195</color2>
+    </header>
+
+
+
+    <data>
+        <id>1</id>    
+        <title>Store Visits</title>
+        <description>VISIT AND RATE THE STORE</description>
+        <color>#f8b195</color>
+		<thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+	<data>
+        <id>2</id>
+        <title>Checklists</title>
+        <description>FILL CHECKLISTS</description>
+        <color>#f67280</color>
+		<thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+
+
+    <data>
+        <id>3</id>
+        <title>Adverts &amp; Promos</title>
+        <description>SEE THE LATEST ADVERTS &amp; PROMOS</description>
+        <color>#c06c84</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>4</id>
+        <title>All About Giant</title>
+        <description>READ OUR CF3 AND OUR VISION_MISSION</description>
+        <color>#6c5b7b</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>5</id>
+        <title>Inbox</title>
+        <description>CHECK THE REPORTS</description>
+        <color>#355c7d</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>6</id>
+        <title>Settings</title>
+        <description>MANAGE YOUR PREFERENCES</description>
+        <color>#549483</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+</storevisit>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storevisit>
+    <header>
+        <id>0</id>
+        <actionbartext>Store Visits</actionbartext>
+        <title>Store Visits</title>
+        <description>VISIT AND RATE THE STORE</description>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+        <color>#FFFFFF</color>
+        <color2>#f8b195</color2>
+    </header>
+    <data>
+        <id>1</id>    
+        <title>IMM Shopping Centre</title>
+        <description>VISIT AND RATE THE STORE</description>
+        <color>#FFFFFF</color>
+		<thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+	<data>
+        <id>2</id>
+        <title>Parkway Parade</title>
+        <description>FILL CHECKLISTS</description>
+        <color>#FFFFFF</color>
+		<thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+
+
+    <data>
+        <id>3</id>
+        <title>Pioneer Mall</title>
+        <description>SEE THE LATEST ADVERTS &amp; PROMOS</description>
+        <color>#FFFFFF</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>4</id>
+        <title>Sembawang Shopping Centre</title>
+        <description>READ OUR CF3 AND OUR VISION_MISSION</description>
+        <color>#FFFFFF</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>5</id>
+        <title>Suntec City Mall</title>
+        <description>CHECK THE REPORTS</description>
+        <color>#FFFFFF</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>6</id>
+        <title>Tampines</title>
+        <description>MANAGE YOUR PREFERENCES</description>
+        <color>#FFFFFF</color>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+</storevisit>

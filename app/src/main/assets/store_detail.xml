@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storevisit>
+
+    <header>
+        <id>0</id>
+        <actionbartext>Giant Tampines</actionbartext>
+        <title>Tampines</title>
+        <description>21 Tampines North Drive 2 #03-01 Singapore 528765</description>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+        <color>#FFFFFF</color>
+        <color2>#f8b195</color2>
+
+    </header>
+
+
+    <data>
+        <id>1</id>    
+        <title>Clean</title>
+        <description>NA</description>
+        <color>#FFFFFF</color>
+        <color2>#f8b195</color2>
+    </data>
+
+	<data>
+        <id>2</id>
+        <title>Full</title>
+        <description></description>
+        <color>#FFFFFF</color>
+        <color2>#aaaaaa</color2>
+		<thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+
+
+    <data>
+        <id>3</id>
+        <title>Fresh</title>
+        <description></description>
+        <color>#FFFFFF</color>
+        <color2>#aaaaaa</color2>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>4</id>
+        <title>Friendly</title>
+        <description>3</description>
+        <color>#FFFFFF</color>
+        <color2>#f8b195</color2>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>5</id>
+        <title>Other Remarks</title>
+        <description></description>
+        <color>#FFFFFF</color>
+        <color2>#aaaaaa</color2>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+    <data>
+        <id>6</id>
+        <title>Pictures</title>
+        <description></description>
+        <color>#FFFFFF</color>
+        <color2>#aaaaaa</color2>
+        <thumb_url>https://app.box.com/shared/static/2lsrwuzurenyxvaswmtwmwy6oe2ita01.png</thumb_url>
+    </data>
+</storevisit>
