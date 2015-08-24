@@ -2,11 +2,13 @@ package com.vi8e.um.wunderlist;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public
@@ -14,89 +16,59 @@ class MainActivity extends AppCompatActivity {
 
 
 
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate ( savedInstanceState );
-	setContentView ( R.layout.activity_main );
-	setupToolbar ();
-	setupRecyclerView ();
-}
-private void setupToolbar() {
-	//Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-	//setSupportActionBar ( toolbar );
-}
-private void setupRecyclerView() {
-	RecyclerView recyclerView = (RecyclerView)       findViewById(R.id.recyclerview);
-	// Let’s a grid with 2 columns.
-	recyclerView.setLayoutManager(new GridLayoutManager (this, 2));
-	populateRecyclerView(recyclerView);
-}
-private void populateRecyclerView(RecyclerView recyclerView) {
-	recyclerView.setAdapter(new RecyclerView.Adapter() {
-		private final static int DUMMY_ITEM_COUNT = 30;
-		@Override
-		public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-			View itemView = LayoutInflater.from ( viewGroup.getContext () ).inflate(R.layout.list_item, viewGroup, false);
-			return new TextHolder(itemView);
-		}
-		@Override
-		public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-			// We are too lazy for this by now ;-)
-		}
-		@Override
-		public int getItemCount() {
-			return DUMMY_ITEM_COUNT;
-		}
-		class TextHolder extends RecyclerView.ViewHolder {
-			public TextHolder(View itemView) {
-				super(itemView);
-			}
-		}
-	});
+	super.onCreate(savedInstanceState);
+	//setContentView(R.layout.activity_my);
 
-	final View tabBar = findViewById(R.id.fake_tab);
-	final View coloredBackgroundView =        findViewById(R.id.colored_background_view);
-	final View toolbarContainer = findViewById(R.id.toolbar_container);
-	final View toolbar = findViewById(R.id.toolbar);
-	recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-		@Override
-		public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-			super.onScrollStateChanged(recyclerView, newState);
-		}
-		@Override
-		public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-			super.onScrolled(recyclerView, dx, dy);
-			scrollColoredViewParallax(dy);
-			if (dy > 0) {
-				hideToolbarBy(dy);
-			} else {
-				showToolbarBy(dy);
-			}
-		}
-		private void scrollColoredViewParallax(int dy) {
-			coloredBackgroundView.setTranslationY(coloredBackgroundView.getTranslationY() - dy / 3);
-		}
-		private void hideToolbarBy(int dy) {
-			if (cannotHideMore(dy)) {
-				toolbarContainer.setTranslationY(-tabBar.getBottom());
-			} else {
-				toolbarContainer.setTranslationY(toolbarContainer.getTranslationY() - dy);
-			}
-		}
-		private boolean cannotHideMore(int dy) {
-			return Math.abs(toolbarContainer.getTranslationY() - dy) > tabBar.getBottom();
-		}
-		private void showToolbarBy(int dy) {
-			if (cannotShowMore(dy)) {
-				toolbarContainer.setTranslationY(0);
-			} else {
-				toolbarContainer.setTranslationY(toolbarContainer.getTranslationY() - dy);
-			}
-		}
-		private boolean cannotShowMore(int dy) {
-			return toolbarContainer.getTranslationY() - dy > 0;
-		}
-	});
+	setContentView(R.layout.activity_my);
+	RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+	recList.setHasFixedSize ( true );
+	LinearLayoutManager llm = new LinearLayoutManager(this);
+	llm.setOrientation ( LinearLayoutManager.VERTICAL );
+	recList.setLayoutManager ( llm );
 
+	ContactAdapter ca = new ContactAdapter(createList(30));
+	recList.setAdapter ( ca );
+}
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.my, menu);
+	return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+	// Handle action bar item clicks here. The action bar will
+	// automatically handle clicks on the Home/Up button, so long
+	// as you specify a parent activity in AndroidManifest.xml.
+	int id = item.getItemId();
+	if (id == R.id.action_settings) {
+		return true;
+	}
+	return super.onOptionsItemSelected(item);
+}
+
+
+
+private
+List<ContactInfo> createList(int size) {
+
+	List<ContactInfo> result = new ArrayList<ContactInfo> ();
+	for (int i=1; i <= size; i++) {
+		ContactInfo ci = new ContactInfo();
+		ci.name = ContactInfo.NAME_PREFIX + i;
+		ci.surname = ContactInfo.SURNAME_PREFIX + i;
+		ci.email = ContactInfo.EMAIL_PREFIX + i + "@test.com";
+
+		result.add(ci);
+
+	}
+
+	return result;
 }
 }
