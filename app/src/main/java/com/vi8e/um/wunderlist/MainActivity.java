@@ -79,7 +79,7 @@ private void initInstances() {
 	rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
 
 	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-	collapsingToolbarLayout.setTitle("Design Library");
+	collapsingToolbarLayout.setTitle("User Profile");
 }
 
 @Override
