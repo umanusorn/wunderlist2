@@ -13,7 +13,7 @@ String type;
 
 public
 ListModel ( String name, String imgPath, int isDisturb, int isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
-	this.name = name;
+	this.name = name; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
 	this.isPinned = isPinned;
