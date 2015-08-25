@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.crashlytics.android.Crashlytics;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.adater.ListAdapter;
 import com.vi8e.um.wunderlist.util.CustomDialog;
+import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
 
@@ -51,17 +53,23 @@ protected void onCreate(Bundle savedInstanceState) {
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ) );
 
 
-	ArrayList<ListModel> arrayOfUsers = new ArrayList<ListModel> ();
+	//Utility.setDrawbleColorFilter ();
+
+	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
 // Create the adapter to convert the array to views
-	ListAdapter adapter = new ListAdapter (this, arrayOfUsers);
+	ListAdapter adapter = new ListAdapter (this, arrayOfList);
 // Attach the adapter to a ListView
 	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
 	listView.setAdapter ( adapter );
+arrayOfList.add ( new ListModel ( "dssdf" ) );
 
+	for ( int i = 0 ; i < 30 ; i++ ) {
+		Log.d ("loop",""+i);
+		adapter.add ( new ListModel ( i, "TestingListViews" + i ) );
+	}
+	adapter.add ( new ListModel ( "dssdf" ) );
+	Utility.setListViewHeightBasedOnChildren ( listView );
 
-
-	ListModel newUser = new ListModel ("Nathan");
-	adapter.add(newUser);
 
 // Or even append an entire new collection
 // Fetching some data, data has now returned

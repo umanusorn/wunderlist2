@@ -67,8 +67,7 @@
 <ListView
         android:id="@+id/listViewLanding"
         android:layout_width="match_parent"
-
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 </ListView>
                 <include layout="@layout/long_content"/>
@@ -147,8 +146,5 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"-->
-
-
-
 
 </android.support.v4.widget.DrawerLayout>

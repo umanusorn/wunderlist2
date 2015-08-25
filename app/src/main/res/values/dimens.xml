@@ -18,7 +18,7 @@
     <dimen name="fab_margin_right">0.1dp</dimen>
     <dimen name="fab_margin_bottom">0.1dp</dimen>
 
-    <dimen name="app_bar_height">256dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
     <dimen name="nav_header_height">192dp</dimen>
 
     <dimen name="expanded_toolbar_title_margin_start">64dp</dimen>
@@ -31,6 +31,7 @@
     <dimen name="rating">15dip</dimen>
     <dimen name="genre">13dip</dimen>
     <dimen name="year">12dip</dimen>
+    <dimen name="list_row_padding">8dp</dimen>
 
 
 </resources>

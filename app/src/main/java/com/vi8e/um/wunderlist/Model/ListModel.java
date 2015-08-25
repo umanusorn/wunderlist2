@@ -1,15 +1,26 @@
 package com.vi8e.um.wunderlist.Model;
 
-public class ListModel {
+public
+class ListModel {
 
 
-int id,numLateTask,numCurrentTask,folderId,isPinned, isDisturb;
+int id;
+int numLateTask;
+int    numCurrentTask;
+int    folderId;
+int    isPinned;
+int    isDisturb;
 String imgPath;
 String listTitle;
 String type;
+public
+ListModel ( int id, String listTitle ) {
+	setDefault ();
+	this.id = id;
+	this.listTitle = listTitle;
+}
 
-
-void setDefault(){
+void setDefault () {
 	this.listTitle = ""; //
 	this.imgPath = "";
 	this.isDisturb = 0;
