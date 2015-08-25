@@ -13,8 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
+import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.adater.ListAdapter;
+import com.vi8e.um.wunderlist.util.CustomDialog;
+
+import java.util.ArrayList;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -43,6 +49,26 @@ protected void onCreate(Bundle savedInstanceState) {
 	initToolbar ();
 	initInstances ();
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ) );
+
+
+	ArrayList<ListModel> arrayOfUsers = new ArrayList<ListModel> ();
+// Create the adapter to convert the array to views
+	ListAdapter adapter = new ListAdapter (this, arrayOfUsers);
+// Attach the adapter to a ListView
+	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
+	listView.setAdapter ( adapter );
+
+
+
+	//ListModel newUser = new ListModel ("Nathan");
+	//adapter.add(newUser);
+// Or even append an entire new collection
+// Fetching some data, data has now returned
+// If data was JSON, convert to ArrayList of User objects.
+	/*JSONArray jsonArray = ...;
+	ArrayList<User> newUsers = User.fromJson(jsonArray)
+	adapter.addAll(newUsers);*/
+
 }
 
 private void setFloatingActionBtnClickListener ( View view ){
@@ -52,7 +78,7 @@ private void setFloatingActionBtnClickListener ( View view ){
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showPassCodeChangeOrTurnOff (thisActivity );
+			CustomDialog.showPassCodeChangeOrTurnOff ( thisActivity );
 		}
 	} );
 	toDoBtn.setOnClickListener ( new View.OnClickListener () {
@@ -76,10 +102,13 @@ private void initInstances() {
 	getSupportActionBar().setHomeButtonEnabled(true);
 	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
 	rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
 
 	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-	collapsingToolbarLayout.setTitle("User Profile");
+	collapsingToolbarLayout.setTitle ( "User Profile" );
+
+
 }
 
 @Override

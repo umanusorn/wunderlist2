@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist;
+package com.vi8e.um.wunderlist.util;
 import android.app.Activity;
 import android.view.View;
 

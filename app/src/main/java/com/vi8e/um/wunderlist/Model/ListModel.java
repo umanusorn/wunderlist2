@@ -5,15 +5,18 @@ public class ListModel {
 
 int id,numLateTask,numCurrentTask,folderId,isPinned, isDisturb;
 String imgPath;
-String name;
+String listTitle;
 String type;
 
 
-
+public
+ListModel ( String listTitle ) {
+	this.listTitle = listTitle;
+}
 
 public
-ListModel ( String name, String imgPath, int isDisturb, int isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
-	this.name = name; //
+ListModel ( String listTitle, String imgPath, int isDisturb, int isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
+	this.listTitle = listTitle; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
 	this.isPinned = isPinned;
@@ -21,6 +24,7 @@ ListModel ( String name, String imgPath, int isDisturb, int isPinned, int folder
 	this.numCurrentTask = numCurrentTask;
 	this.numLateTask = numLateTask;
 	this.id = id;
+
 }
 
 public
@@ -35,13 +39,13 @@ void setType ( String type ) {
 }
 
 public
-String getName () {
-	return name;
+String getListTitle () {
+	return listTitle;
 }
 
 public
-void setName ( String name ) {
-	this.name = name;
+void setListTitle ( String listTitle ) {
+	this.listTitle = listTitle;
 }
 
 public

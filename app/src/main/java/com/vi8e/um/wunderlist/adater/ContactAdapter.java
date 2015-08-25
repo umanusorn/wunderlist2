@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.vi8e.um.wunderlist;
+package com.vi8e.um.wunderlist.adater;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.ContactInfo;
+import com.vi8e.um.wunderlist.R;
 
 import java.util.List;
 
