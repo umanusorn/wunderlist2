@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist;
 import android.app.Activity;
+import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -14,11 +15,20 @@ class CustomDialog {
 public static
 void showPassCodeChangeOrTurnOff (final Activity thisContext ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
-			.title ( "Please choose Change/Turn off" )
-			.positiveText ( "Change" )
-			.negativeText ( "Turn off" )
-			.neutralText ( "natural" )
+			//.customView ( R.layout.dialog_todo, true )
+			.title ( "Add to-do" )
+			.positiveText ( "ADD" )
+			.input ( "Add to-do", "", new MaterialDialog.InputCallback () {
+				@Override public
+				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
+					showPassCodeChangeOrTurnOff ( thisContext );
+				}
+			} )
+			.negativeText ( "CANCEL" )
 			.show ();
+
+
+	View view = scoreDialog.getCustomView ();
 }
 
 
