@@ -7,6 +7,6 @@
     <string name="txt_floating_action_button">FloatActionButton</string>
     <string name="txt_navigation_view">NavigationView</string>
     <string name="txt_other">Other</string>
-    <string name="txt_yo_yo">Yo Yo</string>
+    <string name="txt_test">Test UI Animation</string>
     <string name="title_activity_code_lab">CodeLabActivity</string>
 </resources>

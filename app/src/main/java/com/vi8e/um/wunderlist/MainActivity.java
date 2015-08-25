@@ -42,10 +42,10 @@ protected void onCreate(Bundle savedInstanceState) {
 	thisActivity=this;
 	initToolbar ();
 	initInstances ();
-	setMaterialBtnClickListener ( getWindow().getDecorView().findViewById(android.R.id.content) );
+	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ) );
 }
 
-private void setMaterialBtnClickListener(View view){
+private void setFloatingActionBtnClickListener ( View view ){
 	com.getbase.floatingactionbutton.FloatingActionButton newListBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_a);
 	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_b);
 

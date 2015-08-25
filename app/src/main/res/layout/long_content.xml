@@ -6,101 +6,101 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_yo_yo" />
+        android:text="@string/txt_test" />
 
 </merge>
