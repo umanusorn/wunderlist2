@@ -9,9 +9,22 @@ String listTitle;
 String type;
 
 
+void setDefault(){
+	this.listTitle = ""; //
+	this.imgPath = "";
+	this.isDisturb = 0;
+	this.isPinned = 0;
+	this.folderId = 0;
+	this.numCurrentTask = 0;
+	this.numLateTask = 0;
+	this.id = 0;
+}
+
 public
 ListModel ( String listTitle ) {
+	setDefault ();
 	this.listTitle = listTitle;
+
 }
 
 public

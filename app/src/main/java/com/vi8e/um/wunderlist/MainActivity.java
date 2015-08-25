@@ -60,8 +60,9 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
 
-	//ListModel newUser = new ListModel ("Nathan");
-	//adapter.add(newUser);
+	ListModel newUser = new ListModel ("Nathan");
+	adapter.add(newUser);
+
 // Or even append an entire new collection
 // Fetching some data, data has now returned
 // If data was JSON, convert to ArrayList of User objects.
