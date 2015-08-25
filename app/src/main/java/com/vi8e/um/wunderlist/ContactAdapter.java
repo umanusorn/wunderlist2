@@ -22,45 +22,52 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Model.ContactInfo;
+
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    private List<ContactInfo> contactList;
+private List<ContactInfo> contactList;
 
-    public ContactAdapter(List<ContactInfo> contactList) {
-        this.contactList = contactList;
-    }
+public
+ContactAdapter ( List<ContactInfo> contactList ) {
+	this.contactList = contactList;
+}
 
 
-    @Override
-    public int getItemCount() {
-        return contactList.size();
-    }
+@Override
+public
+int getItemCount () {
+	return contactList.size ();
+}
 
-    @Override
-    public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        ContactInfo ci = contactList.get(i);
-        contactViewHolder.vName.setText(ci.name);
-        contactViewHolder.vSurname.setText(ci.surname);
-        contactViewHolder.vEmail.setText(ci.email);
-        contactViewHolder.vTitle.setText(ci.name + " " + ci.surname);
-    }
+@Override
+public
+void onBindViewHolder ( ContactViewHolder contactViewHolder, int i ) {
+	ContactInfo ci = contactList.get ( i );
+	contactViewHolder.vName.setText ( ci.getName () );
+	contactViewHolder.vSurname.setText ( ci.getSurname () );
+	contactViewHolder.vEmail.setText ( ci.getEmail () );
+	contactViewHolder.vTitle.setText ( ci.getName () + " " + ci.getSurname () );
+}
 
-    @Override
-    public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View itemView = LayoutInflater.
-                    from(viewGroup.getContext()).
-                    inflate(R.layout.card_layout, viewGroup, false);
+@Override
+public
+ContactViewHolder onCreateViewHolder ( ViewGroup viewGroup, int i ) {
+	View itemView = LayoutInflater.
+																		from ( viewGroup.getContext () ).
+																		inflate ( R.layout.card_layout, viewGroup, false );
 
-            return new ContactViewHolder(itemView);
-    }
+	return new ContactViewHolder ( itemView );
+}
 
-    public static class ContactViewHolder extends RecyclerView.ViewHolder {
+public static
+class ContactViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView vName;
-        protected TextView vSurname;
-        protected TextView vEmail;
+	protected TextView vName;
+	protected TextView vSurname;
+	protected TextView vEmail;
         protected TextView vTitle;
 
         public ContactViewHolder(View v) {

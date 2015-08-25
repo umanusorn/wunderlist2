@@ -14,7 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.vi8e.um.wunderlist;
+package com.vi8e.um.wunderlist.Model;
 
 
 public class ContactInfo {
@@ -26,5 +26,51 @@ public class ContactInfo {
     protected static final String NAME_PREFIX = "Name_";
     protected static final String SURNAME_PREFIX = "Surname_";
     protected static final String EMAIL_PREFIX = "email_";
+
+public static
+String getNamePrefix () {
+	return NAME_PREFIX;
+}
+
+public static
+String getSurnamePrefix () {
+	return SURNAME_PREFIX;
+}
+
+public static
+String getEmailPrefix () {
+	return EMAIL_PREFIX;
+}
+
+public
+String getName () {
+
+	return name;
+}
+
+public
+void setName ( String name ) {
+	this.name = name;
+}
+
+public
+String getSurname () {
+	return surname;
+}
+
+public
+void setSurname ( String surname ) {
+	this.surname = surname;
+}
+
+public
+String getEmail () {
+	return email;
+}
+
+public
+void setEmail ( String email ) {
+	this.email = email;
+}
 }
 

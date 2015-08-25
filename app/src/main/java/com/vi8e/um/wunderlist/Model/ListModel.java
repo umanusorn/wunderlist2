@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist;
+package com.vi8e.um.wunderlist.Model;
 
 public class ListModel {
 
