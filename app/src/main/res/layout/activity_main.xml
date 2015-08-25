@@ -97,8 +97,7 @@
                 fab:fab_addButtonColorNormal="@color/material_add_btn"
                 fab:fab_addButtonColorPressed="@color/material_add_btn_press"
                 fab:fab_addButtonPlusIconColor="#000000"
-                android:layout_marginBottom="160dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp">
             <!--
                     android:layout_alignParentStart="true"-->
