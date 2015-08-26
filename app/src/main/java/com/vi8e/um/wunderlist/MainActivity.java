@@ -39,6 +39,7 @@ ActionBarDrawerToggle drawerToggle;
 
 CoordinatorLayout rootLayout;
 FloatingActionButton fabBtn;
+ListAdapter listAdapter;
 
 Activity thisActivity;
 
@@ -48,26 +49,27 @@ protected void onCreate(Bundle savedInstanceState) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_main );
 	thisActivity=this;
+	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
 	initToolbar ();
 	initInstances ();
-	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ) );
+	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
 
 
 	//Utility.setDrawbleColorFilter ();
 
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
 // Create the adapter to convert the array to views
-	ListAdapter adapter = new ListAdapter (this, arrayOfList);
+	listAdapter = new ListAdapter (this, arrayOfList);
 // Attach the adapter to a ListView
-	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
-	listView.setAdapter ( adapter );
+
+	listView.setAdapter ( listAdapter );
 arrayOfList.add ( new ListModel ( "dssdf" ) );
 
-	for ( int i = 0 ; i < 30 ; i++ ) {
+	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ("loop",""+i);
-		adapter.add ( new ListModel ( i, "TestingListViews" + i ) );
+		listAdapter.add ( new ListModel ( i, "TestingListViews" + i ) );
 	}
-	adapter.add ( new ListModel ( "dssdf" ) );
+	listAdapter.add ( new ListModel ( "dssdf" ) );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
 
@@ -80,20 +82,19 @@ arrayOfList.add ( new ListModel ( "dssdf" ) );
 
 }
 
-private void setFloatingActionBtnClickListener ( View view ){
+private void setFloatingActionBtnClickListener ( View view, final ListView listView ){
 	com.getbase.floatingactionbutton.FloatingActionButton newListBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_a);
 	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_b);
-
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showPassCodeChangeOrTurnOff ( thisActivity );
+			CustomDialog.showPassCodeChangeOrTurnOff ( thisActivity,listAdapter,listView );
 		}
 	} );
 	toDoBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showPassCodeChangeOrTurnOff (thisActivity );
+			CustomDialog.showPassCodeChangeOrTurnOff (thisActivity,listAdapter,listView );
 		}
 	} );
 }

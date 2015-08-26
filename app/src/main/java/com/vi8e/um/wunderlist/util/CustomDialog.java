@@ -1,8 +1,10 @@
 package com.vi8e.um.wunderlist.util;
 import android.app.Activity;
-import android.view.View;
+import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.adater.ListAdapter;
 
 
 /**
@@ -13,7 +15,7 @@ class CustomDialog {
 
 
 public static
-void showPassCodeChangeOrTurnOff (final Activity thisContext ) {
+void showPassCodeChangeOrTurnOff ( final Activity thisContext, final ListAdapter listAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Add to-do" )
@@ -21,14 +23,12 @@ void showPassCodeChangeOrTurnOff (final Activity thisContext ) {
 			.input ( "Add to-do", "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					showPassCodeChangeOrTurnOff ( thisContext );
+					listAdapter.addList ( new ListModel ( String.valueOf ( charSequence )),listView );
 				}
 			} )
 			.negativeText ( "CANCEL" )
 			.show ();
 
-
-	View view = scoreDialog.getCustomView ();
 }
 
 
