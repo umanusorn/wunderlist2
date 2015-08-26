@@ -111,9 +111,9 @@ private void initInstances() {
 	drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world);
 	drawerLayout.setDrawerListener ( drawerToggle );
 
-	toolbar = (Toolbar) findViewById(R.id.toolbar);
+	/*toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
-	toolbar.setVisibility ( View.VISIBLE );
+	toolbar.setVisibility ( View.VISIBLE );*/
 	//	getSupportActionBar().setHomeButtonEnabled(true);
 	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -4,18 +4,37 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
+import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.R;
 
 
 public
 class ListActivity extends AppCompatActivity {
 
+String title;
+
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_list );
+	setUpContent ();
+	setView ();
+}
+
+void setView(){
+	EditText editText =(EditText)findViewById ( R.id.editText );
+	editText.setHint ( "Add a to-do in \""+title+"\"" );
+}
+
+void setUpContent(){
+	Bundle extras = getIntent().getExtras();
+	if(extras !=null)
+	{
+		title= extras.getString( ListConst.KEY_TITLE);
+	}
 }
 
 @Override
