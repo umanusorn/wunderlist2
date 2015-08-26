@@ -29,9 +29,11 @@
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
+            android:id="@+id/listViewLanding"
             android:layout_below="@+id/imageView3"
             android:layout_centerHorizontal="true"/>
+
+
 
     <TextView
             android:layout_width="wrap_content"
@@ -40,7 +42,7 @@
             android:text="COMPLETED TO-DOS"
             android:background="@color/grey_600"
             android:id="@+id/textView"
-            android:layout_below="@+id/listView"
+            android:layout_alignBottom="@+id/listViewLanding"
             android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
