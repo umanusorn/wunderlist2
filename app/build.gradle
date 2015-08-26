@@ -1,0 +1,86 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+task('increaseVersionCode') << {
+    def manifestFile = file("AndroidManifest.xml")
+    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+    def manifestText = manifestFile.getText()
+    def matcher = pattern.matcher(manifestText)
+    matcher.find()
+    def versionCode = Integer.parseInt(matcher.group(1))
+    def manifestContent = matcher.replaceAll("versionCode=\"" + ++versionCode + "\"")
+    manifestFile.write(manifestContent)
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'generateReleaseBuildConfig') {
+        task.dependsOn 'increaseVersionCode'
+    }
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+    def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def code = versionProps['VERSION_CODE'].toInteger() + 1
+        versionProps['VERSION_CODE'] = code.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+        defaultConfig {
+            applicationId "com.vi8e.um.wunderlist2"
+            minSdkVersion 16
+            targetSdkVersion 22
+            versionCode code
+            versionName "UmDev"
+        }
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
+
+    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
+    compile 'com.android.support:palette-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
+    compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.getbase:floatingactionbutton:1.8.0'
+    compile 'com.afollestad:material-dialogs:0.7.8.1'
+
+    compile 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-core-slh:3.1.0@aar'
+
+    compile 'com.mcxiaoke.volley:library:1.0.18'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.1@aar') {
+        transitive = true;
+    }
+}
