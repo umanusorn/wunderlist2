@@ -1,6 +1,5 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                         xmlns:app="http://schemas.android.com/apk/res-auto"
-                                        xmlns:fab="http://schemas.android.com/apk/lib/com.getbase.floatingactionbutton"
                                         android:id="@+id/drawerLayout"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
@@ -13,13 +12,17 @@
         <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_height"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                android:background="@drawable/md_transparent"
+
+                app:theme="@style/CustomActionBar"
+               >
 
             <android.support.design.widget.CollapsingToolbarLayout
                     android:id="@+id/collapsingToolbarLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:contentScrim="?attr/colorPrimary"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -83,49 +86,8 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-        <!--<android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="@dimen/fab_margin_bottom"
-                android:layout_marginRight="@dimen/fab_margin_right"
-                android:src="@drawable/ic_plus"
-                app:borderWidth="0dp"
-                app:fabSize="normal" />-->
 
-        <com.getbase.floatingactionbutton.FloatingActionsMenu
-                android:id="@+id/multiple_actions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                fab:fab_addButtonColorNormal="@color/material_add_btn"
-                fab:fab_addButtonColorPressed="@color/material_add_btn_press"
-                fab:fab_addButtonPlusIconColor="#000000"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp">
-            <!--
-                    android:layout_alignParentStart="true"-->
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/action_a"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_icon="@mipmap/wl_actionbar_folder"
-                    fab:fab_colorNormal="@color/material_menu_btn"
-                    fab:fab_title="1"
-                    fab:fab_colorPressed="@color/material_menu_btn_press"/>
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/action_b"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    fab:fab_icon="@mipmap/wl_actionbar_folder"
-                    fab:fab_colorNormal="@color/material_menu_btn"
-                    fab:fab_title="2"
-                    fab:fab_colorPressed="@color/material_menu_btn_press"/>
-
-        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        <include layout="@layout/floating_action_btn"/>
 
 
     </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/multiple_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            fab:fab_addButtonColorNormal="@color/blue_500"
+            fab:fab_addButtonColorPressed="@color/material_add_btn_press"
+            fab:fab_addButtonPlusIconColor="#000000"
+
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp">
+        <!--
+                android:layout_alignParentStart="true"-->
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_icon="@mipmap/wl_actionbar_list"
+            fab:fab_colorNormal="@color/green_500"
+            fab:fab_title="2"
+            fab:fab_colorPressed="@color/material_menu_btn_press"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/action_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_icon="@mipmap/wl_actionbar_done_disabled"
+                fab:fab_colorNormal="@color/material_menu_btn"
+                fab:fab_title="1"
+                android:tintMode="src_atop"
+                android:tint="@color/white"
+                fab:fab_colorPressed="@color/material_menu_btn_press"/>
+
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
