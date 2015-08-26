@@ -112,7 +112,7 @@ private void initInstances() {
 
 	toolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(toolbar);
-
+	toolbar.setVisibility ( View.VISIBLE );
 	//	getSupportActionBar().setHomeButtonEnabled(true);
 	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
