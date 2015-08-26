@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist;
+package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.ListAdapter;
 import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.Utility;

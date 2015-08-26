@@ -35,6 +35,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         app:layout_collapseMode="pin"
+
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                         android:background="@android:color/transparent"/>
 
@@ -60,9 +61,6 @@
                         android:layout_height="match_parent">
 
                 </ListView>
-
-                <include layout="@layout/long_content"/>
-
 
             </LinearLayout>
 
