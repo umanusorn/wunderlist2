@@ -53,7 +53,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
 	initToolbar ();
 	initInstances ();
-	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
+//	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
 
 
 	//Utility.setDrawbleColorFilter ();

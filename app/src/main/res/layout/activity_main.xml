@@ -65,6 +65,8 @@
 
                 </ListView>
 
+                <include layout="@layout/long_content"/>
+
 
             </LinearLayout>
 
