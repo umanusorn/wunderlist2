@@ -45,15 +45,15 @@ Activity thisActivity;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+	super.onCreate ( savedInstanceState );
 	//toolbar.setBackgroundColor ( Color.alpha ( 0 ) );
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_main );
 	thisActivity=this;
-	ListView listView = (ListView ) findViewById(R.id.listViewLanding);
+	ListView listView = ( ListView ) findViewById(R.id.listViewLanding );
 	initToolbar ();
 	initInstances ();
-//	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
+	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
 
 
 	//Utility.setDrawbleColorFilter ();
@@ -110,8 +110,10 @@ private void initInstances() {
 	drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world);
 	drawerLayout.setDrawerListener ( drawerToggle );
 
-	getSupportActionBar().setHomeButtonEnabled(true);
-	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	toolbar = (Toolbar) findViewById(R.id.toolbar);
+	setSupportActionBar(toolbar);
+	//	getSupportActionBar().setHomeButtonEnabled(true);
+	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 	rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
