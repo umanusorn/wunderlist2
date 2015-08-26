@@ -43,7 +43,7 @@ void setDrawbleColorFilter (Context context, Drawable drawable,int color ) {
 	drawable.setColorFilter (	 color, mMode );
 }
 
-public static String getVersionName(Context context){
+public static String getVersionCode ( Context context ){
 	try {
 		return String.valueOf ( context.getPackageManager().getPackageInfo ( context.getPackageName (), 0 ).versionCode );
 	}

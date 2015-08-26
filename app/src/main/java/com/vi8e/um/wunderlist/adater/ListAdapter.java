@@ -1,13 +1,14 @@
 package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vi8e.um.wunderlist.Activity.ListActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
@@ -41,18 +42,35 @@ View getView ( int position, View convertView, ViewGroup parent ) {
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
+	final ImageView star = (ImageView)convertView.findViewById ( R.id.star );
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( listModel.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
 
+
+	star.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			if ( star.getId () == 1 ) {
+				star.setBackgroundColor ( Color.RED );
+				star.setId ( 0 );
+			}
+			else {
+				star.setId ( 1 );
+			}
+		}
+	} );
+
+
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Toast.makeText ( getContext (),"sss",Toast.LENGTH_LONG ).show ();
 			Intent  intent = new Intent ( getContext (), ListActivity.class );
-			intent.putExtra ( ListConst.KEY_TITLE,tvTitle.getText ().toString () );
+			intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
 			getContext ().startActivity ( intent );
+
+
 
 		}
 	} );

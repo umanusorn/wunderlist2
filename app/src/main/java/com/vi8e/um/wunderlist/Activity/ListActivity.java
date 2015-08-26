@@ -66,9 +66,8 @@ ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 	listView.setAdapter ( listAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		listAdapter.add ( new ListModel ( i, "TestingListViews" + i ) );
+		listAdapter.add ( new ListModel ( i, "Dummy Task" + i ) );
 	}
-	listAdapter.add ( new ListModel ( "dssdf" ) );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
 // Or even append an entire new collection
