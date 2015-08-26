@@ -71,9 +71,7 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-
         <include layout="@layout/floating_action_btn"/>
-
 
     </android.support.design.widget.CoordinatorLayout>
 
