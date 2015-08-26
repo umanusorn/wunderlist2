@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:backgroundTintMode="src_atop">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/list_row_padding"
+            >
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+
+            android:src="@mipmap/wl_icon_task_detail_checkbox"
+            android:layout_gravity="center_vertical"
+            android:tintMode="src_atop"
+            android:tint="@color/grey_600"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+
+            android:id="@+id/listtitle"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:textColor="@color/grey_600"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/imageView2"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:padding="@dimen/md_listitem_control_margin"
+            android:text="3"
+            android:id="@+id/latetask"
+            android:textColor="@color/red_400"
+            android:layout_alignParentBottom="false"
+            android:layout_toLeftOf="@+id/currentTask"
+            android:layout_toStartOf="@+id/currentTask"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignParentTop="false"
+            android:layout_centerVertical="true"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:padding="@dimen/md_listitem_control_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="1"
+            android:id="@+id/currentTask"
+            android:textColor="@color/grey_600"
+            android:layout_alignTop="@+id/latetask"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/wl_task_detail_ribbon"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/textView2"
+                android:textColor="@color/red_600"
+                android:layout_below="@+id/imageView2"
+                android:layout_alignLeft="@+id/listtitle"
+                android:layout_alignStart="@+id/listtitle"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:layout_below="@+id/listtitle"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_toEndOf="@+id/textView2"
+                android:src="@drawable/abc_list_pressed_holo_dark"/>
+    </RelativeLayout>
+</RelativeLayout>

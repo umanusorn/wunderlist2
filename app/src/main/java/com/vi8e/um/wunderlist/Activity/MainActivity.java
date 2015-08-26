@@ -1,6 +1,7 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -37,10 +38,10 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 
 DrawerLayout drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-
+ListAdapter listAdapter;
 CoordinatorLayout rootLayout;
 FloatingActionButton fabBtn;
-ListAdapter listAdapter;
+
 
 Activity thisActivity;
 
@@ -52,21 +53,25 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView ( R.layout.activity_main );
 	thisActivity=this;
 	ListView listView = ( ListView ) findViewById(R.id.listViewLanding );
+	 listAdapter = setUpAdapterListView ( thisActivity,getApplication (),listView,listAdapter);
+
 	initToolbar ();
 	initInstances ();
-	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView );
 
+	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ),listView,listAdapter );
 
 	//Utility.setDrawbleColorFilter ();
 
+}
+
+public static ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView,ListAdapter listAdapter ){
+
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
 // Create the adapter to convert the array to views
-	listAdapter = new ListAdapter (this, arrayOfList);
+	listAdapter = new ListAdapter (activity, arrayOfList);
 // Attach the adapter to a ListView
 
 	listView.setAdapter ( listAdapter );
-arrayOfList.add ( new ListModel ( "dssdf" ) );
-
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ("loop",""+i);
 		listAdapter.add ( new ListModel ( i, "TestingListViews" + i ) );
@@ -74,17 +79,16 @@ arrayOfList.add ( new ListModel ( "dssdf" ) );
 	listAdapter.add ( new ListModel ( "dssdf" ) );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
-
 // Or even append an entire new collection
 // Fetching some data, data has now returned
 // If data was JSON, convert to ArrayList of User objects.
 	/*JSONArray jsonArray = ...;
 	ArrayList<User> newUsers = User.fromJson(jsonArray)
 	adapter.addAll(newUsers);*/
-
+	return listAdapter;
 }
 
-private void setFloatingActionBtnClickListener ( View view, final ListView listView ){
+private void setFloatingActionBtnClickListener ( View view, final ListView listView, final ListAdapter listAdapter ){
 	com.getbase.floatingactionbutton.FloatingActionButton newListBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_a);
 	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById(R.id.action_b);
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
