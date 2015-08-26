@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist.util;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -39,6 +40,16 @@ void setDrawbleColorFilter (Context context, Drawable drawable,int color ) {
 
 	//int COLOR2 = Color.parseColor ( "#FF" + getColor () );
 	PorterDuff.Mode mMode = PorterDuff.Mode.SRC_ATOP;
-	drawable.setColorFilter ( color, mMode );
+	drawable.setColorFilter (	 color, mMode );
+}
+
+public static String getVersionName(Context context){
+	try {
+		return String.valueOf ( context.getPackageManager().getPackageInfo ( context.getPackageName (), 0 ).versionCode );
+	}
+	catch ( PackageManager.NameNotFoundException e ) {
+		e.printStackTrace ();
+	}
+	return "null";
 }
 }

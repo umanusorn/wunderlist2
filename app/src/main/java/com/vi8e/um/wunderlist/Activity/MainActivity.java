@@ -127,7 +127,8 @@ private void initInstances() {
 	rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
 
 	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-	collapsingToolbarLayout.setTitle ( "User Profile" );
+
+	collapsingToolbarLayout.setTitle ( Utility.getVersionName ( getApplication () ) );
 
 
 }
