@@ -33,13 +33,15 @@ TaskModel            rowData;
 int                  position;
 ArrayList<TaskModel> inCompleteList;
 ArrayList<TaskModel> completeList;
-
+ListView              listViewIncomplete, listViewComplete;
 public
-TaskAdapter ( Context context, ArrayList<TaskModel> inCompleteList, ArrayList<TaskModel> completeList ) {
+TaskAdapter ( Context context, ArrayList<TaskModel> listInComplete, ArrayList<TaskModel> listComplete, ListView listViewComplete, ListView listViewIncomplete ) {
 
-	super ( context, 0, inCompleteList );
-	this.inCompleteList = inCompleteList;
-	this.completeList = completeList;
+	super ( context, 0, listInComplete );
+	this.inCompleteList = listInComplete;
+	this.completeList = listComplete;
+	this.listViewComplete = listViewComplete;
+	this.listViewIncomplete=listViewIncomplete;
 	mContext = context;
 	res = context.getResources ();
 }
@@ -61,15 +63,15 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
 	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
-	RelativeLayout rowBg = (RelativeLayout) convertView.findViewById ( R.id.rowBg );
-	CardView cardView = (CardView)convertView.findViewById ( R.id.card_view );
+	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
+	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
-	if(rowData.isComplete ()){
+	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
@@ -79,24 +81,24 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		@Override public
 		void onClick ( View v ) {
 			rowData.setIsComplete ( ! rowData.isComplete () );
-			if(!rowData.isComplete ()){
-
-				completeList.add ( rowData );
+			if ( rowData.isComplete () ) {
+				completeList.add (0, rowData);
 				inCompleteList.remove ( position );
-
-				Utility.setListViewHeightBasedOnChildren ( ( ListView ) parent );
+				Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
+//				Utility.setListViewHeightBasedOnChildren ( listViewComplete);
 			}
 		}
 	} );
 
-	star.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-			rowData.setIsStar ( ! rowData.isStar () );
-
-		}
-	} );
+	if ( ! rowData.isComplete () ) {
+		star.setOnClickListener ( new View.OnClickListener () {
+			@Override public
+			void onClick ( View v ) {
+				Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+				rowData.setIsStar ( ! rowData.isStar () );
+			}
+		} );
+	}
 
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public

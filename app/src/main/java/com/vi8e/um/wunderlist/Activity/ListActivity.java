@@ -40,7 +40,7 @@ TaskAdapter           taskAdapterInComplete;
 TaskAdapter           taskAdapterComplete;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
-ListView              listViewIncomplete, listViewComplete;
+static ListView              listViewIncomplete, listViewComplete;
 Boolean isStar = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
@@ -94,16 +94,16 @@ TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 	inCompleteList = new ArrayList<TaskModel> ();
 	completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
-	taskAdapter = new TaskAdapter ( activity, inCompleteList , completeList );
+	taskAdapter = new TaskAdapter ( activity, inCompleteList , completeList,listViewComplete,listViewIncomplete );
 // Attach the adapter to a ListView
 
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
 
-		TaskModel taskModel = new TaskModel ( "Dummy Task" + i );
+		TaskModel taskModel = new TaskModel ( "Dummy Task" + i +isComplete);
 		taskModel.setIsComplete ( isComplete);
-		taskAdapter.add ( taskModel );
+		taskAdapter.insert ( taskModel,0 );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
 

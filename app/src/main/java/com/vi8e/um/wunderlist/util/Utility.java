@@ -27,13 +27,11 @@ public static void setListViewHeightBasedOnChildren(ListView listView) {
 		listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
 		totalHeight += listItem.getMeasuredHeight();
 	}
-
 	ViewGroup.LayoutParams params = listView.getLayoutParams();
 	params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
 	listView.setLayoutParams(params);
 	listView.requestLayout();
 }
-
 
 public static
 void setDrawbleColorFilter (Context context, Drawable drawable,int color ) {
@@ -62,7 +60,7 @@ public static boolean toggleImg (View v,Drawable normal,Drawable click){
 		return false;
 	}
 	else {
-		v.setBackground (click );
+		v.setBackground ( click );
 		v.setId ( 0 );
 		return true;
 	}
