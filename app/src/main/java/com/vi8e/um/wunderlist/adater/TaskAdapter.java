@@ -83,9 +83,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			rowData.setIsComplete ( ! rowData.isComplete () );
 			if ( rowData.isComplete () ) {
 				completeList.add (0, rowData);
-				inCompleteList.remove ( position );
+				//inCompleteList.remove ( position );
 				Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
-//				Utility.setListViewHeightBasedOnChildren ( listViewComplete);
+				Utility.setListViewHeightBasedOnChildren ( listViewComplete);
 			}
 		}
 	} );

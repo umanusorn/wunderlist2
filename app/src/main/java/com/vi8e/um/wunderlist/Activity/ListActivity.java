@@ -106,7 +106,6 @@ TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 		taskAdapter.insert ( taskModel,0 );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
-
 // Or even append an entire new collection
 // Fetching some data, data has now returned
 // If data was JSON, convert to ArrayList of User objects.
