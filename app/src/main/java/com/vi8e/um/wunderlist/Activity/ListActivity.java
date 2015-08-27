@@ -1,6 +1,7 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -43,6 +45,7 @@ static ListView              listViewIncomplete, listViewComplete;
 Boolean isStar = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
+Activity thisActivity;
 
 @Override
 protected
@@ -51,7 +54,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_list );
 	setUpContent ();
 	setView ();
-
+  thisActivity = this;
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,true );
 
@@ -82,6 +85,12 @@ void setView () {
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if(keyCode==KeyEvent.KEYCODE_ENTER){
 				taskAdapterInComplete.addList ( new TaskModel ( editText.getText ().toString (), isStar ), listViewIncomplete );
+				editText.setText ( "" );
+				View view = thisActivity.getCurrentFocus ();
+				if (view != null) {
+					InputMethodManager imm = (InputMethodManager )getSystemService( Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+				}
 			}
 			return false;
 		}
