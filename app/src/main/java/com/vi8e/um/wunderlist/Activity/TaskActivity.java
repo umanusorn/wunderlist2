@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 
 public
-class ListActivity extends AppCompatActivity {
+class TaskActivity extends AppCompatActivity {
 
 String title;
 
@@ -53,7 +53,7 @@ Activity thisActivity;
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
-	setContentView ( R.layout.activity_list );
+	setContentView ( R.layout.activity_task );
 	setUpContent ();
 	setView ();
   thisActivity = this;
@@ -90,9 +90,7 @@ void setView () {
 	} );
 
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
-	if(isStar){
-		editTextStar.setBackground ( getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-	}
+
 	editTextStar.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {

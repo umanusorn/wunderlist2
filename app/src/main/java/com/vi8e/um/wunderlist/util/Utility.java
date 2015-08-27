@@ -45,6 +45,16 @@ void setDrawbleColorFilter (Context context, Drawable drawable,int color ) {
 	drawable.setColorFilter ( color, mMode );
 }
 
+public static String getVersionName ( Context context ){
+	try {
+		return String.valueOf ( context.getPackageManager().getPackageInfo ( context.getPackageName (), 0 ).versionName );
+	}
+	catch ( PackageManager.NameNotFoundException e ) {
+		e.printStackTrace ();
+	}
+	return "null";
+}
+
 public static String getVersionCode ( Context context ){
 	try {
 		return String.valueOf ( context.getPackageManager().getPackageInfo ( context.getPackageName (), 0 ).versionCode );

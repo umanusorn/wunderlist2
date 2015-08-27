@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.ListActivity;
+import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -78,8 +78,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
-	if(rowData.isStar ())
+	if ( rowData.isStar () ) {
 		star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+	}
 
 	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
@@ -96,16 +97,16 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
 				//completeList.add (rowData );
-				ListActivity.taskAdapterComplete.add ( rowData );
-				ListActivity.taskAdapterInComplete.remove ( rowData );
+				TaskActivity.taskAdapterComplete.add ( rowData );
+				TaskActivity.taskAdapterInComplete.remove ( rowData );
 //				inCompleteList.remove ( position );
 			}
 			else {
-				ListActivity.taskAdapterInComplete.add ( rowData );
-				ListActivity.taskAdapterComplete.remove ( rowData );
+				TaskActivity.taskAdapterInComplete.add ( rowData );
+				TaskActivity.taskAdapterComplete.remove ( rowData );
 			}
-			Utility.setListViewHeightBasedOnChildren ( ListActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( ListActivity.listViewIncomplete );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
 	} );
 

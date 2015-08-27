@@ -24,7 +24,7 @@
             android:value="6c846b8f2f0f417e9740c3bd4f28baa0b8930624" />
 
         <activity
-            android:name=".Activity.ListActivity"
+            android:name=".Activity.TaskActivity"
             android:label="@string/title_activity_list"
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
