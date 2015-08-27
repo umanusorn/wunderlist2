@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -20,6 +21,8 @@ public static void setListViewHeightBasedOnChildren(ListView listView) {
 		// pre-condition
 		return;
 	}
+
+	Log.d ( "setListHeight","" );
 
 	int totalHeight = 0;
 	int desiredWidth = View.MeasureSpec.makeMeasureSpec ( listView.getWidth (), View.MeasureSpec.AT_MOST );

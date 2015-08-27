@@ -82,10 +82,14 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		void onClick ( View v ) {
 			rowData.setIsComplete ( ! rowData.isComplete () );
 			if ( rowData.isComplete () ) {
-				completeList.add (0, rowData);
-				//inCompleteList.remove ( position );
+
+				//todo don't know why cant use completeList to add element
+				//completeList.add (rowData );
+				ListActivity.taskAdapterComplete.add ( rowData );
+				inCompleteList.remove ( position );
+
+				Utility.setListViewHeightBasedOnChildren ( listViewComplete );
 				Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
-				Utility.setListViewHeightBasedOnChildren ( listViewComplete);
 			}
 		}
 	} );

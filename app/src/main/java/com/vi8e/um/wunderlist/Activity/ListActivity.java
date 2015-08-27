@@ -1,7 +1,6 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -36,8 +35,8 @@ String title;
 Toolbar               toolbar;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-TaskAdapter           taskAdapterInComplete;
-TaskAdapter           taskAdapterComplete;
+public static TaskAdapter           taskAdapterInComplete;
+public static TaskAdapter           taskAdapterComplete;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
 static ListView              listViewIncomplete, listViewComplete;
@@ -52,11 +51,13 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_list );
 	setUpContent ();
 	setView ();
-	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewIncomplete, taskAdapterInComplete,false );
 
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewComplete, taskAdapterComplete,true );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,true );
+
+	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete,false );
+
 
 }
 
@@ -89,7 +90,7 @@ void setView () {
 }
 
 public static
-TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
+TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
 	inCompleteList = new ArrayList<TaskModel> ();
 	completeList = new ArrayList<TaskModel> ();
@@ -102,8 +103,8 @@ TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 		Log.d ( "loop", "" + i );
 
 		TaskModel taskModel = new TaskModel ( "Dummy Task" + i +isComplete);
-		taskModel.setIsComplete ( isComplete);
-		taskAdapter.insert ( taskModel,0 );
+		taskModel.setIsComplete ( isComplete );
+		taskAdapter.insert ( taskModel, 0 );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
 // Or even append an entire new collection

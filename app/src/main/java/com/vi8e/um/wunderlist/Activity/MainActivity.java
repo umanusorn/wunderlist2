@@ -127,7 +127,7 @@ private void initInstances() {
 
 	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
 
-	collapsingToolbarLayout.setTitle ("Build Number :"+ Utility.getVersionCode ( getApplication () ) );
+	collapsingToolbarLayout.setTitle ("Build :"+ Utility.getVersionCode ( getApplication () ) );
 
 
 }
