@@ -2,7 +2,7 @@ package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +31,15 @@ Context              mContext;
 Resources            res;
 TaskModel            rowData;
 int                  position;
-ArrayList<TaskModel> mArrayList;
+ArrayList<TaskModel> inCompleteList;
+ArrayList<TaskModel> completeList;
 
 public
-TaskAdapter ( Context context, ArrayList<TaskModel> arrayList ) {
+TaskAdapter ( Context context, ArrayList<TaskModel> inCompleteList, ArrayList<TaskModel> completeList ) {
 
-	super ( context, 0, arrayList );
-	mArrayList = arrayList;
+	super ( context, 0, inCompleteList );
+	this.inCompleteList = inCompleteList;
+	this.completeList = completeList;
 	mContext = context;
 	res = context.getResources ();
 }
@@ -60,6 +62,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	RelativeLayout rowBg = (RelativeLayout) convertView.findViewById ( R.id.rowBg );
+	CardView cardView = (CardView)convertView.findViewById ( R.id.card_view );
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
@@ -67,7 +70,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
 	if(rowData.isComplete ()){
-		rowBg.setBackgroundColor ( Color.parseColor ("#66FFFFFF") );
+		rowBg.setAlpha ( ( float ) 0.5 );
+		cardView.setAlpha ( ( float ) 0.5 );
 	}
 
 
@@ -76,7 +80,10 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		void onClick ( View v ) {
 			rowData.setIsComplete ( ! rowData.isComplete () );
 			if(!rowData.isComplete ()){
-				mArrayList.remove ( position );
+
+				completeList.add ( rowData );
+				inCompleteList.remove ( position );
+
 				Utility.setListViewHeightBasedOnChildren ( ( ListView ) parent );
 			}
 		}

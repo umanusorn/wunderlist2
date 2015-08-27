@@ -42,6 +42,8 @@ CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
 ListView              listViewIncomplete, listViewComplete;
 Boolean isStar = false;
+static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
+static ArrayList<TaskModel> completeList;
 
 @Override
 protected
@@ -51,10 +53,10 @@ void onCreate ( Bundle savedInstanceState ) {
 	setUpContent ();
 	setView ();
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewIncomplete, taskAdapterInComplete );
+	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewIncomplete, taskAdapterInComplete,false );
 
-	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewComplete, taskAdapterComplete );
+	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewComplete, taskAdapterComplete,true );
 
 }
 
@@ -87,17 +89,21 @@ void setView () {
 }
 
 public static
-TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, TaskAdapter taskAdapter ) {
+TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
-	ArrayList<TaskModel> arrayOfList = new ArrayList<TaskModel> ();
+	inCompleteList = new ArrayList<TaskModel> ();
+	completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
-	taskAdapter = new TaskAdapter ( activity, arrayOfList );
+	taskAdapter = new TaskAdapter ( activity, inCompleteList , completeList );
 // Attach the adapter to a ListView
 
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		taskAdapter.add ( new TaskModel ( i, "Dummy Task" + i ) );
+
+		TaskModel taskModel = new TaskModel ( "Dummy Task" + i );
+		taskModel.setIsComplete ( isComplete);
+		taskAdapter.add ( taskModel );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
