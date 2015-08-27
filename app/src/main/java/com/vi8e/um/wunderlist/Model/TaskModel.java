@@ -4,6 +4,52 @@ package com.vi8e.um.wunderlist.Model;
  */
 public
 class TaskModel extends ListModel {
+
+boolean isStar;
+boolean isComplete;
+int listId;
+String note;
+
+public
+boolean isStar () {
+	return isStar;
+}
+
+public
+boolean isComplete () {
+	return isComplete;
+}
+
+public
+void setIsComplete ( boolean isComplete ) {
+	this.isComplete = isComplete;
+}
+
+public
+void setIsStar ( boolean isStar ) {
+	this.isStar = isStar;
+}
+
+public
+int getListId () {
+	return listId;
+}
+
+public
+void setListId ( int listId ) {
+	this.listId = listId;
+}
+
+public
+String getNote () {
+	return note;
+}
+
+public
+void setNote ( String note ) {
+	this.note = note;
+}
+
 public
 TaskModel ( int id, String listTitle ) {
 	super ( id, listTitle );
@@ -14,8 +60,4 @@ TaskModel ( String listTitle ) {
 	super ( listTitle );
 }
 
-public
-TaskModel ( String listTitle, String imgPath, int isDisturb, int isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
-	super ( listTitle, imgPath, isDisturb, isPinned, folderId, numCurrentTask, numLateTask, id );
-}
 }

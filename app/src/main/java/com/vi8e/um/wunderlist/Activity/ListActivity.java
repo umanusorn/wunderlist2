@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
-import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.ListAdapter;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -58,7 +58,7 @@ void setView () {
 public static
 ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, ListAdapter listAdapter ) {
 
-	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
+	ArrayList<TaskModel> arrayOfList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	listAdapter = new ListAdapter ( activity, arrayOfList );
 // Attach the adapter to a ListView
@@ -66,7 +66,7 @@ ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 	listView.setAdapter ( listAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		listAdapter.add ( new ListModel ( i, "Dummy Task" + i ) );
+		listAdapter.add ( new TaskModel ( i, "Dummy Task" + i ) );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
 

@@ -8,8 +8,8 @@ int id;
 int numLateTask;
 int    numCurrentTask;
 int    folderId;
-int    isPinned;
-int    isDisturb;
+boolean    isPinned;
+boolean   isDisturb;
 String imgPath;
 String listTitle;
 String type;
@@ -23,12 +23,13 @@ ListModel ( int id, String listTitle ) {
 void setDefault () {
 	this.listTitle = ""; //
 	this.imgPath = "";
-	this.isDisturb = 0;
-	this.isPinned = 0;
+	this.isDisturb = false;
+	this.isPinned = false;
 	this.folderId = 0;
 	this.numCurrentTask = 0;
 	this.numLateTask = 0;
 	this.id = 0;
+
 }
 
 public
@@ -39,7 +40,7 @@ ListModel ( String listTitle ) {
 }
 
 public
-ListModel ( String listTitle, String imgPath, int isDisturb, int isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
+ListModel ( String listTitle, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
 	this.listTitle = listTitle; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
@@ -113,22 +114,22 @@ void setFolderId ( int folderId ) {
 }
 
 public
-int getIsPinned () {
+boolean isPinned () {
 	return isPinned;
 }
 
 public
-void setIsPinned ( int isPinned ) {
+void setIsPinned ( boolean isPinned ) {
 	this.isPinned = isPinned;
 }
 
 public
-int getIsDisturb () {
+boolean isDisturb () {
 	return isDisturb;
 }
 
 public
-void setIsDisturb ( int isDisturb ) {
+void setIsDisturb ( boolean isDisturb ) {
 	this.isDisturb = isDisturb;
 }
 

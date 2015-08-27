@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.ListActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
-import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -23,22 +23,24 @@ import java.util.ArrayList;
  * Created by um.anusorn on 8/25/2015.
  */
 public
-class ListAdapter extends ArrayAdapter<ListModel> {
+class ListAdapter extends ArrayAdapter<TaskModel> {
 
-Context   mContext;
-Resources res;
-ListModel rowData;
-int position;
-ArrayList<ListModel> mArrayList;
+Context              mContext;
+Resources            res;
+TaskModel            rowData;
+int                  position;
+ArrayList<TaskModel > mArrayList;
 
 public
-ListAdapter ( Context context, ArrayList<ListModel> arrayList ) {
+ListAdapter ( Context context, ArrayList<TaskModel> arrayList ) {
 
 	super ( context, 0, arrayList );
-	mArrayList=arrayList;
+	mArrayList = arrayList;
 	mContext = context;
 	res = context.getResources ();
 }
+
+
 
 @Override
 public
@@ -79,9 +81,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-
-
 			Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+			rowData.setIsStar ( !rowData.isStar () );
 
 		}
 	} );
@@ -100,9 +101,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	return convertView;
 }
 
-
 public
-void addList ( ListModel object, ListView listView ) {
+void addList ( TaskModel object, ListView listView ) {
 	super.add ( object );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 }
