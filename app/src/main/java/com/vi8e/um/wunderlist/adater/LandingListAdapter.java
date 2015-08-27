@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vi8e.um.wunderlist.Activity.ListActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
@@ -41,6 +40,8 @@ View getView ( int position, View convertView, ViewGroup parent ) {
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
+
+
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( listModel.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
@@ -49,7 +50,6 @@ View getView ( int position, View convertView, ViewGroup parent ) {
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Toast.makeText ( getContext (),"sss",Toast.LENGTH_LONG ).show ();
 			Intent  intent = new Intent ( getContext (), ListActivity.class );
 			intent.putExtra ( ListConst.KEY_TITLE,tvTitle.getText ().toString () );
 			getContext ().startActivity ( intent );

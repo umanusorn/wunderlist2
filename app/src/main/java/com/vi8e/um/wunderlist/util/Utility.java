@@ -40,7 +40,7 @@ void setDrawbleColorFilter (Context context, Drawable drawable,int color ) {
 
 	//int COLOR2 = Color.parseColor ( "#FF" + getColor () );
 	PorterDuff.Mode mMode = PorterDuff.Mode.SRC_ATOP;
-	drawable.setColorFilter (	 color, mMode );
+	drawable.setColorFilter ( color, mMode );
 }
 
 public static String getVersionCode ( Context context ){
@@ -51,5 +51,18 @@ public static String getVersionCode ( Context context ){
 		e.printStackTrace ();
 	}
 	return "null";
+}
+
+
+public static void toggleImg (View v,Drawable normal,Drawable click){
+	if ( v.getId () == 0 ) {
+
+		v.setBackground ( normal );
+		v.setId ( 1 );
+	}
+	else {
+		v.setBackground (click );
+		v.setId ( 0 );
+	}
 }
 }
