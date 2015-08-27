@@ -16,6 +16,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_alignParentTop="true"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:layout_toLeftOf="@+id/imageView3"
             android:layout_toStartOf="@+id/imageView3"/>
 
@@ -26,25 +28,37 @@
             android:src="@mipmap/wl_task_detail_ribbon"
             android:layout_alignTop="@+id/editText"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/editText"/>
 
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listViewLanding"
-            android:layout_below="@+id/imageView3"
-            android:layout_centerHorizontal="true"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal">
 
+        <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listViewLanding"
+                android:layout_below="@+id/imageView3"
+                android:layout_centerHorizontal="true"/>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="COMPLETED TO-DOS "
+                android:textColor="@color/white"
+                android:background="@color/transparent_black"
+                android:id="@+id/textView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="COMPLETED TO-DOS "
-            android:background="@color/grey_600"
-            android:id="@+id/textView"
-            android:layout_alignBottom="@+id/listViewLanding"
-            android:layout_centerHorizontal="true"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

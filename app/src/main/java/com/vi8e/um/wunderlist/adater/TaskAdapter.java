@@ -29,7 +29,7 @@ Context              mContext;
 Resources            res;
 TaskModel            rowData;
 int                  position;
-ArrayList<TaskModel > mArrayList;
+ArrayList<TaskModel> mArrayList;
 
 public
 TaskAdapter ( Context context, ArrayList<TaskModel> arrayList ) {
@@ -59,7 +59,6 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 
 
-
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
@@ -78,11 +77,10 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		@Override public
 		void onClick ( View v ) {
 			Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-			rowData.setIsStar ( !rowData.isStar () );
+			rowData.setIsStar ( ! rowData.isStar () );
 
 		}
 	} );
-
 
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public

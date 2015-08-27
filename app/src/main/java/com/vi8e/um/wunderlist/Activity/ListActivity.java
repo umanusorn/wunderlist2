@@ -10,8 +10,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -36,6 +38,7 @@ ActionBarDrawerToggle drawerToggle;
 TaskAdapter           mTaskAdapter;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
+ListView listView;
 
 @Override
 protected
@@ -44,14 +47,24 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_list );
 	setUpContent ();
 	setView ();
-	ListView listView = ( ListView ) findViewById ( R.id.listViewLanding );
+	listView = ( ListView ) findViewById ( R.id.listViewLanding );
 	mTaskAdapter = setUpAdapterListView ( this, getApplication (), listView, mTaskAdapter );
+
 }
 
 void setView () {
-	EditText editText = ( EditText ) findViewById ( R.id.editText );
+	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
-
+	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
+	editText.setOnKeyListener ( new View.OnKeyListener () {
+		@Override public
+		boolean onKey ( View v, int keyCode, KeyEvent event ) {
+			if(keyCode==KeyEvent.KEYCODE_ENTER){
+				mTaskAdapter.addList ( new TaskModel ( editText.getText ().toString () ), listView);
+			}
+			return false;
+		}
+	} );
 
 }
 
