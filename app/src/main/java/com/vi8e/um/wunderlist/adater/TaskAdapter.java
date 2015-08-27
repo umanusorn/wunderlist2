@@ -29,7 +29,7 @@ class TaskAdapter extends ArrayAdapter<TaskModel> {
 
 Context              mContext;
 Resources            res;
-TaskModel            rowData;
+
 int                  position;
 ArrayList<TaskModel> inCompleteList;
 ArrayList<TaskModel> completeList;
@@ -56,6 +56,7 @@ public
 View getView ( final int position, View convertView, final ViewGroup parent ) {
 	// Get the data item for this position
 	this.position = position;
+	final TaskModel rowData;
 	rowData = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
@@ -81,11 +82,12 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
 
+//	chkBox.setTag ( 1, position );
 
 	chkBox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-
+			//TaskModel rowData=getItem ( position );
 			rowData.setIsComplete ( ! rowData.isComplete () );
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
