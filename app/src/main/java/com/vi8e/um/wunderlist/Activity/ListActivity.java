@@ -83,7 +83,7 @@ void setView () {
 	editText.setOnKeyListener ( new View.OnKeyListener () {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
-			if(keyCode==KeyEvent.KEYCODE_ENTER){
+			if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction ()!=KeyEvent.ACTION_DOWN){
 				taskAdapterInComplete.addList ( new TaskModel ( editText.getText ().toString (), isStar ), listViewIncomplete );
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
