@@ -56,6 +56,12 @@ TaskModel ( int id, String listTitle ) {
 }
 
 public
+TaskModel ( String listTitle,Boolean isStar ) {
+	super ( listTitle );
+	this.setIsStar ( isStar );
+}
+
+public
 TaskModel ( String listTitle ) {
 	super ( listTitle );
 }

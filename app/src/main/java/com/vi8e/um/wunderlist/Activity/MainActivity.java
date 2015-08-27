@@ -52,7 +52,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_main );
 	thisActivity = this;
-	ListView listView = ( ListView ) findViewById ( R.id.listViewLanding );
+	ListView listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 
 	initToolbar ();

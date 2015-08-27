@@ -54,15 +54,17 @@ public static String getVersionCode ( Context context ){
 }
 
 
-public static void toggleImg (View v,Drawable normal,Drawable click){
+public static boolean toggleImg (View v,Drawable normal,Drawable click){
 	if ( v.getId () == 0 ) {
 
 		v.setBackground ( normal );
 		v.setId ( 1 );
+		return false;
 	}
 	else {
 		v.setBackground (click );
 		v.setId ( 0 );
+		return true;
 	}
 }
 }

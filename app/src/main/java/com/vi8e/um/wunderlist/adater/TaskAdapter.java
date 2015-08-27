@@ -2,12 +2,14 @@ package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.ListActivity;
@@ -57,19 +59,26 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
 	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
-
+	RelativeLayout rowBg = (RelativeLayout) convertView.findViewById ( R.id.rowBg );
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
+	if(rowData.isComplete ()){
+		rowBg.setBackgroundColor ( Color.parseColor ("#66FFFFFF") );
+	}
+
+
 	chkBox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			rowData.setIsComplete ( true );
-			mArrayList.remove ( position );
-			Utility.setListViewHeightBasedOnChildren ( ( ListView ) parent );
+			rowData.setIsComplete ( ! rowData.isComplete () );
+			if(!rowData.isComplete ()){
+				mArrayList.remove ( position );
+				Utility.setListViewHeightBasedOnChildren ( ( ListView ) parent );
+			}
 		}
 	} );
 

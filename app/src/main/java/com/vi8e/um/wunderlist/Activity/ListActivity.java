@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
@@ -35,10 +36,12 @@ String title;
 Toolbar               toolbar;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-TaskAdapter           mTaskAdapter;
+TaskAdapter           taskAdapterInComplete;
+TaskAdapter           taskAdapterComplete;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
-ListView listView;
+ListView              listViewIncomplete, listViewComplete;
+Boolean isStar = false;
 
 @Override
 protected
@@ -47,12 +50,27 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_list );
 	setUpContent ();
 	setView ();
-	listView = ( ListView ) findViewById ( R.id.listViewLanding );
-	mTaskAdapter = setUpAdapterListView ( this, getApplication (), listView, mTaskAdapter );
+	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewIncomplete, taskAdapterInComplete );
+
+	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	taskAdapterInComplete = setUpAdapterListView ( this, getApplication (), listViewComplete, taskAdapterComplete );
 
 }
 
 void setView () {
+
+	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
+	editTextStar.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			isStar = Utility.toggleImg ( v,
+																	 getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+																	 getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+
+		}
+	} );
+
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
@@ -60,7 +78,7 @@ void setView () {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if(keyCode==KeyEvent.KEYCODE_ENTER){
-				mTaskAdapter.addList ( new TaskModel ( editText.getText ().toString () ), listView);
+				taskAdapterInComplete.addList ( new TaskModel ( editText.getText ().toString (), isStar ), listViewIncomplete );
 			}
 			return false;
 		}
