@@ -10,4 +10,5 @@
     <string name="txt_test">Test UI Animation</string>
     <string name="title_activity_code_lab">CodeLabActivity</string>
     <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_task_detail">TaskDetailActivity</string>
 </resources>

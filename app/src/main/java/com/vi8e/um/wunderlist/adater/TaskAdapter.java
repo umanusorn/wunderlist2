@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.ListActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -121,7 +122,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Intent intent = new Intent ( getContext (), ListActivity.class );
+			Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
 			intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
 			getContext ().startActivity ( intent );
 
