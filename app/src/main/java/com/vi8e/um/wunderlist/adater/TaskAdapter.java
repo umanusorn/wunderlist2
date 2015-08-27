@@ -33,15 +33,20 @@ TaskModel            rowData;
 int                  position;
 ArrayList<TaskModel> inCompleteList;
 ArrayList<TaskModel> completeList;
-ListView              listViewIncomplete, listViewComplete;
+ListView             listViewIncomplete, listViewComplete;
+
 public
-TaskAdapter ( Context context, ArrayList<TaskModel> listInComplete, ArrayList<TaskModel> listComplete, ListView listViewComplete, ListView listViewIncomplete ) {
+TaskAdapter ( Context context,
+							ArrayList<TaskModel> listInComplete,
+							ArrayList<TaskModel> listComplete,
+							ListView listViewComplete,
+							ListView listViewIncomplete ) {
 
 	super ( context, 0, listInComplete );
 	this.inCompleteList = listInComplete;
 	this.completeList = listComplete;
 	this.listViewComplete = listViewComplete;
-	this.listViewIncomplete=listViewIncomplete;
+	this.listViewIncomplete = listViewIncomplete;
 	mContext = context;
 	res = context.getResources ();
 }
@@ -80,17 +85,21 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	chkBox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
+
 			rowData.setIsComplete ( ! rowData.isComplete () );
 			if ( rowData.isComplete () ) {
-
 				//todo don't know why cant use completeList to add element
 				//completeList.add (rowData );
 				ListActivity.taskAdapterComplete.add ( rowData );
-				inCompleteList.remove ( position );
-
-				Utility.setListViewHeightBasedOnChildren ( listViewComplete );
-				Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
+				ListActivity.taskAdapterInComplete.remove ( rowData );
+//				inCompleteList.remove ( position );
 			}
+			else {
+				ListActivity.taskAdapterInComplete.add ( rowData );
+				ListActivity.taskAdapterComplete.remove ( rowData );
+			}
+			Utility.setListViewHeightBasedOnChildren ( ListActivity.listViewComplete );
+			Utility.setListViewHeightBasedOnChildren ( ListActivity.listViewIncomplete );
 		}
 	} );
 

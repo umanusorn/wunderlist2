@@ -41,7 +41,7 @@ public static TaskAdapter           taskAdapterInComplete;
 public static TaskAdapter           taskAdapterComplete;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
-static ListView              listViewIncomplete, listViewComplete;
+public static ListView              listViewIncomplete, listViewComplete;
 Boolean isStar = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
