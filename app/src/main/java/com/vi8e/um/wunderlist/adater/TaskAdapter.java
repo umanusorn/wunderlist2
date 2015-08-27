@@ -27,8 +27,8 @@ import java.util.ArrayList;
 public
 class TaskAdapter extends ArrayAdapter<TaskModel> {
 
-Context              mContext;
-Resources            res;
+Context   mContext;
+Resources res;
 
 int                  position;
 ArrayList<TaskModel> inCompleteList;
@@ -76,6 +76,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
+
+	if(rowData.isStar ())
+		star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 
 	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );

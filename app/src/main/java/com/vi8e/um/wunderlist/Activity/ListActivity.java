@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -42,7 +43,8 @@ public static TaskAdapter           taskAdapterComplete;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
 public static ListView              listViewIncomplete, listViewComplete;
-Boolean isStar = false;
+Boolean isStar = true;
+Boolean showComplete = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
 Activity thisActivity;
@@ -61,12 +63,36 @@ void onCreate ( Bundle savedInstanceState ) {
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete,false );
 
+	toggleShowCompleteListView ();
 
 }
 
+void toggleShowCompleteListView(){
+	showComplete=!showComplete;
+	if(showComplete){
+		listViewComplete.setVisibility ( View.VISIBLE );
+	}
+	else {
+		listViewComplete.setVisibility ( View.GONE );
+	}
+}
+
+
+
 void setView () {
 
+	TextView tvComplete = (TextView)findViewById ( R.id.tvComplete );
+	tvComplete.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			toggleShowCompleteListView ();
+		}
+	} );
+
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
+	if(isStar){
+		editTextStar.setBackground ( getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+	}
 	editTextStar.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {

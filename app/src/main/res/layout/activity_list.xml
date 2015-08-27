@@ -54,7 +54,7 @@
                 android:text="COMPLETED TO-DOS "
                 android:textColor="@color/white"
                 android:background="@color/transparent_black"
-                android:id="@+id/textView"
+                android:id="@+id/tvComplete"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
 
@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/listViewTaskComplete"
+
                 android:layout_below="@+id/editTextStar"
                 android:layout_centerHorizontal="true"/>
 
