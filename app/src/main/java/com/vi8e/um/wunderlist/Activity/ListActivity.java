@@ -18,7 +18,7 @@ import android.widget.ListView;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.ListAdapter;
+import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ class ListActivity extends AppCompatActivity {
 String title;
 
 
-Toolbar                 toolbar;
+Toolbar               toolbar;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-ListAdapter    listAdapter;
+TaskAdapter           mTaskAdapter;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
 
@@ -45,7 +45,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setUpContent ();
 	setView ();
 	ListView listView = ( ListView ) findViewById ( R.id.listViewLanding );
-	listAdapter=setUpAdapterListView ( this, getApplication (),listView, listAdapter);
+	mTaskAdapter = setUpAdapterListView ( this, getApplication (), listView, mTaskAdapter );
 }
 
 void setView () {
@@ -56,17 +56,17 @@ void setView () {
 }
 
 public static
-ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, ListAdapter listAdapter ) {
+TaskAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, TaskAdapter taskAdapter ) {
 
 	ArrayList<TaskModel> arrayOfList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
-	listAdapter = new ListAdapter ( activity, arrayOfList );
+	taskAdapter = new TaskAdapter ( activity, arrayOfList );
 // Attach the adapter to a ListView
 
-	listView.setAdapter ( listAdapter );
+	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		listAdapter.add ( new TaskModel ( i, "Dummy Task" + i ) );
+		taskAdapter.add ( new TaskModel ( i, "Dummy Task" + i ) );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
@@ -76,7 +76,7 @@ ListAdapter setUpAdapterListView ( Activity activity, Context context, ListView 
 	/*JSONArray jsonArray = ...;
 	ArrayList<User> newUsers = User.fromJson(jsonArray)
 	adapter.addAll(newUsers);*/
-	return listAdapter;
+	return taskAdapter;
 }
 
 

@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by um.anusorn on 8/25/2015.
  */
 public
-class ListAdapter extends ArrayAdapter<TaskModel> {
+class TaskAdapter extends ArrayAdapter<TaskModel> {
 
 Context              mContext;
 Resources            res;
@@ -32,15 +32,13 @@ int                  position;
 ArrayList<TaskModel > mArrayList;
 
 public
-ListAdapter ( Context context, ArrayList<TaskModel> arrayList ) {
+TaskAdapter ( Context context, ArrayList<TaskModel> arrayList ) {
 
 	super ( context, 0, arrayList );
 	mArrayList = arrayList;
 	mContext = context;
 	res = context.getResources ();
 }
-
-
 
 @Override
 public
@@ -67,12 +65,10 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
-	final View finalConvertView = convertView;
-	final View finalConvertView1 = convertView;
 	chkBox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			//finalConvertView.setVisibility ( View.GONE );
+			rowData.setIsComplete ( true );
 			mArrayList.remove ( position );
 			Utility.setListViewHeightBasedOnChildren ( ( ListView ) parent );
 		}
