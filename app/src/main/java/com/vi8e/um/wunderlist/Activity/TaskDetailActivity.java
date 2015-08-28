@@ -1,10 +1,14 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -29,6 +33,17 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	thisActivity = this;
+
+	getWindow().setSoftInputMode(
+			WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+															);
+	View view = this.getCurrentFocus();
+	if (view != null) {
+		InputMethodManager imm = (InputMethodManager )getSystemService( Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
+
+	}
+
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );

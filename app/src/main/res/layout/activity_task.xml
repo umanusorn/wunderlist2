@@ -31,42 +31,51 @@
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/editText"/>
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView2"
             android:layout_below="@+id/editText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center_horizontal">
+            android:layout_alignRight="@+id/editTextStar"
+            android:layout_alignEnd="@+id/editTextStar">
 
-        <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listViewTaskInComplete"
-                android:layout_below="@+id/editTextStar"
-                android:layout_centerHorizontal="true"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/editText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="COMPLETED TO-DOS "
-                android:textColor="@color/white"
-                android:background="@color/transparent_black"
-                android:id="@+id/tvComplete"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listViewTaskInComplete"
+                    android:layout_below="@+id/editTextStar"
+                    android:layout_centerHorizontal="true"/>
 
-        <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listViewTaskComplete"
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="COMPLETED TO-DOS "
+                    android:textColor="@color/white"
+                    android:background="@color/transparent_black"
+                    android:id="@+id/tvComplete"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
 
-                android:layout_below="@+id/editTextStar"
-                android:layout_centerHorizontal="true"/>
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listViewTaskComplete"
 
-    </LinearLayout>
+                    android:layout_below="@+id/editTextStar"
+                    android:layout_centerHorizontal="true"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
