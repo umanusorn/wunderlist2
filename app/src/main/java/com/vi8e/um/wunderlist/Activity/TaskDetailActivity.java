@@ -14,8 +14,8 @@ import com.vi8e.um.wunderlist.adater.TaskAdapter;
 public
 class TaskDetailActivity extends AppCompatActivity {
 
-private ListView    listViewComplete;
-private Activity    thisActivity;
+private ListView       listViewComplete;
+private Activity       thisActivity;
 private TaskAdapter taskAdapterComplete;
 
 @Override
@@ -26,8 +26,10 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	thisActivity = this;
-	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
-	//taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, true );
+/*	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
+	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
+	taskAdapterComplete = TaskActivity.setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, true );*/
 }
 
 @Override

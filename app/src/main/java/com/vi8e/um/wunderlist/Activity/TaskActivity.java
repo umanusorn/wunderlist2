@@ -38,12 +38,12 @@ String title;
 Toolbar               toolbar;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-public static TaskAdapter           taskAdapterInComplete;
-public static TaskAdapter           taskAdapterComplete;
-CoordinatorLayout     rootLayout;
-FloatingActionButton  fabBtn;
-public static ListView              listViewIncomplete, listViewComplete;
-Boolean isStar = true;
+public static TaskAdapter taskAdapterInComplete;
+public static TaskAdapter taskAdapterComplete;
+CoordinatorLayout    rootLayout;
+FloatingActionButton fabBtn;
+public static ListView listViewIncomplete, listViewComplete;
+Boolean isStar       = false;
 Boolean showComplete = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
@@ -56,21 +56,18 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_task );
 	setUpContent ();
 	setView ();
-  thisActivity = this;
+	thisActivity = this;
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
-	completeList= new ArrayList<TaskModel> ();
+	completeList = new ArrayList<TaskModel> ();
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,true );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, true );
 
-
-
-
-	inCompleteList= new ArrayList<TaskModel> ();
+	inCompleteList = new ArrayList<TaskModel> ();
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
-	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList);
+	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete,false );
 

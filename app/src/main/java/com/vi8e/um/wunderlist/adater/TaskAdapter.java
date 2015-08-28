@@ -44,6 +44,8 @@ TaskAdapter ( Context context,
 	res = context.getResources ();
 }
 
+
+
 @Override
 public
 View getView ( final int position, View convertView, final ViewGroup parent ) {
