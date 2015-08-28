@@ -58,8 +58,19 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
   thisActivity = this;
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	completeList= new ArrayList<TaskModel> ();
+	//completeList = new ArrayList<TaskModel> ();
+// Create the adapter to convert the array to views
+	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,true );
 
+
+
+
+	inCompleteList= new ArrayList<TaskModel> ();
+	//completeList = new ArrayList<TaskModel> ();
+// Create the adapter to convert the array to views
+	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList);
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete,false );
 
@@ -125,16 +136,15 @@ void setView () {
 public static
 TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
-	inCompleteList = new ArrayList<TaskModel> ();
-	completeList = new ArrayList<TaskModel> ();
+/*	list= new ArrayList<TaskModel> ();
+	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
-	taskAdapter = new TaskAdapter ( activity, inCompleteList , completeList,listViewComplete,listViewIncomplete );
-// Attach the adapter to a ListView
+	taskAdapter = new TaskAdapter ( activity, list );
+// Attach the adapter to a ListView*/
 
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-
 		TaskModel taskModel = new TaskModel ( "Dummy Task" + i +isComplete);
 		taskModel.setIsComplete ( isComplete );
 		taskAdapter.insert ( taskModel, 0 );

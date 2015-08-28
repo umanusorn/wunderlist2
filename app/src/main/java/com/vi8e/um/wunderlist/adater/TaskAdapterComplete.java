@@ -3,7 +3,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +26,17 @@ import java.util.ArrayList;
  * Created by um.anusorn on 8/25/2015.
  */
 public
-class TaskAdapter extends ArrayAdapter<TaskModel> {
+class TaskAdapterComplete extends ArrayAdapter<TaskModel> {
 
 Context   mContext;
 Resources res;
 
-int position;
+int                  position;
 //ListView             listViewIncomplete, listViewComplete;
 
 public
-TaskAdapter ( Context context,
-							ArrayList<TaskModel> listInComplete ) {
+TaskAdapterComplete ( Context context,
+											ArrayList<TaskModel> listInComplete ) {
 
 	super ( context, 0, listInComplete );
 	mContext = context;
@@ -70,6 +69,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
+	if ( rowData.isStar () ) {
+		star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+	}
 
 	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
@@ -100,24 +102,6 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	} );
 
 
-	if ( rowData.isStar () ) {
-		try{
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-		}catch ( NullPointerException e ){
-			Log.e("error on setBg", e.toString ());
-		}
-
-	}
-	else{
-		try{
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon) );
-		}catch ( NullPointerException e ){
-			Log.e("error on setBg", e.toString ());
-		}
-	}
-
-	try {
-
 		star.setOnClickListener ( new View.OnClickListener () {
 			@Override public
 			void onClick ( View v ) {
@@ -130,18 +114,12 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			}
 		} );
 
-	}
-	catch ( NullPointerException e ) {
-	Log.e("error on setonClick", e.toString ());
-	}
-
 
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
 			Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
 			intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
-			intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 			getContext ().startActivity ( intent );
 
 		}
