@@ -140,7 +140,7 @@ TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAda
 // Attach the adapter to a ListView*/
 
 	listView.setAdapter ( taskAdapter );
-	for ( int i = 0 ; i < 3 ; i++ ) {
+	for ( int i = 0 ; i < 10 ; i++ ) {
 		Log.d ( "loop", "" + i );
 		TaskModel taskModel = new TaskModel ( "Dummy Task" + i +isComplete);
 		taskModel.setIsComplete ( isComplete );

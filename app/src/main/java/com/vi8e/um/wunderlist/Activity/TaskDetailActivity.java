@@ -7,8 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
+
+import java.util.ArrayList;
 
 
 public
@@ -26,10 +29,10 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	thisActivity = this;
-/*	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
-	taskAdapterComplete = TaskActivity.setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, true );*/
+	taskAdapterComplete = TaskActivity.setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
 }
 
 @Override
