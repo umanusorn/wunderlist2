@@ -52,10 +52,10 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final TaskModel rowData;
 	rowData = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
-	if ( convertView == null ) {
+	/*if ( convertView == null ) {
 		convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
-	}
-
+	}*/
+	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
@@ -86,12 +86,12 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
 				//completeList.add (rowData );
-				TaskActivity.taskAdapterComplete.add ( rowData );
+				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterInComplete.remove ( rowData );
 //				inCompleteList.remove ( position );
 			}
 			else {
-				TaskActivity.taskAdapterInComplete.add ( rowData );
+				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterComplete.remove ( rowData );
 			}
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
@@ -101,38 +101,47 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 
 	if ( rowData.isStar () ) {
-		try{
+		try {
+			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-		}catch ( NullPointerException e ){
-			Log.e("error on setBg", e.toString ());
+		}
+		catch ( NullPointerException e ) {
+			Log.e ( "error on setBg Star",rowData.getListTitle ()+":"+ e.toString () );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
 
 	}
-	else{
-		try{
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon) );
-		}catch ( NullPointerException e ){
-			Log.e("error on setBg", e.toString ());
+	else {
+		try {
+			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
+			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
+		}
+		catch ( NullPointerException e ) {
+			Log.e ( "error on setBg unStar",rowData.getListTitle ()+":"+ e.toString () );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
 	}
 
 	try {
-
 		star.setOnClickListener ( new View.OnClickListener () {
 			@Override public
 			void onClick ( View v ) {
-
+				Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
 				if ( ! rowData.isComplete () ) {
+					Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
 					rowData.setIsStar ( ! rowData.isStar () );
 					Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-
 				}
 			}
 		} );
 
 	}
 	catch ( NullPointerException e ) {
-	Log.e("error on setonClick", e.toString ());
+		Log.e ( "error on setonClick",rowData.getListTitle ()+":"+ e.toString () );
+		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 	}
 
 

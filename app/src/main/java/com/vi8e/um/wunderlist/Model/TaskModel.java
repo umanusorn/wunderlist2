@@ -1,4 +1,7 @@
 package com.vi8e.um.wunderlist.Model;
+import android.util.Log;
+
+
 /**
  * Created by um.anusorn on 8/27/2015.
  */
@@ -27,6 +30,7 @@ void setIsComplete ( boolean isComplete ) {
 
 public
 void setIsStar ( boolean isStar ) {
+	Log.d ( "isStar=", "" + isStar );
 	this.isStar = isStar;
 }
 
