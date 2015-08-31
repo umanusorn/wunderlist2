@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +14,8 @@ import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.TaskAdapter;
+import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
 
@@ -21,9 +23,9 @@ import java.util.ArrayList;
 public
 class TaskDetailActivity extends AppCompatActivity {
 
-private ListView       listViewComplete;
-private Activity       thisActivity;
-private TaskAdapter taskAdapterComplete;
+private ListView          listViewComplete;
+private Activity          thisActivity;
+private TaskDetailAdapter taskAdapterComplete;
 
 @Override
 protected
@@ -34,21 +36,48 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	thisActivity = this;
 
-	getWindow().setSoftInputMode(
+	getWindow ().setSoftInputMode (
 			WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-															);
-	View view = this.getCurrentFocus();
-	if (view != null) {
-		InputMethodManager imm = (InputMethodManager )getSystemService( Context.INPUT_METHOD_SERVICE);
+																);
+	View view = this.getCurrentFocus ();
+	if ( view != null ) {
+		InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
 		imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 
 	}
 
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
-	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
-	taskAdapterComplete = TaskActivity.setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
+	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete,taskAdapterComplete, false );
 }
+
+public static
+TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskAdapter, boolean isComplete ) {
+
+/*	list= new ArrayList<TaskModel> ();
+	//completeList = new ArrayList<TaskModel> ();
+// Create the adapter to convert the array to views
+	taskAdapter = new TaskAdapter ( activity, list );
+// Attach the adapter to a ListView*/
+
+	listView.setAdapter ( taskAdapter );
+	for ( int i = 0 ; i < 3 ; i++ ) {
+		Log.d ( "loop", "" + i );
+		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete );
+		taskModel.setIsComplete ( isComplete );
+		taskAdapter.insert ( taskModel, 0 );
+	}
+	Utility.setListViewHeightBasedOnChildren ( listView );
+// Or even append an entire new collection
+// Fetching some data, data has now returned
+// If data was JSON, convert to ArrayList of User objects.
+	/*JSONArray jsonArray = ...;
+	ArrayList<User> newUsers = User.fromJson(jsonArray)
+	adapter.addAll(newUsers);*/
+	return taskAdapter;
+}
+
 
 @Override
 public

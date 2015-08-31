@@ -57,10 +57,10 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_task );
 
 	Intent intent = getIntent ();
-	Bundle bundle= intent.getExtras ();
+	Bundle bundle = intent.getExtras ();
 	String title = bundle.getString ( ListConst.KEY_TITLE );
 
-	setToolBar (toolbar,title);
+	setToolBar ( toolbar, title );
 	setUpContent ();
 	setView ();
 	thisActivity = this;
@@ -76,7 +76,7 @@ void onCreate ( Bundle savedInstanceState ) {
 // Create the adapter to convert the array to views
 	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete,false );
+	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete, false );
 
 	toggleShowCompleteListView ();
 
@@ -106,14 +106,14 @@ public static void setToolBar ( Toolbar toolbar, String title, final AppCompatAc
 
 private
 void setToolBar ( Toolbar toolbar, String title ) {
-	toolbar = (Toolbar ) findViewById( R.id.toolbar);
+	toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
 	setSupportActionBar ( toolbar );
 	toolbar.setVisibility ( View.VISIBLE );
 	getSupportActionBar ().setTitle ( title );
 	toolbar.setTitle ( title );
-	getSupportActionBar().setDisplayShowTitleEnabled ( true );
-	getSupportActionBar().setDisplayHomeAsUpEnabled ( true );
-	getSupportActionBar().setDisplayShowHomeEnabled ( true );
+	getSupportActionBar ().setDisplayShowTitleEnabled ( true );
+	getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
+	getSupportActionBar ().setDisplayShowHomeEnabled ( true );
 	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -124,7 +124,7 @@ void setToolBar ( Toolbar toolbar, String title ) {
 
 void setView () {
 
-	TextView tvComplete = (TextView)findViewById ( R.id.tvComplete );
+	TextView tvComplete = ( TextView ) findViewById ( R.id.tvComplete );
 	tvComplete.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -149,13 +149,13 @@ void setView () {
 	editText.setOnKeyListener ( new View.OnKeyListener () {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
-			if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction ()!=KeyEvent.ACTION_DOWN){
+			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				taskAdapterInComplete.addList ( new TaskModel ( editText.getText ().toString (), isStar ), listViewIncomplete );
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
-				if (view != null) {
-					InputMethodManager imm = (InputMethodManager )getSystemService( Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+				if ( view != null ) {
+					InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
+					imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 				}
 			}
 			return false;
@@ -164,9 +164,9 @@ void setView () {
 
 }
 
-void toggleShowCompleteListView(){
-	showComplete=!showComplete;
-	if(showComplete){
+void toggleShowCompleteListView () {
+	showComplete = ! showComplete;
+	if ( showComplete ) {
 		listViewComplete.setVisibility ( View.VISIBLE );
 	}
 	else {
@@ -186,7 +186,7 @@ TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAda
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy Task " + i +" "+isComplete);
+		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete );
 		taskModel.setIsComplete ( isComplete );
 		taskAdapter.insert ( taskModel, 0 );
 	}
@@ -201,11 +201,10 @@ TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAda
 }
 
 
-void setUpContent(){
-	Bundle extras = getIntent().getExtras();
-	if(extras !=null)
-	{
-		title= extras.getString( ListConst.KEY_TITLE);
+void setUpContent () {
+	Bundle extras = getIntent ().getExtras ();
+	if ( extras != null ) {
+		title = extras.getString ( ListConst.KEY_TITLE );
 	}
 }
 
@@ -216,7 +215,6 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
 	return true;
 }
-
 
 
 @Override
