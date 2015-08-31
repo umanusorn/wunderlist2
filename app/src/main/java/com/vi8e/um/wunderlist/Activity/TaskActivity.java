@@ -54,6 +54,9 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task );
+
+	setToolBar ();
+
 	setUpContent ();
 	setView ();
 	thisActivity = this;
@@ -75,17 +78,20 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
-void toggleShowCompleteListView(){
-	showComplete=!showComplete;
-	if(showComplete){
-		listViewComplete.setVisibility ( View.VISIBLE );
-	}
-	else {
-		listViewComplete.setVisibility ( View.GONE );
-	}
+private
+void setToolBar () {
+	toolbar = (Toolbar ) findViewById( R.id.toolbar);
+	setSupportActionBar ( toolbar );
+	toolbar.setVisibility ( View.VISIBLE );
+	getSupportActionBar().setDisplayHomeAsUpEnabled ( true );
+	getSupportActionBar().setDisplayShowHomeEnabled ( true );
+	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			finish ();
+		}
+	} );
 }
-
-
 
 void setView () {
 
@@ -130,6 +136,16 @@ void setView () {
 
 }
 
+void toggleShowCompleteListView(){
+	showComplete=!showComplete;
+	if(showComplete){
+		listViewComplete.setVisibility ( View.VISIBLE );
+	}
+	else {
+		listViewComplete.setVisibility ( View.GONE );
+	}
+}
+
 public static
 TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
@@ -169,7 +185,7 @@ void setUpContent(){
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater ().inflate ( R.menu.menu_list, menu );
+	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
 	return true;
 }
 
