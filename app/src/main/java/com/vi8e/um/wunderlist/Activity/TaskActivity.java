@@ -60,7 +60,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Bundle bundle= intent.getExtras ();
 	String title = bundle.getString ( ListConst.KEY_TITLE );
 
-	setToolBar (title);
+	setToolBar (toolbar,title);
 	setUpContent ();
 	setView ();
 	thisActivity = this;
@@ -82,15 +82,36 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
+/*
+public static void setToolBar ( Toolbar toolbar, String title, final AppCompatActivity appCompatActivity) {
+
+	ActionBar actionBar = appCompatActivity.getSupportActionBar ();
+	toolbar = (Toolbar ) appCompatActivity.findViewById( R.id.toolbar);
+	appCompatActivity.setSupportActionBar ( toolbar );
+	toolbar.setVisibility ( View.VISIBLE );
+	appCompatActivity.getSupportActionBar ().setTitle ( title );
+	toolbar.setTitle ( title );
+	actionBar.setDisplayShowTitleEnabled ( true );
+	actionBar.setDisplayHomeAsUpEnabled ( true );
+	actionBar.setDisplayShowHomeEnabled ( true );
+	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			appCompatActivity.finish ();
+		}
+	} );
+}
+*/
+
+
 private
-void setToolBar ( String title ) {
+void setToolBar ( Toolbar toolbar, String title ) {
 	toolbar = (Toolbar ) findViewById( R.id.toolbar);
 	setSupportActionBar ( toolbar );
 	toolbar.setVisibility ( View.VISIBLE );
-	Log.d ( "setToolBar",title );
 	getSupportActionBar ().setTitle ( title );
 	toolbar.setTitle ( title );
-	getSupportActionBar().setDisplayShowTitleEnabled(true);
+	getSupportActionBar().setDisplayShowTitleEnabled ( true );
 	getSupportActionBar().setDisplayHomeAsUpEnabled ( true );
 	getSupportActionBar().setDisplayShowHomeEnabled ( true );
 	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
