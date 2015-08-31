@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        jcenter()
+
     }
 
     dependencies {
@@ -99,6 +101,8 @@ dependencies {
     compile 'com.nhaarman.listviewanimations:lib-core-slh:3.1.0@aar'
 
     compile 'com.mcxiaoke.volley:library:1.0.18'
+    testCompile "org.mockito:mockito-core:1.+"
+    testCompile "org.robolectric:robolectric:3.0"
 
     compile('com.crashlytics.sdk.android:crashlytics:2.5.1@aar') {
         transitive = true;
