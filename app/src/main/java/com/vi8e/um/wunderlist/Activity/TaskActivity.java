@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -55,8 +56,11 @@ void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task );
 
-	setToolBar ();
+	Intent intent = getIntent ();
+	Bundle bundle= intent.getExtras ();
+	String title = bundle.getString ( ListConst.KEY_TITLE );
 
+	setToolBar (title);
 	setUpContent ();
 	setView ();
 	thisActivity = this;
@@ -79,10 +83,14 @@ void onCreate ( Bundle savedInstanceState ) {
 }
 
 private
-void setToolBar () {
+void setToolBar ( String title ) {
 	toolbar = (Toolbar ) findViewById( R.id.toolbar);
 	setSupportActionBar ( toolbar );
 	toolbar.setVisibility ( View.VISIBLE );
+	Log.d ( "setToolBar",title );
+	getSupportActionBar ().setTitle ( title );
+	toolbar.setTitle ( title );
+	getSupportActionBar().setDisplayShowTitleEnabled(true);
 	getSupportActionBar().setDisplayHomeAsUpEnabled ( true );
 	getSupportActionBar().setDisplayShowHomeEnabled ( true );
 	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
@@ -102,7 +110,6 @@ void setView () {
 			toggleShowCompleteListView ();
 		}
 	} );
-
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
 
 	editTextStar.setOnClickListener ( new View.OnClickListener () {
