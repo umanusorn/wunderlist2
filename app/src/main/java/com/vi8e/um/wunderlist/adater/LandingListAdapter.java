@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.TaskActivity;
+import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
@@ -22,9 +22,18 @@ import java.util.ArrayList;
  */
 public
 class LandingListAdapter extends ArrayAdapter<ListModel> {
+
+
+ArrayList<ListModel> users;
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> users ) {
 	super ( context, 0, users );
+	this.users =users;
+}
+
+public
+ArrayList<ListModel> getArrayList () {
+	return users;
 }
 
 @Override
@@ -50,7 +59,8 @@ View getView ( int position, View convertView, ViewGroup parent ) {
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Intent  intent = new Intent ( getContext (), TaskActivity.class );
+//			Intent  intent = new Intent ( getContext (), TaskActivity.class );
+			Intent  intent = new Intent ( getContext (), DeveloperActivity.class );
 			intent.putExtra ( ListConst.KEY_TITLE,tvTitle.getText ().toString () );
 			getContext ().startActivity ( intent );
 

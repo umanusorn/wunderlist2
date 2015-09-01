@@ -27,6 +27,12 @@ Cursor getListValueCursor ( Context context ) {
 	return recordValueCursor;
 }
 
+public static void deleteRecordValue(Context context){
+
+	ListSelection personTeamSelection = new ListSelection();
+	personTeamSelection.delete(context.getContentResolver());
+}
+
 public static
 List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 	List<ContentValues> values = new ArrayList<ContentValues> ();

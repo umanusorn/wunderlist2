@@ -55,7 +55,7 @@ void setNote ( String note ) {
 }
 
 public
-TaskModel ( int id, String listTitle ) {
+TaskModel ( String id, String listTitle ) {
 	super ( id, listTitle );
 }
 

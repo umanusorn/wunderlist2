@@ -34,6 +34,9 @@
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
         <activity
+                android:name=".Activity.DeveloperActivity">
+        </activity>
+        <activity
             android:name=".Activity.TaskDetailActivity"
             android:label="@string/title_activity_task_detail" >
         </activity>

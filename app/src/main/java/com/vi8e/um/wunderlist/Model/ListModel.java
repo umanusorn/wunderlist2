@@ -1,10 +1,15 @@
 package com.vi8e.um.wunderlist.Model;
 
+import android.content.ContentValues;
+
+import com.vi8e.um.wunderlist.provider.list.ListColumns;
+
+
 public
 class ListModel {
 
 
-int id;
+String id;
 int numLateTask;
 int    numCurrentTask;
 int    folderId;
@@ -14,7 +19,7 @@ String imgPath;
 String listTitle;
 String type;
 public
-ListModel ( int id, String listTitle ) {
+ListModel ( String id, String listTitle ) {
 	setDefault ();
 	this.id = id;
 	this.listTitle = listTitle;
@@ -24,12 +29,31 @@ void setDefault () {
 	this.listTitle = ""; //
 	this.imgPath = "";
 	this.isDisturb = false;
+
 	this.isPinned = false;
 	this.folderId = 0;
 	this.numCurrentTask = 0;
-	this.numLateTask = 0;
-	this.id = 0;
 
+	this.numLateTask = 0;
+	this.id = "0";
+
+}
+
+public
+ContentValues getValues(){
+	ContentValues values = new ContentValues (  );
+	values.put ( ListColumns.LIST_TITLE,listTitle );
+	values.put ( ListColumns.IMG_PATH,imgPath );
+	values.put ( ListColumns.ISDISTURB,isDisturb );
+
+	values.put ( ListColumns.ISPINNED,isPinned );
+	values.put ( ListColumns.FOLDER_ID,folderId );
+	values.put ( ListColumns.NUM_CURRENT_TASK,numCurrentTask );
+
+	values.put ( ListColumns.NUM_LATE_TASK,numLateTask );
+	//values.put ( ListColumns._ID,id );
+
+	return values;
 }
 
 public
@@ -40,7 +64,7 @@ ListModel ( String listTitle ) {
 }
 
 public
-ListModel ( String listTitle, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, int id ) {
+ListModel ( String listTitle, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
 	this.listTitle = listTitle; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
@@ -74,12 +98,12 @@ void setListTitle ( String listTitle ) {
 }
 
 public
-int getId () {
+String getId () {
 	return id;
 }
 
 public
-void setId ( int id ) {
+void setId ( String id ) {
 	this.id = id;
 }
 

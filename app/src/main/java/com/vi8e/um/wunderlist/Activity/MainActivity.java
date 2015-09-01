@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -40,6 +41,7 @@ public
 class MainActivity extends AppCompatActivity {
 
 
+private static final String TAG = MainActivity.class.getSimpleName ();
 Toolbar                 toolbar;
 CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -67,14 +69,52 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-	//Utility.setDrawbleColorFilter ();
+
+
+
+	for ( int i = 0 ; i < 1 ; i++ ) {
+		addToDB ( getApplication () );
+	}
+
+	Intent intent = new Intent ( thisActivity, ViewDBActivity.class );
+	startActivity ( intent );
+}
+
+public
+void addToDB ( Context context ) {
+
+	Log.d ( "addToDb", "" );
+	String testTitle = "test Title";
+	ListContentValues values = new ListContentValues ();
+	values.putListTitle ( testTitle );
+	ListModel listModel=new ListModel ( "dddd" );
+
+	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+	Log.d ( "ChkColumn ",uri.getPathSegments ().get ( 1 ) );
+	//mLandingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), testTitle ), 0 );
+}
+
+@Override
+protected void onPause(){
+	super.onPause();
+Log.d ("Main", "EnterOnPause");
+	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
+		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
+		String id = recordData.getId ();
+		Uri uri = Uri.parse(String.valueOf(ListColumns.CONTENT_URI) + "/" + id);
+		try {
+			getContentResolver().update(uri, recordData.getValues (), null, null);
+		} catch (IllegalArgumentException e) {
+			Log.e ( "errorOnAddData", e.getMessage () );
+			getContentResolver().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
+		}
+
+	}
 
 }
 
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
-
-
 	Cursor c = QueryHelper.getListValueCursor ( context);
 	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
 
@@ -85,8 +125,10 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 
 	listView.setAdapter ( landingListAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-		Log.d ( "loop", "" + i );
-		landingListAdapter.add ( new ListModel ( i, allListValues.get ( i ).getAsString ( ListColumns.LIST_TITLE )) );
+
+		ContentValues values =allListValues.get ( i );
+		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE )) );
+		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
 	}
 
 	Utility.setListViewHeightBasedOnChildren ( listView );
@@ -148,20 +190,7 @@ void initInstances () {
 
 	//ContentValues values = new ContentValues (  );
 
-	addToDB ( getApplication () );
-	Intent intent = new Intent ( thisActivity, ViewDBActivity.class );
-	startActivity ( intent );
 
-}
-
-
-public static
-void addToDB ( Context context ) {
-
-	Log.d ( "addToDb", "" );
-	ListContentValues values = new ListContentValues ();
-	values.putListTitle ( "Tes title" );
-	context.getContentResolver ().insert ( ListColumns.CONTENT_URI, values.values () );
 }
 
 @Override
@@ -193,9 +222,6 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		return true;
 	}
 
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
 	int id = item.getItemId ();
 
 	//noinspection SimplifiableIfStatement

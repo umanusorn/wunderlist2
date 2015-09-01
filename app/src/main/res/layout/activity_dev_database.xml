@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="app.umitems.health.Activity.dev.DeveloperActivity">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TableRow
+            android:layout_width="fill_parent"
+
+            android:gravity="center_horizontal"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="viewDb"
+                android:id="@+id/viewDbBtn"
+                android:contentDescription="sss"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="setValue"
+                android:id="@+id/setValueBtn"
+
+                android:contentDescription="sss"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+
+            android:gravity="center_horizontal"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="removeDB"
+                android:id="@+id/removeHealthDbBtn"
+                android:contentDescription="sss"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="genRecord"
+                android:id="@+id/GenRecordBtn"
+                android:contentDescription="sss"/>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="fill_parent">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alarm"
+                android:id="@+id/alarmBtn"
+                android:contentDescription="sss"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="charts"
+                android:id="@+id/chartBtn"
+                android:contentDescription="sss"/>
+    </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="fill_parent">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monitor Sleep"
+                    android:id="@+id/monitorSleepBtn"
+                    android:contentDescription="sss"/>
+
+
+        </TableRow>
+
+        <TableRow
+
+                android:gravity="center_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ViewDB2"
+                android:id="@+id/viewDB2Btn"
+                android:layout_column="0" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dummyCalories"
+                android:id="@+id/dummyCalBtn"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+
+                android:gravity="center_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="removeDB2"
+                android:id="@+id/removeDB2Btn"
+                android:layout_column="0" />
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
