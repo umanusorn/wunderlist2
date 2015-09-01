@@ -20,7 +20,7 @@ class QueryHelper {
 
 
 public static
-Cursor getRecordValueCursor ( Context context ) {
+Cursor getListValueCursor ( Context context ) {
 	ListSelection recordValueSelection = new ListSelection ();
 	String[] projection = ListColumns.ALL_COLUMNS;
 	ListCursor recordValueCursor = recordValueSelection.query ( context.getContentResolver (), projection );
@@ -28,7 +28,7 @@ Cursor getRecordValueCursor ( Context context ) {
 }
 
 public static
-List<ContentValues> getRecordValueValues ( Cursor c ) {
+List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 	List<ContentValues> values = new ArrayList<ContentValues> ();
 	int i = 0;
 	String key;

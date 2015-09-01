@@ -43,7 +43,6 @@ void onCreate ( Bundle savedInstanceState ) {
 	if ( view != null ) {
 		InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
 		imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
-
 	}
 
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );

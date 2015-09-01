@@ -1,9 +1,11 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,6 +22,7 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.QueryHelper;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
@@ -28,6 +31,7 @@ import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -70,17 +74,21 @@ void onCreate ( Bundle savedInstanceState ) {
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
 
+
+	Cursor c = QueryHelper.getListValueCursor ( context);
+	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
+
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
 // Create the adapter to convert the array to views
 	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
 // Attach the adapter to a ListView
 
 	listView.setAdapter ( landingListAdapter );
-	for ( int i = 0 ; i < 3 ; i++ ) {
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		Log.d ( "loop", "" + i );
-		landingListAdapter.add ( new ListModel ( i, "TestingListViews" + i ) );
+		landingListAdapter.add ( new ListModel ( i, allListValues.get ( i ).getAsString ( ListColumns.LIST_TITLE )) );
 	}
-	landingListAdapter.add ( new ListModel ( "dssdf" ) );
+
 	Utility.setListViewHeightBasedOnChildren ( listView );
 
 // Or even append an entire new collection
