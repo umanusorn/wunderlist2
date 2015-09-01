@@ -3,7 +3,6 @@ import android.app.Activity;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.vi8e.um.wunderlist.Activity.MainActivity;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 
 
@@ -23,7 +22,7 @@ void showPassCodeChangeOrTurnOff ( final Activity thisContext, final LandingList
 			.input ( "Add to-do", "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					MainActivity.addToDB ( thisContext,String.valueOf ( charSequence ),landingListAdapter,listView );
+					QueryHelper.addToDB ( thisContext, String.valueOf ( charSequence ), landingListAdapter, listView );
 					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence )),listView );
 				}
 			} )

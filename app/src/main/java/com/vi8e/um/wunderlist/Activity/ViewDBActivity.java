@@ -12,11 +12,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Model.QueryHelper;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.util.ConfirmDialog;
 import com.vi8e.um.wunderlist.util.Init;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 
 import java.util.List;
 

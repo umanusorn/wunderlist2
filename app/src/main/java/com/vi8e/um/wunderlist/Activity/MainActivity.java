@@ -22,12 +22,12 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 import com.vi8e.um.wunderlist.Model.ListModel;
-import com.vi8e.um.wunderlist.Model.QueryHelper;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListContentValues;
 import com.vi8e.um.wunderlist.util.CustomDialog;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ ActionBarDrawerToggle drawerToggle;
 LandingListAdapter    mLandingListAdapter;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
-
+ListView listView;
 
 Activity thisActivity;
 
@@ -60,7 +60,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_main );
 	thisActivity = this;
-	ListView listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 
 
 	initToolbar ();
@@ -69,22 +69,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-	for ( int i = 0 ; i < 1 ; i++ ) {
+	/*for ( int i = 0 ; i < 1 ; i++ ) {
 		addToDB ( getApplication (),"tssd",mLandingListAdapter, listView );
-	}
-}
-
-public static
-void addToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
-
-	Log.d ( "addToDb", "" );
-	ListContentValues values = new ListContentValues ();
-	values.putListTitle ( title );
-	ListModel listModel = new ListModel ( title );
-	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
-	Log.d ( "ChkColumn ", uri.getPathSegments ().get ( 1 ) );
-	landingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	}*/
 }
 
 @Override
@@ -99,7 +86,14 @@ Log.d ("Main", "EnterOnPause dataCount"+mLandingListAdapter.getCount ());
 			getContentResolver().update(uri, recordData.getValues (), null, null);
 		} catch (IllegalArgumentException e) {
 			Log.e ( "errorOnAddData", e.getMessage () );
-			getContentResolver().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
+
+			String title = recordData.getListTitle ();
+			ListContentValues values = new ListContentValues ();
+			values.putListTitle ( title );
+			ListModel listModel = new ListModel ( title );
+			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+			Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
+			//getContentResolver().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
 		}
 	}
 }

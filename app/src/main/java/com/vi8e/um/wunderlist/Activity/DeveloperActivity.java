@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.vi8e.um.wunderlist.Model.QueryHelper;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 
 import java.util.Locale;
 
@@ -45,14 +45,14 @@ void onCreate ( Bundle savedInstanceState ) {
 	viewDbBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View view) {
 			Intent callIntent = new Intent (getApplication(), ViewDBActivity.class);
-			startActivity(callIntent);
+			startActivity ( callIntent );
 		}
 	});
 
     viewDB2Btn.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
             Intent callIntent = new Intent (getApplication(), ViewDBActivity.class);
-            startActivity(callIntent);
+            startActivity ( callIntent );
         }
     });
 
