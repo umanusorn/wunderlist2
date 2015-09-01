@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.DefaultDatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
@@ -23,7 +22,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     private final UmSQLiteHelperCallbacks mOpenHelperCallbacks;
 
     // @formatter:off
-    private static final String SQL_CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS "
+    public static final String SQL_CREATE_TABLE_LIST = "CREATE TABLE IF NOT EXISTS "
             + ListColumns.TABLE_NAME + " ( "
             + ListColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + ListColumns.LIST_TITLE + " TEXT DEFAULT '0', "
@@ -36,7 +35,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
             + ListColumns.TYPE + " TEXT DEFAULT '0' "
             + " );";
 
-    private static final String SQL_CREATE_INDEX_LIST_NUM_LATE_TASK = "CREATE INDEX IDX_LIST_NUM_LATE_TASK "
+    public static final String SQL_CREATE_INDEX_LIST_NUM_LATE_TASK = "CREATE INDEX IDX_LIST_NUM_LATE_TASK "
             + " ON " + ListColumns.TABLE_NAME + " ( " + ListColumns.NUM_LATE_TASK + " );";
 
     // @formatter:on
@@ -62,13 +61,12 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     /*
      * Pre Honeycomb.
      */
-
     private static UmSQLiteHelper newInstancePreHoneycomb(Context context) {
-        return new UmSQLiteHelper(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);
+        return new UmSQLiteHelper(context);
     }
 
-    private UmSQLiteHelper(Context context, String name, CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    private UmSQLiteHelper(Context context) {
+        super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION);
         mContext = context;
         mOpenHelperCallbacks = new UmSQLiteHelperCallbacks();
     }
@@ -77,15 +75,14 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     /*
      * Post Honeycomb.
      */
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private static UmSQLiteHelper newInstancePostHoneycomb(Context context) {
-        return new UmSQLiteHelper(context, DATABASE_FILE_NAME, null, DATABASE_VERSION, new DefaultDatabaseErrorHandler());
+        return new UmSQLiteHelper(context, new DefaultDatabaseErrorHandler());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private UmSQLiteHelper(Context context, String name, CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
+    private UmSQLiteHelper(Context context, DatabaseErrorHandler errorHandler) {
+        super(context, DATABASE_FILE_NAME, null, DATABASE_VERSION, errorHandler);
         mContext = context;
         mOpenHelperCallbacks = new UmSQLiteHelperCallbacks();
     }

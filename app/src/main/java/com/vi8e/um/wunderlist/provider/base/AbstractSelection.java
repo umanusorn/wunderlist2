@@ -1,13 +1,15 @@
 package com.vi8e.um.wunderlist.provider.base;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class AbstractSelection <T extends AbstractSelection<?>> {
+public abstract class AbstractSelection<T extends AbstractSelection<?>> {
     private static final String EQ = "=?";
     private static final String PAREN_OPEN = "(";
     private static final String PAREN_CLOSE = ")";
@@ -24,9 +26,21 @@ public abstract class AbstractSelection <T extends AbstractSelection<?>> {
     private static final String LT_EQ = "<=?";
     private static final String NOT_EQ = "<>?";
     private static final String LIKE = " LIKE ?";
+    private static final String CONTAINS = " LIKE '%' || ? || '%'";
+    private static final String STARTS = " LIKE ? || '%'";
+    private static final String ENDS = " LIKE '%' || ?";
+    private static final String COUNT = "COUNT(*)";
+    private static final String DESC = " DESC";
 
-    private StringBuilder mSelection = new StringBuilder();
-    private List<String> mSelectionArgs = new ArrayList<String>(5);
+    private final StringBuilder mSelection = new StringBuilder();
+    private final List<String> mSelectionArgs = new ArrayList<String>(5);
+
+    private final StringBuilder mOrderBy = new StringBuilder();
+
+    Boolean mNotify;
+    String mGroupBy;
+    String mHaving;
+    Integer mLimit;
 
     protected void addEquals(String column, Object[] value) {
         mSelection.append(column);
@@ -93,6 +107,45 @@ public abstract class AbstractSelection <T extends AbstractSelection<?>> {
         for (int i = 0; i < values.length; i++) {
             mSelection.append(column);
             mSelection.append(LIKE);
+            mSelectionArgs.add(values[i]);
+            if (i < values.length - 1) {
+                mSelection.append(OR);
+            }
+        }
+        mSelection.append(PAREN_CLOSE);
+    }
+
+    protected void addContains(String column, String[] values) {
+        mSelection.append(PAREN_OPEN);
+        for (int i = 0; i < values.length; i++) {
+            mSelection.append(column);
+            mSelection.append(CONTAINS);
+            mSelectionArgs.add(values[i]);
+            if (i < values.length - 1) {
+                mSelection.append(OR);
+            }
+        }
+        mSelection.append(PAREN_CLOSE);
+    }
+
+    protected void addStartsWith(String column, String[] values) {
+        mSelection.append(PAREN_OPEN);
+        for (int i = 0; i < values.length; i++) {
+            mSelection.append(column);
+            mSelection.append(STARTS);
+            mSelectionArgs.add(values[i]);
+            if (i < values.length - 1) {
+                mSelection.append(OR);
+            }
+        }
+        mSelection.append(PAREN_CLOSE);
+    }
+
+    protected void addEndsWith(String column, String[] values) {
+        mSelection.append(PAREN_OPEN);
+        for (int i = 0; i < values.length; i++) {
+            mSelection.append(column);
+            mSelection.append(ENDS);
             mSelectionArgs.add(values[i]);
             if (i < values.length - 1) {
                 mSelection.append(OR);
@@ -223,11 +276,26 @@ public abstract class AbstractSelection <T extends AbstractSelection<?>> {
         return mSelectionArgs.toArray(new String[size]);
     }
 
+    /**
+     * Returns the order string produced by this object.
+     */
+    public String order() {
+        return mOrderBy.length() > 0 ? mOrderBy.toString() : null;
+    }
 
     /**
      * Returns the {@code uri} argument to pass to the {@code ContentResolver} methods.
      */
-    public abstract Uri uri();
+    public Uri uri() {
+        Uri uri = baseUri();
+        if (mNotify != null) uri = BaseContentProvider.notify(uri, mNotify);
+        if (mGroupBy != null) uri = BaseContentProvider.groupBy(uri, mGroupBy);
+        if (mHaving != null) uri = BaseContentProvider.having(uri, mHaving);
+        if (mLimit != null) uri = BaseContentProvider.limit(uri, String.valueOf(mLimit));
+        return uri;
+    }
+
+    protected abstract Uri baseUri();
 
     /**
      * Deletes row(s) specified by this selection.
@@ -237,5 +305,69 @@ public abstract class AbstractSelection <T extends AbstractSelection<?>> {
      */
     public int delete(ContentResolver contentResolver) {
         return contentResolver.delete(uri(), sel(), args());
+    }
+
+    /**
+     * Deletes row(s) specified by this selection.
+     *
+     * @param context The context to use.
+     * @return The number of rows deleted.
+     */
+    public int delete(Context context) {
+        return context.getContentResolver().delete(uri(), sel(), args());
+    }
+
+    @SuppressWarnings("unchecked")
+    public T notify(boolean notify) {
+        mNotify = notify;
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T groupBy(String groupBy) {
+        mGroupBy = groupBy;
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T having(String having) {
+        mHaving = having;
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T limit(int limit) {
+        mLimit = limit;
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T orderBy(String order, boolean desc) {
+        if (mOrderBy.length() > 0) mOrderBy.append(COMMA);
+        mOrderBy.append(order);
+        if (desc) mOrderBy.append(DESC);
+        return (T) this;
+    }
+
+    public T orderBy(String order) {
+        return orderBy(order, false);
+    }
+
+    @SuppressWarnings("unchecked")
+    public T orderBy(String... orders) {
+        for (String order : orders) {
+            orderBy(order, false);
+        }
+        return (T) this;
+    }
+
+    public int count(ContentResolver resolver) {
+        Cursor cursor = resolver.query(uri(), new String[] { COUNT }, sel(), args(), null);
+        if (cursor == null) return 0;
+        try {
+            return cursor.moveToFirst() ? cursor.getInt(0) : 0;
+        } finally {
+            cursor.close();
+        }
     }
 }

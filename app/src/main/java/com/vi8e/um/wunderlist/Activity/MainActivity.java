@@ -3,7 +3,6 @@ package com.vi8e.um.wunderlist.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
@@ -62,42 +61,36 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_main );
 	thisActivity = this;
 	ListView listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
+
 
 	initToolbar ();
 	initInstances ();
 
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-
-
-
 	for ( int i = 0 ; i < 1 ; i++ ) {
-		addToDB ( getApplication () );
+		addToDB ( getApplication (),"tssd",mLandingListAdapter, listView );
 	}
-
-	Intent intent = new Intent ( thisActivity, ViewDBActivity.class );
-	startActivity ( intent );
 }
 
-public
-void addToDB ( Context context ) {
+public static
+void addToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
 
 	Log.d ( "addToDb", "" );
-	String testTitle = "test Title";
 	ListContentValues values = new ListContentValues ();
-	values.putListTitle ( testTitle );
-	ListModel listModel=new ListModel ( "dddd" );
-
+	values.putListTitle ( title );
+	ListModel listModel = new ListModel ( title );
 	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
-	Log.d ( "ChkColumn ",uri.getPathSegments ().get ( 1 ) );
-	//mLandingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), testTitle ), 0 );
+	Log.d ( "ChkColumn ", uri.getPathSegments ().get ( 1 ) );
+	landingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
+	Utility.setListViewHeightBasedOnChildren ( listView );
 }
 
 @Override
 protected void onPause(){
 	super.onPause();
-Log.d ("Main", "EnterOnPause");
+Log.d ("Main", "EnterOnPause dataCount"+mLandingListAdapter.getCount ());
 	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
 		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
 		String id = recordData.getId ();
@@ -108,18 +101,20 @@ Log.d ("Main", "EnterOnPause");
 			Log.e ( "errorOnAddData", e.getMessage () );
 			getContentResolver().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
 		}
-
 	}
-
 }
 
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
+
+
 	Cursor c = QueryHelper.getListValueCursor ( context);
+	c.moveToFirst ();
+
+	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
 
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
-// Create the adapter to convert the array to views
 	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
 // Attach the adapter to a ListView
 

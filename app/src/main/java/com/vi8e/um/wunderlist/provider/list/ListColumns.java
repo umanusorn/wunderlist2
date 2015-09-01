@@ -15,7 +15,7 @@ public class ListColumns implements BaseColumns {
     /**
      * Primary key.
      */
-    public static final String _ID = new String(BaseColumns._ID);
+    public static final String _ID = BaseColumns._ID;
 
     public static final String LIST_TITLE = "list_title";
 
@@ -28,9 +28,9 @@ public class ListColumns implements BaseColumns {
 
     public static final String FOLDER_ID = "folder_id";
 
-    public static final String ISPINNED = "ispinned";
+    public static final String ISPINNED = "isPinned";
 
-    public static final String ISDISTURB = "isdisturb";
+    public static final String ISDISTURB = "isDisturb";
 
     public static final String IMG_PATH = "img_path";
 
@@ -56,14 +56,14 @@ public class ListColumns implements BaseColumns {
     public static boolean hasColumns(String[] projection) {
         if (projection == null) return true;
         for (String c : projection) {
-            if (c == LIST_TITLE || c.contains("." + LIST_TITLE)) return true;
-            if (c == NUM_LATE_TASK || c.contains("." + NUM_LATE_TASK)) return true;
-            if (c == NUM_CURRENT_TASK || c.contains("." + NUM_CURRENT_TASK)) return true;
-            if (c == FOLDER_ID || c.contains("." + FOLDER_ID)) return true;
-            if (c == ISPINNED || c.contains("." + ISPINNED)) return true;
-            if (c == ISDISTURB || c.contains("." + ISDISTURB)) return true;
-            if (c == IMG_PATH || c.contains("." + IMG_PATH)) return true;
-            if (c == TYPE || c.contains("." + TYPE)) return true;
+            if (c.equals(LIST_TITLE) || c.contains("." + LIST_TITLE)) return true;
+            if (c.equals(NUM_LATE_TASK) || c.contains("." + NUM_LATE_TASK)) return true;
+            if (c.equals(NUM_CURRENT_TASK) || c.contains("." + NUM_CURRENT_TASK)) return true;
+            if (c.equals(FOLDER_ID) || c.contains("." + FOLDER_ID)) return true;
+            if (c.equals(ISPINNED) || c.contains("." + ISPINNED)) return true;
+            if (c.equals(ISDISTURB) || c.contains("." + ISDISTURB)) return true;
+            if (c.equals(IMG_PATH) || c.contains("." + IMG_PATH)) return true;
+            if (c.equals(TYPE) || c.contains("." + TYPE)) return true;
         }
         return false;
     }

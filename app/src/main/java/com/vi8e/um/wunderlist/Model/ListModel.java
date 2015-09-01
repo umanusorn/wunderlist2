@@ -1,6 +1,7 @@
 package com.vi8e.um.wunderlist.Model;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 
@@ -21,6 +22,8 @@ String type;
 public
 ListModel ( String id, String listTitle ) {
 	setDefault ();
+
+	Log.d ("NewListModel","id="+id);
 	this.id = id;
 	this.listTitle = listTitle;
 }

@@ -42,6 +42,7 @@ List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 	c.moveToFirst ();
 	while ( c.moveToNext () ) {
 		ContentValues value = new ContentValues ();
+		Log.d ( "InWhile cursor=",c.getCount () + "  Values=" + values.size () );
 		for ( int j = 1 ; j < c.getColumnCount () ; j++ ) {
 			key = ListColumns.ALL_COLUMNS[ j ];
 			index = c.getColumnIndex ( key );
@@ -50,7 +51,7 @@ List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 		i++;
 		values.add ( value );
 	}
-	Log.d ( "getCount",c.getCount () + "  " + values.size () );
+	Log.d ( "getCount cursor=",c.getCount () + "  Values=" + values.size () );
 
 	return values;
 }

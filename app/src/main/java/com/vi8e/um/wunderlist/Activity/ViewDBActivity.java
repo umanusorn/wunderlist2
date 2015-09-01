@@ -38,10 +38,12 @@ void onCreate ( Bundle savedInstanceState ) {
 
 public void genTableUi() {
 	Cursor c = QueryHelper.getListValueCursor ( getApplicationContext () );
+	c.moveToFirst ();
 	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
 	genColName();
+
 	if (allListValues.isEmpty()) {
-		ConfirmDialog.show(this, "No data in TableHealth", new ConfirmDialog.ConfirmListener() {
+		ConfirmDialog.show(this, "No data ", new ConfirmDialog.ConfirmListener() {
 			@Override public void onConfirm(String key) {
 				finish();
 			}
@@ -49,7 +51,7 @@ public void genTableUi() {
 		return;
 	}
 //fill data each row
-	final int ROW_SIZE = c.getCount();
+	//final int ROW_SIZE = c.getCount();
 	for (ContentValues value : allListValues) {
 		TableRow tableRow = Init.tableRow ( getApplicationContext () );
 //fill data each column
