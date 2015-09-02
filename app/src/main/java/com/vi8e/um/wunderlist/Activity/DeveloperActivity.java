@@ -88,7 +88,7 @@ void onCreate ( Bundle savedInstanceState ) {
 
     removeDB2.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-            QueryHelper.deleteRecordValue ( getApplicationContext () );
+            QueryHelper.deleteListValue ( getApplicationContext () );
         }
     });
 

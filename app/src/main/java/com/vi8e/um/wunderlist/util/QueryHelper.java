@@ -33,8 +33,7 @@ Cursor getListValueCursor ( Context context ) {
 }
 
 public static
-void deleteRecordValue ( Context context ) {
-
+void deleteListValue ( Context context ) {
 	ListSelection personTeamSelection = new ListSelection ();
 	personTeamSelection.delete ( context.getContentResolver () );
 }
@@ -65,6 +64,8 @@ List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 
 	return values;
 }
+
+
 
 
 public static

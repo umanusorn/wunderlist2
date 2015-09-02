@@ -37,10 +37,10 @@ import io.fabric.sdk.android.Fabric;
 
 
 public
-class MainActivity extends AppCompatActivity {
+class LandingActivity extends AppCompatActivity {
 
 
-private static final String TAG = MainActivity.class.getSimpleName ();
+private static final String TAG = LandingActivity.class.getSimpleName ();
 Toolbar                 toolbar;
 CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -49,7 +49,7 @@ ActionBarDrawerToggle drawerToggle;
 LandingListAdapter    mLandingListAdapter;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
-ListView listView;
+ListView              listView;
 
 Activity thisActivity;
 
@@ -75,16 +75,18 @@ void onCreate ( Bundle savedInstanceState ) {
 }
 
 @Override
-protected void onPause(){
-	super.onPause();
-Log.d ("Main", "EnterOnPause dataCount"+mLandingListAdapter.getCount ());
+protected
+void onPause () {
+	super.onPause ();
+	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
 	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
 		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
 		String id = recordData.getId ();
-		Uri uri = Uri.parse(String.valueOf(ListColumns.CONTENT_URI) + "/" + id);
+		Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
 		try {
-			getContentResolver().update(uri, recordData.getValues (), null, null);
-		} catch (IllegalArgumentException e) {
+			getContentResolver ().update ( uri, recordData.getValues (), null, null );
+		}
+		catch ( IllegalArgumentException e ) {
 			Log.e ( "errorOnAddData", e.getMessage () );
 
 			String title = recordData.getListTitle ();
@@ -161,7 +163,7 @@ void initToolbar () {
 private
 void initInstances () {
 	drawerLayout = ( DrawerLayout ) findViewById ( R.id.drawerLayout );
-	drawerToggle = new ActionBarDrawerToggle ( MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
+	drawerToggle = new ActionBarDrawerToggle ( LandingActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
 	drawerLayout.setDrawerListener ( drawerToggle );
 
 	toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
