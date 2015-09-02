@@ -46,13 +46,14 @@ List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 	String key;
 	int index;
 	c.moveToFirst ();
-	if ( c.getCount () != 0 ) {
+	if ( c.getCount () > 0 ) {
 		do {
 			ContentValues value = new ContentValues ();
 			Log.d ( "InWhile cursor=", c.getCount () + "  Values=" + values.size () );
-			for ( int j = 1 ; j < c.getColumnCount () ; j++ ) {
+			for ( int j = 0 ; j < c.getColumnCount () ; j++ ) {
 				key = ListColumns.ALL_COLUMNS[ j ];
 				index = c.getColumnIndex ( key );
+				Log.d ( "InFor",key+">>"+index );
 				value.put ( key, c.getString ( index ) );
 			}
 			i++;

@@ -51,16 +51,11 @@ android {
             minSdkVersion 16
             targetSdkVersion 22
             versionCode code
-            versionName "testBeta"+code
+            versionName "UmDev"+code
         }
     } else {
         throw new GradleException("Could not read version.properties!")
     }
-
-
-
-
-
 
     buildTypes {
         release {
