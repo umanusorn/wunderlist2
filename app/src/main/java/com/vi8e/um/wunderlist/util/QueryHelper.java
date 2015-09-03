@@ -92,13 +92,12 @@ void addToDB ( Context context, String title, LandingListAdapter landingListAdap
 }
 
 public static
-void addTaskToDB ( Context context, String title, TaskAdapter taskAdapter, ListView listView ) {
+void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter, ListView listView ) {
 
 	Log.d ( "addTaskToDb", "" );
-	TaskModel taskModel = new TaskModel ( title );
 	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
-	Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
-	taskAdapter.insert ( new TaskModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
+	Log.d ( "ChkColumn ", "title" + taskModel.getListTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
+	taskAdapter.insert ( new TaskModel ( uri.getPathSegments ().get ( 1 ), taskModel.getListTitle () ), 0 );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 }
 

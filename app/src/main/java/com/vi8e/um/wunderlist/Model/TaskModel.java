@@ -19,17 +19,18 @@ String taskTitle;
 String taskId;
 
 
+
+
 public
 ContentValues getValues (){
 	ContentValues values = new ContentValues (  );
-	values.put ( TaskColumns.TASK_TITLE,taskTitle );
+	values.put ( TaskColumns.TASK_TITLE,listTitle );
 	values.put ( TaskColumns.ISSTAR,isStar );
 	values.put ( TaskColumns.ISCOMPLETE,isComplete );
 	values.put ( TaskColumns.LISTID,listId );
 	values.put ( TaskColumns.NOTE,note );
 		return values;
 }
-
 
 public
 boolean isStar () {
@@ -87,6 +88,7 @@ public
 TaskModel ( String listTitle,Boolean isStar ,boolean isComplete ) {
 	super ( listTitle );
 	this.setIsStar ( isStar );
+	this.setIsComplete ( isComplete );
 }
 
 public
@@ -106,4 +108,13 @@ TaskModel ( String listTitle ) {
 
 }
 
+public
+String getTaskTitle () {
+	return taskTitle;
+}
+
+public
+String getTaskId () {
+	return taskId;
+}
 }

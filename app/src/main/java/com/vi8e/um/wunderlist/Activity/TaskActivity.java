@@ -27,8 +27,8 @@ import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
-import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -75,14 +75,14 @@ void onCreate ( Bundle savedInstanceState ) {
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
-	taskAdapterComplete = setUpAdapterListView ( this,getApplicationContext (), listViewComplete, taskAdapterComplete, true );
+	taskAdapterComplete = setUpAdapterListView ( getApplicationContext (), listViewComplete, taskAdapterComplete, true );
 
 	inCompleteList = new ArrayList<TaskModel> ();
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this,getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
+	taskAdapterInComplete = setUpAdapterListView ( getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
 
 	toggleShowCompleteListView ();
 
@@ -135,8 +135,10 @@ void setView () {
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				String title = editText.getText ().toString ();
-				taskAdapterInComplete.addList ( new TaskModel ( title, isStar ), listViewIncomplete );
-				QueryHelper.addTaskToDB ( getApplicationContext (),title,taskAdapterComplete,listViewComplete );
+
+				TaskModel taskModel =new TaskModel ( title,isStar,true );
+				taskAdapterInComplete.addList ( taskModel, listViewIncomplete );
+				QueryHelper.addTaskToDB ( getApplicationContext (),taskModel,taskAdapterInComplete,listViewIncomplete);
 
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
@@ -162,10 +164,17 @@ void toggleShowCompleteListView () {
 }
 
 public static
-TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
+TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
 	listView.setAdapter ( taskAdapter );
-	Cursor c = QueryHelper.getTaskValueCursor ( context );
+	TaskSelection where = new TaskSelection ();
+	String isCompleteValue="0";
+	if(isComplete==true)
+		isCompleteValue="1";
+
+	where.iscomplete ( isCompleteValue );
+
+	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
@@ -174,8 +183,9 @@ TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView l
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 
 		ContentValues values = allListValues.get ( i );
-		taskAdapter.add ( new TaskModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
-		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
+
+		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values.getAsString ( TaskColumns.TASK_TITLE ) ) );
+		Log.d ( "loop", " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
 
 	Utility.setListViewHeightBasedOnChildren ( listView );
