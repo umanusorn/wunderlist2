@@ -13,7 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.list.ListColumns;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.ConfirmDialog;
 import com.vi8e.um.wunderlist.util.Init;
 import com.vi8e.um.wunderlist.util.QueryHelper;
@@ -37,12 +37,13 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 public void genTableUi() {
-	Cursor c = QueryHelper.getListValueCursor ( getApplicationContext () );
+	Cursor c = QueryHelper.getTaskValueCursor ( getApplicationContext () );
 	c.moveToFirst ();
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, ListColumns.ALL_COLUMNS );
-	genColName();
+	String[] ALL_COLUMNS = TaskColumns.ALL_COLUMNS;
+	List<ContentValues> allValues = QueryHelper.getValuesFromCursor ( c,ALL_COLUMNS );
+	genColName(ALL_COLUMNS);
 
-	if (allListValues.isEmpty()) {
+	if (allValues.isEmpty()) {
 		ConfirmDialog.show(this, "No data ", new ConfirmDialog.ConfirmListener() {
 			@Override public void onConfirm(String key) {
 				finish();
@@ -52,12 +53,12 @@ public void genTableUi() {
 	}
 //fill data each row
 	//final int ROW_SIZE = c.getCount();
-	for (ContentValues value : allListValues) {
+	for (ContentValues value : allValues) {
 		TableRow tableRow = Init.tableRow ( getApplicationContext () );
 //fill data each column
-		for (int j = 0; j < ListColumns.ALL_COLUMNS.length; j++) {
+		for (int j = 0; j < ALL_COLUMNS.length; j++) {
 			String tvString = "NO DATA";
-			tvString = value.getAsString(ListColumns.ALL_COLUMNS[j]);
+			tvString = value.getAsString(ALL_COLUMNS[j]);
 			tvString = "  " + tvString + "  ";
 
 			TextView textView = Init.textView(getApplicationContext(),
@@ -76,12 +77,12 @@ public void genTableUi() {
 	}
 }
 
-public void genColName() {
+public void genColName(String[] ALL_COLUMNS) {
 	TableRow tableRow = Init.tableRow(getApplicationContext());
-	for (int j = 0; j < ListColumns.ALL_COLUMNS.length; j++) {
+	for (int j = 0; j <ALL_COLUMNS.length; j++) {
 		TextView textView = Init.textView(getApplicationContext(),
 																			"   " +
-																			(ListColumns.ALL_COLUMNS[j]) + "   ",
+																			(ALL_COLUMNS[j]) + "   ",
 																			0,
 																			0,
 																			0);

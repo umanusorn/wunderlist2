@@ -27,7 +27,7 @@ ContentValues getValues (){
 	values.put ( TaskColumns.ISCOMPLETE,isComplete );
 	values.put ( TaskColumns.LISTID,listId );
 	values.put ( TaskColumns.NOTE,note );
-	return values;
+		return values;
 }
 
 
@@ -90,8 +90,20 @@ TaskModel ( String listTitle,Boolean isStar ,boolean isComplete ) {
 }
 
 public
+void setTaskTitle ( String taskTitle ) {
+	this.taskTitle = taskTitle;
+}
+
+public
+void setTaskId ( String taskId ) {
+	this.taskId = taskId;
+}
+
+public
 TaskModel ( String listTitle ) {
 	super ( listTitle );
+	this.setTaskTitle ( listTitle );
+
 }
 
 }

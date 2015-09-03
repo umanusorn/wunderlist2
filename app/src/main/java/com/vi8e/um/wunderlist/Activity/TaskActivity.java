@@ -137,6 +137,7 @@ void setView () {
 				String title = editText.getText ().toString ();
 				taskAdapterInComplete.addList ( new TaskModel ( title, isStar ), listViewIncomplete );
 				QueryHelper.addTaskToDB ( getApplicationContext (),title,taskAdapterComplete,listViewComplete );
+
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
 				if ( view != null ) {
@@ -164,20 +165,10 @@ public static
 TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
 	listView.setAdapter ( taskAdapter );
-	/*for ( int i = 0 ; i < 3 ; i++ ) {
-		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete );
-		taskModel.setIsComplete ( isComplete );
-		taskAdapter.insert ( taskModel, 0 );
-	}*/
-
 	Cursor c = QueryHelper.getTaskValueCursor ( context );
 	c.moveToFirst ();
-
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
-
-// Attach the adapter to a ListView
 
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
@@ -188,7 +179,6 @@ TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView l
 	}
 
 	Utility.setListViewHeightBasedOnChildren ( listView );
-
 	return taskAdapter;
 }
 

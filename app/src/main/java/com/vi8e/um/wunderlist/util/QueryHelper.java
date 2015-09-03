@@ -11,7 +11,6 @@ import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
-import com.vi8e.um.wunderlist.provider.list.ListContentValues;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
@@ -33,8 +32,8 @@ public static
 Cursor getListValueCursor ( Context context ) {
 	ListSelection recordValueSelection = new ListSelection ();
 	String[] projection = ListColumns.ALL_COLUMNS;
-	ListCursor recordValueCursor = recordValueSelection.query ( context.getContentResolver (), projection );
-	return recordValueCursor;
+	ListCursor cursor = recordValueSelection.query ( context.getContentResolver (), projection );
+	return cursor;
 }
 
 public static
@@ -85,8 +84,6 @@ public static
 void addToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
 
 	Log.d ( "addToDb", "" );
-	ListContentValues values = new ListContentValues ();
-	values.putListTitle ( title );
 	ListModel listModel = new ListModel ( title );
 	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
 	Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
@@ -98,8 +95,6 @@ public static
 void addTaskToDB ( Context context, String title, TaskAdapter taskAdapter, ListView listView ) {
 
 	Log.d ( "addTaskToDb", "" );
-	ListContentValues values = new ListContentValues ();
-	values.putListTitle ( title );
 	TaskModel taskModel = new TaskModel ( title );
 	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
 	Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
