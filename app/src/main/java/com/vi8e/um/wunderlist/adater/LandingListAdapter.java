@@ -1,6 +1,5 @@
 package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
-import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ class LandingListAdapter extends ArrayAdapter<ListModel> {
 
 
 ArrayList<ListModel> lists;
+boolean              mIsLongClick;
 
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
@@ -40,12 +39,14 @@ public
 ArrayList<ListModel> getArrayList () {
 	return lists;
 }
+
 ListModel listModel;
-int position;
+int       position;
+
 @Override
 public
 View getView ( final int position, View convertView, ViewGroup parent ) {
-this.position=position;
+	this.position = position;
 	listModel = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
@@ -61,23 +62,26 @@ this.position=position;
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
 
-	convertView.setOnClickListener ( getOnClick ( tvTitle,getContext () ) );
+	convertView.setOnClickListener ( getOnClick ( tvTitle,getContext ()) );
 	convertView.setOnLongClickListener ( getOnLongClick () );
 
 	// Return the completed view to render on screen
 	return convertView;
 }
 
-@NonNull public static
-View.OnClickListener getOnClick ( final TextView tvTitle, final Context context ) {
+@NonNull public
+View.OnClickListener getOnClick ( final TextView tvTitle, final Context context) {
 	return new View.OnClickListener () {
+
 		@Override public
 		void onClick ( View v ) {
-			//Intent  intent = new Intent ( getContext (), TaskActivity.class );
-			Intent intent = new Intent (context, DeveloperActivity.class );
-			intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
-			context.startActivity ( intent );
 
+			Log.d ( "onClick","isLongClick="+mIsLongClick );
+			if(!mIsLongClick){
+				IntentCaller.taskActivity ( context, tvTitle );
+
+			}
+			mIsLongClick=false;
 		}
 	};
 }
@@ -87,7 +91,7 @@ View.OnLongClickListener getOnLongClick () {
 	return new View.OnLongClickListener () {
 		@Override public
 		boolean onLongClick ( View v ) {
-
+			mIsLongClick =true;
 			Log.d ( "onLongClick", "" );
 			//remove ( listModel );
 			LandingActivity.currentList=listModel;

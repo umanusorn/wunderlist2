@@ -28,6 +28,7 @@ import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListContentValues;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.util.CustomDialog;
+import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -239,6 +240,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.action_settings ) {
+		IntentCaller.developer (getApplication ());
 		return true;
 	}
 	if ( id == R.id.delete ) {
@@ -252,4 +254,5 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 	return super.onOptionsItemSelected ( item );
 }
+
 }
