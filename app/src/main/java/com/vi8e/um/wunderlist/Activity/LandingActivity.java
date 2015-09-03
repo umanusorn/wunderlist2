@@ -71,7 +71,6 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 
-
 	initToolbar ();
 	initInstances ();
 
@@ -114,7 +113,6 @@ void onPause () {
 
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
-
 
 	Cursor c = QueryHelper.getListValueCursor ( context );
 	c.moveToFirst ();
@@ -249,7 +247,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.menu_setting ) {
-		IntentCaller.developer (thisActivity);
+		IntentCaller.developer ( thisActivity );
 		return true;
 	}
 	if ( id == R.id.delete ) {

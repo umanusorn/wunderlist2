@@ -12,6 +12,9 @@ import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListContentValues;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.provider.task.TaskCursor;
+import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,14 @@ Cursor getListValueCursor ( Context context ) {
 }
 
 public static
+Cursor getTaskValueCursor ( Context context ) {
+	TaskSelection selection = new TaskSelection ();
+	String[] projection = TaskColumns.ALL_COLUMNS;
+	TaskCursor recordValueCursor = selection.query ( context.getContentResolver (), projection );
+	return recordValueCursor;
+}
+
+public static
 void deleteListValue ( Context context ) {
 	ListSelection personTeamSelection = new ListSelection ();
 	personTeamSelection.delete ( context.getContentResolver () );
@@ -48,11 +59,11 @@ List<ContentValues> getListValuesFromCursor ( Cursor c ) {
 	if ( c.getCount () > 0 ) {
 		do {
 			ContentValues value = new ContentValues ();
-			Log.d ( "InWhile cursor=", c.getCount () + "  Values=" + values.size () );
+			//Log.d ( "InWhile cursor=", c.getCount () + "  Values=" + values.size () );
 			for ( int j = 0 ; j < c.getColumnCount () ; j++ ) {
 				key = ListColumns.ALL_COLUMNS[ j ];
 				index = c.getColumnIndex ( key );
-				Log.d ( "InFor",key+">>"+index );
+				//Log.d ( "InFor",key+">>"+index );
 				value.put ( key, c.getString ( index ) );
 			}
 			i++;

@@ -1,8 +1,10 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,9 +27,12 @@ import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
+import com.vi8e.um.wunderlist.provider.list.ListColumns;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public
@@ -69,14 +74,14 @@ void onCreate ( Bundle savedInstanceState ) {
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, true );
+	taskAdapterComplete = setUpAdapterListView ( this,getApplicationContext (), listViewComplete, taskAdapterComplete, true );
 
 	inCompleteList = new ArrayList<TaskModel> ();
 	//completeList = new ArrayList<TaskModel> ();
 // Create the adapter to convert the array to views
 	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	taskAdapterInComplete = setUpAdapterListView ( this, listViewIncomplete, taskAdapterInComplete, false );
+	taskAdapterInComplete = setUpAdapterListView ( this,getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
 
 	toggleShowCompleteListView ();
 
@@ -175,28 +180,34 @@ void toggleShowCompleteListView () {
 }
 
 public static
-TaskAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
-
-/*	list= new ArrayList<TaskModel> ();
-	//completeList = new ArrayList<TaskModel> ();
-// Create the adapter to convert the array to views
-	taskAdapter = new TaskAdapter ( activity, list );
-// Attach the adapter to a ListView*/
+TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
 
 	listView.setAdapter ( taskAdapter );
-	for ( int i = 0 ; i < 3 ; i++ ) {
+	/*for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
 		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete );
 		taskModel.setIsComplete ( isComplete );
 		taskAdapter.insert ( taskModel, 0 );
+	}*/
+
+	Cursor c = QueryHelper.getTaskValueCursor ( context );
+	c.moveToFirst ();
+
+	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
+	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
+
+// Attach the adapter to a ListView
+
+	listView.setAdapter ( taskAdapter );
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
+
+		ContentValues values = allListValues.get ( i );
+		taskAdapter.add ( new TaskModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
+		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
 	}
+
 	Utility.setListViewHeightBasedOnChildren ( listView );
-// Or even append an entire new collection
-// Fetching some data, data has now returned
-// If data was JSON, convert to ArrayList of User objects.
-	/*JSONArray jsonArray = ...;
-	ArrayList<User> newUsers = User.fromJson(jsonArray)
-	adapter.addAll(newUsers);*/
+
 	return taskAdapter;
 }
 
