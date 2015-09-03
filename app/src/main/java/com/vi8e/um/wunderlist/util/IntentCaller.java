@@ -1,4 +1,5 @@
 package com.vi8e.um.wunderlist.util;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
@@ -16,9 +17,11 @@ class IntentCaller {
 
 
 public static
-void developer (Context context) {
-	Intent intent = new Intent (context, DeveloperActivity.class );
-	context.startActivity ( intent );
+void developer (Activity activity ) {
+	Intent intent = new Intent ( activity, DeveloperActivity.class );
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	activity.startActivity ( intent );
+
 }
 
 public static

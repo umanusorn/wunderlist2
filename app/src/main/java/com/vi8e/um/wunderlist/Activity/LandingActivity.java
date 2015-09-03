@@ -11,6 +11,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -50,10 +51,11 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 public static ListModel currentList;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-LandingListAdapter    mLandingListAdapter;
-CoordinatorLayout     rootLayout;
-FloatingActionButton  fabBtn;
-ListView              listView;
+static ActionBar mActionBar;
+LandingListAdapter   mLandingListAdapter;
+CoordinatorLayout    rootLayout;
+FloatingActionButton fabBtn;
+ListView             listView;
 static long listId;
 
 
@@ -65,7 +67,7 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	Fabric.with ( this, new Crashlytics () );
-	setContentView ( R.layout.activity_main );
+	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
 	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 
@@ -85,6 +87,8 @@ void onCreate ( Bundle savedInstanceState ) {
 protected
 void onPause () {
 	super.onPause ();
+	setMenuNormal ();
+
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
 	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
 		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
@@ -164,24 +168,29 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 }
 
 public static
-void setToolBarList () {
+void setMenuList () {
 	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_toggle, menu );
-	//toolbar.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
+
 }
 
 
 public static
-void setToolBarNormal () {
+void setMenuNormal () {
 	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main, menu );
-	//toolbar.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+
+//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
+
 }
 
 private
 void initToolbar () {
 	toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
 	setSupportActionBar ( toolbar );
+	mActionBar = getSupportActionBar ();
 	toolbar.setVisibility ( View.VISIBLE );
 }
 
@@ -224,7 +233,7 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
-	setToolBarNormal ();
+	setMenuNormal ();
 
 	return true;
 }
@@ -239,8 +248,8 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	int id = item.getItemId ();
 
 	//noinspection SimplifiableIfStatement
-	if ( id == R.id.action_settings ) {
-		IntentCaller.developer (getApplication ());
+	if ( id == R.id.menu_setting ) {
+		IntentCaller.developer (thisActivity);
 		return true;
 	}
 	if ( id == R.id.delete ) {
@@ -250,7 +259,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		mLandingListAdapter.remove ( currentList );
 	}
 
-	setToolBarNormal ();
+	setMenuNormal ();
 
 	return super.onOptionsItemSelected ( item );
 }

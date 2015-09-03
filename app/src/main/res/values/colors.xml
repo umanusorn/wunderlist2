@@ -24,5 +24,6 @@
     <color name="list_row_hover_start_color">#ebeef0</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
     <color name="transparent_black">#66000000</color>
+    <color name="transparent">#00000000</color>
 
 </resources>
