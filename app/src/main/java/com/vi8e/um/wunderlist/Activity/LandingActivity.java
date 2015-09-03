@@ -163,17 +163,19 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 }
 
 public static
-void toggleToolBar ( long id ) {
-
-//thisActivity.getActionBar ().setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
-	//toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
+void setToolBarList () {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_toggle, menu );
-	listId = id;
 	//toolbar.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
-
 }
 
+
+public static
+void setToolBarNormal () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main, menu );
+	//toolbar.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
+}
 
 private
 void initToolbar () {
@@ -221,7 +223,7 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
-	getMenuInflater ().inflate ( R.menu.menu_main, menu );
+	setToolBarNormal ();
 
 	return true;
 }
@@ -242,9 +244,11 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	if ( id == R.id.delete ) {
 		ListSelection where = new ListSelection ();
 		where.id ( Long.parseLong ( currentList.getId () ) );
-		where.delete (getApplicationContext ());
+		where.delete ( getApplicationContext () );
 		mLandingListAdapter.remove ( currentList );
 	}
+
+	setToolBarNormal ();
 
 	return super.onOptionsItemSelected ( item );
 }

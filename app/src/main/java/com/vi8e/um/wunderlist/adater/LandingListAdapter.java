@@ -91,7 +91,7 @@ View.OnLongClickListener getOnLongClick () {
 			Log.d ( "onLongClick", "" );
 			//remove ( listModel );
 			LandingActivity.currentList=listModel;
-			LandingActivity.toggleToolBar ( Long.parseLong ( listModel.getId () ) );
+			LandingActivity.setToolBarList ();
 			ListSelection where = new ListSelection ();
 			//where.id ( Long.parseLong ( listModel.getId () ) );
 			//where.delete ( context );
