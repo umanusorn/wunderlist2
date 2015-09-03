@@ -26,6 +26,7 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListContentValues;
+import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -41,17 +42,22 @@ class LandingActivity extends AppCompatActivity {
 
 
 private static final String TAG = LandingActivity.class.getSimpleName ();
-Toolbar                 toolbar;
+static Toolbar toolbar;
+static Context sContext;
 CollapsingToolbarLayout collapsingToolbarLayout;
 
+public static ListModel currentList;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
 LandingListAdapter    mLandingListAdapter;
 CoordinatorLayout     rootLayout;
 FloatingActionButton  fabBtn;
 ListView              listView;
+static long listId;
 
-Activity thisActivity;
+
+static Activity thisActivity;
+static Menu     menu;
 
 @Override
 protected
@@ -100,6 +106,7 @@ void onPause () {
 	}
 }
 
+
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
 
@@ -138,7 +145,8 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 	com.getbase.floatingactionbutton.FloatingActionButton
 			newListBtn
 			= ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
-	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id
+			                                                                                                                                              .action_b );
 
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -154,10 +162,24 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 	} );
 }
 
+public static
+void toggleToolBar ( long id ) {
+
+//thisActivity.getActionBar ().setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
+	//toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_toggle, menu );
+	listId = id;
+	//toolbar.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_300 ) );
+
+}
+
+
 private
 void initToolbar () {
-	//toolbar = (Toolbar) findViewById(R.id.toolbar);
-//	setSupportActionBar(toolbar);
+	toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
+	setSupportActionBar ( toolbar );
+	toolbar.setVisibility ( View.VISIBLE );
 }
 
 private
@@ -166,12 +188,8 @@ void initInstances () {
 	drawerToggle = new ActionBarDrawerToggle ( LandingActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
 	drawerLayout.setDrawerListener ( drawerToggle );
 
-	toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
-	setSupportActionBar ( toolbar );
-	toolbar.setVisibility ( View.VISIBLE );
 	//	getSupportActionBar().setHomeButtonEnabled(true);
 	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 
@@ -202,7 +220,9 @@ void onConfigurationChanged ( Configuration newConfig ) {
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
+	this.menu = menu;
 	getMenuInflater ().inflate ( R.menu.menu_main, menu );
+
 	return true;
 }
 
@@ -218,6 +238,12 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.action_settings ) {
 		return true;
+	}
+	if ( id == R.id.delete ) {
+		ListSelection where = new ListSelection ();
+		where.id ( Long.parseLong ( currentList.getId () ) );
+		where.delete (getApplicationContext ());
+		mLandingListAdapter.remove ( currentList );
 	}
 
 	return super.onOptionsItemSelected ( item );

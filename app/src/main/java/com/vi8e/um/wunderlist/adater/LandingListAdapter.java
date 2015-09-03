@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
+import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
@@ -40,11 +41,11 @@ ArrayList<ListModel> getArrayList () {
 	return lists;
 }
 ListModel listModel;
-
+int position;
 @Override
 public
 View getView ( final int position, View convertView, ViewGroup parent ) {
-
+this.position=position;
 	listModel = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
@@ -88,13 +89,12 @@ View.OnLongClickListener getOnLongClick () {
 		boolean onLongClick ( View v ) {
 
 			Log.d ( "onLongClick", "" );
-			Context context = getContext ();
-
-
-			remove ( listModel );
+			//remove ( listModel );
+			LandingActivity.currentList=listModel;
+			LandingActivity.toggleToolBar ( Long.parseLong ( listModel.getId () ) );
 			ListSelection where = new ListSelection ();
-			where.id ( Long.parseLong ( listModel.getId () ) );
-			where.delete ( context );
+			//where.id ( Long.parseLong ( listModel.getId () ) );
+			//where.delete ( context );
 			return false;
 		}
 	};
