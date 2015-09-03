@@ -89,6 +89,8 @@ View.OnLongClickListener getOnLongClick () {
 
 			Log.d ( "onLongClick", "" );
 			Context context = getContext ();
+
+
 			remove ( listModel );
 			ListSelection where = new ListSelection ();
 			where.id ( Long.parseLong ( listModel.getId () ) );

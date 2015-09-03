@@ -104,7 +104,7 @@ public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
 
 
-	Cursor c = QueryHelper.getListValueCursor ( context);
+	Cursor c = QueryHelper.getListValueCursor ( context );
 	c.moveToFirst ();
 
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
@@ -117,8 +117,8 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	listView.setAdapter ( landingListAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 
-		ContentValues values =allListValues.get ( i );
-		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE )) );
+		ContentValues values = allListValues.get ( i );
+		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
 		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
 	}
 
@@ -138,8 +138,8 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 	com.getbase.floatingactionbutton.FloatingActionButton
 			newListBtn
 			= ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
-	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id
-																																																																										.action_b );
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
+
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
