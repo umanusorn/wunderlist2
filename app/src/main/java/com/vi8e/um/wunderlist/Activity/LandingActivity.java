@@ -118,7 +118,7 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	c.moveToFirst ();
 
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, ListColumns.ALL_COLUMNS );
 
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
 	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
@@ -145,22 +145,20 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 
 private
 void setFloatingActionBtnClickListener ( View view, final ListView listView, final LandingListAdapter landingListAdapter ) {
-	com.getbase.floatingactionbutton.FloatingActionButton
-			newListBtn
+	com.getbase.floatingactionbutton.FloatingActionButton newListBtn
 			= ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
-	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id
-			                                                                                                                                              .action_b );
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
 
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showPassCodeChangeOrTurnOff ( thisActivity, landingListAdapter, listView );
+			CustomDialog.showEditTextDialog ( thisActivity, landingListAdapter, listView );
 		}
 	} );
 	toDoBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showPassCodeChangeOrTurnOff ( thisActivity, landingListAdapter, listView );
+			CustomDialog.showEditTextDialog ( thisActivity, landingListAdapter, listView );
 		}
 	} );
 }

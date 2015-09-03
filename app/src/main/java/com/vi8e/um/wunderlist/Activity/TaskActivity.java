@@ -28,6 +28,7 @@ import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -87,27 +88,6 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
-/*
-public static void setToolBar ( Toolbar toolbar, String title, final AppCompatActivity appCompatActivity) {
-
-	ActionBar actionBar = appCompatActivity.getSupportActionBar ();
-	toolbar = (Toolbar ) appCompatActivity.findViewById( R.id.toolbar);
-	appCompatActivity.setSupportActionBar ( toolbar );
-	toolbar.setVisibility ( View.VISIBLE );
-	appCompatActivity.getSupportActionBar ().setTitle ( title );
-	toolbar.setTitle ( title );
-	actionBar.setDisplayShowTitleEnabled ( true );
-	actionBar.setDisplayHomeAsUpEnabled ( true );
-	actionBar.setDisplayShowHomeEnabled ( true );
-	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			appCompatActivity.finish ();
-		}
-	} );
-}
-*/
-
 
 private
 void setToolBar ( Toolbar toolbar, String title ) {
@@ -128,7 +108,6 @@ void setToolBar ( Toolbar toolbar, String title ) {
 }
 
 void setView () {
-
 	TextView tvComplete = ( TextView ) findViewById ( R.id.tvComplete );
 	tvComplete.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -155,7 +134,9 @@ void setView () {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
-				taskAdapterInComplete.addList ( new TaskModel ( editText.getText ().toString (), isStar ), listViewIncomplete );
+				String title = editText.getText ().toString ();
+				taskAdapterInComplete.addList ( new TaskModel ( title, isStar ), listViewIncomplete );
+				QueryHelper.addTaskToDB ( getApplicationContext (),title,taskAdapterComplete,listViewComplete );
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
 				if ( view != null ) {
@@ -194,7 +175,7 @@ TaskAdapter setUpAdapterListView ( Activity activity,Context context, ListView l
 	c.moveToFirst ();
 
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
 
 // Attach the adapter to a ListView
 

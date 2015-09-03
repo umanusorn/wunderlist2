@@ -39,7 +39,7 @@ void onCreate ( Bundle savedInstanceState ) {
 public void genTableUi() {
 	Cursor c = QueryHelper.getListValueCursor ( getApplicationContext () );
 	c.moveToFirst ();
-	List<ContentValues> allListValues = QueryHelper.getListValuesFromCursor ( c );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, ListColumns.ALL_COLUMNS );
 	genColName();
 
 	if (allListValues.isEmpty()) {

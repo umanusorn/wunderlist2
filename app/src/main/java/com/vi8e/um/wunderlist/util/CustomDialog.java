@@ -14,7 +14,7 @@ class CustomDialog {
 
 
 public static
-void showPassCodeChangeOrTurnOff ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
+void showEditTextDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Add to-do" )

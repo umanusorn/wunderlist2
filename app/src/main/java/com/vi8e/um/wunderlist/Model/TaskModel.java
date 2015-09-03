@@ -1,5 +1,8 @@
 package com.vi8e.um.wunderlist.Model;
+import android.content.ContentValues;
 import android.util.Log;
+
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 
 
 /**
@@ -12,6 +15,21 @@ boolean isStar;
 boolean isComplete;
 int listId;
 String note;
+String taskTitle;
+String taskId;
+
+
+public
+ContentValues getValues (){
+	ContentValues values = new ContentValues (  );
+	values.put ( TaskColumns.TASK_TITLE,taskTitle );
+	values.put ( TaskColumns.ISSTAR,isStar );
+	values.put ( TaskColumns.ISCOMPLETE,isComplete );
+	values.put ( TaskColumns.LISTID,listId );
+	values.put ( TaskColumns.NOTE,note );
+	return values;
+}
+
 
 public
 boolean isStar () {

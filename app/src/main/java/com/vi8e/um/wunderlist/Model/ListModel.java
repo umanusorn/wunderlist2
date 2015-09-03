@@ -43,7 +43,7 @@ void setDefault () {
 }
 
 public
-ContentValues getValues(){
+ContentValues getValues (){
 	ContentValues values = new ContentValues (  );
 	values.put ( ListColumns.LIST_TITLE,listTitle );
 	values.put ( ListColumns.IMG_PATH,imgPath );
