@@ -135,9 +135,7 @@ void setView () {
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				String title = editText.getText ().toString ();
-
-				TaskModel taskModel =new TaskModel ( title,isStar,true );
-				taskAdapterInComplete.addList ( taskModel, listViewIncomplete );
+				TaskModel taskModel =new TaskModel ( title,isStar,false);
 				QueryHelper.addTaskToDB ( getApplicationContext (),taskModel,taskAdapterInComplete,listViewIncomplete);
 
 				editText.setText ( "" );
