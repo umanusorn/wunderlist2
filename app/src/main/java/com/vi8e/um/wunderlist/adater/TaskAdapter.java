@@ -147,9 +147,10 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 		void onClick ( View v ) {
 			//TaskModel rowData=getItem ( position );
 			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+			Log.d ( "TaskAdapter","isComplete="+rowData.getIsComplete () );
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
-				//completeList.add (rowData );
+
 				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterInComplete.remove ( rowData );
 //				inCompleteList.remove ( position );

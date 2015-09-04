@@ -158,10 +158,15 @@ protected
 void onPause () {
 	super.onPause ();
 	//setMenuNormal ();
+adapterToDb ( taskAdapterComplete );
+	adapterToDb ( taskAdapterInComplete );
+}
 
-	Log.d ( TAG, "EnterOnPause dataCount" + taskAdapterInComplete.getCount () );
-	for ( int i = 0 ; i < taskAdapterInComplete.getCount () ; i++ ) {
-		TaskModel data = taskAdapterInComplete.getArrayList ().get ( i );
+void adapterToDb(TaskAdapter taskAdapter){
+
+	Log.d ( TAG, "EnterOnPause dataCount" + taskAdapter.getCount () );
+	for ( int i = 0 ; i < taskAdapter.getCount () ; i++ ) {
+		TaskModel data = taskAdapter.getArrayList ().get ( i );
 		String id = data.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
 		Log.d ( TAG,"isStar="+data.getIsStar ()+" listId="+data.getListId ()+" OwnId"+data.getId () );
