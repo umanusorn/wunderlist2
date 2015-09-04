@@ -13,13 +13,10 @@ class TaskModel extends ListModel {
 
 boolean isStar;
 boolean isComplete;
-int listId;
+String listId;
 String note;
 String taskTitle;
 String taskId;
-
-
-
 
 public
 ContentValues getValues (){
@@ -54,12 +51,12 @@ void setIsStar ( boolean isStar ) {
 }
 
 public
-int getListId () {
+String getListId () {
 	return listId;
 }
 
 public
-void setListId ( int listId ) {
+void setListId ( String listId ) {
 	this.listId = listId;
 }
 
@@ -102,9 +99,12 @@ void setTaskId ( String taskId ) {
 }
 
 public
-TaskModel ( String listTitle ) {
-	super ( listTitle );
-	this.setTaskTitle ( listTitle );
+TaskModel ( String title, Boolean isStar, boolean b, String listID ) {
+	super ( title );
+	this.setIsStar ( isStar );
+	this.setIsComplete ( isComplete );
+	//this.setTaskTitle ( title );
+	this.setListId ( listID );
 
 }
 

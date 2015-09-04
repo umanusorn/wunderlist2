@@ -55,7 +55,7 @@ Boolean showComplete = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
 Activity thisActivity;
-String listId;
+static String listId;
 
 @Override
 protected
@@ -66,9 +66,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Intent intent = getIntent ();
 	Bundle bundle = intent.getExtras ();
 	String title = bundle.getString ( ListConst.KEY_TITLE );
-listId = bundle.getString ( ListConst.KEY_ID );
-
-
+	listId = bundle.getString ( ListConst.KEY_ID );
 
 	setToolBar ( toolbar, title );
 	setUpContent ();
@@ -139,7 +137,7 @@ void setView () {
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				String title = editText.getText ().toString ();
-				TaskModel taskModel = new TaskModel ( title, isStar, false );
+				TaskModel taskModel = new TaskModel ( title, isStar, false,listId );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );
@@ -175,7 +173,9 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 		isCompleteValue = "1";
 	}
 
-	where.iscomplete ( isCompleteValue );
+
+	Log.d ( "listId=",listId );
+	where.iscomplete(isCompleteValue ).and ().listid ( listId );
 
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();

@@ -63,7 +63,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete );
+		TaskModel taskModel = new TaskModel ( "Dummy Task " + i + " " + isComplete,"0" );
 		taskModel.setIsComplete ( isComplete );
 		taskAdapter.insert ( taskModel, 0 );
 	}
