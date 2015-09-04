@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
@@ -119,25 +120,23 @@ void setView () {
 	} );
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
 
-	editTextStar.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			isStar = Utility.toggleImg ( v,
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-
-		}
-	} );
+	editTextStar.setOnClickListener ( onCLickEditText () );
 
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
-	editText.setOnKeyListener ( new View.OnKeyListener () {
+	editText.setOnKeyListener ( onAddViaEditText ( editText ) );
+
+}
+
+@NonNull private
+View.OnKeyListener onAddViaEditText ( final EditText editText ) {
+	return new View.OnKeyListener () {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				String title = editText.getText ().toString ();
-				TaskModel taskModel = new TaskModel ( title, isStar, false,listId );
+				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false),listId );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );
@@ -149,8 +148,20 @@ void setView () {
 			}
 			return false;
 		}
-	} );
+	};
+}
 
+@NonNull private
+View.OnClickListener onCLickEditText () {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			isStar = Utility.toggleImg ( v,
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+
+		}
+	};
 }
 
 void toggleShowCompleteListView () {
@@ -173,21 +184,16 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 		isCompleteValue = "1";
 	}
 
-
-	Log.d ( "listId=",listId );
+	Log.d ( "listId=", listId );
 	where.iscomplete(isCompleteValue ).and ().listid ( listId );
-
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
-
 	listView.setAdapter ( taskAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-
 		ContentValues values = allListValues.get ( i );
-
-		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values.getAsString ( TaskColumns.TASK_TITLE ) ) );
+		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values ) );
 		Log.d ( "loop", " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
 

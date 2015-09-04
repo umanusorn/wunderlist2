@@ -83,7 +83,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		@Override public
 		void onClick ( View v ) {
 			//TaskModel rowData=getItem ( position );
-			rowData.setIsComplete ( ! rowData.isComplete () );
+			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
 				//completeList.add (rowData );

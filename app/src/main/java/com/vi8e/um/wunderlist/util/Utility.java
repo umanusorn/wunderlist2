@@ -32,7 +32,7 @@ public static void setListViewHeightBasedOnChildren(ListView listView) {
 		View listItem = listAdapter.getView(i, null, listView);
 		try {
 			TaskModel taskModel = (TaskModel)listAdapter.getItem ( i );
-			Log.d ( "Data",taskModel.getListTitle ()+"isStar ["+taskModel.isStar ()+"] isComplete"+taskModel.isComplete () );
+			Log.d ( "Data",taskModel.getListTitle ()+"isStar ["+taskModel.isStar()+"] isComplete"+taskModel.isComplete () );
 		}catch ( Exception e ){
 
 		}

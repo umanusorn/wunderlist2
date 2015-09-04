@@ -69,7 +69,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
-	if ( rowData.isComplete () ) {
+	if ( Boolean.valueOf ( rowData.isComplete () ) ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
@@ -80,8 +80,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		@Override public
 		void onClick ( View v ) {
 			//TaskModel rowData=getItem ( position );
-			rowData.setIsComplete ( ! rowData.isComplete () );
-			if ( rowData.isComplete () ) {
+			rowData.setIsComplete (String.valueOf ( ! Boolean.valueOf ( rowData.isComplete() ) )   );
+			if (Boolean.valueOf ( rowData.isComplete () )) {
 				//todo don't know why cant use completeList to add element
 				//completeList.add (rowData );
 				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
@@ -98,7 +98,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	} );
 
 
-	if ( rowData.isStar () ) {
+	if ( Boolean.valueOf ( rowData.isStar () )) {
 		try {
 			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
@@ -126,10 +126,10 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		star.setOnClickListener ( new View.OnClickListener () {
 			@Override public
 			void onClick ( View v ) {
-				Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
-				if ( ! rowData.isComplete () ) {
-					Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-					rowData.setIsStar ( ! rowData.isStar () );
+				//Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
+				if ( ! Boolean.valueOf ( rowData.isComplete ()) ) {
+					Log.d ( "setOnClickStar", "" + ! Boolean.valueOf ( rowData.isComplete () ) );
+					rowData.setIsStar ( String.valueOf ( ! Boolean.valueOf ( rowData.isStar () ) ));
 					Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 				}
 			}
