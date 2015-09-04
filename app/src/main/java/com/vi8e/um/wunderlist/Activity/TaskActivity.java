@@ -27,7 +27,6 @@ import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
-import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.QueryHelper;
@@ -284,13 +283,15 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 
 	if ( id == R.id.delete ) {
-		ListSelection where = new ListSelection ();
+		TaskSelection where = new TaskSelection ();
 		where.id ( Long.parseLong ( currentTask.getId () ) );
 		where.delete ( getApplicationContext () );
 		if( currentTask.isComplete ())
 		taskAdapterComplete.remove ( currentTask );
 		else
 			taskAdapterInComplete.remove ( currentTask );
+
+		Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
 	}
 
 	return super.onOptionsItemSelected ( item );

@@ -59,7 +59,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	// Get the data item for this position
 	this.position = position;
 	final TaskModel rowData;
-	rowData = getItem ( position );
+	taskModel=rowData = getItem ( position );
 
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
