@@ -55,6 +55,7 @@ Boolean showComplete = false;
 static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
 static ArrayList<TaskModel> completeList;
 Activity thisActivity;
+String listId;
 
 @Override
 protected
@@ -65,6 +66,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	Intent intent = getIntent ();
 	Bundle bundle = intent.getExtras ();
 	String title = bundle.getString ( ListConst.KEY_TITLE );
+listId = bundle.getString ( ListConst.KEY_ID );
+
+
 
 	setToolBar ( toolbar, title );
 	setUpContent ();
@@ -121,8 +125,8 @@ void setView () {
 		@Override public
 		void onClick ( View v ) {
 			isStar = Utility.toggleImg ( v,
-																	 getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-																	 getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 
 		}
 	} );
@@ -135,8 +139,8 @@ void setView () {
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 				String title = editText.getText ().toString ();
-				TaskModel taskModel =new TaskModel ( title,isStar,false);
-				QueryHelper.addTaskToDB ( getApplicationContext (),taskModel,taskAdapterInComplete,listViewIncomplete);
+				TaskModel taskModel = new TaskModel ( title, isStar, false );
+				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
@@ -166,9 +170,10 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 
 	listView.setAdapter ( taskAdapter );
 	TaskSelection where = new TaskSelection ();
-	String isCompleteValue="0";
-	if(isComplete==true)
-		isCompleteValue="1";
+	String isCompleteValue = "0";
+	if ( isComplete == true ) {
+		isCompleteValue = "1";
+	}
 
 	where.iscomplete ( isCompleteValue );
 

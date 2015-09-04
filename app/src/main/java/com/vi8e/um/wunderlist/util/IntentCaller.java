@@ -2,11 +2,11 @@ package com.vi8e.um.wunderlist.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
+import com.vi8e.um.wunderlist.Model.ListModel;
 
 
 /**
@@ -25,9 +25,10 @@ void developer (Activity activity ) {
 }
 
 public static
-void taskActivity ( Context context, TextView tvTitle ) {
+void taskActivity ( Context context, ListModel listModel ) {
 	Intent intent = new Intent ( context, TaskActivity.class );
-	intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
+	intent.putExtra ( ListConst.KEY_TITLE, listModel.getListTitle ());
+	intent.putExtra ( ListConst.KEY_ID,listModel.getId () );
 	context.startActivity ( intent );
 }
 }

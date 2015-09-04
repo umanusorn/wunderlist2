@@ -59,10 +59,10 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	final ListView listView = ( ListView ) convertView.getParent ();
 
 	tvTitle.setText ( listModel.getListTitle () );
+
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-
-	convertView.setOnClickListener ( getOnClick ( tvTitle,getContext ()) );
+	convertView.setOnClickListener ( getOnClick ( listModel,getContext ()) );
 	convertView.setOnLongClickListener ( getOnLongClick () );
 
 	// Return the completed view to render on screen
@@ -70,7 +70,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 }
 
 @NonNull public
-View.OnClickListener getOnClick ( final TextView tvTitle, final Context context) {
+View.OnClickListener getOnClick ( final ListModel tvTitle, final Context context) {
 	return new View.OnClickListener () {
 
 		@Override public
@@ -79,7 +79,6 @@ View.OnClickListener getOnClick ( final TextView tvTitle, final Context context)
 			Log.d ( "onClick","isLongClick="+mIsLongClick );
 			if(!mIsLongClick){
 				IntentCaller.taskActivity ( context, tvTitle );
-
 			}
 			mIsLongClick=false;
 		}
