@@ -132,7 +132,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 				Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
 				if ( ! rowData.isComplete () ) {
 					Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-					rowData.setIsStar ( ! rowData.isStar () );
+					rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
 					Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 				}
 			}
@@ -144,7 +144,6 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 	}
-
 
 	convertView.setOnClickListener ( new View.OnClickListener () {
 		@Override public

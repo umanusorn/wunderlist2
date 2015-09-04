@@ -31,11 +31,10 @@ TaskModel ( String id, ContentValues values ){
 }
 
 public
-TaskModel ( String title, String isStar, String b, String listID ) {
+TaskModel ( String title, String isStar, String isComplete, String listID ) {
 	super ( title );
 	this.setIsStar ( isStar );
 	this.setIsComplete ( isComplete );
-	//this.setTaskTitle ( title );
 	this.setListId ( listID );
 
 }
@@ -63,6 +62,10 @@ ContentValues getValues (){
 public
 boolean isStar () {
 	return Boolean.valueOf ( isStar );
+}
+
+public String getIsStar(){
+	return isStar;
 }
 /*public
 String isStar () {
