@@ -21,15 +21,14 @@ String listTitle;
 String type;
 public
 ListModel ( String id, String listTitle ) {
-	setDefault ();
-
+	//setDefault ();
 	Log.d ("NewListModel","id="+id);
 	this.id = id;
 	this.listTitle = listTitle;
 }
 
 void setDefault () {
-	this.listTitle = ""; //
+	//this.listTitle = ""; //
 	this.imgPath = "";
 	this.isDisturb = false;
 

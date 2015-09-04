@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,22 +30,26 @@ import java.util.ArrayList;
 public
 class TaskAdapter extends ArrayAdapter<TaskModel> {
 
-Context   mContext;
-Resources res;
-
-int position;
+Context              mContext;
+Resources            res;
+ArrayList<TaskModel> lists;
+int                  position;
 //ListView             listViewIncomplete, listViewComplete;
 
 public
 TaskAdapter ( Context context,
-							ArrayList<TaskModel> listInComplete ) {
+              ArrayList<TaskModel> lists ) {
 
-	super ( context, 0, listInComplete );
+	super ( context, 0, lists );
+	this.lists = lists;
 	mContext = context;
 	res = context.getResources ();
 }
 
-
+public
+ArrayList<TaskModel> getArrayList () {
+	return lists;
+}
 
 @Override
 public
@@ -74,37 +79,15 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
 
-//	chkBox.setTag ( 1, position );
+	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 
-	chkBox.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			//TaskModel rowData=getItem ( position );
-			rowData.setIsComplete (String.valueOf ( ! Boolean.valueOf ( rowData.isComplete() ) )   );
-			if (Boolean.valueOf ( rowData.isComplete () )) {
-				//todo don't know why cant use completeList to add element
-				//completeList.add (rowData );
-				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
-				TaskActivity.taskAdapterInComplete.remove ( rowData );
-//				inCompleteList.remove ( position );
-			}
-			else {
-				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
-				TaskActivity.taskAdapterComplete.remove ( rowData );
-			}
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
-		}
-	} );
-
-
-	if ( Boolean.valueOf ( rowData.isStar () )) {
+	if ( Boolean.valueOf ( rowData.isStar () ) ) {
 		try {
 			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg Star",rowData.getListTitle ()+":"+ e.toString () );
+			Log.e ( "error on setBg Star", rowData.getListTitle () + ":" + e.toString () );
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
@@ -116,7 +99,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg unStar",rowData.getListTitle ()+":"+ e.toString () );
+			Log.e ( "error on setBg unStar", rowData.getListTitle () + ":" + e.toString () );
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
@@ -127,9 +110,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			@Override public
 			void onClick ( View v ) {
 				//Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
-				if ( ! Boolean.valueOf ( rowData.isComplete ()) ) {
-					Log.d ( "setOnClickStar", "" + ! Boolean.valueOf ( rowData.isComplete () ) );
-					rowData.setIsStar ( String.valueOf ( ! Boolean.valueOf ( rowData.isStar () ) ));
+				if ( ! rowData.isComplete () ) {
+					Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
+					rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
 					Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 				}
 			}
@@ -137,7 +120,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	}
 	catch ( NullPointerException e ) {
-		Log.e ( "error on setonClick",rowData.getListTitle ()+":"+ e.toString () );
+		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 	}
@@ -155,6 +138,30 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	} );
 	// Return the completed view to render on screen
 	return convertView;
+}
+
+@NonNull public static
+View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			//TaskModel rowData=getItem ( position );
+			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+			if ( rowData.isComplete () ) {
+				//todo don't know why cant use completeList to add element
+				//completeList.add (rowData );
+				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
+				TaskActivity.taskAdapterInComplete.remove ( rowData );
+//				inCompleteList.remove ( position );
+			}
+			else {
+				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
+				TaskActivity.taskAdapterComplete.remove ( rowData );
+			}
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+		}
+	};
 }
 
 public

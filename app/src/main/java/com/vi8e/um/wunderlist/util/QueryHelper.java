@@ -77,9 +77,6 @@ List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
 	return values;
 }
 
-
-
-
 public static
 void addToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
 
@@ -96,7 +93,8 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 
 	Log.d ( "addTaskToDb", "" );
 	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
-	Log.d ( "ChkColumn ", "title" + taskModel.getListTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
+	Log.d ( "ChkColumn ", "title" + taskModel.getListTitle () + "taskId=" + uri.getPathSegments ().get ( 1 )+"listId"+taskModel.getListId () );
+	taskModel.setId ( uri.getPathSegments ().get ( 1 ) );
 	taskAdapter.insert ( new TaskModel ( uri.getPathSegments ().get ( 1 ), taskModel ), 0 );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 }

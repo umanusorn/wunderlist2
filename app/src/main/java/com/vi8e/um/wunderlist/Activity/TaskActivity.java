@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -41,7 +42,7 @@ public
 class TaskActivity extends AppCompatActivity {
 
 String title;
-
+private static final String TAG = TaskActivity.class.getSimpleName();
 
 Toolbar               toolbar;
 DrawerLayout          drawerLayout;
@@ -120,7 +121,7 @@ void setView () {
 	} );
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
 
-	editTextStar.setOnClickListener ( onCLickEditText () );
+	editTextStar.setOnClickListener ( onCLickStar () );
 
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
@@ -135,6 +136,7 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
+
 				String title = editText.getText ().toString ();
 				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false),listId );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
@@ -151,8 +153,35 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 	};
 }
 
+@Override
+protected
+void onPause () {
+	super.onPause ();
+	//setMenuNormal ();
+
+	Log.d ( TAG, "EnterOnPause dataCount" + taskAdapterInComplete.getCount () );
+	for ( int i = 0 ; i < taskAdapterInComplete.getCount () ; i++ ) {
+		TaskModel data = taskAdapterInComplete.getArrayList ().get ( i );
+		String id = data.getId ();
+		Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
+		Log.d ( TAG,"isStar="+data.getIsStar ()+" listId="+data.getListId ()+" OwnId"+data.getId () );
+		try {
+			getContentResolver ().update ( uri, data.getValues (), null, null );
+		}
+		catch ( IllegalArgumentException e ) {
+			Log.e ( TAG, "errorOnAddData" + e.getMessage () );
+
+			String title = data.getListTitle ();
+			TaskModel taskModel = new TaskModel (id, data );
+			uri = getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
+			Log.d ( TAG, "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
+			//getContentResolver().insert ( ListColumns.CONTENT_URI, data.getValues () );
+		}
+	}
+}
+
 @NonNull private
-View.OnClickListener onCLickEditText () {
+View.OnClickListener onCLickStar () {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -180,19 +209,20 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 	listView.setAdapter ( taskAdapter );
 	TaskSelection where = new TaskSelection ();
 
-	Log.d ( "listId=", listId+" isComplete="+isComplete );
+	Log.d ( TAG, "listId=" + listId + " isComplete=" + isComplete );
 	where.iscomplete( String.valueOf ( isComplete ) ).and ().listid ( listId );
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
-	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
+	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
-	listView.setAdapter ( taskAdapter );
+
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
+		Log.d (TAG,values.toString ());
 		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values ) );
-		Log.d ( "loop", " id=" + values.getAsInteger ( TaskColumns._ID ) );
+		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
-
+	listView.setAdapter ( taskAdapter );
 	Utility.setListViewHeightBasedOnChildren ( listView );
 	return taskAdapter;
 }

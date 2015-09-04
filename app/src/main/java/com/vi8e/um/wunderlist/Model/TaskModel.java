@@ -14,25 +14,35 @@ String isStar;
 String isComplete;
 String listId;
 String note;
-String taskTitle;
-String taskId;
+
+void setAll(TaskModel taskModel){
+	this.setId ( taskModel.getId () );
+	this.setIsStar ( taskModel.isStar );
+	this.setIsComplete ( taskModel.isComplete );
+	this.setListId ( taskModel.getListId () );
+	this.setNote ( taskModel.getNote () );
+	//this.setTaskId ( taskModel.getTaskId () );
+	this.setListTitle ( taskModel.getListTitle () );
+	//this.setTaskTitle ( taskModel.getTaskTitle () );
+}
 
 public
 TaskModel ( String id, TaskModel taskModel ) {
 	super ( id, taskModel.listTitle );
-	this.setIsStar ( taskModel.isStar );
-	this.setIsComplete ( taskModel.isComplete );
+	setAll ( taskModel );
 }
 
 public
 TaskModel ( String id, ContentValues values ){
 	super ( id );
+
 	setValues ( values );
 }
 
 public
 TaskModel ( String title, String isStar, String isComplete, String listID ) {
 	super ( title );
+	//setDefault ();
 	this.setIsStar ( isStar );
 	this.setIsComplete ( isComplete );
 	this.setListId ( listID );
@@ -45,6 +55,7 @@ public void setValues(ContentValues values){
 	this.setIsComplete ( values.getAsString ( TaskColumns.ISCOMPLETE ) );
 	this.setListId ( values.getAsString ( TaskColumns.LISTID ) );
 	this.setNote ( values.getAsString ( TaskColumns.NOTE ) );
+	this.setId ( values.getAsString ( TaskColumns._ID ) );
 
 }
 
@@ -111,23 +122,4 @@ void setNote ( String note ) {
 	this.note = note;
 }
 
-public
-String getTaskTitle () {
-	return taskTitle;
-}
-
-public
-void setTaskTitle ( String taskTitle ) {
-	this.taskTitle = taskTitle;
-}
-
-public
-String getTaskId () {
-	return taskId;
-}
-
-public
-void setTaskId ( String taskId ) {
-	this.taskId = taskId;
-}
 }
