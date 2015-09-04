@@ -28,6 +28,8 @@ class LandingListAdapter extends ArrayAdapter<ListModel> {
 
 ArrayList<ListModel> lists;
 boolean              mIsLongClick;
+ListModel listModel;
+int       position;
 
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
@@ -39,9 +41,6 @@ public
 ArrayList<ListModel> getArrayList () {
 	return lists;
 }
-
-ListModel listModel;
-int       position;
 
 @Override
 public

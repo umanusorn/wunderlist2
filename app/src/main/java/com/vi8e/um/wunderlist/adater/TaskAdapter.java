@@ -34,6 +34,8 @@ Context              mContext;
 Resources            res;
 ArrayList<TaskModel> lists;
 int                  position;
+boolean              mIsLongClick;
+TaskModel taskModel;
 //ListView             listViewIncomplete, listViewComplete;
 
 public
@@ -126,30 +128,60 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 
 
-	convertView.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
-			intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
-			intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
-			getContext ().startActivity ( intent );
-
-		}
-	} );
+	convertView.setOnClickListener ( onClickTask ( tvTitle ) );
+	convertView.setOnLongClickListener ( onLongClickTask () );
 	// Return the completed view to render on screen
 	return convertView;
 }
 
-@NonNull public static
-View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+@NonNull public
+View.OnClickListener onClickTask ( final TextView tvTitle ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			//TaskModel rowData=getItem ( position );
-			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
-			Log.d ( "TaskAdapter","isComplete="+rowData.getIsComplete () );
-			if ( rowData.isComplete () ) {
-				//todo don't know why cant use completeList to add element
+
+			if(!mIsLongClick){
+				Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
+				intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
+				intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+				getContext ().startActivity ( intent );
+			}
+			mIsLongClick=false;
+
+
+		}
+	};
+}
+
+
+@NonNull private
+View.OnLongClickListener onLongClickTask () {
+	return new View.OnLongClickListener () {
+		@Override public
+		boolean onLongClick ( View v ) {
+			mIsLongClick =true;
+			Log.d ( "onLongClick", "" );
+			//remove ( listModel );
+			TaskActivity.currentTask =taskModel;
+				TaskActivity.setMenuList ();
+				//ListSelection where = new ListSelection ();
+				//where.id ( Long.parseLong ( listModel.getId () ) );
+				//where.delete ( context );
+				return false;
+			}
+		};
+	}
+
+	@NonNull public static
+	View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+		return new View.OnClickListener () {
+			@Override public
+			void onClick ( View v ) {
+				//TaskModel rowData=getItem ( position );
+				rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+				Log.d ( "TaskAdapter","isComplete="+rowData.getIsComplete () );
+				if ( rowData.isComplete () ) {
+					//todo don't know why cant use completeList to add element
 
 				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterInComplete.remove ( rowData );

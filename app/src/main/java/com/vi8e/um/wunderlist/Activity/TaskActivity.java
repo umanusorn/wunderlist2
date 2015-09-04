@@ -8,8 +8,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +27,7 @@ import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
+import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.QueryHelper;
@@ -42,22 +41,24 @@ public
 class TaskActivity extends AppCompatActivity {
 
 String title;
-private static final String TAG = TaskActivity.class.getSimpleName();
+private static final String TAG = TaskActivity.class.getSimpleName ();
 
 Toolbar               toolbar;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
+
 public static TaskAdapter taskAdapterInComplete;
 public static TaskAdapter taskAdapterComplete;
-CoordinatorLayout    rootLayout;
-FloatingActionButton fabBtn;
 public static ListView listViewIncomplete, listViewComplete;
 Boolean isStar       = false;
-Boolean showComplete = false;
-static ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
-static ArrayList<TaskModel> completeList;
-Activity thisActivity;
-static String listId;
+Boolean showComplete = true;
+static        ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
+static        ArrayList<TaskModel> completeList;
+static        Activity             thisActivity;
+static        String               listId;
+public static TaskModel            currentTask;
+static        Menu                 menu;
+
 
 @Override
 protected
@@ -245,9 +246,29 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
+	TaskActivity.menu =menu;
 	return true;
 }
 
+
+public static
+void setMenuList () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
+
+}
+
+
+public static
+void setMenuNormal () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+
+//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
+
+}
 
 @Override
 public
@@ -260,6 +281,16 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.action_settings ) {
 		return true;
+	}
+
+	if ( id == R.id.delete ) {
+		ListSelection where = new ListSelection ();
+		where.id ( Long.parseLong ( currentTask.getId () ) );
+		where.delete ( getApplicationContext () );
+		if( currentTask.isComplete ())
+		taskAdapterComplete.remove ( currentTask );
+		else
+			taskAdapterInComplete.remove ( currentTask );
 	}
 
 	return super.onOptionsItemSelected ( item );
