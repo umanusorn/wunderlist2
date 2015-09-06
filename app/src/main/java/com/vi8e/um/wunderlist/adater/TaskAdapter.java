@@ -70,20 +70,21 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
 	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
+	//ListView listView =(ListView)cardView.get
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
-	if ( Boolean.valueOf ( rowData.isComplete () ) ) {
+	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
 
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 
-	if ( Boolean.valueOf ( rowData.isStar () ) ) {
+	if ( rowData.isStar () ) {
 		try {
 			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
@@ -160,13 +161,10 @@ View.OnLongClickListener onLongClickTask () {
 		@Override public
 		boolean onLongClick ( View v ) {
 			mIsLongClick =true;
-			Log.d ( "onLongClick", "" );
+			Log.d ( "onLongClick", "position="+position );
 			//remove ( listModel );
-			TaskActivity.currentTask =taskModel;
+			TaskActivity.currentTask = getItem ( position );
 				TaskActivity.setMenuList ();
-				//ListSelection where = new ListSelection ();
-				//where.id ( Long.parseLong ( listModel.getId () ) );
-				//where.delete ( context );
 				return false;
 			}
 		};

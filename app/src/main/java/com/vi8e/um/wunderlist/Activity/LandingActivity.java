@@ -59,8 +59,15 @@ ListView             listView;
 static long listId;
 
 
-static Activity thisActivity;
-static Menu     menu;
+static  Activity thisActivity;
+static  Menu     menu;
+
+public
+boolean isLongClick () {
+	return mIsLongClick;
+}
+
+private boolean mIsLongClick;
 
 @Override
 protected
@@ -71,6 +78,8 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 
+
+
 	initToolbar ();
 	initInstances ();
 
@@ -80,6 +89,25 @@ void onCreate ( Bundle savedInstanceState ) {
 	/*for ( int i = 0 ; i < 1 ; i++ ) {
 		addToDB ( getApplication (),"tssd",mLandingListAdapter, listView );
 	}*/
+
+
+/*	listView.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
+		@Override public
+		boolean onItemLongClick ( AdapterView<?> parent, View view, int position, long id ) {
+			LandingListAdapter landingListAdapter = ( LandingListAdapter ) parent.getAdapter ();
+
+			mIsLongClick = true;
+			Log.d ( "onLongClick", "position=" + position );
+			//remove ( listModel );
+			LandingActivity.currentList = landingListAdapter.getItem ( position );
+			LandingActivity.setMenuList ();
+			ListSelection where = new ListSelection ();
+			//where.id ( Long.parseLong ( listModel.getId () ) );
+			//where.delete ( context );
+			return false;
+
+		}
+	} );*/
 }
 
 @Override

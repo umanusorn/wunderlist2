@@ -61,36 +61,21 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-	convertView.setOnClickListener ( getOnClick ( listModel,getContext ()) );
-	convertView.setOnLongClickListener ( getOnLongClick () );
+	convertView.setOnClickListener ( getOnClick ( listModel, getContext () ) );
+	convertView.setOnLongClickListener ( getOnLongClick (listModel,position) );
 
 	// Return the completed view to render on screen
 	return convertView;
 }
 
-@NonNull public
-View.OnClickListener getOnClick ( final ListModel tvTitle, final Context context) {
-	return new View.OnClickListener () {
-
-		@Override public
-		void onClick ( View v ) {
-
-			Log.d ( "onClick","isLongClick="+mIsLongClick );
-			if(!mIsLongClick){
-				IntentCaller.taskActivity ( context, tvTitle );
-			}
-			mIsLongClick=false;
-		}
-	};
-}
 
 @NonNull private
-View.OnLongClickListener getOnLongClick () {
+View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int position ) {
 	return new View.OnLongClickListener () {
 		@Override public
 		boolean onLongClick ( View v ) {
 			mIsLongClick =true;
-			Log.d ( "onLongClick", "" );
+			Log.d ( "onLongClick", "position="+ position );
 			//remove ( listModel );
 			LandingActivity.currentList=listModel;
 			LandingActivity.setMenuList ();
@@ -98,6 +83,22 @@ View.OnLongClickListener getOnLongClick () {
 			//where.id ( Long.parseLong ( listModel.getId () ) );
 			//where.delete ( context );
 			return false;
+		}
+	};
+}
+
+@NonNull public
+View.OnClickListener getOnClick ( final ListModel listModel, final Context context) {
+	return new View.OnClickListener () {
+
+		@Override public
+		void onClick ( View v ) {
+
+			Log.d ( "onClick","isLongClick="+mIsLongClick );
+			if(!mIsLongClick){
+				IntentCaller.taskActivity ( context, listModel );
+			}
+			mIsLongClick=false;
 		}
 	};
 }

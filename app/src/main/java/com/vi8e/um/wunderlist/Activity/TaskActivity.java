@@ -254,7 +254,6 @@ public static
 void setMenuList () {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
 
 }
 
@@ -263,9 +262,6 @@ public static
 void setMenuNormal () {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
-
-//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
 
 }
 
@@ -283,6 +279,9 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 
 	if ( id == R.id.delete ) {
+
+		Log.d ( TAG,"delete id="+currentTask.getId () );
+
 		TaskSelection where = new TaskSelection ();
 		where.id ( Long.parseLong ( currentTask.getId () ) );
 		where.delete ( getApplicationContext () );
@@ -293,6 +292,8 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 		Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
 	}
+
+	setMenuNormal ();
 
 	return super.onOptionsItemSelected ( item );
 }
