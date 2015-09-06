@@ -35,7 +35,7 @@ Resources            res;
 ArrayList<TaskModel> lists;
 int                  position;
 boolean              mIsLongClick;
-TaskModel taskModel;
+TaskModel            taskModel;
 //ListView             listViewIncomplete, listViewComplete;
 
 public
@@ -59,7 +59,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	// Get the data item for this position
 	this.position = position;
 	final TaskModel rowData;
-	taskModel=rowData = getItem ( position );
+	taskModel = rowData = getItem ( position );
 
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
@@ -130,7 +130,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 
 	convertView.setOnClickListener ( onClickTask ( tvTitle ) );
-	convertView.setOnLongClickListener ( onLongClickTask () );
+	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
 	// Return the completed view to render on screen
 	return convertView;
 }
@@ -140,50 +140,47 @@ View.OnClickListener onClickTask ( final TextView tvTitle ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-
-			if(!mIsLongClick){
+			if ( ! mIsLongClick ) {
 				Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
 				intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
 				intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 				getContext ().startActivity ( intent );
 			}
-			mIsLongClick=false;
-
-
+			mIsLongClick = false;
 		}
 	};
 }
 
 
 @NonNull private
-View.OnLongClickListener onLongClickTask () {
+View.OnLongClickListener onLongClickTask ( TaskModel taskModel, final int position ) {
 	return new View.OnLongClickListener () {
 		@Override public
 		boolean onLongClick ( View v ) {
-			mIsLongClick =true;
-			Log.d ( "onLongClick", "position="+position );
+			mIsLongClick = true;
+			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
 			TaskActivity.currentTask = getItem ( position );
-				TaskActivity.setMenuList ();
-				return false;
-			}
-		};
-	}
+			TaskActivity.setMenuList ();
+			return false;
+		}
+	};
+}
 
-	@NonNull public static
-	View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
-		return new View.OnClickListener () {
-			@Override public
-			void onClick ( View v ) {
-				//TaskModel rowData=getItem ( position );
-				rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
-				Log.d ( "TaskAdapter","isComplete="+rowData.getIsComplete () );
-				if ( rowData.isComplete () ) {
-					//todo don't know why cant use completeList to add element
+@NonNull public static
+View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			//TaskModel rowData=getItem ( position );
+			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
+			if ( rowData.isComplete () ) {
+				//todo don't know why cant use completeList to add element
 
 				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterInComplete.remove ( rowData );
-//				inCompleteList.remove ( position );
+			//inCompleteList.remove ( position );
 			}
 			else {
 				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
