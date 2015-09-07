@@ -72,10 +72,25 @@ void onCreate ( Bundle savedInstanceState ) {
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Utility.toggleImgStarData ( v,mTaskModel,getApplicationContext () );
+			Utility.toggleImgStarData ( v, mTaskModel, getApplicationContext () );
 		}
 	} );
+
+	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
+	Utility.toggleImgCompleteData ( checkBox, mTaskModel, getApplicationContext () );
+	checkBox.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
+		}
+	} );
+
+
 	editTextTitle.setText ( TaskActivity.currentTask.getListTitle () );
+
+
+
+
 
 }
 

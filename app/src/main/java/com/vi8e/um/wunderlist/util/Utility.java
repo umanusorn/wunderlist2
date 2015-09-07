@@ -77,7 +77,7 @@ public static String getVersionCode ( Context context ){
 }
 
 
-public static boolean toggleImg (View v,Drawable normal,Drawable click){
+public static boolean toggleImg (View v,Drawable normal,Drawable clicked){
 	if ( v.getId () == 0 ) {
 
 		v.setBackground ( normal );
@@ -85,7 +85,7 @@ public static boolean toggleImg (View v,Drawable normal,Drawable click){
 		return false;
 	}
 	else {
-		v.setBackground ( click );
+		v.setBackground ( clicked );
 		v.setId ( 0 );
 		return true;
 	}
@@ -94,13 +94,12 @@ public static boolean toggleImg (View v,Drawable normal,Drawable click){
 public static boolean toggleImgStarData ( View v, TaskModel rowData,Context context){
 
 	Resources res = context.getResources ();
-
   Drawable normal =  res.getDrawable ( R.mipmap.wl_task_detail_ribbon );
-	Drawable click= res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
-	return toggleImgStarData (v,rowData,normal,click );
+	Drawable clicked= res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
+	return toggleImgStarData ( v, rowData, normal, clicked );
 }
 
-public static boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable click ){
+public static boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable clicked ){
 
 	Log.d ( "toggleImgData","isStar="+rowData.getIsStar () );
 
@@ -110,8 +109,33 @@ public static boolean toggleImgStarData ( View v, TaskModel rowData, Drawable no
 		return false;
 	}
 	else {
-		v.setBackground ( click );
+		v.setBackground ( clicked );
 		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
+		return true;
+	}
+}
+
+
+public static boolean toggleImgCompleteData ( View v, TaskModel rowData,Context context){
+
+	Resources res = context.getResources ();
+	Drawable normal = res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
+	Drawable clicked= res.getDrawable ( R.mipmap.wl_icon_task_detail_checkbox);
+	return toggleImgCompleteData ( v, rowData, normal, clicked );
+}
+
+public static boolean toggleImgCompleteData ( View v, TaskModel rowData, Drawable normal, Drawable clicked ){
+
+	Log.d ( "toggleImgData","isStar="+rowData.getIsStar () );
+
+	if ( rowData.isStar ()) {
+		v.setBackground ( normal );
+		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+		return false;
+	}
+	else {
+		v.setBackground ( clicked );
+		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 		return true;
 	}
 }
