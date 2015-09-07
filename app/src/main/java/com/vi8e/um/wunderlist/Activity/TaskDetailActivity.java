@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -28,6 +30,10 @@ class TaskDetailActivity extends AppCompatActivity {
 private ListView          listViewComplete;
 private Activity          thisActivity;
 private TaskDetailAdapter taskAdapterComplete;
+
+EditText editTextTitle;
+
+ImageView star,checkBox;
 
 @Override
 protected
@@ -56,13 +62,28 @@ void onCreate ( Bundle savedInstanceState ) {
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete,taskAdapterComplete, false );
 
 
-	ImageView checkBox =(ImageView)findViewById ( R.id.chkBox );
-	EditText editTextTitle =(EditText)findViewById ( R.id.editTextTitle );
-	ImageView star = (ImageView)findViewById ( R.id.star );
+	checkBox =(ImageView)findViewById ( R.id.chkBox );
+	editTextTitle =(EditText)findViewById ( R.id.editTextTitle );
+	star = (ImageView)findViewById ( R.id.star );
 
 	editTextTitle.setText ( TaskActivity.currentTask.getListTitle () );
 
 
+
+}
+
+@Override
+protected
+void onPause () {
+	super.onPause ();
+	//setMenuNormal ();
+
+	//ListModel currentList= LandingActivity.currentList;
+	TaskModel currentTask = TaskActivity.currentTask;
+	currentTask.setListTitle ( editTextTitle.getText ().toString () );
+	String id = currentTask.getId ();
+	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
+	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
 
 }
 

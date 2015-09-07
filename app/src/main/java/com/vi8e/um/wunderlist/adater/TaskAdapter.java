@@ -77,7 +77,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		star.setOnClickListener ( new View.OnClickListener () {
 			@Override public
 			void onClick ( View v ) {
-					onClickStar ( v,rowData );
+				onClickStar ( v, rowData );
 			}
 		} );
 
@@ -88,7 +88,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 	}
 
-	convertView.setOnClickListener ( onClickTask ( tvTitle,position ) );
+	convertView.setOnClickListener ( onClickTask ( tvTitle, position ) );
 	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
 	// Return the completed view to render on screen
 	return convertView;
@@ -129,7 +129,7 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	}
 }
 
-void onClickStar(View v,TaskModel rowData){
+void onClickStar ( View v, TaskModel rowData ) {
 	if ( ! rowData.isComplete () ) {
 		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
 		Utility.toggleImgStarData ( v,
@@ -148,7 +148,7 @@ View.OnClickListener onClickTask ( final TextView tvTitle, final int position ) 
 			TaskActivity.currentTask = getItem ( position );
 			if ( ! mIsLongClick ) {
 
-				IntentCaller.taskDetailActivity ( getContext (),tvTitle );
+				IntentCaller.taskDetailActivity ( getContext (), tvTitle );
 			}
 			mIsLongClick = false;
 		}
@@ -184,7 +184,7 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 
 				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterInComplete.remove ( rowData );
-			//inCompleteList.remove ( position );
+				//inCompleteList.remove ( position );
 			}
 			else {
 				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );

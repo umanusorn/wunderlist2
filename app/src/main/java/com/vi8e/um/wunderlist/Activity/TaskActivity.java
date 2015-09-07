@@ -75,21 +75,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 	thisActivity = this;
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
+	setUpAdater ();
+
+	toggleShowCompleteListView ();
+
+}
+
+private
+void setUpAdater () {
 	completeList = new ArrayList<TaskModel> ();
-	//completeList = new ArrayList<TaskModel> ();
-// Create the adapter to convert the array to views
 	taskAdapterComplete = new TaskAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( getApplicationContext (), listViewComplete, taskAdapterComplete, true );
 
 	inCompleteList = new ArrayList<TaskModel> ();
-	//completeList = new ArrayList<TaskModel> ();
-// Create the adapter to convert the array to views
 	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	taskAdapterInComplete = setUpAdapterListView ( getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
-
-	toggleShowCompleteListView ();
-
 }
 
 
@@ -264,6 +265,17 @@ void setMenuNormal () {
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
 
 }
+
+
+@Override
+protected void
+onResume(){
+	super.onResume ();
+	Log.d ( "OnResume", "" );
+	setUpAdater ();
+
+}
+
 
 @Override
 public
