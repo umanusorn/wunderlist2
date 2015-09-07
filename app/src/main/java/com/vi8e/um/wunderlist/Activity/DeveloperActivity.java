@@ -32,13 +32,8 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button removeAllHealthRecordBtn = (Button ) findViewById(R.id.removeHealthDbBtn);
 	Button viewDbBtn = (Button ) findViewById(R.id.viewDbBtn);
 	Button setValueBtn = (Button ) findViewById(R.id.setValueBtn);
-	Button alarmBtn = (Button ) findViewById(R.id.alarmBtn);
-	Button chartBtn = (Button ) findViewById(R.id.chartBtn);
     Button viewDB2Btn = (Button ) findViewById(R.id.viewDB2Btn);
-    Button dummyCalBtn = (Button ) findViewById(R.id.dummyCalBtn);
     Button removeDB2 = (Button ) findViewById(R.id.removeDB2Btn);
-
-	Button mornitorSleepBtn = (Button ) findViewById(R.id.monitorSleepBtn);
 
 
 

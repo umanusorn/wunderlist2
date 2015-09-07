@@ -60,31 +60,13 @@
             android:layout_width="fill_parent"
             android:gravity="center_horizontal"
             android:layout_height="fill_parent">
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="alarm"
-                android:id="@+id/alarmBtn"
-                android:contentDescription="sss"/>
 
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="charts"
-                android:id="@+id/chartBtn"
-                android:contentDescription="sss"/>
-    </TableRow>
+        </TableRow>
 
         <TableRow
                 android:layout_width="fill_parent"
                 android:gravity="center_horizontal"
                 android:layout_height="fill_parent">
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Monitor Sleep"
-                    android:id="@+id/monitorSleepBtn"
-                    android:contentDescription="sss"/>
 
 
         </TableRow>
@@ -105,9 +87,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dummyCalories"
-                android:id="@+id/dummyCalBtn"
+                android:text="removeDB2"
+                android:id="@+id/removeDB2Btn"
                 android:layout_column="1" />
+
         </TableRow>
 
         <TableRow
@@ -116,12 +99,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="removeDB2"
-                android:id="@+id/removeDB2Btn"
-                android:layout_column="0" />
             <Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="wrap_content"
