@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.adater.TaskDetailAdapter2;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -29,7 +29,7 @@ class TaskDetailActivity extends AppCompatActivity {
 
 private ListView          listViewComplete;
 private Activity          thisActivity;
-private TaskDetailAdapter taskAdapterComplete;
+private TaskDetailAdapter2 taskAdapterComplete;
 
 EditText editTextTitle;
 
@@ -58,7 +58,7 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
-	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
+	taskAdapterComplete = new TaskDetailAdapter2 ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete,taskAdapterComplete, false );
 
 
@@ -88,29 +88,17 @@ void onPause () {
 }
 
 public static
-TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskAdapter, boolean isComplete ) {
+TaskDetailAdapter2 setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter2 taskDetailAdapter, boolean isComplete ) {
 
-/*	list= new ArrayList<TaskModel> ();
-	//completeList = new ArrayList<TaskModel> ();
-// Create the adapter to convert the array to views
-	taskAdapter = new TaskAdapter ( activity, list );
-// Attach the adapter to a ListView*/
-
-	listView.setAdapter ( taskAdapter );
+	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
 		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf (false ), String.valueOf ( false),"0" );
 		taskModel.setIsComplete ( String.valueOf ( isComplete ) );
-		taskAdapter.insert ( taskModel, 0 );
+		taskDetailAdapter.insert ( taskModel, 0 );
 	}
 	Utility.setListViewHeightBasedOnChildren ( listView );
-// Or even append an entire new collection
-// Fetching some data, data has now returned
-// If data was JSON, convert to ArrayList of User objects.
-	/*JSONArray jsonArray = ...;
-	ArrayList<User> newUsers = User.fromJson(jsonArray)
-	adapter.addAll(newUsers);*/
-	return taskAdapter;
+	return taskDetailAdapter;
 }
 
 
