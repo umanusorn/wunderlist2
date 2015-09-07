@@ -51,16 +51,17 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 public static ListModel currentList;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-static ActionBar mActionBar;
-LandingListAdapter   mLandingListAdapter;
+static ActionBar          mActionBar;
+static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 ListView             listView;
 static long listId;
 
 
-static  Activity thisActivity;
-static  Menu     menu;
+static        Activity thisActivity;
+static        Menu     menu;
+public static int      currentListPosition;
 
 public
 boolean isLongClick () {
@@ -78,36 +79,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 
-
-
 	initToolbar ();
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-	/*for ( int i = 0 ; i < 1 ; i++ ) {
-		addToDB ( getApplication (),"tssd",mLandingListAdapter, listView );
-	}*/
+}
 
 
-/*	listView.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
-		@Override public
-		boolean onItemLongClick ( AdapterView<?> parent, View view, int position, long id ) {
-			LandingListAdapter landingListAdapter = ( LandingListAdapter ) parent.getAdapter ();
+@Override
+		protected void
+onResume(){
+super.onResume ();
+	Log.d ( "OnResume","" );
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 
-			mIsLongClick = true;
-			Log.d ( "onLongClick", "position=" + position );
-			//remove ( listModel );
-			LandingActivity.currentList = landingListAdapter.getItem ( position );
-			LandingActivity.setMenuList ();
-			ListSelection where = new ListSelection ();
-			//where.id ( Long.parseLong ( listModel.getId () ) );
-			//where.delete ( context );
-			return false;
-
-		}
-	} );*/
 }
 
 @Override
@@ -174,7 +161,8 @@ private
 void setFloatingActionBtnClickListener ( View view, final ListView listView, final LandingListAdapter landingListAdapter ) {
 	com.getbase.floatingactionbutton.FloatingActionButton newListBtn
 			= ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
-	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id
+			                                                                                                                                              .action_b );
 
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -280,6 +268,12 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		where.id ( Long.parseLong ( currentList.getId () ) );
 		where.delete ( getApplicationContext () );
 		mLandingListAdapter.remove ( currentList );
+	}
+
+	if ( id == R.id.menu_edit ) {
+		/*ListSelection where = new ListSelection ();
+		where.id ( Long.parseLong ( currentList.getId () ) );*/
+		IntentCaller.listDetailActivity ( getApplicationContext (),currentList );
 	}
 
 	setMenuNormal ();

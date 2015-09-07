@@ -29,7 +29,6 @@ class LandingListAdapter extends ArrayAdapter<ListModel> {
 ArrayList<ListModel> lists;
 boolean              mIsLongClick;
 ListModel listModel;
-int       position;
 
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
@@ -45,7 +44,7 @@ ArrayList<ListModel> getArrayList () {
 @Override
 public
 View getView ( final int position, View convertView, ViewGroup parent ) {
-	this.position = position;
+
 	listModel = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
@@ -79,6 +78,7 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			//remove ( listModel );
 			LandingActivity.currentList=listModel;
 			LandingActivity.setMenuList ();
+			LandingActivity.currentListPosition=position;
 			ListSelection where = new ListSelection ();
 			//where.id ( Long.parseLong ( listModel.getId () ) );
 			//where.delete ( context );
