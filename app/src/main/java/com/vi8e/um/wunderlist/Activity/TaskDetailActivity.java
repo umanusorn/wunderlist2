@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -34,6 +36,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_task_detail );
 
 
+
+
+
 	thisActivity = this;
 
 	getWindow ().setSoftInputMode (
@@ -49,6 +54,16 @@ void onCreate ( Bundle savedInstanceState ) {
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete,taskAdapterComplete, false );
+
+
+	ImageView checkBox =(ImageView)findViewById ( R.id.chkBox );
+	EditText editTextTitle =(EditText)findViewById ( R.id.editTextTitle );
+	ImageView star = (ImageView)findViewById ( R.id.star );
+
+	editTextTitle.setText ( TaskActivity.currentTask.getListTitle () );
+
+
+
 }
 
 public static

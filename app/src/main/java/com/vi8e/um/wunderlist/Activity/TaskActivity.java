@@ -48,7 +48,7 @@ ActionBarDrawerToggle drawerToggle;
 
 public static TaskAdapter taskAdapterInComplete;
 public static TaskAdapter taskAdapterComplete;
-public static ListView listViewIncomplete, listViewComplete;
+public static ListView    listViewIncomplete, listViewComplete;
 Boolean isStar       = false;
 Boolean showComplete = true;
 static        ArrayList<TaskModel> inCompleteList;// = new ArrayList<TaskModel> ();
@@ -138,7 +138,7 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 
 				String title = editText.getText ().toString ();
-				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false),listId );
+				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false ), listId );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );
@@ -158,18 +158,18 @@ protected
 void onPause () {
 	super.onPause ();
 	//setMenuNormal ();
-adapterToDb ( taskAdapterComplete );
+	adapterToDb ( taskAdapterComplete );
 	adapterToDb ( taskAdapterInComplete );
 }
 
-void adapterToDb(TaskAdapter taskAdapter){
+void adapterToDb ( TaskAdapter taskAdapter ) {
 
 	Log.d ( TAG, "EnterOnPause dataCount" + taskAdapter.getCount () );
 	for ( int i = 0 ; i < taskAdapter.getCount () ; i++ ) {
 		TaskModel data = taskAdapter.getArrayList ().get ( i );
 		String id = data.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-		Log.d ( TAG,"isStar="+data.getIsStar ()+" listId="+data.getListId ()+" OwnId"+data.getId () );
+		Log.d ( TAG, "isStar=" + data.getIsStar () + " listId=" + data.getListId () + " OwnId" + data.getId () );
 		try {
 			getContentResolver ().update ( uri, data.getValues (), null, null );
 		}
@@ -177,7 +177,7 @@ void adapterToDb(TaskAdapter taskAdapter){
 			Log.e ( TAG, "errorOnAddData" + e.getMessage () );
 
 			String title = data.getListTitle ();
-			TaskModel taskModel = new TaskModel (id, data );
+			TaskModel taskModel = new TaskModel ( id, data );
 			uri = getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
 			Log.d ( TAG, "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
 			//getContentResolver().insert ( ListColumns.CONTENT_URI, data.getValues () );
@@ -215,7 +215,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 	TaskSelection where = new TaskSelection ();
 
 	Log.d ( TAG, "listId=" + listId + " isComplete=" + isComplete );
-	where.iscomplete( String.valueOf ( isComplete ) ).and ().listid ( listId );
+	where.iscomplete ( String.valueOf ( isComplete ) ).and ().listid ( listId );
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
 	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
@@ -223,7 +223,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
-		Log.d (TAG,values.toString ());
+		Log.d ( TAG, values.toString () );
 		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values ) );
 		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
@@ -245,7 +245,7 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
-	TaskActivity.menu =menu;
+	TaskActivity.menu = menu;
 	return true;
 }
 
@@ -280,15 +280,17 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 	if ( id == R.id.delete ) {
 
-		Log.d ( TAG,"delete id="+currentTask.getId () );
+		Log.d ( TAG, "delete id=" + currentTask.getId () );
 
 		TaskSelection where = new TaskSelection ();
 		where.id ( Long.parseLong ( currentTask.getId () ) );
 		where.delete ( getApplicationContext () );
-		if( currentTask.isComplete ())
-		taskAdapterComplete.remove ( currentTask );
-		else
+		if ( currentTask.isComplete () ) {
+			taskAdapterComplete.remove ( currentTask );
+		}
+		else {
 			taskAdapterInComplete.remove ( currentTask );
+		}
 
 		Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
 	}

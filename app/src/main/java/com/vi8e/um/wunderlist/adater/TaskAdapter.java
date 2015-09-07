@@ -1,6 +1,5 @@
 package com.vi8e.um.wunderlist.adater;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -15,10 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
-import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -90,7 +88,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 	}
 
-	convertView.setOnClickListener ( onClickTask ( tvTitle ) );
+	convertView.setOnClickListener ( onClickTask ( tvTitle,position ) );
 	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
 	// Return the completed view to render on screen
 	return convertView;
@@ -142,15 +140,15 @@ void onClickStar(View v,TaskModel rowData){
 }
 
 @NonNull public
-View.OnClickListener onClickTask ( final TextView tvTitle ) {
+View.OnClickListener onClickTask ( final TextView tvTitle, final int position ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
+
+			TaskActivity.currentTask = getItem ( position );
 			if ( ! mIsLongClick ) {
-				Intent intent = new Intent ( getContext (), TaskDetailActivity.class );
-				intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
-				intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
-				getContext ().startActivity ( intent );
+
+				IntentCaller.taskDetailActivity ( getContext (),tvTitle );
 			}
 			mIsLongClick = false;
 		}

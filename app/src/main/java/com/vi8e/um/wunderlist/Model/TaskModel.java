@@ -16,6 +16,7 @@ String listId;
 String note;
 
 void setAll(TaskModel taskModel){
+
 	this.setId ( taskModel.getId () );
 	this.setIsStar ( taskModel.isStar );
 	this.setIsComplete ( taskModel.isComplete );
