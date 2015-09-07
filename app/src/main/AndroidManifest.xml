@@ -33,8 +33,7 @@
             android:label="@string/title_activity_list"
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
-        <activity
-                android:name=".Activity.DeveloperActivity">
+        <activity android:name=".Activity.DeveloperActivity" >
         </activity>
         <activity
             android:name=".Activity.TaskDetailActivity"
@@ -43,6 +42,10 @@
         <activity
             android:name=".Activity.ViewDBActivity"
             android:label="@string/title_activity_view_db" >
+        </activity>
+        <activity
+            android:name=".Activity.ListDetailActivity"
+            android:label="@string/title_activity_list_detail" >
         </activity>
     </application>
 

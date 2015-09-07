@@ -69,17 +69,9 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 	//ListView listView =(ListView)cardView.get
 
-
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
-	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
-	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
-
-	if ( rowData.isComplete () ) {
-		rowBg.setAlpha ( ( float ) 0.5 );
-		cardView.setAlpha ( ( float ) 0.5 );
-	}
-
+	setUpCompletedBg ( rowData, rowBg, cardView );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 	setUpStar ( rowData, star, res );
 
@@ -102,6 +94,14 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
 	// Return the completed view to render on screen
 	return convertView;
+}
+
+private
+void setUpCompletedBg ( TaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
+	if ( rowData.isComplete () ) {
+		rowBg.setAlpha ( ( float ) 0.5 );
+		cardView.setAlpha ( ( float ) 0.5 );
+	}
 }
 
 private static

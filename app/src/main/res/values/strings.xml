@@ -12,4 +12,5 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_task_detail">TaskDetailActivity</string>
     <string name="title_activity_view_db">ViewDBActivity</string>
+    <string name="title_activity_list_detail">ListDetailActivity</string>
 </resources>
