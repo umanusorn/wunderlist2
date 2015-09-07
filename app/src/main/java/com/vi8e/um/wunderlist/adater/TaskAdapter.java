@@ -33,10 +33,7 @@ class TaskAdapter extends ArrayAdapter<TaskModel> {
 Context              mContext;
 Resources            res;
 ArrayList<TaskModel> lists;
-int                  position;
 boolean              mIsLongClick;
-TaskModel            taskModel;
-//ListView             listViewIncomplete, listViewComplete;
 
 public
 TaskAdapter ( Context context,
@@ -56,10 +53,10 @@ ArrayList<TaskModel> getArrayList () {
 @Override
 public
 View getView ( final int position, View convertView, final ViewGroup parent ) {
-	// Get the data item for this position
-	this.position = position;
+
 	final TaskModel rowData;
-	taskModel = rowData = getItem ( position );
+	// Get the data item for this position
+	rowData = getItem ( position );
 
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
@@ -72,6 +69,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 	//ListView listView =(ListView)cardView.get
 
+
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
@@ -83,7 +81,31 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+	setUpStar ( rowData, star, res );
 
+	try {
+		star.setOnClickListener ( new View.OnClickListener () {
+			@Override public
+			void onClick ( View v ) {
+					onClickStar ( v,rowData );
+			}
+		} );
+
+	}
+	catch ( NullPointerException e ) {
+		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
+		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
+		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+	}
+
+	convertView.setOnClickListener ( onClickTask ( tvTitle ) );
+	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
+	// Return the completed view to render on screen
+	return convertView;
+}
+
+private static
+void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	if ( rowData.isStar () ) {
 		try {
 			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
@@ -107,32 +129,16 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
 		}
 	}
+}
 
-	try {
-		star.setOnClickListener ( new View.OnClickListener () {
-			@Override public
-			void onClick ( View v ) {
-				//Log.d ( "setOnClickStar ", "isComplete=" + ! rowData.isComplete () );
-				if ( ! rowData.isComplete () ) {
-					Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-					rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
-					Utility.toggleImg ( v, res.getDrawable ( R.mipmap.wl_task_detail_ribbon ), res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-				}
-			}
-		} );
-
+void onClickStar(View v,TaskModel rowData){
+	if ( ! rowData.isComplete () ) {
+		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
+		Utility.toggleImgStarData ( v,
+		                            rowData,
+		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 	}
-	catch ( NullPointerException e ) {
-		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
-	}
-
-
-	convertView.setOnClickListener ( onClickTask ( tvTitle ) );
-	convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
-	// Return the completed view to render on screen
-	return convertView;
 }
 
 @NonNull public

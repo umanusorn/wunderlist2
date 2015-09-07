@@ -88,4 +88,22 @@ public static boolean toggleImg (View v,Drawable normal,Drawable click){
 		return true;
 	}
 }
+
+public static boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable click ){
+
+	Log.d ( "toggleImgData","isStar="+rowData.getIsStar () );
+
+	if ( rowData.isStar ()) {
+		v.setBackground ( normal );
+		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
+		return false;
+	}
+	else {
+		v.setBackground ( click );
+		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
+		return true;
+	}
+}
+
+
 }
