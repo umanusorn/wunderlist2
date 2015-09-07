@@ -41,13 +41,13 @@
                 android:layout_alignParentTop="true"
                 android:imeOptions="actionDone"
                 android:singleLine="true"
-                android:layout_toLeftOf="@+id/editTextStar"
-                android:layout_toStartOf="@+id/editTextStar"/>
+                android:layout_toLeftOf="@+id/star"
+                android:layout_toStartOf="@+id/star"/>
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextStar"
+                android:id="@+id/star"
                 android:src="@mipmap/wl_task_detail_ribbon"
                 android:layout_alignTop="@+id/editText"
                 android:layout_alignParentRight="true"
@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/scrollView2"
                 android:layout_below="@+id/editText"
-                android:layout_alignRight="@+id/editTextStar"
-                android:layout_alignEnd="@+id/editTextStar">
+                android:layout_alignRight="@+id/star"
+                android:layout_alignEnd="@+id/star">
 
             <LinearLayout
                     android:orientation="vertical"
@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/listViewTaskInComplete"
-                        android:layout_below="@+id/editTextStar"
+                        android:layout_below="@+id/star"
                         android:layout_centerHorizontal="true"/>
 
                 <TextView
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/listViewTaskComplete"
-                        android:layout_below="@+id/editTextStar"
+                        android:layout_below="@+id/star"
                         android:layout_centerHorizontal="true"/>
 
             </LinearLayout>

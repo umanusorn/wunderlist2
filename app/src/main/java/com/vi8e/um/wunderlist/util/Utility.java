@@ -1,6 +1,7 @@
 package com.vi8e.um.wunderlist.util;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
+import com.vi8e.um.wunderlist.R;
 
 
 /**
@@ -87,6 +89,15 @@ public static boolean toggleImg (View v,Drawable normal,Drawable click){
 		v.setId ( 0 );
 		return true;
 	}
+}
+
+public static boolean toggleImgStarData ( View v, TaskModel rowData,Context context){
+
+	Resources res = context.getResources ();
+
+  Drawable normal =  res.getDrawable ( R.mipmap.wl_task_detail_ribbon );
+	Drawable click= res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
+	return toggleImgStarData (v,rowData,normal,click );
 }
 
 public static boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable click ){

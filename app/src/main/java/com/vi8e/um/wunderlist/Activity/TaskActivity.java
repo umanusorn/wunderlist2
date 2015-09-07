@@ -76,7 +76,6 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
 	setUpAdater ();
-
 	toggleShowCompleteListView ();
 
 }
@@ -93,6 +92,29 @@ void setUpAdater () {
 	taskAdapterInComplete = setUpAdapterListView ( getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
 }
 
+public static
+TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
+
+	listView.setAdapter ( taskAdapter );
+	TaskSelection where = new TaskSelection ();
+
+	Log.d ( TAG, "listId=" + listId + " isComplete=" + isComplete );
+	where.iscomplete ( String.valueOf ( isComplete ) ).and ().listid ( listId );
+	Cursor c = where.query ( context.getContentResolver () );
+	c.moveToFirst ();
+	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
+
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
+		ContentValues values = allListValues.get ( i );
+		Log.d ( TAG, values.toString () );
+		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values ) );
+		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
+	}
+	listView.setAdapter ( taskAdapter );
+	Utility.setListViewHeightBasedOnChildren ( listView );
+	return taskAdapter;
+}
 
 private
 void setToolBar ( Toolbar toolbar, String title ) {
@@ -120,7 +142,7 @@ void setView () {
 			toggleShowCompleteListView ();
 		}
 	} );
-	ImageView editTextStar = ( ImageView ) findViewById ( R.id.editTextStar );
+	ImageView editTextStar = ( ImageView ) findViewById ( R.id.star );
 
 	editTextStar.setOnClickListener ( onCLickStar () );
 
@@ -152,6 +174,36 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 			return false;
 		}
 	};
+}
+
+@NonNull private
+View.OnClickListener onCLickStar () {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			isStar = Utility.toggleImg ( v,
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+
+		}
+	};
+}
+
+void toggleShowCompleteListView () {
+	showComplete = ! showComplete;
+	if ( showComplete ) {
+		listViewComplete.setVisibility ( View.VISIBLE );
+	}
+	else {
+		listViewComplete.setVisibility ( View.GONE );
+	}
+}
+
+void setUpContent () {
+	Bundle extras = getIntent ().getExtras ();
+	if ( extras != null ) {
+		title = extras.getString ( ListConst.KEY_TITLE );
+	}
 }
 
 @Override
@@ -186,59 +238,13 @@ void adapterToDb ( TaskAdapter taskAdapter ) {
 	}
 }
 
-@NonNull private
-View.OnClickListener onCLickStar () {
-	return new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			isStar = Utility.toggleImg ( v,
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+@Override
+protected void
+onResume(){
+	super.onResume ();
+	Log.d ( "OnResume", "" );
+	setUpAdater ();
 
-		}
-	};
-}
-
-void toggleShowCompleteListView () {
-	showComplete = ! showComplete;
-	if ( showComplete ) {
-		listViewComplete.setVisibility ( View.VISIBLE );
-	}
-	else {
-		listViewComplete.setVisibility ( View.GONE );
-	}
-}
-
-public static
-TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapter taskAdapter, boolean isComplete ) {
-
-	listView.setAdapter ( taskAdapter );
-	TaskSelection where = new TaskSelection ();
-
-	Log.d ( TAG, "listId=" + listId + " isComplete=" + isComplete );
-	where.iscomplete ( String.valueOf ( isComplete ) ).and ().listid ( listId );
-	Cursor c = where.query ( context.getContentResolver () );
-	c.moveToFirst ();
-	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskColumns.ALL_COLUMNS );
-
-	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-		ContentValues values = allListValues.get ( i );
-		Log.d ( TAG, values.toString () );
-		taskAdapter.add ( new TaskModel ( values.getAsString ( TaskColumns._ID ), values ) );
-		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
-	}
-	listView.setAdapter ( taskAdapter );
-	Utility.setListViewHeightBasedOnChildren ( listView );
-	return taskAdapter;
-}
-
-
-void setUpContent () {
-	Bundle extras = getIntent ().getExtras ();
-	if ( extras != null ) {
-		title = extras.getString ( ListConst.KEY_TITLE );
-	}
 }
 
 @Override
@@ -249,33 +255,6 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	TaskActivity.menu = menu;
 	return true;
 }
-
-
-public static
-void setMenuList () {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
-
-}
-
-
-public static
-void setMenuNormal () {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
-
-}
-
-
-@Override
-protected void
-onResume(){
-	super.onResume ();
-	Log.d ( "OnResume", "" );
-	setUpAdater ();
-
-}
-
 
 @Override
 public
@@ -310,5 +289,19 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	setMenuNormal ();
 
 	return super.onOptionsItemSelected ( item );
+}
+
+public static
+void setMenuNormal () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+
+}
+
+public static
+void setMenuList () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
+
 }
 }

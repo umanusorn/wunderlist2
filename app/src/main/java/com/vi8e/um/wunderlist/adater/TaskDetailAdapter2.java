@@ -58,14 +58,12 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
-	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
-	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
 	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
 	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 	//ListView listView =(ListView)cardView.get
-star.setVisibility ( View.GONE );
+	star.setVisibility ( View.GONE );
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getListTitle () );

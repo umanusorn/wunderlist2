@@ -27,13 +27,17 @@ import java.util.ArrayList;
 public
 class TaskDetailActivity extends AppCompatActivity {
 
-private ListView          listViewComplete;
-private Activity          thisActivity;
+private ListView           listViewComplete;
+private Activity           thisActivity;
 private TaskDetailAdapter2 taskAdapterComplete;
 
 EditText editTextTitle;
 
-ImageView star,checkBox;
+Boolean isStar       = false;
+Boolean showComplete = true;
+TaskModel mTaskModel;
+
+ImageView star, checkBox;
 
 @Override
 protected
@@ -41,15 +45,12 @@ void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task_detail );
 
-
-
-
-
 	thisActivity = this;
+	mTaskModel = TaskActivity.currentTask;
 
 	getWindow ().setSoftInputMode (
 			WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-																);
+	                              );
 	View view = this.getCurrentFocus ();
 	if ( view != null ) {
 		InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
@@ -59,16 +60,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskDetailAdapter2 ( getApplication (), completeList );
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete,taskAdapterComplete, false );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
 
 
-	checkBox =(ImageView)findViewById ( R.id.chkBox );
-	editTextTitle =(EditText)findViewById ( R.id.editTextTitle );
-	star = (ImageView)findViewById ( R.id.star );
+	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
+	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
+	star = ( ImageView ) findViewById ( R.id.star );
 
+	mTaskModel.setIsStar ( String.valueOf ( !mTaskModel.isStar () ) );
+	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
+	star.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Utility.toggleImgStarData ( v,mTaskModel,getApplicationContext () );
+		}
+	} );
 	editTextTitle.setText ( TaskActivity.currentTask.getListTitle () );
-
-
 
 }
 
@@ -93,7 +100,7 @@ TaskDetailAdapter2 setUpAdapterListView ( Activity activity, ListView listView, 
 	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf (false ), String.valueOf ( false),"0" );
+		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf ( false ), String.valueOf ( false ), "0" );
 		taskModel.setIsComplete ( String.valueOf ( isComplete ) );
 		taskDetailAdapter.insert ( taskModel, 0 );
 	}
