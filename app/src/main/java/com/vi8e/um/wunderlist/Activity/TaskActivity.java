@@ -222,7 +222,7 @@ void adapterToDb ( TaskAdapter taskAdapter ) {
 		TaskModel data = taskAdapter.getArrayList ().get ( i );
 		String id = data.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-		Log.d ( TAG, "isStar=" + data.getIsStar () + " listId=" + data.getListId () + " OwnId" + data.getId () );
+		//Log.d ( TAG, "isStar=" + data.getIsStar () + " listId=" + data.getListId () + " OwnId" + data.getId () );
 		try {
 			getContentResolver ().update ( uri, data.getValues (), null, null );
 		}
@@ -233,14 +233,14 @@ void adapterToDb ( TaskAdapter taskAdapter ) {
 			TaskModel taskModel = new TaskModel ( id, data );
 			uri = getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
 			Log.d ( TAG, "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
-			//getContentResolver().insert ( ListColumns.CONTENT_URI, data.getValues () );
 		}
 	}
 }
 
 @Override
-protected void
-onResume(){
+protected
+void
+onResume () {
 	super.onResume ();
 	Log.d ( "OnResume", "" );
 	setUpAdater ();
@@ -250,7 +250,6 @@ onResume(){
 @Override
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
-	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
 	TaskActivity.menu = menu;
 	return true;
@@ -259,12 +258,8 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 @Override
 public
 boolean onOptionsItemSelected ( MenuItem item ) {
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
 	int id = item.getItemId ();
 
-	//noinspection SimplifiableIfStatement
 	if ( id == R.id.action_settings ) {
 		return true;
 	}
@@ -285,6 +280,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 		Utility.setTaskListViewHeight ( listViewIncomplete );
 	}
+
 
 	setMenuNormal ();
 

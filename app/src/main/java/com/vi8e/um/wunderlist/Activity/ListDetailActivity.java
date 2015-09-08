@@ -33,10 +33,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	Bundle bundle = intent.getExtras ();
 	String title = bundle.getString ( ListConst.KEY_TITLE );
 	listId = bundle.getString ( ListConst.KEY_ID );
-
 	listName = (EditText)findViewById ( R.id.listName );
-	listName.setText ( title );
 
+	listName.setText ( title );
 }
 
 @Override

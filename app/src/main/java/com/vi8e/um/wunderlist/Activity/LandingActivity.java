@@ -42,7 +42,6 @@ import io.fabric.sdk.android.Fabric;
 public
 class LandingActivity extends AppCompatActivity {
 
-
 private static final String TAG = LandingActivity.class.getSimpleName ();
 static Toolbar toolbar;
 static Context sContext;
@@ -51,23 +50,15 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 public static ListModel currentList;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
-static ActionBar          mActionBar;
+static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 ListView             listView;
-static long listId;
-
 
 static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
-private boolean mIsLongClick;
-
-public
-boolean isLongClick () {
-	return mIsLongClick;
-}
 
 @Override
 protected
@@ -152,9 +143,6 @@ void initInstances () {
 	drawerToggle = new ActionBarDrawerToggle ( LandingActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
 	drawerLayout.setDrawerListener ( drawerToggle );
 
-	//	getSupportActionBar().setHomeButtonEnabled(true);
-	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
 	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
@@ -182,11 +170,11 @@ void onPause () {
 	setMenuNormal ();
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
-	adapterToDb ();
+	saveListAdapterToDb ();
 }
 
 private
-void adapterToDb () {
+void saveListAdapterToDb () {
 	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
 		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
 		String id = recordData.getId ();
@@ -203,10 +191,11 @@ void adapterToDb () {
 }
 
 @Override
-		protected void
-onResume(){
-super.onResume ();
-	Log.d ( "OnResume","" );
+protected
+void
+onResume () {
+	super.onResume ();
+	Log.d ( "OnResume", "" );
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 
 }
@@ -235,7 +224,6 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
 	setMenuNormal ();
-
 	return true;
 }
 
@@ -245,9 +233,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	if ( drawerToggle.onOptionsItemSelected ( item ) ) {
 		return true;
 	}
-
 	int id = item.getItemId ();
-
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.menu_setting ) {
 		IntentCaller.developer ( thisActivity );
@@ -266,9 +252,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 
 	if ( id == R.id.menu_edit ) {
-		/*ListSelection where = new ListSelection ();
-		where.id ( Long.parseLong ( currentList.getId () ) );*/
-		IntentCaller.listDetailActivity ( getApplicationContext (),currentList );
+		IntentCaller.listDetailActivity ( getApplicationContext (), currentList );
 	}
 
 	setMenuNormal ();
