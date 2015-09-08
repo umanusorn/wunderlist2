@@ -27,9 +27,11 @@ public class TaskColumns implements BaseColumns {
 
     public static final String IMG_PATH = "img_path";
 
-    public static final String DUETODATE = "dueToDate";
+    public static final String CREATE_DATE = "create_Date";
 
-    public static final String REMINDERDATE = "reminderDate";
+    public static final String DUETO_DATE = "dueTo_Date";
+
+    public static final String REMINDER_DATE = "reminder_Date";
 
     public static final String NOTE = "note";
 
@@ -46,8 +48,9 @@ public class TaskColumns implements BaseColumns {
             ISSTAR,
             ISCOMPLETE,
             IMG_PATH,
-            DUETODATE,
-            REMINDERDATE,
+            CREATE_DATE,
+            DUETO_DATE,
+            REMINDER_DATE,
             NOTE,
             LISTID
     };
@@ -61,8 +64,9 @@ public class TaskColumns implements BaseColumns {
             if (c.equals(ISSTAR) || c.contains("." + ISSTAR)) return true;
             if (c.equals(ISCOMPLETE) || c.contains("." + ISCOMPLETE)) return true;
             if (c.equals(IMG_PATH) || c.contains("." + IMG_PATH)) return true;
-            if (c.equals(DUETODATE) || c.contains("." + DUETODATE)) return true;
-            if (c.equals(REMINDERDATE) || c.contains("." + REMINDERDATE)) return true;
+            if (c.equals(CREATE_DATE) || c.contains("." + CREATE_DATE)) return true;
+            if (c.equals(DUETO_DATE) || c.contains("." + DUETO_DATE)) return true;
+            if (c.equals(REMINDER_DATE) || c.contains("." + REMINDER_DATE)) return true;
             if (c.equals(NOTE) || c.contains("." + NOTE)) return true;
             if (c.equals(LISTID) || c.contains("." + LISTID)) return true;
         }

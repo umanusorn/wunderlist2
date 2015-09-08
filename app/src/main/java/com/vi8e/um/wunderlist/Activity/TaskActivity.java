@@ -280,8 +280,6 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 		Utility.setTaskListViewHeight ( listViewIncomplete );
 	}
-
-
 	setMenuNormal ();
 
 	return super.onOptionsItemSelected ( item );

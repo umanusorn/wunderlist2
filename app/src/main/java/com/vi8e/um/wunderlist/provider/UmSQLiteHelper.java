@@ -65,8 +65,9 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
             + TaskColumns.ISSTAR + " TEXT DEFAULT '0', "
             + TaskColumns.ISCOMPLETE + " TEXT DEFAULT '0', "
             + TaskColumns.IMG_PATH + " TEXT DEFAULT '0', "
-            + TaskColumns.DUETODATE + " TEXT DEFAULT '0', "
-            + TaskColumns.REMINDERDATE + " TEXT DEFAULT '0', "
+            + TaskColumns.CREATE_DATE + " TEXT DEFAULT '0', "
+            + TaskColumns.DUETO_DATE + " TEXT DEFAULT '0', "
+            + TaskColumns.REMINDER_DATE + " TEXT DEFAULT '0', "
             + TaskColumns.NOTE + " TEXT DEFAULT '0', "
             + TaskColumns.LISTID + " TEXT DEFAULT '0' "
             + " );";

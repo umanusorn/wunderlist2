@@ -45,18 +45,25 @@ public interface TaskModel extends BaseModel {
     String getImgPath();
 
     /**
-     * Get the {@code duetodate} value.
+     * Get the {@code create_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    String getDuetodate();
+    String getCreateDate();
 
     /**
-     * Get the {@code reminderdate} value.
+     * Get the {@code dueto_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    String getReminderdate();
+    String getDuetoDate();
+
+    /**
+     * Get the {@code reminder_date} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    String getReminderDate();
 
     /**
      * Get the {@code note} value.

@@ -74,22 +74,32 @@ public class TaskCursor extends AbstractCursor implements TaskModel {
     }
 
     /**
-     * Get the {@code duetodate} value.
+     * Get the {@code create_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    public String getDuetodate() {
-        String res = getStringOrNull(TaskColumns.DUETODATE);
+    public String getCreateDate() {
+        String res = getStringOrNull(TaskColumns.CREATE_DATE);
         return res;
     }
 
     /**
-     * Get the {@code reminderdate} value.
+     * Get the {@code dueto_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    public String getReminderdate() {
-        String res = getStringOrNull(TaskColumns.REMINDERDATE);
+    public String getDuetoDate() {
+        String res = getStringOrNull(TaskColumns.DUETO_DATE);
+        return res;
+    }
+
+    /**
+     * Get the {@code reminder_date} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    public String getReminderDate() {
+        String res = getStringOrNull(TaskColumns.REMINDER_DATE);
         return res;
     }
 

@@ -58,12 +58,12 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
 
 
     public TaskSelection id(long... value) {
-        addEquals("task." + TaskColumns._ID, toObjectArray(value));
+        addEquals ( "task." + TaskColumns._ID, toObjectArray ( value ) );
         return this;
     }
 
     public TaskSelection idNot(long... value) {
-        addNotEquals("task." + TaskColumns._ID, toObjectArray(value));
+        addNotEquals ( "task." + TaskColumns._ID, toObjectArray ( value ) );
         return this;
     }
 
@@ -276,83 +276,123 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
         return this;
     }
 
-    public TaskSelection duetodate(String... value) {
-        addEquals(TaskColumns.DUETODATE, value);
+    public TaskSelection createDate(String... value) {
+        addEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection duetodateNot(String... value) {
-        addNotEquals(TaskColumns.DUETODATE, value);
+    public TaskSelection createDateNot(String... value) {
+        addNotEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection duetodateLike(String... value) {
-        addLike(TaskColumns.DUETODATE, value);
+    public TaskSelection createDateLike(String... value) {
+        addLike(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection duetodateContains(String... value) {
-        addContains(TaskColumns.DUETODATE, value);
+    public TaskSelection createDateContains(String... value) {
+        addContains(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection duetodateStartsWith(String... value) {
-        addStartsWith(TaskColumns.DUETODATE, value);
+    public TaskSelection createDateStartsWith(String... value) {
+        addStartsWith(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection duetodateEndsWith(String... value) {
-        addEndsWith(TaskColumns.DUETODATE, value);
+    public TaskSelection createDateEndsWith(String... value) {
+        addEndsWith(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection orderByDuetodate(boolean desc) {
-        orderBy(TaskColumns.DUETODATE, desc);
+    public TaskSelection orderByCreateDate(boolean desc) {
+        orderBy(TaskColumns.CREATE_DATE, desc);
         return this;
     }
 
-    public TaskSelection orderByDuetodate() {
-        orderBy(TaskColumns.DUETODATE, false);
+    public TaskSelection orderByCreateDate() {
+        orderBy(TaskColumns.CREATE_DATE, false);
         return this;
     }
 
-    public TaskSelection reminderdate(String... value) {
-        addEquals(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDate(String... value) {
+        addEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderdateNot(String... value) {
-        addNotEquals(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDateNot(String... value) {
+        addNotEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderdateLike(String... value) {
-        addLike(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDateLike(String... value) {
+        addLike(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderdateContains(String... value) {
-        addContains(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDateContains(String... value) {
+        addContains(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderdateStartsWith(String... value) {
-        addStartsWith(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDateStartsWith(String... value) {
+        addStartsWith(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderdateEndsWith(String... value) {
-        addEndsWith(TaskColumns.REMINDERDATE, value);
+    public TaskSelection duetoDateEndsWith(String... value) {
+        addEndsWith(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection orderByReminderdate(boolean desc) {
-        orderBy(TaskColumns.REMINDERDATE, desc);
+    public TaskSelection orderByDuetoDate(boolean desc) {
+        orderBy(TaskColumns.DUETO_DATE, desc);
         return this;
     }
 
-    public TaskSelection orderByReminderdate() {
-        orderBy(TaskColumns.REMINDERDATE, false);
+    public TaskSelection orderByDuetoDate() {
+        orderBy(TaskColumns.DUETO_DATE, false);
+        return this;
+    }
+
+    public TaskSelection reminderDate(String... value) {
+        addEquals(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateNot(String... value) {
+        addNotEquals(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateLike(String... value) {
+        addLike(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateContains(String... value) {
+        addContains(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateStartsWith(String... value) {
+        addStartsWith(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateEndsWith(String... value) {
+        addEndsWith(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection orderByReminderDate(boolean desc) {
+        orderBy(TaskColumns.REMINDER_DATE, desc);
+        return this;
+    }
+
+    public TaskSelection orderByReminderDate() {
+        orderBy(TaskColumns.REMINDER_DATE, false);
         return this;
     }
 

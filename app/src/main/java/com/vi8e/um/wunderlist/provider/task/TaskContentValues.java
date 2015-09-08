@@ -86,23 +86,33 @@ public class TaskContentValues extends AbstractContentValues {
         return this;
     }
 
-    public TaskContentValues putDuetodate(@Nullable String value) {
-        mContentValues.put(TaskColumns.DUETODATE, value);
+    public TaskContentValues putCreateDate(@Nullable String value) {
+        mContentValues.put(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskContentValues putDuetodateNull() {
-        mContentValues.putNull(TaskColumns.DUETODATE);
+    public TaskContentValues putCreateDateNull() {
+        mContentValues.putNull(TaskColumns.CREATE_DATE);
         return this;
     }
 
-    public TaskContentValues putReminderdate(@Nullable String value) {
-        mContentValues.put(TaskColumns.REMINDERDATE, value);
+    public TaskContentValues putDuetoDate(@Nullable String value) {
+        mContentValues.put(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskContentValues putReminderdateNull() {
-        mContentValues.putNull(TaskColumns.REMINDERDATE);
+    public TaskContentValues putDuetoDateNull() {
+        mContentValues.putNull(TaskColumns.DUETO_DATE);
+        return this;
+    }
+
+    public TaskContentValues putReminderDate(@Nullable String value) {
+        mContentValues.put(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskContentValues putReminderDateNull() {
+        mContentValues.putNull(TaskColumns.REMINDER_DATE);
         return this;
     }
 
