@@ -112,7 +112,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
 	listView.setAdapter ( taskAdapter );
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 	return taskAdapter;
 }
 
@@ -283,7 +283,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 			taskAdapterInComplete.remove ( currentTask );
 		}
 
-		Utility.setListViewHeightBasedOnChildren ( listViewIncomplete );
+		Utility.setTaskListViewHeight ( listViewIncomplete );
 	}
 
 	setMenuNormal ();

@@ -26,7 +26,6 @@ import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
-import com.vi8e.um.wunderlist.provider.list.ListContentValues;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.IntentCaller;
@@ -62,13 +61,12 @@ static long listId;
 static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
+private boolean mIsLongClick;
 
 public
 boolean isLongClick () {
 	return mIsLongClick;
 }
-
-private boolean mIsLongClick;
 
 @Override
 protected
@@ -87,45 +85,6 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
-
-@Override
-		protected void
-onResume(){
-super.onResume ();
-	Log.d ( "OnResume","" );
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
-
-}
-
-@Override
-protected
-void onPause () {
-	super.onPause ();
-	setMenuNormal ();
-
-	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
-	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
-		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
-		String id = recordData.getId ();
-		Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
-		try {
-			getContentResolver ().update ( uri, recordData.getValues (), null, null );
-		}
-		catch ( IllegalArgumentException e ) {
-			Log.e ( "errorOnAddData", e.getMessage () );
-
-			String title = recordData.getListTitle ();
-			ListContentValues values = new ListContentValues ();
-			values.putListTitle ( title );
-			ListModel listModel = new ListModel ( title );
-			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
-			Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
-			//getContentResolver().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
-		}
-	}
-}
-
-
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
 
@@ -134,11 +93,11 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, ListColumns.ALL_COLUMNS );
-
 	ArrayList<ListModel> arrayOfList = new ArrayList<ListModel> ();
-	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-// Attach the adapter to a ListView
 
+	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
+
+// Attach the adapter to a ListView
 	listView.setAdapter ( landingListAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
@@ -146,7 +105,7 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
 	}
 
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 
 // Or even append an entire new collection
 // Fetching some data, data has now returned
@@ -178,25 +137,6 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 	} );
 }
 
-public static
-void setMenuList () {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
-
-}
-
-
-public static
-void setMenuNormal () {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
-
-//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
-
-}
-
 private
 void initToolbar () {
 	toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
@@ -215,13 +155,8 @@ void initInstances () {
 	//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
-
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-
 	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
-
-	//ContentValues values = new ContentValues (  );
-
 
 }
 
@@ -237,6 +172,60 @@ public
 void onConfigurationChanged ( Configuration newConfig ) {
 	super.onConfigurationChanged ( newConfig );
 	drawerToggle.onConfigurationChanged ( newConfig );
+}
+
+@Override
+protected
+void onPause () {
+	super.onPause ();
+	setMenuNormal ();
+
+	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
+	adapterToDb ();
+}
+
+private
+void adapterToDb () {
+	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
+		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
+		String id = recordData.getId ();
+		Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
+		try {
+			getContentResolver ().update ( uri, recordData.getValues (), null, null );
+		}
+		catch ( IllegalArgumentException e ) {
+			Log.e ( "errorOnUpdateData", e.getMessage () );
+			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
+			Log.d ( "ChkColumn ", "title" + recordData.getListTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
+		}
+	}
+}
+
+@Override
+		protected void
+onResume(){
+super.onResume ();
+	Log.d ( "OnResume","" );
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
+
+}
+
+public static
+void setMenuNormal () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+
+//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
+
+}
+
+public static
+void setMenuList () {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
+
 }
 
 @Override

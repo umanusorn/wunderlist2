@@ -108,6 +108,6 @@ public
 void addList ( ListModel object, ListView listView ) {
 
 	super.add ( object );
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 }
 }

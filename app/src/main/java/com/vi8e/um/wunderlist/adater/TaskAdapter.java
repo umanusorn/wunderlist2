@@ -84,8 +84,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 	catch ( NullPointerException e ) {
 		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 	}
 
 	convertView.setOnClickListener ( onClickTask ( tvTitle, position ) );
@@ -111,8 +111,8 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg Star", rowData.getListTitle () + ":" + e.toString () );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 
 	}
@@ -123,8 +123,8 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg unStar", rowData.getListTitle () + ":" + e.toString () );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 	}
 }
@@ -190,8 +190,8 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterComplete.remove ( rowData );
 			}
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 	};
 }
@@ -199,7 +199,7 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 public
 void addList ( TaskModel object, ListView listView ) {
 	super.add ( object );
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 }
 
 }

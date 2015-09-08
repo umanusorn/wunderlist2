@@ -119,7 +119,7 @@ TaskDetailAdapter2 setUpAdapterListView ( Activity activity, ListView listView, 
 		taskModel.setIsComplete ( String.valueOf ( isComplete ) );
 		taskDetailAdapter.insert ( taskModel, 0 );
 	}
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 	return taskDetailAdapter;
 }
 

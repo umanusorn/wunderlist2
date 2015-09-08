@@ -95,8 +95,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterComplete.remove ( rowData );
 			}
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 	} );
 
@@ -108,8 +108,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg Star", rowData.getListTitle () + ":" + e.toString () );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 
 	}
@@ -120,8 +120,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg unStar", rowData.getListTitle () + ":" + e.toString () );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-			Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
 	}
 
@@ -141,8 +141,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 	catch ( NullPointerException e ) {
 		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewComplete );
-		Utility.setListViewHeightBasedOnChildren ( TaskActivity.listViewIncomplete );
+		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
+		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 	}
 
 	convertView.setOnClickListener ( new View.OnClickListener () {
@@ -162,7 +162,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 public
 void addList ( TaskModel object, ListView listView ) {
 	super.add ( object );
-	Utility.setListViewHeightBasedOnChildren ( listView );
+	Utility.setTaskListViewHeight ( listView );
 }
 
 }

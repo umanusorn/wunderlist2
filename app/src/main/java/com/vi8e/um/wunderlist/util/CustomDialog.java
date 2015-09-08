@@ -17,13 +17,14 @@ public static
 void showEditTextDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
-			.title ( "Add to-do" )
+			.title ( "Add List" )
 			.positiveText ( "ADD" )
-			.input ( "Add to-do", "", new MaterialDialog.InputCallback () {
+			.input ( "Add List", "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					QueryHelper.addToDB ( thisContext, String.valueOf ( charSequence ), landingListAdapter, listView );
-					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence )),listView );
+					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), landingListAdapter, listView );
+					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
+					//Utility.setTaskListViewHeight ( listView );
 				}
 			} )
 			.negativeText ( "CANCEL" )
