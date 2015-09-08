@@ -12,8 +12,8 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 
 
-
-public class DeveloperActivity extends Activity {
+public
+class DeveloperActivity extends Activity {
 Activity mActivity;
 
 @Override
@@ -23,30 +23,29 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_dev_database );
 
 
-
-	Button genRecord = (Button ) findViewById(R.id.GenRecordBtn);
-	Button removeLists = (Button ) findViewById(R.id.removeListBtn );
-	Button viewDbBtn = (Button ) findViewById(R.id.viewDbBtn);
-	Button setValueBtn = (Button ) findViewById(R.id.setValueBtn);
-    Button viewDB2Btn = (Button ) findViewById(R.id.viewDB2Btn);
-    Button removeTask = (Button ) findViewById(R.id.removeTaskBtn );
-
+	Button genRecord = ( Button ) findViewById ( R.id.GenRecordBtn );
+	Button removeLists = ( Button ) findViewById ( R.id.removeListBtn );
+	Button viewDbBtn = ( Button ) findViewById ( R.id.viewDbBtn );
+	Button setValueBtn = ( Button ) findViewById ( R.id.setValueBtn );
+	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
+	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
 
 
-	viewDbBtn.setOnClickListener(new View.OnClickListener() {
-		@Override public void onClick(View view) {
-			Intent callIntent = new Intent (getApplication(), ViewListDBActivity.class);
+	viewDbBtn.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent callIntent = new Intent ( getApplication (), ViewListDBActivity.class );
 			startActivity ( callIntent );
 		}
-	});
+	} );
 
-    viewDB2Btn.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View view) {
-            Intent callIntent = new Intent (getApplication(), ViewTaskDBActivity.class);
-            startActivity ( callIntent );
-        }
-    });
-
+	viewDB2Btn.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent callIntent = new Intent ( getApplication (), ViewTaskDBActivity.class );
+			startActivity ( callIntent );
+		}
+	} );
 
 	removeTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -54,38 +53,37 @@ void onCreate ( Bundle savedInstanceState ) {
 			QueryHelper.deleteTaskValue ( getApplicationContext () );
 		}
 	} );
-
 	removeLists.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.deleteListValue ( getApplicationContext ());
+			QueryHelper.deleteListValue ( getApplicationContext () );
 		}
 	} );
 
 }
 
-
 @Override
-public boolean onCreateOptionsMenu(Menu menu) {
+public
+boolean onCreateOptionsMenu ( Menu menu ) {
 	return true;
 }
 
 @Override
-public boolean onOptionsItemSelected(MenuItem item) {
+public
+boolean onOptionsItemSelected ( MenuItem item ) {
 	// Handle action bar item clicks here. The action bar will
 	// automatically handle clicks on the Home/Up button, so long
 	// as you specify a parent activity in AndroidManifest.xml.
-	int id = item.getItemId();
+	int id = item.getItemId ();
 
 	//noinspection SimplifiableIfStatement
-	if (id == android.R.id.home) {
-		super.onBackPressed();
+	if ( id == android.R.id.home ) {
+		super.onBackPressed ();
 	}
-	if (id == R.id.action_settings) {
+	if ( id == R.id.action_settings ) {
 		return true;
 	}
 
-
-	return super.onOptionsItemSelected(item);
+	return super.onOptionsItemSelected ( item );
 }
 }

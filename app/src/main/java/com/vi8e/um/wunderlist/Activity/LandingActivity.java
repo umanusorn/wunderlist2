@@ -27,6 +27,7 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.QueryHelper;
@@ -253,9 +254,14 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		return true;
 	}
 	if ( id == R.id.delete ) {
-		ListSelection where = new ListSelection ();
-		where.id ( Long.parseLong ( currentList.getId () ) );
-		where.delete ( getApplicationContext () );
+
+		TaskSelection taskSelection = new TaskSelection ();
+		taskSelection.listid ( currentList.getId () );
+		taskSelection.delete ( getApplicationContext () );
+
+		ListSelection listSelection = new ListSelection ();
+		listSelection.id ( Long.parseLong ( currentList.getId () ) );
+		listSelection.delete ( getApplicationContext () );
 		mLandingListAdapter.remove ( currentList );
 	}
 
