@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
@@ -84,7 +85,8 @@ void addListToDB ( Context context, String title, LandingListAdapter landingList
 	ListModel listModel = new ListModel ( title );
 	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
 	Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
-	landingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
+	LandingActivity.mLandingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
+	//landingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
 
 	Utility.setTaskListViewHeight ( listView );
 }

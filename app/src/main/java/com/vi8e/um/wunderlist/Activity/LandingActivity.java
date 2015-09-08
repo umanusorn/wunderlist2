@@ -51,7 +51,7 @@ public static ListModel currentList;
 DrawerLayout          drawerLayout;
 ActionBarDrawerToggle drawerToggle;
 static ActionBar          mActionBar;
-static LandingListAdapter mLandingListAdapter;
+public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 ListView             listView;
