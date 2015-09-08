@@ -40,7 +40,7 @@
             android:label="@string/title_activity_task_detail" >
         </activity>
         <activity
-            android:name=".Activity.ViewDBActivity"
+            android:name=".Activity.ViewTaskDBActivity"
             android:label="@string/title_activity_view_db" >
         </activity>
         <activity

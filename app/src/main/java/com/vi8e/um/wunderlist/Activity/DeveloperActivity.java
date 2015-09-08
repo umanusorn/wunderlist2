@@ -3,17 +3,13 @@ package com.vi8e.um.wunderlist.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.QueryHelper;
-
-import java.util.Locale;
 
 
 
@@ -39,14 +35,14 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	viewDbBtn.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View view) {
-			Intent callIntent = new Intent (getApplication(), ViewDBActivity.class);
+			Intent callIntent = new Intent (getApplication(), ViewListDBActivity.class);
 			startActivity ( callIntent );
 		}
 	});
 
     viewDB2Btn.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
-            Intent callIntent = new Intent (getApplication(), ViewDBActivity.class);
+            Intent callIntent = new Intent (getApplication(), ViewTaskDBActivity.class);
             startActivity ( callIntent );
         }
     });
@@ -86,27 +82,6 @@ void onCreate ( Bundle savedInstanceState ) {
             QueryHelper.deleteListValue ( getApplicationContext () );
         }
     });
-
-
-    Spinner mySpinner = (Spinner ) findViewById(R.id.spinner1);
-    final Locale currentLocal = getResources().getConfiguration().locale;
-// Set default state.
-    if (currentLocal.getLanguage().equals(
-            new Locale ("th").getLanguage())) {
-        mySpinner.setSelection(0);
-        Log.d ( "localize", "select TH" );
-    }else if (currentLocal.getLanguage().equals( Locale.ENGLISH.getLanguage())) {
-        mySpinner.setSelection(1);
-        Log.d ( "localize", "select EN" );
-    }else if(currentLocal.getLanguage().equals(
-            new Locale ("zh").getLanguage())) {
-        mySpinner.setSelection(2);
-        Log.d ( "localize", "select CH" );
-    }else if(currentLocal.getLanguage().equals(
-            new Locale ("ja").getLanguage())) {
-        mySpinner.setSelection(3);
-        Log.d ( "localize", "select JP" );
-    }
 
 }
 

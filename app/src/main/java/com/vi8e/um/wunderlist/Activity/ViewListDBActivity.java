@@ -13,7 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.util.ConfirmDialog;
 import com.vi8e.um.wunderlist.util.Init;
 import com.vi8e.um.wunderlist.util.QueryHelper;
@@ -22,7 +22,7 @@ import java.util.List;
 
 
 public
-class ViewDBActivity extends AppCompatActivity {
+class ViewListDBActivity extends AppCompatActivity {
 TableLayout tableLayout;
 
 @Override
@@ -37,9 +37,9 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 public void genTableUi() {
-	Cursor c = QueryHelper.getTaskValueCursor ( getApplicationContext () );
+	Cursor c = QueryHelper.getListValueCursor ( getApplicationContext () );
 	c.moveToFirst ();
-	String[] ALL_COLUMNS = TaskColumns.ALL_COLUMNS;
+	String[] ALL_COLUMNS = ListColumns.ALL_COLUMNS;
 	List<ContentValues> allValues = QueryHelper.getValuesFromCursor ( c,ALL_COLUMNS );
 	genColName(ALL_COLUMNS);
 
