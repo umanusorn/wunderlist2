@@ -25,11 +25,11 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	Button genRecord = (Button ) findViewById(R.id.GenRecordBtn);
-	Button removeAllHealthRecordBtn = (Button ) findViewById(R.id.removeHealthDbBtn);
+	Button removeLists = (Button ) findViewById(R.id.removeListBtn );
 	Button viewDbBtn = (Button ) findViewById(R.id.viewDbBtn);
 	Button setValueBtn = (Button ) findViewById(R.id.setValueBtn);
     Button viewDB2Btn = (Button ) findViewById(R.id.viewDB2Btn);
-    Button removeDB2 = (Button ) findViewById(R.id.removeDB2Btn);
+    Button removeTask = (Button ) findViewById(R.id.removeTaskBtn );
 
 
 
@@ -47,41 +47,20 @@ void onCreate ( Bundle savedInstanceState ) {
         }
     });
 
-	/*genRecord.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			QueryHelper.getGenRecord ( mActivity, getApplicationContext () );
-		}
-	});
 
-	dummyCalBtn.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			QueryHelper.loadDummyCalories ( getApplicationContext () );
+	removeTask.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			QueryHelper.deleteTaskValue ( getApplicationContext () );
 		}
-	});
+	} );
 
-	setValueBtn.setOnClickListener(new View.OnClickListener() {
-		@Override public void onClick(View view) {
-			IntentCaller.callSetValuesActivity(0, getApplicationContext());
+	removeLists.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			QueryHelper.deleteListValue ( getApplicationContext ());
 		}
-	});
-  mornitorSleepBtn.setOnClickListener(new View.OnClickListener() {
-	@Override public void onClick(View v) {
-		IntentCaller.callSleepAsAndroid(getApplicationContext());
-	}
-});
-	removeAllHealthRecordBtn.setOnClickListener(new View.OnClickListener() {
-		@Override public void onClick(View v) {
-			QueryHelper.deleteRecord(getApplicationContext());
-		}
-	});*/
-
-    removeDB2.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View v) {
-            QueryHelper.deleteListValue ( getApplicationContext () );
-        }
-    });
+	} );
 
 }
 

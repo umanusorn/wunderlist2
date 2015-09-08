@@ -52,6 +52,12 @@ void deleteListValue ( Context context ) {
 }
 
 public static
+void deleteTaskValue ( Context context ) {
+	TaskSelection personTeamSelection = new TaskSelection ();
+	personTeamSelection.delete ( context.getContentResolver () );
+}
+
+public static
 List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
 	List<ContentValues> values = new ArrayList<ContentValues> ();
 	int i = 0;

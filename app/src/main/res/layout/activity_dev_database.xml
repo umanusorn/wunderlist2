@@ -53,15 +53,15 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="removeDB"
-                    android:id="@+id/removeHealthDbBtn"
+                    android:text="removeLists"
+                    android:id="@+id/removeListBtn"
                     android:contentDescription="sss"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="removeDB2"
-                    android:id="@+id/removeDB2Btn" />
+                    android:text="removeTasks"
+                    android:id="@+id/removeTaskBtn" />
             </TableRow>
 
             <TableRow
