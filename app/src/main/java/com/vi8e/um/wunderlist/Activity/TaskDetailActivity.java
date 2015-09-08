@@ -123,7 +123,6 @@ TaskDetailAdapter2 setUpAdapterListView ( Activity activity, ListView listView, 
 	return taskDetailAdapter;
 }
 
-
 @Override
 public
 boolean onCreateOptionsMenu ( Menu menu ) {

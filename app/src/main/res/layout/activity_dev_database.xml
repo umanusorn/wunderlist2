@@ -73,17 +73,16 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="setValue"
-                    android:id="@+id/setValueBtn"
-                    android:visibility="gone"
+                    android:text="GEN LIST/TASK"
+                    android:id="@+id/genListTask"
                     android:contentDescription="sss"
                     android:layout_column="0"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:text="genRecord"
+                    android:visibility="gone"
                     android:id="@+id/GenRecordBtn"
                     android:contentDescription="sss"/>
             </TableRow>

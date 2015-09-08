@@ -88,14 +88,18 @@ public static
 void addListToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
 
 	Log.d ( "addListToDb", "" );
-	ListModel listModel = new ListModel ( title );
-	Uri uri = context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+	Uri uri = addListToDB ( context, title );
 	Log.d ( "ChkColumn ", "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );
 	LandingActivity.mLandingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
-	//landingListAdapter.insert ( new ListModel ( uri.getPathSegments ().get ( 1 ), title ), 0 );
-
 	Utility.setTaskListViewHeight ( listView );
 }
+
+public static
+Uri addListToDB ( Context context, String title ) {
+	ListModel listModel = new ListModel ( title );
+	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+}
+
 
 public static
 void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter, ListView listView ) {
@@ -103,6 +107,7 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 	Log.d ( "addTaskToDb", "" );
 	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
 	Log.d ( "ChkColumn ", "title" + taskModel.getTitle () + "taskId=" + uri.getPathSegments ().get ( 1 )+"listId"+taskModel.getListId () );
+
 	taskModel.setId ( uri.getPathSegments ().get ( 1 ) );
 	taskAdapter.insert ( new TaskModel ( uri.getPathSegments ().get ( 1 ), taskModel ), 0 );
 	Utility.setTaskListViewHeight ( listView );
