@@ -68,7 +68,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	//ListView listView =(ListView)cardView.get
 
 	// Populate the data into the template view using the data object
-	tvTitle.setText ( rowData.getListTitle () );
+	tvTitle.setText ( rowData.getTitle () );
 	setUpCompletedBg ( rowData, rowBg, cardView );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 	setUpStar ( rowData, star, res );
@@ -83,7 +83,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	}
 	catch ( NullPointerException e ) {
-		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
+		Log.e ( "error on setonClick", rowData.getTitle () + ":" + e.toString () );
 		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 	}
@@ -106,11 +106,11 @@ private static
 void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	if ( rowData.isStar () ) {
 		try {
-			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
+			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg Star", rowData.getListTitle () + ":" + e.toString () );
+			Log.e ( "error on setBg Star", rowData.getTitle () + ":" + e.toString () );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
@@ -118,11 +118,11 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	}
 	else {
 		try {
-			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
+			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg unStar", rowData.getListTitle () + ":" + e.toString () );
+			Log.e ( "error on setBg unStar", rowData.getTitle () + ":" + e.toString () );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}

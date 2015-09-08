@@ -102,7 +102,7 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 
 	Log.d ( "addTaskToDb", "" );
 	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
-	Log.d ( "ChkColumn ", "title" + taskModel.getListTitle () + "taskId=" + uri.getPathSegments ().get ( 1 )+"listId"+taskModel.getListId () );
+	Log.d ( "ChkColumn ", "title" + taskModel.getTitle () + "taskId=" + uri.getPathSegments ().get ( 1 )+"listId"+taskModel.getListId () );
 	taskModel.setId ( uri.getPathSegments ().get ( 1 ) );
 	taskAdapter.insert ( new TaskModel ( uri.getPathSegments ().get ( 1 ), taskModel ), 0 );
 	Utility.setTaskListViewHeight ( listView );

@@ -71,7 +71,7 @@ void onPause () {
 	super.onPause ();
 	//setMenuNormal ();
 	ListModel currentList= LandingActivity.currentList;
-	currentList.setListTitle ( listName.getText ().toString () );
+	currentList.setTitle ( listName.getText ().toString () );
 	String id = currentList.getId ();
 	Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
 	getContentResolver ().update ( uri, currentList.getValues (), null, null );

@@ -30,7 +30,7 @@ void developer ( Activity activity ) {
 public static
 void taskActivity ( Context context, ListModel listModel ) {
 	Intent intent = new Intent ( context, TaskActivity.class );
-	intent.putExtra ( ListConst.KEY_TITLE, listModel.getListTitle () );
+	intent.putExtra ( ListConst.KEY_TITLE, listModel.getTitle () );
 	intent.putExtra ( ListConst.KEY_ID, listModel.getId () );
 	context.startActivity ( intent );
 }
@@ -47,7 +47,7 @@ void taskDetailActivity ( Context context, TextView tvTitle ) {
 public static
 void listDetailActivity ( Context context, ListModel listModel ) {
 	Intent intent = new Intent ( context, ListDetailActivity.class );
-	intent.putExtra ( ListConst.KEY_TITLE, listModel.getListTitle () );
+	intent.putExtra ( ListConst.KEY_TITLE, listModel.getTitle () );
 	intent.putExtra ( ListConst.KEY_ID, listModel.getId () );
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	context.startActivity ( intent );

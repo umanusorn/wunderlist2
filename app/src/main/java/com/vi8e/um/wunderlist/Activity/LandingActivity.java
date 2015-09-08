@@ -197,7 +197,7 @@ void adapterToDb () {
 		catch ( IllegalArgumentException e ) {
 			Log.e ( "errorOnUpdateData", e.getMessage () );
 			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
-			Log.d ( "ChkColumn ", "title" + recordData.getListTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
+			Log.d ( "ChkColumn ", "title" + recordData.getTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
 		}
 	}
 }

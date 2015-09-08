@@ -229,7 +229,7 @@ void adapterToDb ( TaskAdapter taskAdapter ) {
 		catch ( IllegalArgumentException e ) {
 			Log.e ( TAG, "errorOnAddData" + e.getMessage () );
 
-			String title = data.getListTitle ();
+			String title = data.getTitle ();
 			TaskModel taskModel = new TaskModel ( id, data );
 			uri = getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
 			Log.d ( TAG, "title" + title + "newId=" + uri.getPathSegments ().get ( 1 ) );

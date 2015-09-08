@@ -86,7 +86,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	} );
 
 
-	editTextTitle.setText ( TaskActivity.currentTask.getListTitle () );
+	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
 
 
 
@@ -102,7 +102,7 @@ void onPause () {
 
 	//ListModel currentList= LandingActivity.currentList;
 	TaskModel currentTask = TaskActivity.currentTask;
-	currentTask.setListTitle ( editTextTitle.getText ().toString () );
+	currentTask.setTitle ( editTextTitle.getText ().toString () );
 	String id = currentTask.getId ();
 	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
 	getContentResolver ().update ( uri, currentTask.getValues (), null, null );

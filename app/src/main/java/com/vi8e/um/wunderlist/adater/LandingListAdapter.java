@@ -56,7 +56,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
 	final ListView listView = ( ListView ) convertView.getParent ();
 
-	tvTitle.setText ( listModel.getListTitle () );
+	tvTitle.setText ( listModel.getTitle () );
 
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );

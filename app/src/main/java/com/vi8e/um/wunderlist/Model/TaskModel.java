@@ -23,13 +23,13 @@ void setAll(TaskModel taskModel){
 	this.setListId ( taskModel.getListId () );
 	this.setNote ( taskModel.getNote () );
 	//this.setTaskId ( taskModel.getTaskId () );
-	this.setListTitle ( taskModel.getListTitle () );
+	this.setTitle ( taskModel.getTitle () );
 	//this.setTaskTitle ( taskModel.getTaskTitle () );
 }
 
 public
 TaskModel ( String id, TaskModel taskModel ) {
-	super ( id, taskModel.listTitle );
+	super ( id, taskModel.title );
 	setAll ( taskModel );
 }
 
@@ -51,7 +51,7 @@ TaskModel ( String title, String isStar, String isComplete, String listID ) {
 }
 
 public void setValues(ContentValues values){
-	this.setListTitle ( values.getAsString ( TaskColumns.TASK_TITLE ) );
+	this.setTitle ( values.getAsString ( TaskColumns.TASK_TITLE ) );
 	this.setIsStar ( values.getAsString ( TaskColumns.ISSTAR ) );
 	this.setIsComplete ( values.getAsString ( TaskColumns.ISCOMPLETE ) );
 	this.setListId ( values.getAsString ( TaskColumns.LISTID ) );
@@ -63,7 +63,7 @@ public void setValues(ContentValues values){
 public
 ContentValues getValues (){
 	ContentValues values = new ContentValues (  );
-	values.put ( TaskColumns.TASK_TITLE, listTitle );
+	values.put ( TaskColumns.TASK_TITLE, title );
 	values.put ( TaskColumns.ISSTAR, isStar );
 	values.put ( TaskColumns.ISCOMPLETE, isComplete );
 	values.put ( TaskColumns.LISTID, listId );

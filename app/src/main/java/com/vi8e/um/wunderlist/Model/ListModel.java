@@ -10,25 +10,26 @@ public
 class ListModel {
 
 
-String id;
-int numLateTask;
-int    numCurrentTask;
-int    folderId;
-boolean    isPinned;
-boolean   isDisturb;
-String imgPath;
-String listTitle;
-String type;
+String  id;
+int     numLateTask;
+int     numCurrentTask;
+int     folderId;
+boolean isPinned;
+boolean isDisturb;
+String  imgPath;
+String  title;
+String  type;
+
 public
-ListModel ( String id, String listTitle ) {
+ListModel ( String id, String title ) {
 	//setDefault ();
-	Log.d ("NewListModel","id="+id);
+	Log.d ( "NewListModel", "id=" + id );
 	this.id = id;
-	this.listTitle = listTitle;
+	this.title = title;
 }
 
 void setDefault () {
-	//this.listTitle = ""; //
+	//this.title = ""; //
 	this.imgPath = "";
 	this.isDisturb = false;
 
@@ -44,7 +45,7 @@ void setDefault () {
 public
 ContentValues getValues (){
 	ContentValues values = new ContentValues (  );
-	values.put ( ListColumns.LIST_TITLE,listTitle );
+	values.put ( ListColumns.LIST_TITLE, title );
 	values.put ( ListColumns.IMG_PATH,imgPath );
 	values.put ( ListColumns.ISDISTURB,isDisturb );
 
@@ -59,15 +60,15 @@ ContentValues getValues (){
 }
 
 public
-ListModel ( String listTitle ) {
+ListModel ( String title ) {
 	setDefault ();
-	this.listTitle = listTitle;
+	this.title = title;
 
 }
 
 public
-ListModel ( String listTitle, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
-	this.listTitle = listTitle; //
+ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
+	this.title = title; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
 	this.isPinned = isPinned;
@@ -90,13 +91,13 @@ void setType ( String type ) {
 }
 
 public
-String getListTitle () {
-	return listTitle;
+String getTitle () {
+	return title;
 }
 
 public
-void setListTitle ( String listTitle ) {
-	this.listTitle = listTitle;
+void setTitle ( String title ) {
+	this.title = title;
 }
 
 public

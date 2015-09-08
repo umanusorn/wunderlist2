@@ -67,7 +67,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 
 	// Populate the data into the template view using the data object
-	tvTitle.setText ( rowData.getListTitle () );
+	tvTitle.setText ( rowData.getTitle () );
 	tvCurrentTask.setText ( String.valueOf ( rowData.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( rowData.getNumLateTask () ) );
 
@@ -103,11 +103,11 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	if ( rowData.isStar () ) {
 		try {
-			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
+			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg Star", rowData.getListTitle () + ":" + e.toString () );
+			Log.e ( "error on setBg Star", rowData.getTitle () + ":" + e.toString () );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
@@ -115,11 +115,11 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 	else {
 		try {
-			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getListTitle () );
+			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
 			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
 		}
 		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg unStar", rowData.getListTitle () + ":" + e.toString () );
+			Log.e ( "error on setBg unStar", rowData.getTitle () + ":" + e.toString () );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 		}
@@ -140,7 +140,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	}
 	catch ( NullPointerException e ) {
-		Log.e ( "error on setonClick", rowData.getListTitle () + ":" + e.toString () );
+		Log.e ( "error on setonClick", rowData.getTitle () + ":" + e.toString () );
 		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
 		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
 	}
