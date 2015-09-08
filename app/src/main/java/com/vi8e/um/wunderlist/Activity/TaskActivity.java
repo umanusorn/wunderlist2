@@ -161,7 +161,7 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 
 				String title = editText.getText ().toString ();
-				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false ), listId );
+				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false ), listId,System.currentTimeMillis () );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );

@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 
 import com.vi8e.um.wunderlist.provider.base.AbstractCursor;
 
+import java.util.Date;
+
 /**
  * Cursor wrapper for the {@code task} table.
  */
@@ -78,8 +80,8 @@ public class TaskCursor extends AbstractCursor implements TaskModel {
      * Can be {@code null}.
      */
     @Nullable
-    public String getCreateDate() {
-        String res = getStringOrNull(TaskColumns.CREATE_DATE);
+    public Date getCreateDate() {
+        Date res = getDateOrNull(TaskColumns.CREATE_DATE);
         return res;
     }
 
@@ -88,8 +90,8 @@ public class TaskCursor extends AbstractCursor implements TaskModel {
      * Can be {@code null}.
      */
     @Nullable
-    public String getDuetoDate() {
-        String res = getStringOrNull(TaskColumns.DUETO_DATE);
+    public Date getDuetoDate() {
+        Date res = getDateOrNull(TaskColumns.DUETO_DATE);
         return res;
     }
 
@@ -98,8 +100,8 @@ public class TaskCursor extends AbstractCursor implements TaskModel {
      * Can be {@code null}.
      */
     @Nullable
-    public String getReminderDate() {
-        String res = getStringOrNull(TaskColumns.REMINDER_DATE);
+    public Date getReminderDate() {
+        Date res = getDateOrNull(TaskColumns.REMINDER_DATE);
         return res;
     }
 

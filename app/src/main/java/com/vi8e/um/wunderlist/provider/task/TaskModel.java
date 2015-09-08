@@ -4,6 +4,8 @@ import android.support.annotation.Nullable;
 
 import com.vi8e.um.wunderlist.provider.base.BaseModel;
 
+import java.util.Date;
+
 /**
  * Data model for the {@code task} table.
  */
@@ -49,21 +51,21 @@ public interface TaskModel extends BaseModel {
      * Can be {@code null}.
      */
     @Nullable
-    String getCreateDate();
+    Date getCreateDate();
 
     /**
      * Get the {@code dueto_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    String getDuetoDate();
+    Date getDuetoDate();
 
     /**
      * Get the {@code reminder_date} value.
      * Can be {@code null}.
      */
     @Nullable
-    String getReminderDate();
+    Date getReminderDate();
 
     /**
      * Get the {@code note} value.

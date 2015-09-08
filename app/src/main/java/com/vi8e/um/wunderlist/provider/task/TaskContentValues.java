@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 
 import com.vi8e.um.wunderlist.provider.base.AbstractContentValues;
 
+import java.util.Date;
+
 /**
  * Content values wrapper for the {@code task} table.
  */
@@ -86,8 +88,8 @@ public class TaskContentValues extends AbstractContentValues {
         return this;
     }
 
-    public TaskContentValues putCreateDate(@Nullable String value) {
-        mContentValues.put(TaskColumns.CREATE_DATE, value);
+    public TaskContentValues putCreateDate(@Nullable Date value) {
+        mContentValues.put(TaskColumns.CREATE_DATE, value == null ? null : value.getTime());
         return this;
     }
 
@@ -96,8 +98,13 @@ public class TaskContentValues extends AbstractContentValues {
         return this;
     }
 
-    public TaskContentValues putDuetoDate(@Nullable String value) {
-        mContentValues.put(TaskColumns.DUETO_DATE, value);
+    public TaskContentValues putCreateDate(@Nullable Long value) {
+        mContentValues.put(TaskColumns.CREATE_DATE, value);
+        return this;
+    }
+
+    public TaskContentValues putDuetoDate(@Nullable Date value) {
+        mContentValues.put(TaskColumns.DUETO_DATE, value == null ? null : value.getTime());
         return this;
     }
 
@@ -106,13 +113,23 @@ public class TaskContentValues extends AbstractContentValues {
         return this;
     }
 
-    public TaskContentValues putReminderDate(@Nullable String value) {
-        mContentValues.put(TaskColumns.REMINDER_DATE, value);
+    public TaskContentValues putDuetoDate(@Nullable Long value) {
+        mContentValues.put(TaskColumns.DUETO_DATE, value);
+        return this;
+    }
+
+    public TaskContentValues putReminderDate(@Nullable Date value) {
+        mContentValues.put(TaskColumns.REMINDER_DATE, value == null ? null : value.getTime());
         return this;
     }
 
     public TaskContentValues putReminderDateNull() {
         mContentValues.putNull(TaskColumns.REMINDER_DATE);
+        return this;
+    }
+
+    public TaskContentValues putReminderDate(@Nullable Long value) {
+        mContentValues.put(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 

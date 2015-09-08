@@ -7,6 +7,8 @@ import android.net.Uri;
 
 import com.vi8e.um.wunderlist.provider.base.AbstractSelection;
 
+import java.util.Date;
+
 /**
  * Selection for the {@code task} table.
  */
@@ -58,12 +60,12 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
 
 
     public TaskSelection id(long... value) {
-        addEquals ( "task." + TaskColumns._ID, toObjectArray ( value ) );
+        addEquals("task." + TaskColumns._ID, toObjectArray(value));
         return this;
     }
 
     public TaskSelection idNot(long... value) {
-        addNotEquals ( "task." + TaskColumns._ID, toObjectArray ( value ) );
+        addNotEquals("task." + TaskColumns._ID, toObjectArray(value));
         return this;
     }
 
@@ -276,33 +278,38 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
         return this;
     }
 
-    public TaskSelection createDate(String... value) {
+    public TaskSelection createDate(Date... value) {
         addEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection createDateNot(String... value) {
+    public TaskSelection createDateNot(Date... value) {
         addNotEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection createDateLike(String... value) {
-        addLike(TaskColumns.CREATE_DATE, value);
+    public TaskSelection createDate(Long... value) {
+        addEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection createDateContains(String... value) {
-        addContains(TaskColumns.CREATE_DATE, value);
+    public TaskSelection createDateAfter(Date value) {
+        addGreaterThan(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection createDateStartsWith(String... value) {
-        addStartsWith(TaskColumns.CREATE_DATE, value);
+    public TaskSelection createDateAfterEq(Date value) {
+        addGreaterThanOrEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
-    public TaskSelection createDateEndsWith(String... value) {
-        addEndsWith(TaskColumns.CREATE_DATE, value);
+    public TaskSelection createDateBefore(Date value) {
+        addLessThan(TaskColumns.CREATE_DATE, value);
+        return this;
+    }
+
+    public TaskSelection createDateBeforeEq(Date value) {
+        addLessThanOrEquals(TaskColumns.CREATE_DATE, value);
         return this;
     }
 
@@ -316,33 +323,38 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
         return this;
     }
 
-    public TaskSelection duetoDate(String... value) {
+    public TaskSelection duetoDate(Date... value) {
         addEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection duetoDateNot(String... value) {
+    public TaskSelection duetoDateNot(Date... value) {
         addNotEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection duetoDateLike(String... value) {
-        addLike(TaskColumns.DUETO_DATE, value);
+    public TaskSelection duetoDate(Long... value) {
+        addEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection duetoDateContains(String... value) {
-        addContains(TaskColumns.DUETO_DATE, value);
+    public TaskSelection duetoDateAfter(Date value) {
+        addGreaterThan(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection duetoDateStartsWith(String... value) {
-        addStartsWith(TaskColumns.DUETO_DATE, value);
+    public TaskSelection duetoDateAfterEq(Date value) {
+        addGreaterThanOrEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
-    public TaskSelection duetoDateEndsWith(String... value) {
-        addEndsWith(TaskColumns.DUETO_DATE, value);
+    public TaskSelection duetoDateBefore(Date value) {
+        addLessThan(TaskColumns.DUETO_DATE, value);
+        return this;
+    }
+
+    public TaskSelection duetoDateBeforeEq(Date value) {
+        addLessThanOrEquals(TaskColumns.DUETO_DATE, value);
         return this;
     }
 
@@ -356,33 +368,38 @@ public class TaskSelection extends AbstractSelection<TaskSelection> {
         return this;
     }
 
-    public TaskSelection reminderDate(String... value) {
+    public TaskSelection reminderDate(Date... value) {
         addEquals(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderDateNot(String... value) {
+    public TaskSelection reminderDateNot(Date... value) {
         addNotEquals(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderDateLike(String... value) {
-        addLike(TaskColumns.REMINDER_DATE, value);
+    public TaskSelection reminderDate(Long... value) {
+        addEquals(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderDateContains(String... value) {
-        addContains(TaskColumns.REMINDER_DATE, value);
+    public TaskSelection reminderDateAfter(Date value) {
+        addGreaterThan(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderDateStartsWith(String... value) {
-        addStartsWith(TaskColumns.REMINDER_DATE, value);
+    public TaskSelection reminderDateAfterEq(Date value) {
+        addGreaterThanOrEquals(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
-    public TaskSelection reminderDateEndsWith(String... value) {
-        addEndsWith(TaskColumns.REMINDER_DATE, value);
+    public TaskSelection reminderDateBefore(Date value) {
+        addLessThan(TaskColumns.REMINDER_DATE, value);
+        return this;
+    }
+
+    public TaskSelection reminderDateBeforeEq(Date value) {
+        addLessThanOrEquals(TaskColumns.REMINDER_DATE, value);
         return this;
     }
 
