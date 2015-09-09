@@ -17,10 +17,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
@@ -57,7 +59,7 @@ static        Activity             thisActivity;
 static        String               listId;
 public static TaskModel            currentTask;
 static        Menu                 menu;
-
+private int prevScrollPosition = 0;
 
 @Override
 protected
@@ -143,6 +145,7 @@ void setView () {
 		}
 	} );
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.star );
+	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
 
 	editTextStar.setOnClickListener ( onCLickStar () );
 
@@ -150,6 +153,19 @@ void setView () {
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
 	editText.setOnKeyListener ( onAddViaEditText ( editText ) );
+	scrollView.getViewTreeObserver ().addOnScrollChangedListener ( new ViewTreeObserver.OnScrollChangedListener () {
+		@Override public
+		void onScrollChanged () {
+			int currentScrollPosition = scrollView.getScrollY (); ;
+			if ( prevScrollPosition < currentScrollPosition ) {
+				Log.d ( TAG, "scroll up" );
+			}
+			else if(prevScrollPosition > currentScrollPosition){
+				Log.d ( TAG, "scroll down" );
+			}
+				prevScrollPosition =currentScrollPosition;
+		}
+	} );
 
 }
 
@@ -162,7 +178,7 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
 
 				String title = editText.getText ().toString ();
-				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false ), listId,System.currentTimeMillis () );
+				TaskModel taskModel = new TaskModel ( title, String.valueOf ( isStar ), String.valueOf ( false ), listId, System.currentTimeMillis () );
 				QueryHelper.addTaskToDB ( getApplicationContext (), taskModel, taskAdapterInComplete, listViewIncomplete );
 
 				editText.setText ( "" );
