@@ -61,13 +61,14 @@ android {
         release {
      //       minifyEnabled false
      //       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            /*applicationVariants.all { variant ->
+            applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     output.outputFile = new File(
                             output.outputFile.parent,
-                            output.outputFile.name.replace(".apk", getDate()+"Beta-${variant.versionName}.apk"))
+                            //output.outputFile.name.replace(".apk", getDate()+"Beta-${variant.versionName}.apk"))
+                            output.outputFile.name.replace("app-debug.apk","WunerList-"+getDate()+".apk"))
                 }
-            }*/
+            }
         }
 
     }
@@ -76,7 +77,7 @@ android {
 
 def getDate() {
     def date = new Date()
-    def formattedDate = date.format('yyyyMMddHHmmss')
+    def formattedDate = date.format('yyMMdd')
     return formattedDate
 }
 dependencies {
