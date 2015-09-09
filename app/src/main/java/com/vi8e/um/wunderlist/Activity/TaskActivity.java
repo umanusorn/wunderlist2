@@ -18,10 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -146,6 +149,8 @@ void setView () {
 	} );
 	ImageView editTextStar = ( ImageView ) findViewById ( R.id.star );
 	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
+	final RelativeLayout bottomBar=(RelativeLayout)findViewById ( R.id.bottomBar );
+	bottomBar.setVisibility ( View.GONE );
 
 	editTextStar.setOnClickListener ( onCLickStar () );
 
@@ -159,9 +164,20 @@ void setView () {
 			int currentScrollPosition = scrollView.getScrollY (); ;
 			if ( prevScrollPosition < currentScrollPosition ) {
 				Log.d ( TAG, "scroll up" );
+				Animation bottomOut = AnimationUtils.loadAnimation ( getApplicationContext (),
+				                                                     R.anim.abc_slide_out_bottom);
+				bottomBar.startAnimation(bottomOut);
+				bottomBar.setVisibility ( View.GONE );
+
+
+
 			}
 			else if(prevScrollPosition > currentScrollPosition){
 				Log.d ( TAG, "scroll down" );
+				Animation bottomIn = AnimationUtils.loadAnimation ( getApplicationContext (),
+				                                                    R.anim.abc_slide_in_bottom );
+				bottomBar.startAnimation(bottomIn);
+				bottomBar.setVisibility ( View.VISIBLE );
 			}
 				prevScrollPosition =currentScrollPosition;
 		}
