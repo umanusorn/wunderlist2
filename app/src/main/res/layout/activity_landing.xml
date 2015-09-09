@@ -18,8 +18,10 @@
                     android:id="@+id/collapsingToolbarLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:contentScrim="?attr/colorPrimary"
+                    app:contentScrim="@color/transparent"
                     app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
+
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     >
                 <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"|-->
                 <ImageView
@@ -34,6 +36,8 @@
                         app:layout_collapseMode="pin"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                         android:background="@android:color/transparent"/>
+
+
 
 
             </android.support.design.widget.CollapsingToolbarLayout>
