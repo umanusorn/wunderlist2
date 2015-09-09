@@ -153,6 +153,7 @@ void setView () {
 
 }
 
+
 @NonNull private
 View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 	return new View.OnKeyListener () {
