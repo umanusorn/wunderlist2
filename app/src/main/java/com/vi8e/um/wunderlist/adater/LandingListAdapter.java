@@ -13,6 +13,7 @@ import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -63,10 +64,22 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	convertView.setOnClickListener ( getOnClick ( listModel, getContext () ) );
 	convertView.setOnLongClickListener ( getOnLongClick (listModel,position) );
 
+	tvLateTask.setVisibility ( View.GONE );
+	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel,getContext () ) ));
+
 	// Return the completed view to render on screen
 	return convertView;
 }
 
+
+int getCurrentTaskCount(ListModel listModel,Context context){
+	TaskSelection where = new TaskSelection ();
+
+	where.listid ( listModel.getId ()  );
+	int count = where.count ( context.getContentResolver () );
+	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
+	return count;
+}
 
 @NonNull private
 View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int position ) {

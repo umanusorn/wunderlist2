@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.TaskDetailAdapter2;
+import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -27,9 +27,9 @@ import java.util.ArrayList;
 public
 class TaskDetailActivity extends AppCompatActivity {
 
-private ListView           listViewComplete;
-private Activity           thisActivity;
-private TaskDetailAdapter2 taskAdapterComplete;
+private ListView          listViewComplete;
+private Activity          thisActivity;
+private TaskDetailAdapter taskAdapterComplete;
 
 EditText editTextTitle;
 
@@ -59,7 +59,7 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
-	taskAdapterComplete = new TaskDetailAdapter2 ( getApplication (), completeList );
+	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
 
 
@@ -110,7 +110,7 @@ void onPause () {
 }
 
 public static
-TaskDetailAdapter2 setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter2 taskDetailAdapter, boolean isComplete ) {
+TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, boolean isComplete ) {
 
 	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
