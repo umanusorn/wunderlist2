@@ -63,6 +63,7 @@ static        String               listId;
 public static TaskModel            currentTask;
 static        Menu                 menu;
 private int prevScrollPosition = 0;
+private boolean isPrevScrollUp = true;
 
 @Override
 protected
@@ -162,25 +163,25 @@ void setView () {
 		@Override public
 		void onScrollChanged () {
 			int currentScrollPosition = scrollView.getScrollY (); ;
-			if ( prevScrollPosition < currentScrollPosition ) {
+			if ( prevScrollPosition < currentScrollPosition && !isPrevScrollUp) {
 				Log.d ( TAG, "scroll up" );
 				Animation bottomOut = AnimationUtils.loadAnimation ( getApplicationContext (),
 				                                                     R.anim.abc_slide_out_bottom);
 				bottomBar.startAnimation(bottomOut);
 				bottomBar.setVisibility ( View.GONE );
 
-
-
+				isPrevScrollUp=true;
 			}
-			else if(prevScrollPosition > currentScrollPosition){
+			else if(prevScrollPosition > currentScrollPosition && isPrevScrollUp){
 				Log.d ( TAG, "scroll down" );
 				Animation bottomIn = AnimationUtils.loadAnimation ( getApplicationContext (),
 				                                                    R.anim.abc_slide_in_bottom );
 				bottomBar.startAnimation(bottomIn);
 				bottomBar.setVisibility ( View.VISIBLE );
+				isPrevScrollUp=false;
 			}
-				prevScrollPosition =currentScrollPosition;
-		}
+		prevScrollPosition =currentScrollPosition;
+	}
 	} );
 
 }
