@@ -67,6 +67,19 @@ ListModel ( String title ) {
 }
 
 public
+ListModel ( ListModel listModel) {
+	this.title = listModel.getTitle ();
+	this.imgPath = listModel.getImgPath ();
+	this.isDisturb = listModel.isDisturb ();
+	this.isPinned = listModel.isPinned ();
+	this.folderId = listModel.getFolderId ();
+	this.numCurrentTask = listModel.getNumCurrentTask ();
+	this.numLateTask = listModel.getNumLateTask ();
+	this.id = listModel.getId ();
+
+}
+
+public
 ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
 	this.title = title; //
 	this.imgPath = imgPath;

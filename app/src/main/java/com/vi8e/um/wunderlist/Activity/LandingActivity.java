@@ -23,10 +23,13 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.IntentCaller;
@@ -241,14 +244,12 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 	if ( id == R.id.delete ) {
 
-		TaskSelection taskSelection = new TaskSelection ();
-		taskSelection.listid ( currentList.getId () );
-		taskSelection.delete ( getApplicationContext () );
+		deleteSpecificList ();
+	}
 
-		ListSelection listSelection = new ListSelection ();
-		listSelection.id ( Long.parseLong ( currentList.getId () ) );
-		listSelection.delete ( getApplicationContext () );
-		mLandingListAdapter.remove ( currentList );
+	if ( id == R.id.duplicateList) {
+
+		duplicateSpecificList ();
 	}
 
 	if ( id == R.id.menu_edit ) {
@@ -258,6 +259,43 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	setMenuNormal ();
 
 	return super.onOptionsItemSelected ( item );
+}
+
+private
+void duplicateSpecificList () {
+	ListModel newListModel=new ListModel ( currentList );
+	newListModel.setTitle ( newListModel.getTitle ()+" Copy" );
+	Uri uri=QueryHelper.addListToDB ( getApplicationContext (), newListModel);
+	//listSelection.delete ( getApplicationContext () );
+
+	TaskSelection taskSelection = new TaskSelection ();
+	taskSelection.listid ( currentList.getId () );
+
+	TaskCursor taskCursor = taskSelection.query ( getApplicationContext () );
+
+	taskCursor.moveToFirst ();
+
+		List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( taskCursor, TaskColumns.ALL_COLUMNS );
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
+
+		ContentValues values = allListValues.get ( i );
+		Log.d ( TAG, "duplicating " + values.getAsString ( TaskColumns.TASK_TITLE ) );
+		values.put ( TaskColumns.LISTID, uri.getPathSegments ().get ( 1 ) );
+		QueryHelper.addTaskToDB (getApplicationContext (), new TaskModel (values  ));
+	}
+QueryHelper.updateListAdapter ( newListModel,listView );
+
+}
+
+private
+void deleteSpecificList () {
+	TaskSelection taskSelection = new TaskSelection ();
+	taskSelection.listid ( currentList.getId () );
+	taskSelection.delete ( getApplicationContext () );
+	ListSelection listSelection = new ListSelection ();
+	listSelection.id ( Long.parseLong ( currentList.getId () ) );
+	listSelection.delete ( getApplicationContext () );
+	mLandingListAdapter.remove ( currentList );
 }
 
 }

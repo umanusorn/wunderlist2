@@ -57,6 +57,14 @@ void setNote ( String note ) {
 }
 
 public
+TaskModel (  ContentValues values ){
+	super (values.getAsString ( TaskColumns.TASK_TITLE ));
+//	super ( id );
+	setValues ( values );
+}
+
+
+public
 TaskModel ( String id, ContentValues values ){
 	super ( id );
 	setValues ( values );
