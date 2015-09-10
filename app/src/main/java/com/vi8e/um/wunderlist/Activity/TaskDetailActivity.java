@@ -14,11 +14,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -36,8 +39,11 @@ EditText editTextTitle;
 Boolean isStar       = false;
 Boolean showComplete = true;
 TaskModel mTaskModel;
+RelativeLayout noteLayout;
 
 ImageView star, checkBox;
+TextView noteEditText;
+
 
 @Override
 protected
@@ -66,8 +72,10 @@ void onCreate ( Bundle savedInstanceState ) {
 	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
 	star = ( ImageView ) findViewById ( R.id.star );
+	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
+	noteLayout =(RelativeLayout)findViewById ( R.id.noteLayout );
 
-	mTaskModel.setIsStar ( String.valueOf ( !mTaskModel.isStar () ) );
+	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
 	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -75,6 +83,15 @@ void onCreate ( Bundle savedInstanceState ) {
 			Utility.toggleImgStarData ( v, mTaskModel, getApplicationContext () );
 		}
 	} );
+
+	noteLayout.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			IntentCaller.taskNoteActivity ( getApplicationContext (), mTaskModel );
+		}
+	} );
+
+//	noteEditText
 
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
 	Utility.toggleImgCompleteData ( checkBox, mTaskModel, getApplicationContext () );
@@ -84,12 +101,7 @@ void onCreate ( Bundle savedInstanceState ) {
 			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
 		}
 	} );
-
-
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
-
-
-
 
 
 }
@@ -115,7 +127,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < 3 ; i++ ) {
 		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf ( false ), String.valueOf ( false ), "0",System.currentTimeMillis () );
+		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf ( false ), String.valueOf ( false ), "0", System.currentTimeMillis () );
 		taskModel.setIsComplete ( String.valueOf ( isComplete ) );
 		taskDetailAdapter.insert ( taskModel, 0 );
 	}

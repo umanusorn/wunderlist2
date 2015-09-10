@@ -8,8 +8,11 @@ import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.ListDetailActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Activity.TaskNoteActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.TaskModel;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 
 
 /**
@@ -40,6 +43,16 @@ void taskDetailActivity ( Context context, TextView tvTitle ) {
 
 	Intent intent = new Intent ( context, TaskDetailActivity.class );
 	intent.putExtra ( ListConst.KEY_TITLE, tvTitle.getText ().toString () );
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	context.startActivity ( intent );
+}
+
+public static
+void taskNoteActivity ( Context context, TaskModel taskModel ) {
+	Intent intent = new Intent ( context, TaskNoteActivity.class );
+	intent.putExtra ( TaskColumns.TASK_TITLE, taskModel.getTitle () );
+	intent.putExtra ( TaskColumns.NOTE,taskModel.getNote () );
+	intent.putExtra ( TaskColumns._ID, taskModel.getId () );
 	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
 	context.startActivity ( intent );
 }

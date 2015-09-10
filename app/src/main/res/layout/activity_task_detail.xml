@@ -373,7 +373,8 @@
                             android:text="Add a note..."
                             android:textColor="@color/grey_400"
                             android:layout_alignWithParentIfMissing="false"
-                            android:layout_alignParentTop="true"/>
+                            android:layout_alignParentTop="true"
+                            android:id="@+id/noteEdittext"/>
 
 
                 </RelativeLayout>

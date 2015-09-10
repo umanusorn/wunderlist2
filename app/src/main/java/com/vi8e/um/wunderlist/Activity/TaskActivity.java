@@ -104,7 +104,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 	listView.setAdapter ( taskAdapter );
 	TaskSelection where = new TaskSelection ();
 
-	Log.d ( TAG, "listId=" + listId + " isComplete=" + isComplete );
+	Log.d ( TAG, "taskId=" + listId + " isComplete=" + isComplete );
 	where.iscomplete ( String.valueOf ( isComplete ) ).and ().listid ( listId );
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
@@ -256,7 +256,7 @@ void adapterToDb ( TaskAdapter taskAdapter ) {
 		TaskModel data = taskAdapter.getArrayList ().get ( i );
 		String id = data.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-		//Log.d ( TAG, "isStar=" + data.getIsStar () + " listId=" + data.getListId () + " OwnId" + data.getId () );
+		//Log.d ( TAG, "isStar=" + data.getIsStar () + " taskId=" + data.getListId () + " OwnId" + data.getId () );
 		try {
 			getContentResolver ().update ( uri, data.getValues (), null, null );
 		}

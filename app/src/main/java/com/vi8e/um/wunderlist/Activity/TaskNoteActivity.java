@@ -8,15 +8,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.ActivityUi;
 
 
 public
 class TaskNoteActivity extends AppCompatActivity {
 Toolbar  toolBar;
-String   listId;
+String   taskId;
+String   note;
 EditText listName;
 
 @Override
@@ -24,15 +25,17 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task_note );
-	ActivityUi.setToolBar ( this, toolBar, "" );
+
 
 	Intent intent = getIntent ();
 	Bundle bundle = intent.getExtras ();
-	String title = bundle.getString ( ListConst.KEY_TITLE );
-	listId = bundle.getString ( ListConst.KEY_ID );
-	listName = (EditText)findViewById ( R.id.listName );
+	String title = bundle.getString ( TaskColumns.TASK_TITLE );
+	taskId = bundle.getString ( TaskColumns._ID );
+	note = bundle.getString ( TaskColumns.NOTE );
 
-	listName.setText ( title );
+	listName = ( EditText ) findViewById ( R.id.listName );
+	ActivityUi.setToolBar ( this, toolBar, title  );
+	listName.setText ( note );
 }
 
 @Override
