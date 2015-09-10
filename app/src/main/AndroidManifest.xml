@@ -16,8 +16,8 @@
 
         <activity
             android:name=".Activity.LandingActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,19 +35,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
-        <activity android:name=".Activity.DeveloperActivity"
-                  android:screenOrientation="portrait"
-                >
+        <activity
+            android:name=".Activity.DeveloperActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activity.TaskDetailActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_task_detail" >
+            android:label="@string/title_activity_task_detail"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity
-                android:name=".Activity.ViewListDBActivity"
-
-                >
+        <activity android:name=".Activity.ViewListDBActivity" >
         </activity>
         <activity
             android:name=".Activity.ViewTaskDBActivity"
@@ -55,8 +52,12 @@
         </activity>
         <activity
             android:name=".Activity.ListDetailActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_list_detail" >
+            android:label="@string/title_activity_list_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Activity.TaskNoteActivity"
+            android:label="@string/title_activity_task_note" >
         </activity>
     </application>
 

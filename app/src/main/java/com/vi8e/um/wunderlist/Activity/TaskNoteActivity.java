@@ -1,7 +1,6 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,23 +9,21 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
-import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.util.ActivityUi;
 
 
 public
-class ListDetailActivity extends AppCompatActivity {
-
-Toolbar toolBar;
-String listId;
+class TaskNoteActivity extends AppCompatActivity {
+Toolbar  toolBar;
+String   listId;
 EditText listName;
+
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
-	setContentView ( R.layout.activity_list_detail );
+	setContentView ( R.layout.activity_task_note );
 	ActivityUi.setToolBar ( this, toolBar, "" );
 
 	Intent intent = getIntent ();
@@ -42,20 +39,8 @@ void onCreate ( Bundle savedInstanceState ) {
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater ().inflate ( R.menu.menu_list_detail, menu );
+	getMenuInflater ().inflate ( R.menu.menu_task_note, menu );
 	return true;
-}
-
-@Override
-protected
-void onPause () {
-	super.onPause ();
-	//setMenuNormal ();
-	ListModel currentList= LandingActivity.currentList;
-	currentList.setTitle ( listName.getText ().toString () );
-	String id = currentList.getId ();
-	Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
-	getContentResolver ().update ( uri, currentList.getValues (), null, null );
 }
 
 @Override
