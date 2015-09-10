@@ -1,6 +1,7 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.ActivityUi;
@@ -44,6 +46,17 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater ().inflate ( R.menu.menu_task_note, menu );
 	return true;
+}
+
+@Override
+protected
+void onPause () {
+	super.onPause ();
+	TaskModel currentTask=TaskActivity.currentTask;
+	currentTask.setNote ( listName.getText ().toString () );
+	String id = currentTask.getId ();
+	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
+	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
 }
 
 @Override

@@ -76,6 +76,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	noteLayout =(RelativeLayout)findViewById ( R.id.noteLayout );
 
 	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
+	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
 	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
