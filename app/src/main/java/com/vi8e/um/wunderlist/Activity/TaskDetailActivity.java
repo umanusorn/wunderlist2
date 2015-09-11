@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public
 class TaskDetailActivity extends AppCompatActivity {
-
+private static final String TAG = LandingActivity.class.getSimpleName ();
 private ListView          listViewComplete;
 private Activity          thisActivity;
 private TaskDetailAdapter taskAdapterComplete;
@@ -63,20 +63,19 @@ void onCreate ( Bundle savedInstanceState ) {
 		imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 	}
 
-	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	setView ();
+
+	setViewValues ();
+
+
+}
+
+private
+void setViewValues () {
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
 
-
-	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
-	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
-	star = ( ImageView ) findViewById ( R.id.star );
-	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
-	noteLayout =(RelativeLayout)findViewById ( R.id.noteLayout );
-
-	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
-	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
 	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -103,6 +102,30 @@ void onCreate ( Bundle savedInstanceState ) {
 		}
 	} );
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
+}
+
+private
+void setView () {
+	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
+	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
+	star = ( ImageView ) findViewById ( R.id.star );
+	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
+	noteLayout =(RelativeLayout )findViewById ( R.id.noteLayout );
+	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
+	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
+}
+
+@Override
+protected
+void
+onResume () {
+	super.onResume ();
+	Log.d ( "OnResume", "" );
+
+	setView ();
+
+	setViewValues ();
 
 
 }

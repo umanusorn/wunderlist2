@@ -13,7 +13,7 @@ class TaskModel extends ListModel {
 String isStar;
 String isComplete;
 String listId;
-String note;
+String note="";
 String createDate,DueToDate,ReminderDate;
 
 public
@@ -48,6 +48,8 @@ void setListId ( String listId ) {
 
 public
 String getNote () {
+	if(note==null)
+		note="";
 	return note;
 }
 

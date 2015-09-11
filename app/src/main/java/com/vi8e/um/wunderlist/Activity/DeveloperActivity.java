@@ -34,7 +34,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	genListTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.genListTask ( getApplicationContext () );
+			QueryHelper.genListAndTask ( getApplicationContext () );
 		}
 	} );
 

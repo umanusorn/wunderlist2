@@ -144,7 +144,7 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 
 
 public static
-void genListTask ( Context context ) {
+void genListAndTask ( Context context ) {
 	for ( int i = 0 ; i < 15 ; i++ ) {
 		Uri uri = addListToDB ( context, "Category " + ( i + 1 ) );
 
