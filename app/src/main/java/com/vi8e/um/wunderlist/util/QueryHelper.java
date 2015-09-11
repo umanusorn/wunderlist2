@@ -143,4 +143,37 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 }
 
 
+public static
+void genListTask ( Context context ) {
+	for ( int i = 0 ; i < 15 ; i++ ) {
+		Uri uri = addListToDB ( context, "Category " + ( i + 1 ) );
+
+		for ( int j = 0 ; j < i ; j++ ) {
+			boolean isStar, isComplete = false;
+			if ( j % 2 == 0 ) {
+				isStar = true;
+				if ( j % 3 != 0 ) {
+					isComplete = false;
+				}
+				else
+				{
+					isComplete = true;
+				}
+			}
+			else {
+				isStar = false;
+			}
+
+			TaskModel taskModel = new TaskModel ( "Task "+( i + 1 )+"-"+(j+1),
+			                                      String.valueOf ( isStar ),
+			                                      String.valueOf ( isComplete ),
+			                                      uri.getPathSegments ().get ( 1 ),
+			                                      System.currentTimeMillis () );
+			if(j>2)
+					taskModel.setNote ( "GeneratedNote"+( i + 1 )+"-"+(j-2) );
+			context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
+		}
+
+	}
+}
 }

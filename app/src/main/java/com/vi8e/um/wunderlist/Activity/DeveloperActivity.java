@@ -2,16 +2,13 @@ package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 
 
@@ -37,34 +34,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	genListTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			for ( int i = 0 ; i < 15 ; i++ ) {
-				Uri uri =QueryHelper.addListToDB ( getApplicationContext (), "Category " + ( i + 1 ) );
-
-				for ( int j = 0 ; j < i ; j++ ) {
-					boolean isStar, isComplete = false;
-					if ( j % 2 == 0 ) {
-						isStar = true;
-						if ( j % 3 != 0 ) {
-							isComplete = false;
-						}
-						else
-						{
-							isComplete = true;
-						}
-					}
-					else {
-						isStar = false;
-					}
-
-					TaskModel taskModel = new TaskModel ( "Task "+( i + 1 )+"-"+(j+1),
-					                                      String.valueOf ( isStar ),
-					                                      String.valueOf ( isComplete ),
-					                                      uri.getPathSegments ().get ( 1 ),
-					                                      System.currentTimeMillis () );
-					getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
-				}
-
-			}
+			QueryHelper.genListTask ( getApplicationContext () );
 		}
 	} );
 

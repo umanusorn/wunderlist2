@@ -5,6 +5,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
 
               android:orientation="vertical"
+              android:background="@color/amber_50"
               tools:context="com.vi8e.um.wunderlist.Activity.ListDetailActivity">
     <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
