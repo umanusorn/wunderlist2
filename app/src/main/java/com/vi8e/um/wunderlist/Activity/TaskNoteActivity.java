@@ -36,6 +36,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	note = bundle.getString ( TaskColumns.NOTE );
 
 	listName = ( EditText ) findViewById ( R.id.listName );
+	//listName.setImeActionLabel ( "NOTED", KeyEvent.KEYCODE_ENTER );
 	ActivityUi.setToolBar ( this, toolBar, title  );
 	listName.setText ( note );
 }
