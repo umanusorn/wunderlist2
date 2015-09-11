@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -148,17 +147,18 @@ void setView () {
 			toggleShowCompleteListView ();
 		}
 	} );
-	ImageView editTextStar = ( ImageView ) findViewById ( R.id.star );
+	ImageView star = ( ImageView ) findViewById ( R.id.star );
 	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
 	final RelativeLayout bottomBar=(RelativeLayout)findViewById ( R.id.bottomBar );
 	bottomBar.setVisibility ( View.GONE );
 
-	editTextStar.setOnClickListener ( onCLickStar () );
+	star.setOnClickListener ( onCLickStar () );
 
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
 	editText.setOnKeyListener ( onAddViaEditText ( editText ) );
+
 	scrollView.getViewTreeObserver ().addOnScrollChangedListener ( new ViewTreeObserver.OnScrollChangedListener () {
 		@Override public
 		void onScrollChanged () {
@@ -201,8 +201,8 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
 				if ( view != null ) {
-					InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
-					imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
+				//	InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
+				//	imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 				}
 			}
 			return false;
@@ -218,7 +218,6 @@ View.OnClickListener onCLickStar () {
 			isStar = Utility.toggleImg ( v,
 			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
 			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-
 		}
 	};
 }

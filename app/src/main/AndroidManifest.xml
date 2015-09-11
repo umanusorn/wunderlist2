@@ -57,7 +57,9 @@
         </activity>
         <activity
             android:name=".Activity.TaskNoteActivity"
-            android:label="@string/title_activity_task_note" >
+            android:label="@string/title_activity_task_note"
+            android:windowSoftInputMode="adjustNothing|stateVisible"
+                >
         </activity>
     </application>
 
