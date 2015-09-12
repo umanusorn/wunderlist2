@@ -56,12 +56,17 @@
                     android:orientation="vertical">
 
 
-                <ListView
+                <!--<ListView
                         android:id="@+id/listViewTaskInComplete"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                </ListView>
+                </ListView>-->
+
+                <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+                        android:id="@+id/listViewTaskInComplete"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
             </LinearLayout>
 

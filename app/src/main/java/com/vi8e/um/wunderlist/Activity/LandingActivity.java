@@ -22,6 +22,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -57,7 +59,7 @@ static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
-ListView             listView;
+DynamicListView           listView;
 
 static        Activity thisActivity;
 static        Menu     menu;
@@ -70,8 +72,13 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
-	listView = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
+	listView.enableDragAndDrop ();
 
+
+
+//	listView.enableSimpleSwipeUndo ();
+	//mDynamicListView.setDraggableManager(new TouchViewDraggableManager (R.id.itemrow_gripview));
 	initToolbar ();
 	initInstances ();
 
@@ -80,8 +87,15 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
+public void insert(){
+
+}
+
 public static
 LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
+
+
+
 
 	Cursor c = QueryHelper.getListValueCursor ( context );
 	c.moveToFirst ();
@@ -108,6 +122,11 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	/*JSONArray jsonArray = ...;
 	ArrayList<User> newUsers = User.fromJson(jsonArray)
 	adapter.addAll(newUsers);*/
+
+	AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter (landingListAdapter);
+	animationAdapter.setAbsListView(listView);
+	listView.setAdapter ( animationAdapter );
+
 	return landingListAdapter;
 }
 

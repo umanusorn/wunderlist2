@@ -97,7 +97,7 @@ void addListToDB ( Context context, String title, LandingListAdapter landingList
 
 public static
  void updateListAdapter ( String title, ListView listView, Uri uri ) {
-	LandingActivity.mLandingListAdapter.insert ( new ListModel ( getIdFromUri ( uri ), title ), 0 );
+	LandingActivity.mLandingListAdapter.add ( 0, new ListModel ( getIdFromUri ( uri ), title ) );
 	Utility.setTaskListViewHeight ( listView );
 }
 
@@ -108,7 +108,8 @@ String getIdFromUri ( Uri uri ) {
 
 public static
 void updateListAdapter ( ListModel listModel, ListView listView) {
-	LandingActivity.mLandingListAdapter.insert (listModel, 0 );
+
+	LandingActivity.mLandingListAdapter.add ( 0,listModel );
 	Utility.setTaskListViewHeight ( listView );
 }
 
