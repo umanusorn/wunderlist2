@@ -13,7 +13,6 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAd
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -30,14 +29,15 @@ class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements
 
 ArrayList<ListModel> lists;
 boolean              mIsLongClick;
-ListModel listModel;
-Context mContext;
+ListModel            listModel;
+Context              mContext;
+
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
-	super (context);
+	super ( context );
 	//super ( context, 0, listModels );
 	this.lists = listModels;
-	this.mContext=context;
+	this.mContext = context;
 }
 
 public
@@ -64,11 +64,11 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-	convertView.setOnClickListener ( getOnClick ( listModel, mContext) );
-	convertView.setOnLongClickListener ( getOnLongClick (listModel,position) );
+	convertView.setOnClickListener ( getOnClick ( listModel, mContext ) );
+	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
 
 	tvLateTask.setVisibility ( View.GONE );
-	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel,mContext ) ));
+	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel, mContext ) ) );
 
 	// Return the completed view to render on screen
 	return convertView;
@@ -76,9 +76,9 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 @NonNull @Override public
 View getTitleView ( int i, View view, @NonNull ViewGroup viewGroup ) {
-	TextView tv = (TextView) view;
-	if (tv == null) {
-		tv = new TextView(mContext );
+	TextView tv = ( TextView ) view;
+	if ( tv == null ) {
+		tv = new TextView ( mContext );
 	}
 	//tv.setText(mContext.getString(R.string.expandorcollapsecard, (int) getItem(position)));
 	return tv;
@@ -89,11 +89,10 @@ View getContentView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 	return null;
 }
 
-
-int getCurrentTaskCount(ListModel listModel,Context context){
+int getCurrentTaskCount ( ListModel listModel, Context context ) {
 	TaskSelection where = new TaskSelection ();
 
-	where.listid ( listModel.getId ()  );
+	where.listid ( listModel.getId () );
 	int count = where.count ( context.getContentResolver () );
 	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
 	return count;
@@ -104,60 +103,61 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 	return new View.OnLongClickListener () {
 		@Override public
 		boolean onLongClick ( View v ) {
-			mIsLongClick =true;
-			Log.d ( "onLongClick", "position="+ position );
+			mIsLongClick = true;
+			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
-			LandingActivity.currentList=listModel;
+			LandingActivity.currentList = listModel;
 			LandingActivity.setMenuList ();
-			LandingActivity.currentListPosition=position;
-			ListSelection where = new ListSelection ();
-			//where.id ( Long.parseLong ( listModel.getId () ) );
-			//where.delete ( context );
+			LandingActivity.currentListPosition = position;
 			return false;
 		}
 	};
 }
 
 @NonNull public
-View.OnClickListener getOnClick ( final ListModel listModel, final Context context) {
+View.OnClickListener getOnClick ( final ListModel listModel, final Context context ) {
 	return new View.OnClickListener () {
 
 		@Override public
 		void onClick ( View v ) {
 
-			Log.d ( "onClick","isLongClick="+mIsLongClick );
-			if(!mIsLongClick){
+			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
+			if ( ! mIsLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
 			}
-			mIsLongClick=false;
+			mIsLongClick = false;
 		}
 	};
 }
 
+public
+void moveItem ( ListModel item, int newIndex ) {
+	if ( lists != null ) {
+		lists.remove ( item );
+		lists.add ( newIndex, item );
 
-public void swapItems(){
-
+		Log.d ( "moveItem", " newIndex=" + newIndex );
+		notifyDataSetChanged ();
+	}
 }
 
+
 @Override
-public boolean hasStableIds(){
+public
+boolean hasStableIds () {
 	return true;
 }
 
 
 @NonNull
 @Override
-public View getUndoView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+public
+View getUndoView ( final int position, final View convertView, @NonNull final ViewGroup parent ) {
 	View view = convertView;
-	if (view == null) {
+	if ( view == null ) {
 		//view = LayoutInflater.from(mContext).inflate(R.layout.undo_row, parent, false);
 	}
 	return view;
-}
-
-@Override
-public void swapItems(int i, int i2) {
-	super.swapItems(i,i2);
 }
 
 @NonNull @Override public
@@ -166,16 +166,22 @@ View getUndoClickView ( @NonNull View view ) {
 }
 
 @Override
-public long getItemId(final int position) {
-	return getItem(position).hashCode();
+public
+long getItemId ( final int position ) {
+	return getItem ( position ).hashCode ();
 }
+
+/*@Override
+public
+void swapItems ( int i, int i2 ) {
+	super.swapItems ( i, i2 );
+}*/
 /*
 
 
 hasStableIds() to return true. For stable id's you could do something like
 public long getItemId(int) { return getItem(i).hashCode(); }
 */
-
 
 public
 void addList ( ListModel object, ListView listView ) {

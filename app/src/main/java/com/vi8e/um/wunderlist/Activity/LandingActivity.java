@@ -24,7 +24,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.OnItemMovedListener;
@@ -64,7 +63,7 @@ static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
-DynamicListView           listView;
+DynamicListView      listView;
 
 static        Activity thisActivity;
 static        Menu     menu;
@@ -78,79 +77,106 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
-	listView.enableDragAndDrop ();
-	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
-	//listView.setOnItemMovedListener(new MyOnItemMovedListener(mLandingListAdapter.getArrayList ()));
-	listView.setOnItemLongClickListener(new MyOnItemLongClickListener(listView));
 
         /* Enable swipe to dismiss */
 	//listView.enableSimpleSwipeUndo ();
 
         /* Add new items on item click */
-	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
 
 //	listView.enableSimpleSwipeUndo ();
-	//mDynamicListView.setDraggableManager(new TouchViewDraggableManager (R.id.itemrow_gripview));
 	initToolbar ();
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
+	/*listView.enableDragAndDrop();
+	listView.setDraggableManager(new TouchViewDraggableManager(R.id.list_row_draganddrop_touchview));
+	listView.setOnItemMovedListener(new MyOnItemMovedListener(adapter));
+	listView.setOnItemLongClickListener(new MyOnItemLongClickListener(listView));*/
+
+
+	listView.enableDragAndDrop ();
+	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
+
+
+	listView.setOnItemMovedListener ( new MyOnItemMovedListener ( mLandingListAdapter ) );
+	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
+	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
+
 }
 
 
-private static class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
+private static
+class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 
 	private final DynamicListView mListView;
 
-	MyOnItemLongClickListener(final DynamicListView listView) {
+	MyOnItemLongClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
 
 	@Override
-	public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-		if (mListView != null) {
-			mListView.startDragging(position - mListView.getHeaderViewsCount());
+	public
+	boolean onItemLongClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
+		Log.d ( TAG, "onItemLongClick" );
+		if ( mListView != null ) {
+			Log.d ( TAG, "StartDrag" );
+			mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+			//mListView.startDragging(position);
 		}
 		return true;
 	}
 }
 
-private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+private
+class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 
 	private final DynamicListView mListView;
 
-	MyOnItemClickListener(final DynamicListView listView) {
+	MyOnItemClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
 
 	@Override
-	public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+	public
+	void onItemClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
 		//mListView.insert(position, getString(R.string.newly_added_item, mNewItemCount));
 		//mNewItemCount++;
 	}
 }
 
-private class MyOnItemMovedListener implements OnItemMovedListener {
+private
+class MyOnItemMovedListener implements OnItemMovedListener {
 
-	private final ArrayAdapter<String> mAdapter;
+	private final LandingListAdapter mAdapter;
 
 	private Toast mToast;
 
-	MyOnItemMovedListener ( final ArrayAdapter<String> adapter ) {
+	MyOnItemMovedListener ( final LandingListAdapter adapter ) {
 		mAdapter = adapter;
 	}
 
 	@Override
 	public
 	void onItemMoved ( final int originalPosition, final int newPosition ) {
+
+		Log.d ( TAG, "onItemMoved" );
+
 		if ( mToast != null ) {
 			mToast.cancel ();
 		}
 
-		mToast = Toast.makeText ( getApplicationContext (), getString ( R.string.abc_search_hint, mAdapter.getItem ( newPosition ), newPosition ), Toast.LENGTH_SHORT );
+		mToast = Toast.makeText ( getApplicationContext (),
+		                          getString ( R.string.abc_search_hint, mAdapter.getItem ( newPosition ), newPosition ),
+		                          Toast.LENGTH_SHORT );
 		mToast.show ();
+
+
+		if ( originalPosition != newPosition ) {
+			ListModel item = mAdapter.getItem ( originalPosition );
+			mAdapter.moveItem ( item, newPosition );
+		}
 	}
 }
 
@@ -328,7 +354,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		deleteSpecificList ();
 	}
 
-	if ( id == R.id.duplicateList) {
+	if ( id == R.id.duplicateList ) {
 
 		duplicateSpecificList ();
 	}
@@ -344,9 +370,9 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 
 private
 void duplicateSpecificList () {
-	ListModel newListModel=new ListModel ( currentList );
-	newListModel.setTitle ( newListModel.getTitle ()+" Copy" );
-	Uri uri=QueryHelper.addListToDB ( getApplicationContext (), newListModel);
+	ListModel newListModel = new ListModel ( currentList );
+	newListModel.setTitle ( newListModel.getTitle () + " Copy" );
+	Uri uri = QueryHelper.addListToDB ( getApplicationContext (), newListModel );
 	//listSelection.delete ( getApplicationContext () );
 
 	TaskSelection taskSelection = new TaskSelection ();
@@ -356,15 +382,15 @@ void duplicateSpecificList () {
 
 	taskCursor.moveToFirst ();
 
-		List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( taskCursor, TaskColumns.ALL_COLUMNS );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( taskCursor, TaskColumns.ALL_COLUMNS );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 
 		ContentValues values = allListValues.get ( i );
 		Log.d ( TAG, "duplicating " + values.getAsString ( TaskColumns.TASK_TITLE ) );
 		values.put ( TaskColumns.LISTID, uri.getPathSegments ().get ( 1 ) );
-		QueryHelper.addTaskToDB (getApplicationContext (), new TaskModel (values  ));
+		QueryHelper.addTaskToDB ( getApplicationContext (), new TaskModel ( values ) );
 	}
-QueryHelper.updateListAdapter ( newListModel,listView );
+	QueryHelper.updateListAdapter ( newListModel, listView );
 
 }
 
