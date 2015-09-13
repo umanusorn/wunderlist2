@@ -259,7 +259,8 @@ void onPause () {
 private
 void saveListAdapterToDb () {
 	for ( int i = 0 ; i < mLandingListAdapter.getCount () ; i++ ) {
-		ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
+		//ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
+		ListModel recordData = mLandingListAdapter.getItem ( i );
 		String id = recordData.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( ListColumns.CONTENT_URI ) + "/" + id );
 		try {
