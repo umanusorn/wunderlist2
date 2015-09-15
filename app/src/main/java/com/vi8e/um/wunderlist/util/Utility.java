@@ -41,8 +41,8 @@ void setTaskListViewHeight ( ListView listView ) {
 			Log.d ( "Data ", listModel.getTitle () );// + "isStar [" + taskModel.isStar () + "] isComplete" + taskModel.isComplete () );
 		}
 		catch ( Exception e ) {
-			Log.e("setListViewHeight",e.getMessage ());
-	}
+			Log.e ( "setListViewHeight", e.getMessage () );
+		}
 
 		listItem.measure ( desiredWidth, View.MeasureSpec.UNSPECIFIED );
 		totalHeight += listItem.getMeasuredHeight ();
@@ -150,26 +150,22 @@ boolean toggleImgCompleteData ( View v, TaskModel rowData, Drawable normal, Draw
 	}
 }
 
-public static float getListHeight(Activity activity){
-DisplayMetrics displayMetrics = getScreenSize ( activity );
-	float height =displayMetrics.heightPixels;
-	float density =displayMetrics.density;
-	float headerHeight=activity.getResources ().getDimension ( R.dimen.landing_header_max_height );
-	float screenHeight= height/density;
-	headerHeight/=3;
-	Log.d ( "Utility","ScreenHeight"+screenHeight+"headerHeight="+headerHeight );
-	return (screenHeight-headerHeight)*3;
+public static
+float getListHeight ( Activity activity ) {
+	DisplayMetrics displayMetrics = getScreenSize ( activity );
+	float height = displayMetrics.heightPixels;
+	float density = activity.getResources ().getDisplayMetrics ().density;
+	float headerHeight = activity.getResources ().getDimension ( R.dimen.landing_header_max_height )/density;
+	float screenHeight = height / density;
+	Log.d ( "Utility", "ScreenHeight" + screenHeight + "headerHeight=" + headerHeight +"dense="+density);
+	return ( screenHeight - headerHeight )*density;
 }
 
 public static
-DisplayMetrics getScreenSize (Activity activity) {
-	Display display = activity.getWindowManager ().getDefaultDisplay();
+DisplayMetrics getScreenSize ( Activity activity ) {
+	Display display = activity.getWindowManager ().getDefaultDisplay ();
 	DisplayMetrics outMetrics = new DisplayMetrics ();
-	display.getMetrics(outMetrics);
-
-	float density  = activity.getResources ().getDisplayMetrics().density;
-	float dpHeight = outMetrics.heightPixels / density;
-	float dpWidth  = outMetrics.widthPixels / density;
+	display.getMetrics ( outMetrics );
 
 	return outMetrics;
 }
