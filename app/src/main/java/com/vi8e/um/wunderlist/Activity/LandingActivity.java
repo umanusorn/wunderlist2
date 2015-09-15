@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -76,29 +77,30 @@ static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
 private static final int INITIAL_DELAY_MILLIS = 300;
+
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	Fabric.with ( this, new Crashlytics () );
-	setContentView ( R.layout.activity_landing_test_drag );
+	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
 
-	//initToolbar ();
+	initToolbar ();
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
-	//setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
+	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
 
 	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
-	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter (adapter, this, new MyOnDismissCallback(adapter));
-	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter(simpleSwipeUndoAdapter);
+	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new MyOnDismissCallback ( adapter ) );
+	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter ( simpleSwipeUndoAdapter );
 	animAdapter.setAbsListView ( listView );
 
 	assert animAdapter.getViewAnimator () != null;
-	animAdapter.getViewAnimator ().setInitialDelayMillis(INITIAL_DELAY_MILLIS );
+	animAdapter.getViewAnimator ().setInitialDelayMillis ( INITIAL_DELAY_MILLIS );
 	listView.setAdapter ( animAdapter );
 
 
@@ -113,11 +115,11 @@ void onCreate ( Bundle savedInstanceState ) {
 	listView.setOnItemMovedListener ( new MyOnItemMovedListener ( mLandingListAdapter ) );
 	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
 
-	listView.enableSimpleSwipeUndo();
+	listView.enableSimpleSwipeUndo ();
 
 
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
-
+	listView.setLayoutParams( new  FrameLayout.LayoutParams( FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT) );
 }
 
 
@@ -269,7 +271,7 @@ void initInstances () {
 
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-//	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
+	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
 
 }
 
@@ -352,35 +354,36 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	return true;
 }
 
-private class MyOnDismissCallback implements OnDismissCallback {
+private
+class MyOnDismissCallback implements OnDismissCallback {
 
 	private final ArrayAdapter<ListModel> mAdapter;
 
 	@Nullable
 	private Toast mToast;
 
-	MyOnDismissCallback(final ArrayAdapter<ListModel> adapter) {
+	MyOnDismissCallback ( final ArrayAdapter<ListModel> adapter ) {
 		mAdapter = adapter;
 	}
 
 	@Override
-	public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
-		for (int position : reverseSortedPositions) {
-			mAdapter.remove(position);
+	public
+	void onDismiss ( @NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions ) {
+		for ( int position : reverseSortedPositions ) {
+			mAdapter.remove ( position );
 		}
 
-		if (mToast != null) {
-			mToast.cancel();
+		if ( mToast != null ) {
+			mToast.cancel ();
 		}
-		mToast = Toast.makeText(
+		mToast = Toast.makeText (
 				LandingActivity.this,
 				getString ( R.string.removed_positions, Arrays.toString ( reverseSortedPositions ) ),
 				Toast.LENGTH_LONG
-		                       );
-		mToast.show();
+		                        );
+		mToast.show ();
 	}
 }
-
 
 
 @Override

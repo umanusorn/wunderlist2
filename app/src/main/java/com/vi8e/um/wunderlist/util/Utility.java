@@ -39,7 +39,7 @@ void setTaskListViewHeight ( ListView listView ) {
 		}
 		catch ( Exception e ) {
 			Log.e("setListViewHeight",e.getMessage ());
-		}
+	}
 
 		listItem.measure ( desiredWidth, View.MeasureSpec.UNSPECIFIED );
 		totalHeight += listItem.getMeasuredHeight ();

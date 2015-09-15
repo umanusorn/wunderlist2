@@ -13,7 +13,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp">
 
-
             <android.support.design.widget.CollapsingToolbarLayout
                     android:id="@+id/collapsingToolbarLayout"
                     android:layout_width="match_parent"
@@ -29,6 +28,7 @@
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/header"/>
+
                 <android.support.v7.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
@@ -38,37 +38,28 @@
                         android:background="@android:color/transparent"/>
 
 
-
-
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
 
-
         <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/red_600"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+
+            <!--<ListView
+                    android:id="@+id/listViewTaskInComplete"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
+            </ListView>-->
 
-                <!--<ListView
-                        android:id="@+id/listViewTaskInComplete"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                </ListView>-->
-
-                <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-                        android:id="@+id/listViewTaskInComplete"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-            </LinearLayout>
+            <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+                    android:id="@+id/listViewTaskInComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
         </android.support.v4.widget.NestedScrollView>
