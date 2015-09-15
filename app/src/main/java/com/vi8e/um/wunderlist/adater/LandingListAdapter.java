@@ -27,7 +27,7 @@ public
 class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements UndoAdapter {
 
 
-ArrayList<ListModel> lists;
+static ArrayList<ListModel> lists;
 boolean              mIsLongClick;
 ListModel            listModel;
 Context              mContext;
@@ -38,6 +38,7 @@ LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
 	//super ( context, 0, listModels );
 	this.lists = listModels;
 	this.mContext = context;
+
 }
 
 public
@@ -107,7 +108,9 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
 			LandingActivity.currentList = listModel;
-			LandingActivity.setMenuList ();
+
+//			LandingActivity.setMenuList ();
+
 			LandingActivity.currentListPosition = position;
 			return false;
 		}
@@ -132,9 +135,11 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 
 public
 void moveItem ( ListModel item, int newIndex ) {
+
 	if ( lists != null ) {
-		lists.remove ( item );
-		lists.add ( newIndex, item );
+		this.remove ( item );
+		this.add ( newIndex, item );
+
 
 		Log.d ( "moveItem", " newIndex=" + newIndex );
 		notifyDataSetChanged ();

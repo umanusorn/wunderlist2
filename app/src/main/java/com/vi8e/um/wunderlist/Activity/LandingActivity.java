@@ -7,6 +7,8 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,15 +21,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.OnItemMovedListener;
 import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.TouchViewDraggableManager;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.SimpleSwipeUndoAdapter;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -43,6 +49,7 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
@@ -68,27 +75,32 @@ DynamicListView      listView;
 static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
-
+private static final int INITIAL_DELAY_MILLIS = 300;
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	Fabric.with ( this, new Crashlytics () );
-	setContentView ( R.layout.activity_landing );
+	setContentView ( R.layout.activity_landing_test_drag );
 	thisActivity = this;
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
 
-        /* Enable swipe to dismiss */
-	//listView.enableSimpleSwipeUndo ();
-
-        /* Add new items on item click */
-
-//	listView.enableSimpleSwipeUndo ();
-	initToolbar ();
+	//initToolbar ();
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
-	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
+	//setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
+
+
+	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
+	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter (adapter, this, new MyOnDismissCallback(adapter));
+	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter(simpleSwipeUndoAdapter);
+	animAdapter.setAbsListView ( listView );
+
+	assert animAdapter.getViewAnimator () != null;
+	animAdapter.getViewAnimator ().setInitialDelayMillis(INITIAL_DELAY_MILLIS );
+	listView.setAdapter ( animAdapter );
+
 
 	/*listView.enableDragAndDrop();
 	listView.setDraggableManager(new TouchViewDraggableManager(R.id.list_row_draganddrop_touchview));
@@ -98,10 +110,12 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	listView.enableDragAndDrop ();
 	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
-
-
 	listView.setOnItemMovedListener ( new MyOnItemMovedListener ( mLandingListAdapter ) );
 	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
+
+	listView.enableSimpleSwipeUndo();
+
+
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
 
 }
@@ -123,6 +137,7 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		if ( mListView != null ) {
 			Log.d ( TAG, "StartDrag" );
 			mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+
 			//mListView.startDragging(position);
 		}
 		return true;
@@ -254,7 +269,7 @@ void initInstances () {
 
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
+//	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
 
 }
 
@@ -336,6 +351,37 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	setMenuNormal ();
 	return true;
 }
+
+private class MyOnDismissCallback implements OnDismissCallback {
+
+	private final ArrayAdapter<ListModel> mAdapter;
+
+	@Nullable
+	private Toast mToast;
+
+	MyOnDismissCallback(final ArrayAdapter<ListModel> adapter) {
+		mAdapter = adapter;
+	}
+
+	@Override
+	public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
+		for (int position : reverseSortedPositions) {
+			mAdapter.remove(position);
+		}
+
+		if (mToast != null) {
+			mToast.cancel();
+		}
+		mToast = Toast.makeText(
+				LandingActivity.this,
+				getString ( R.string.removed_positions, Arrays.toString ( reverseSortedPositions ) ),
+				Toast.LENGTH_LONG
+		                       );
+		mToast.show();
+	}
+}
+
+
 
 @Override
 public
