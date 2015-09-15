@@ -1,10 +1,13 @@
 package com.vi8e.um.wunderlist.util;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -147,5 +150,27 @@ boolean toggleImgCompleteData ( View v, TaskModel rowData, Drawable normal, Draw
 	}
 }
 
+public static float getListHeight(Activity activity){
+DisplayMetrics displayMetrics = getScreenSize ( activity );
+	float height =displayMetrics.heightPixels;
+	float density =displayMetrics.density;
+	float headerHeight=activity.getResources ().getDimension ( R.dimen.landing_header_max_height );
+	float screenHeight= height/density;
+	headerHeight/=3;
+	Log.d ( "Utility","ScreenHeight"+screenHeight+"headerHeight="+headerHeight );
+	return (screenHeight-headerHeight)*3;
+}
 
+public static
+DisplayMetrics getScreenSize (Activity activity) {
+	Display display = activity.getWindowManager ().getDefaultDisplay();
+	DisplayMetrics outMetrics = new DisplayMetrics ();
+	display.getMetrics(outMetrics);
+
+	float density  = activity.getResources ().getDisplayMetrics().density;
+	float dpHeight = outMetrics.heightPixels / density;
+	float dpWidth  = outMetrics.widthPixels / density;
+
+	return outMetrics;
+}
 }

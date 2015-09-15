@@ -32,6 +32,7 @@
     <dimen name="genre">13dip</dimen>
     <dimen name="year">12dip</dimen>
     <dimen name="list_row_padding">8dp</dimen>
+    <dimen name="landing_header_max_height">180dp</dimen>
 
 
 </resources>

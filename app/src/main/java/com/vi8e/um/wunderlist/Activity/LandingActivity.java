@@ -13,6 +13,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +72,7 @@ public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 DynamicListView      listView;
+NestedScrollView nestedScrollView;
 
 static        Activity thisActivity;
 static        Menu     menu;
@@ -85,7 +87,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
-
+	nestedScrollView = (NestedScrollView)findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
 
@@ -118,7 +120,16 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
+
+
+
+	int minHeight=( int ) Utility.getListHeight ( thisActivity ) ;
+Log.d ( TAG, "minHeight Of NestedScroll= "+minHeight );
+
+	nestedScrollView.setMinimumHeight ( minHeight );
 	//listView.setLayoutParams( new CoordinatorLayout.LayoutParams ( CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT ) );
+
+
 
 
 	/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
