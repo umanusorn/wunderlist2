@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -119,7 +118,13 @@ void onCreate ( Bundle savedInstanceState ) {
 
 
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
-	listView.setLayoutParams( new  FrameLayout.LayoutParams( FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT) );
+	//listView.setLayoutParams( new CoordinatorLayout.LayoutParams ( CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT ) );
+
+
+	/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		listView.setNestedScrollingEnabled(true);
+	}*/
+
 }
 
 
@@ -265,9 +270,11 @@ void initToolbar () {
 
 private
 void initInstances () {
+/*
 	drawerLayout = ( DrawerLayout ) findViewById ( R.id.drawerLayout );
 	drawerToggle = new ActionBarDrawerToggle ( LandingActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
 	drawerLayout.setDrawerListener ( drawerToggle );
+*/
 
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
@@ -279,7 +286,7 @@ void initInstances () {
 public
 void onPostCreate ( Bundle savedInstanceState ) {
 	super.onPostCreate ( savedInstanceState );
-	drawerToggle.syncState ();
+//	drawerToggle.syncState ();
 }
 
 @Override
