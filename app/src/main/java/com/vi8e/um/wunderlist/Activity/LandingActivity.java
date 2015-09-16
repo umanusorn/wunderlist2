@@ -393,9 +393,10 @@ class MyOnDismissCallback implements OnDismissCallback {
 
 //todo bad code T^T
 		for ( int position : reverseSortedPositions ) {
-			setCurrentList ( mAdapter.getItem ( position ),position );
+			setCurrentList ( mAdapter.getItem ( position ), position );
 		}
 		//setCurrentList ( currentList, );
+		Log.d ( TAG,"onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
 
 		if ( mToast != null ) {
@@ -470,13 +471,17 @@ void duplicateSpecificList () {
 
 public static
 void deleteSpecificList (Context context) {
+	Log.d ( TAG,"CurrentList title= "+currentList.getTitle () );
 	TaskSelection taskSelection = new TaskSelection ();
 	taskSelection.listid ( currentList.getId () );
 	taskSelection.delete ( context );
 	ListSelection listSelection = new ListSelection ();
 	listSelection.id ( Long.parseLong ( currentList.getId () ) );
 	listSelection.delete ( context );
-	mLandingListAdapter.remove ( currentList );
+
+	//todo dont know why cannot delete via .remove(currentList)
+	//mLandingListAdapter.remove ( currentList );
+	mLandingListAdapter.remove ( currentListPosition );
 }
 
 }

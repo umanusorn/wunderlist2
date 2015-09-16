@@ -43,6 +43,8 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 					super.onPositive ( dialog );
 
 					LandingActivity.deleteSpecificList ( thisContext );
+					LandingActivity.mLandingListAdapter.notifyDataSetChanged ();
+
 				}
 			} )
 
