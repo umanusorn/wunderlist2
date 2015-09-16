@@ -71,11 +71,11 @@ public static LandingListAdapter mLandingListAdapter;
 CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 DynamicListView      listView;
-NestedScrollView nestedScrollView;
+NestedScrollView     nestedScrollView;
 static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
-private static final int INITIAL_DELAY_MILLIS = 300;
+private static final int INITIAL_DELAY_MILLIS = 100;
 
 @Override
 protected
@@ -85,14 +85,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
-	nestedScrollView = (NestedScrollView)findViewById ( R.id.nested_scroll_view );
+	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
+	setListView ();
+	int minHeight = ( int ) Utility.getListHeight ( thisActivity );
+	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
+	nestedScrollView.setMinimumHeight ( minHeight );
 
+}
+
+private
+void setListView () {
 	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
 	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new MyOnDismissCallback ( adapter ) );
 	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter ( simpleSwipeUndoAdapter );
@@ -109,28 +117,11 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	//listView.enableSimpleSwipeUndo ();
 	listView.enableSwipeToDismiss ( simpleSwipeUndoAdapter );
-
-
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
-
-
-
-	int minHeight=( int ) Utility.getListHeight ( thisActivity ) ;
-Log.d ( TAG, "minHeight Of NestedScroll= "+minHeight );
-
-	nestedScrollView.setMinimumHeight ( minHeight );
-	//listView.setLayoutParams( new CoordinatorLayout.LayoutParams ( CoordinatorLayout.LayoutParams.MATCH_PARENT, CoordinatorLayout.LayoutParams.MATCH_PARENT ) );
-
-
-
-
-	/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-		listView.setNestedScrollingEnabled(true);
-	}*/
-
 }
 
-public static void setCurrentList(final ListModel listModel, final int position ){
+public static
+void setCurrentList ( final ListModel listModel, final int position ) {
 	currentList = listModel;
 	currentListPosition = position;
 }
@@ -153,10 +144,12 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			Log.d ( TAG, "StartDrag" );
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
-			}catch ( ClassCastException e ){
-				Log.e ( TAG,e.getMessage () );
-			}catch ( IllegalStateException e ){
-				Log.e ( TAG,e.getMessage () );
+			}
+			catch ( ClassCastException e ) {
+				Log.e ( TAG, e.getMessage () );
+			}
+			catch ( IllegalStateException e ) {
+				Log.e ( TAG, e.getMessage () );
 			}
 
 		}
@@ -197,17 +190,11 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	void onItemMoved ( final int originalPosition, final int newPosition ) {
 
 		Log.d ( TAG, "onItemMoved" );
+		updateListPosition ( originalPosition, newPosition );
+	}
 
-		if ( mToast != null ) {
-			mToast.cancel ();
-		}
-
-		mToast = Toast.makeText ( getApplicationContext (),
-		                          getString ( R.string.abc_search_hint, mAdapter.getItem ( newPosition ), newPosition ),
-		                          Toast.LENGTH_SHORT );
-		mToast.show ();
-
-
+	public
+	void updateListPosition ( int originalPosition, int newPosition ) {
 		if ( originalPosition != newPosition ) {
 			ListModel item = mAdapter.getItem ( originalPosition );
 			mAdapter.moveItem ( item, newPosition );
@@ -394,10 +381,9 @@ class MyOnDismissCallback implements OnDismissCallback {
 		for ( int position : reverseSortedPositions ) {
 			setCurrentList ( mAdapter.getItem ( position ), position );
 		}
-		//setCurrentList ( currentList, );
-		Log.d ( TAG,"onDismiss" );
+		Log.d ( TAG, "onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
-		Utility.toastOneInstance (mToast,getApplicationContext ());
+		Utility.toastOneInstance ( mToast, getApplicationContext () );
 	}
 
 }
@@ -417,7 +403,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 	if ( id == R.id.delete ) {
 
-		deleteSpecificList (getApplicationContext ());
+		deleteSpecificList ( getApplicationContext () );
 	}
 
 	if ( id == R.id.duplicateList ) {
@@ -461,7 +447,7 @@ void duplicateSpecificList () {
 }
 
 public static
-void deleteSpecificList (Context context) {
+void deleteSpecificList ( Context context ) {
 	Log.d ( TAG, "CurrentList title= " + currentList.getTitle () );
 	TaskSelection taskSelection = new TaskSelection ();
 	taskSelection.listid ( currentList.getId () );
