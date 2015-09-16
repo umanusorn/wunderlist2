@@ -391,10 +391,9 @@ class MyOnDismissCallback implements OnDismissCallback {
 	public
 	void onDismiss ( @NonNull final ViewGroup viewGroup_ListView, @NonNull final int[] reverseSortedPositions ) {
 
-
+//todo bad code T^T
 		for ( int position : reverseSortedPositions ) {
 			setCurrentList ( mAdapter.getItem ( position ),position );
-			//mAdapter.remove ( position );
 		}
 		//setCurrentList ( currentList, );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );

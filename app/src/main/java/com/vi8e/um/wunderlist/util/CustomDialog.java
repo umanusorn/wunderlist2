@@ -37,15 +37,15 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Delete List" )
-			.positiveText ( "Delete" )
-			.input ( "Add List", "", new MaterialDialog.InputCallback () {
+			.positiveText ( "Delete" ).callback ( new MaterialDialog.ButtonCallback () {
 				@Override public
-				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
+				void onPositive ( MaterialDialog dialog ) {
+					super.onPositive ( dialog );
+
 					LandingActivity.deleteSpecificList ( thisContext );
-					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
-					//Utility.setTaskListViewHeight ( listView );
 				}
 			} )
+
 			.negativeText ( "CANCEL" )
 			.show ();
 }
