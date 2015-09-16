@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,8 +158,18 @@ float getListHeight ( Activity activity ) {
 	float density = activity.getResources ().getDisplayMetrics ().density;
 	float headerHeight = activity.getResources ().getDimension ( R.dimen.landing_header_max_height )/density;
 	float screenHeight = height / density;
-	Log.d ( "Utility", "ScreenHeight" + screenHeight + "headerHeight=" + headerHeight +"dense="+density);
-	return ( screenHeight - headerHeight )*density;
+	int actonBarHeight= ( int ) (getActionBarHeight ( activity )/density);
+	//Log.d ( "Utility", "ScreenHeight" + screenHeight + "headerHeight=" + headerHeight +"dense="+density+"actionBarHeight"+actonBarHeight);
+	return ( screenHeight - headerHeight )*density-actonBarHeight;
+}
+
+public static int getActionBarHeight(Activity activity){
+	TypedValue tv = new TypedValue ();
+	if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+	{
+		return  TypedValue.complexToDimensionPixelSize(tv.data,activity.getResources().getDisplayMetrics());
+	}
+	return -1;
 }
 
 public static

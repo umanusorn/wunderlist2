@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public
 class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements UndoAdapter {
 
-
 static ArrayList<ListModel> lists;
 boolean              mIsLongClick;
 ListModel            listModel;
@@ -72,6 +71,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel, mContext ) ) );
 
 	// Return the completed view to render on screen
+
 	return convertView;
 }
 
@@ -93,7 +93,7 @@ View getContentView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 int getCurrentTaskCount ( ListModel listModel, Context context ) {
 	TaskSelection where = new TaskSelection ();
 
-	where.listid ( listModel.getId () );
+	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
 	int count = where.count ( context.getContentResolver () );
 	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
 	return count;
@@ -108,9 +108,6 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
 			LandingActivity.currentList = listModel;
-
-//			LandingActivity.setMenuList ();
-
 			LandingActivity.currentListPosition = position;
 			return false;
 		}

@@ -104,19 +104,13 @@ void onCreate ( Bundle savedInstanceState ) {
 	animAdapter.getViewAnimator ().setInitialDelayMillis ( INITIAL_DELAY_MILLIS );
 	listView.setAdapter ( animAdapter );
 
-
-	/*listView.enableDragAndDrop();
-	listView.setDraggableManager(new TouchViewDraggableManager(R.id.list_row_draganddrop_touchview));
-	listView.setOnItemMovedListener(new MyOnItemMovedListener(adapter));
-	listView.setOnItemLongClickListener(new MyOnItemLongClickListener(listView));*/
-
-
 	listView.enableDragAndDrop ();
 	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
 	listView.setOnItemMovedListener ( new MyOnItemMovedListener ( mLandingListAdapter ) );
 	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
 
-	listView.enableSimpleSwipeUndo ();
+	//listView.enableSimpleSwipeUndo ();
+	listView.enableSwipeToDismiss ( simpleSwipeUndoAdapter );
 
 
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
