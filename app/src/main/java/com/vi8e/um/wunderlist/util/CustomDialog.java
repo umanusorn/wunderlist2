@@ -4,6 +4,7 @@ import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
+import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 
 
@@ -37,6 +38,7 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Delete List" )
+			.content ( "\""+LandingActivity.currentList.getTitle ()+"\" "+thisContext.getString( R.string.content_delete_list) )
 			.positiveText ( "Delete" ).callback ( new MaterialDialog.ButtonCallback () {
 				@Override public
 				void onPositive ( MaterialDialog dialog ) {
@@ -46,9 +48,9 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 					LandingActivity.mLandingListAdapter.notifyDataSetChanged ();
 
 				}
-			} )
+			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
 
-			.negativeText ( "CANCEL" )
+			.negativeText ( "NO" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
 			.show ();
 }
 

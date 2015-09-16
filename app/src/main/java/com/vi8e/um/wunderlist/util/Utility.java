@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -179,5 +180,18 @@ DisplayMetrics getScreenSize ( Activity activity ) {
 	display.getMetrics ( outMetrics );
 
 	return outMetrics;
+}
+
+public static
+void toastOneInstance (Toast mToast,Context context) {
+	if ( mToast != null ) {
+		mToast.cancel ();
+	}
+	mToast = Toast.makeText (
+			context,
+			"String",
+			Toast.LENGTH_LONG
+	                        );
+	mToast.show ();
 }
 }

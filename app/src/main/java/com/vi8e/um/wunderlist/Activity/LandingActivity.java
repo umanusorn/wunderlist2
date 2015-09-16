@@ -50,7 +50,6 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
@@ -398,17 +397,9 @@ class MyOnDismissCallback implements OnDismissCallback {
 		//setCurrentList ( currentList, );
 		Log.d ( TAG,"onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
-
-		if ( mToast != null ) {
-			mToast.cancel ();
-		}
-		mToast = Toast.makeText (
-				LandingActivity.this,
-				getString ( R.string.removed_positions, Arrays.toString ( reverseSortedPositions ) ),
-				Toast.LENGTH_LONG
-		                        );
-		mToast.show ();
+		Utility.toastOneInstance (mToast,getApplicationContext ());
 	}
+
 }
 
 
@@ -471,7 +462,7 @@ void duplicateSpecificList () {
 
 public static
 void deleteSpecificList (Context context) {
-	Log.d ( TAG,"CurrentList title= "+currentList.getTitle () );
+	Log.d ( TAG, "CurrentList title= " + currentList.getTitle () );
 	TaskSelection taskSelection = new TaskSelection ();
 	taskSelection.listid ( currentList.getId () );
 	taskSelection.delete ( context );
