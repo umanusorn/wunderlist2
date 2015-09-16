@@ -73,7 +73,6 @@ CoordinatorLayout    rootLayout;
 FloatingActionButton fabBtn;
 DynamicListView      listView;
 NestedScrollView nestedScrollView;
-
 static        Activity thisActivity;
 static        Menu     menu;
 public static int      currentListPosition;
@@ -132,6 +131,11 @@ Log.d ( TAG, "minHeight Of NestedScroll= "+minHeight );
 
 }
 
+public static void setCurrentList(final ListModel listModel, final int position ){
+	currentList = listModel;
+	currentListPosition = position;
+}
+
 
 private static
 class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
@@ -148,9 +152,14 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		Log.d ( TAG, "onItemLongClick" );
 		if ( mListView != null ) {
 			Log.d ( TAG, "StartDrag" );
-			mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+			try {
+				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+			}catch ( ClassCastException e ){
+				Log.e ( TAG,e.getMessage () );
+			}catch ( IllegalStateException e ){
+				Log.e ( TAG,e.getMessage () );
+			}
 
-			//mListView.startDragging(position);
 		}
 		return true;
 	}
@@ -380,10 +389,15 @@ class MyOnDismissCallback implements OnDismissCallback {
 
 	@Override
 	public
-	void onDismiss ( @NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions ) {
+	void onDismiss ( @NonNull final ViewGroup viewGroup_ListView, @NonNull final int[] reverseSortedPositions ) {
+
+
 		for ( int position : reverseSortedPositions ) {
-			mAdapter.remove ( position );
+			setCurrentList ( mAdapter.getItem ( position ),position );
+			//mAdapter.remove ( position );
 		}
+		//setCurrentList ( currentList, );
+		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
 
 		if ( mToast != null ) {
 			mToast.cancel ();
@@ -412,7 +426,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 	if ( id == R.id.delete ) {
 
-		deleteSpecificList ();
+		deleteSpecificList (getApplicationContext ());
 	}
 
 	if ( id == R.id.duplicateList ) {
@@ -455,14 +469,14 @@ void duplicateSpecificList () {
 
 }
 
-private
-void deleteSpecificList () {
+public static
+void deleteSpecificList (Context context) {
 	TaskSelection taskSelection = new TaskSelection ();
 	taskSelection.listid ( currentList.getId () );
-	taskSelection.delete ( getApplicationContext () );
+	taskSelection.delete ( context );
 	ListSelection listSelection = new ListSelection ();
 	listSelection.id ( Long.parseLong ( currentList.getId () ) );
-	listSelection.delete ( getApplicationContext () );
+	listSelection.delete ( context );
 	mLandingListAdapter.remove ( currentList );
 }
 

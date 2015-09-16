@@ -48,13 +48,13 @@ Cursor getTaskValueCursor ( Context context ) {
 
 
 public static
-void deleteListValue ( Context context ) {
-	ListSelection personTeamSelection = new ListSelection ();
-	personTeamSelection.delete ( context.getContentResolver () );
+void deleteAllListValues ( Context context ) {
+	ListSelection listSelection = new ListSelection ();
+	listSelection.delete ( context.getContentResolver () );
 }
 
 public static
-void deleteTaskValue ( Context context ) {
+void deleteAllTaskValues ( Context context ) {
 	TaskSelection personTeamSelection = new TaskSelection ();
 	personTeamSelection.delete ( context.getContentResolver () );
 }

@@ -64,7 +64,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-	convertView.setOnClickListener ( getOnClick ( listModel, mContext ) );
+	convertView.setOnClickListener ( getOnClick ( listModel, mContext,position ) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
 
 	tvLateTask.setVisibility ( View.GONE );
@@ -107,21 +107,24 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			mIsLongClick = true;
 			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
-			LandingActivity.currentList = listModel;
-			LandingActivity.currentListPosition = position;
+			LandingActivity.setCurrentList ( listModel, position );
+
 			return false;
 		}
 	};
 }
 
+
+
 @NonNull public
-View.OnClickListener getOnClick ( final ListModel listModel, final Context context ) {
+View.OnClickListener getOnClick ( final ListModel listModel, final Context context, final int position ) {
 	return new View.OnClickListener () {
 
 		@Override public
 		void onClick ( View v ) {
 
 			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
+			LandingActivity.setCurrentList ( listModel, position );
 			if ( ! mIsLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
 			}

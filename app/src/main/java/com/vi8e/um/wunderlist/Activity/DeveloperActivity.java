@@ -57,13 +57,13 @@ void onCreate ( Bundle savedInstanceState ) {
 	removeTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.deleteTaskValue ( getApplicationContext () );
+			QueryHelper.deleteAllTaskValues ( getApplicationContext () );
 		}
 	} );
 	removeLists.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.deleteListValue ( getApplicationContext () );
+			QueryHelper.deleteAllListValues ( getApplicationContext () );
 		}
 	} );
 
