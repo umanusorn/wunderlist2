@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nhaarman.listviewanimations.itemmanipulation.expandablelistitem.ExpandableListItemAdapter;
@@ -30,11 +31,13 @@ static ArrayList<ListModel> lists;
 boolean              mIsLongClick;
 ListModel            listModel;
 Context              mContext;
+View convertView;
+
+RelativeLayout rowListBg;
 
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
 	super ( context );
-	//super ( context, 0, listModels );
 	this.lists = listModels;
 	this.mContext = context;
 
@@ -48,6 +51,8 @@ ArrayList<ListModel> getArrayList () {
 @Override
 public
 View getView ( final int position, View convertView, ViewGroup parent ) {
+
+	this.convertView = convertView;
 
 	listModel = getItem ( position );
 	// Check if an existing view is being reused, otherwise inflate the view
@@ -66,12 +71,12 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
 	convertView.setOnClickListener ( getOnClick ( listModel, mContext,position ) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
+	rowListBg = ( RelativeLayout ) convertView.findViewById ( R.id.row_list_bg );
 
 	tvLateTask.setVisibility ( View.GONE );
 	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel, mContext ) ) );
 
 	// Return the completed view to render on screen
-
 	return convertView;
 }
 
@@ -108,7 +113,9 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			Log.d ( "onLongClick", "position=" + position );
 			//remove ( listModel );
 			LandingActivity.setCurrentList ( listModel, position );
+			LandingActivity.setMenuList ();
 
+			rowListBg.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
 			return false;
 		}
 	};

@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -62,19 +61,17 @@ private static final String TAG = LandingActivity.class.getSimpleName ();
 static Toolbar toolbar;
 static Context sContext;
 CollapsingToolbarLayout collapsingToolbarLayout;
-
-public static ListModel currentList;
-DrawerLayout          drawerLayout;
-ActionBarDrawerToggle drawerToggle;
+ActionBarDrawerToggle   drawerToggle;
+CoordinatorLayout       rootLayout;
+FloatingActionButton    fabBtn;
+DynamicListView         listView;
+NestedScrollView        nestedScrollView;
+public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
-CoordinatorLayout    rootLayout;
-FloatingActionButton fabBtn;
-DynamicListView      listView;
-NestedScrollView     nestedScrollView;
-static        Activity thisActivity;
-static        Menu     menu;
-public static int      currentListPosition;
+static        Activity           thisActivity;
+static        Menu               menu;
+public static int                currentListPosition;
 private static final int INITIAL_DELAY_MILLIS = 100;
 
 @Override
@@ -392,9 +389,7 @@ class MyOnDismissCallback implements OnDismissCallback {
 @Override
 public
 boolean onOptionsItemSelected ( MenuItem item ) {
-	if ( drawerToggle.onOptionsItemSelected ( item ) ) {
-		return true;
-	}
+
 	int id = item.getItemId ();
 	//noinspection SimplifiableIfStatement
 	if ( id == R.id.menu_setting ) {

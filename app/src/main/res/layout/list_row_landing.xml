@@ -2,80 +2,86 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-
+                android:background="@color/white"
+                android:id="@+id/row_list_bg"
                 android:backgroundTintMode="src_atop">
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="@dimen/list_row_padding"
+
+
             >
+        <!--don't know why we need com.nhaarman.listviewanimations.itemmanipulation.dragdrop.GripView. any way I will transparent it-->
         <com.nhaarman.listviewanimations.itemmanipulation.dragdrop.GripView
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/list_row_draganddrop_touchview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:color="@android:color/darker_gray"
+                android:color="@android:color/transparent"
                 android:paddingBottom="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:paddingTop="4dp" />
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/chkBox"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+                android:paddingTop="4dp"/>
 
-            android:src="@mipmap/wl_actionbar_list"
-            android:layout_gravity="center_vertical"
-            android:tintMode="src_atop"
-            android:tint="@color/grey_600"
-            android:layout_centerVertical="true"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chkBox"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+                android:src="@mipmap/wl_actionbar_list"
+                android:layout_gravity="center_vertical"
+                android:tintMode="src_atop"
+                android:tint="@color/grey_600"
+                android:layout_centerVertical="true"/>
 
-            android:id="@+id/listtitle"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_alignBottom="@+id/chkBox"
-            android:layout_toRightOf="@+id/chkBox"
-            android:textColor="@color/grey_600"
-            android:textSize="18sp"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@+id/chkBox"
-            android:layout_centerVertical="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:padding="@dimen/md_listitem_control_margin"
-            android:text="3"
-            android:id="@+id/latetask"
-            android:textColor="@color/red_400"
-            android:layout_alignParentBottom="false"
-            android:layout_toLeftOf="@+id/currentTask"
-            android:layout_toStartOf="@+id/currentTask"
-            android:layout_alignWithParentIfMissing="false"
-            android:layout_alignParentTop="false"
-            android:layout_centerVertical="true"/>
+                android:id="@+id/listtitle"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_alignBottom="@+id/chkBox"
+                android:layout_toRightOf="@+id/chkBox"
+                android:textColor="@color/grey_600"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                android:layout_toEndOf="@+id/chkBox"
+                android:layout_centerVertical="true"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/md_listitem_control_margin"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="1"
-            android:id="@+id/currentTask"
-            android:textColor="@color/grey_600"
-            android:layout_alignTop="@+id/latetask"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:padding="@dimen/md_listitem_control_margin"
+                android:text="3"
+                android:id="@+id/latetask"
+                android:textColor="@color/red_400"
+                android:layout_alignParentBottom="false"
+                android:layout_toLeftOf="@+id/currentTask"
+                android:layout_toStartOf="@+id/currentTask"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_alignParentTop="false"
+                android:layout_centerVertical="true"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/md_listitem_control_margin"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="1"
+                android:id="@+id/currentTask"
+                android:textColor="@color/grey_600"
+                android:layout_alignTop="@+id/latetask"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
     </RelativeLayout>
 </RelativeLayout>
