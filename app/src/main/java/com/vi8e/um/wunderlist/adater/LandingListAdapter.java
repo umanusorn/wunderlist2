@@ -52,13 +52,13 @@ public
 View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	listModel = getItem ( position );
-	Log.d ( TAG,"getView title="+listModel.getTitle () );
-	listModel.setRootView ( convertView );
+	Log.d ( TAG, "getView title=" + listModel.getTitle () );
+
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
 		convertView = LayoutInflater.from ( mContext ).inflate ( R.layout.list_row_landing, parent, false );
 	}
-
+	listModel.setRootView ( convertView );
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );

@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist.util;
 import android.app.Activity;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,21 +36,24 @@ void showEditTextDialog ( final Activity thisContext, final LandingListAdapter l
 
 public static
 void showDialogDelete ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
-	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
+
+
+	String title = landingListAdapter.getItem ( LandingActivity.currentListPosition ).getTitle ();
+	Log.d ( "CustomDialog ", title );
+	MaterialDialog diallogDelete = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Delete List" )
-			.content ( "\""+LandingActivity.currentList.getTitle ()+"\" "+thisContext.getString( R.string.content_delete_list) )
+			.content ( "\"" + title + "\" " + thisContext.getString ( R.string.content_delete_list ) )
 			.positiveText ( "Delete" ).callback ( new MaterialDialog.ButtonCallback () {
 				@Override public
 				void onPositive ( MaterialDialog dialog ) {
 					super.onPositive ( dialog );
-
 					LandingActivity.deleteSpecificList ( thisContext );
 					LandingActivity.mLandingListAdapter.notifyDataSetChanged ();
+					LandingActivity.setUpOnResume ();
 
 				}
 			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
-
 			.negativeText ( "NO" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
 			.show ();
 }

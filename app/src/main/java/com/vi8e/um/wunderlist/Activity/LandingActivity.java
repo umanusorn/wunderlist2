@@ -64,7 +64,7 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 ActionBarDrawerToggle   drawerToggle;
 CoordinatorLayout       rootLayout;
 FloatingActionButton    fabBtn;
-DynamicListView         listView;
+static DynamicListView         listView;
 NestedScrollView        nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
@@ -99,7 +99,7 @@ void onCreate ( Bundle savedInstanceState ) {
 private
 void setListView () {
 	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
-	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new MyOnDismissCallback ( adapter ) );
+	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new OnSwipeDismissCallBack ( adapter ) );
 	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter ( simpleSwipeUndoAdapter );
 	animAdapter.setAbsListView ( listView );
 
@@ -197,6 +197,11 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 			mAdapter.moveItem ( item, newPosition );
 		}
 	}
+}
+
+public static
+void setUpOnResume (){
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (),listView , mLandingListAdapter );
 }
 
 public static
@@ -327,7 +332,8 @@ void
 onResume () {
 	super.onResume ();
 	Log.d ( "OnResume", "" );
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
+	setUpOnResume ();
+	//mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
 
 }
 
@@ -359,14 +365,14 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 }
 
 private
-class MyOnDismissCallback implements OnDismissCallback {
+class OnSwipeDismissCallBack implements OnDismissCallback {
 
 	private final ArrayAdapter<ListModel> mAdapter;
 
 	@Nullable
 	private Toast mToast;
 
-	MyOnDismissCallback ( final ArrayAdapter<ListModel> adapter ) {
+	OnSwipeDismissCallBack ( final ArrayAdapter<ListModel> adapter ) {
 		mAdapter = adapter;
 	}
 
@@ -444,9 +450,11 @@ void duplicateSpecificList () {
 public static
 void deleteSpecificList ( Context context ) {
 	Log.d ( TAG, "CurrentList title= " + currentList.getTitle () );
+
 	TaskSelection taskSelection = new TaskSelection ();
 	taskSelection.listid ( currentList.getId () );
 	taskSelection.delete ( context );
+
 	ListSelection listSelection = new ListSelection ();
 	listSelection.id ( Long.parseLong ( currentList.getId () ) );
 	listSelection.delete ( context );
