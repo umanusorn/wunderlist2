@@ -217,7 +217,6 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
 		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
-		Log.d ( "loop", " id=" + values.getAsInteger ( ListColumns._ID ) );
 	}
 
 	Utility.setTaskListViewHeight ( listView );
@@ -229,9 +228,10 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	ArrayList<User> newUsers = User.fromJson(jsonArray)
 	adapter.addAll(newUsers);*/
 
-	AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter ( landingListAdapter );
-	animationAdapter.setAbsListView ( listView );
-	listView.setAdapter ( animationAdapter );
+	/*AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter ( landingListAdapter );
+	animationAdapter.setAbsListView ( listView );*/
+
+	listView.setAdapter ( landingListAdapter );
 
 	return landingListAdapter;
 }

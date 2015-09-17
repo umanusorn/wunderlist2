@@ -3,6 +3,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -51,6 +52,7 @@ public
 View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	listModel = getItem ( position );
+	Log.d ( TAG,"getView title="+listModel.getTitle () );
 	listModel.setRootView ( convertView );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
@@ -71,6 +73,17 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	convertView.setOnClickListener ( getOnClick ( listModel, mContext, position ) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
+	convertView.setOnTouchListener ( new View.OnTouchListener () {
+		@Override public
+		boolean onTouch ( View v, MotionEvent event ) {
+			Log.d ( TAG,"onTouch" );
+			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
+			RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+
+			return false;
+		}
+	} );
 
 	// Return the completed view to render on screen
 	return convertView;
@@ -95,7 +108,6 @@ int getCurrentTaskCount ( ListModel listModel, Context context ) {
 
 	Log.d ( TAG, "getCurrmetTaskCount");
 	TaskSelection where = new TaskSelection ();
-
 	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
 	int count = where.count ( context.getContentResolver () );
 	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
@@ -112,8 +124,8 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			//remove ( listModel );
 			LandingActivity.setCurrentList ( listModel, position );
 			LandingActivity.setMenuList ();
-			RelativeLayout rowListRootView = (RelativeLayout)listModel.getRootView ().findViewById ( R.id.row_list_root_view );
-			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+			RelativeLayout rowListRootView = listModel.getRowListRootView ();
+			rowListRootView.setAlpha ( ( float ) 0.5 );
 			return false;
 		}
 	};
@@ -127,6 +139,7 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 		void onClick ( View v ) {
 
 			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
+
 			LandingActivity.setCurrentList ( listModel, position );
 			if ( ! mIsLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
@@ -142,7 +155,6 @@ void moveItem ( ListModel item, int newIndex ) {
 	if ( lists != null ) {
 		this.remove ( item );
 		this.add ( newIndex, item );
-
 
 		Log.d ( "moveItem", " newIndex=" + newIndex );
 		notifyDataSetChanged ();

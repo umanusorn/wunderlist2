@@ -3,7 +3,9 @@ package com.vi8e.um.wunderlist.Model;
 import android.content.ContentValues;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 
+import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 
 
@@ -22,10 +24,13 @@ String  title;
 String  type;
 View rootView;
 
+public RelativeLayout getRowListRootView(){
+	return  (RelativeLayout)getRootView ().findViewById ( R.id.row_list_root_view );
+}
 public
 ListModel ( String id, String title ) {
 	//setDefault ();
-	Log.d ( "NewListModel", "id=" + id );
+	Log.d ( "NewListModel", "id=" + id+"title= "+title );
 	this.id = id;
 	this.title = title;
 }
