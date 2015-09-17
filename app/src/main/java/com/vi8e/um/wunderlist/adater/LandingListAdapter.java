@@ -78,8 +78,18 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 		boolean onTouch ( View v, MotionEvent event ) {
 			Log.d ( TAG,"onTouch" );
 			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
-			RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
-			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+			try {
+				RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+				rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+			}catch ( IndexOutOfBoundsException e ){
+
+				Log.e ( TAG,e.getMessage () );
+				listView.deferNotifyDataSetChanged ();
+				LandingActivity.setUpOnResume ();
+				RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+				rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+			}
+
 
 			return false;
 		}

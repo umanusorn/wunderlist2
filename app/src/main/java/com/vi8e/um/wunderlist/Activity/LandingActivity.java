@@ -81,15 +81,16 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
-	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
+
 	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
 
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), listView, mLandingListAdapter );
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), mLandingListAdapter );
+	setListView ();
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-	setListView ();
+
 	int minHeight = ( int ) Utility.getListHeight ( thisActivity );
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
 	nestedScrollView.setMinimumHeight ( minHeight );
@@ -98,13 +99,16 @@ void onCreate ( Bundle savedInstanceState ) {
 
 private
 void setListView () {
+	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
 	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
+
 	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new OnSwipeDismissCallBack ( adapter ) );
 	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter ( simpleSwipeUndoAdapter );
 	animAdapter.setAbsListView ( listView );
 
 	assert animAdapter.getViewAnimator () != null;
 	animAdapter.getViewAnimator ().setInitialDelayMillis ( INITIAL_DELAY_MILLIS );
+
 	listView.setAdapter ( animAdapter );
 
 	listView.enableDragAndDrop ();
@@ -201,13 +205,14 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 
 public static
 void setUpOnResume (){
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (),listView , mLandingListAdapter );
+//	mLandingListAdapter.clear ();
+	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
 }
 
 public static
-LandingListAdapter setUpAdapterListView ( Activity activity, Context context, ListView listView, LandingListAdapter landingListAdapter ) {
+LandingListAdapter setUpAdapterListView ( Activity activity, Context context,  LandingListAdapter landingListAdapter ) {
 
-
+	listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
 	Cursor c = QueryHelper.getListValueCursor ( context );
 	c.moveToFirst ();
 
@@ -218,6 +223,7 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, Li
 	landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
 
 // Attach the adapter to a ListView
+
 	listView.setAdapter ( landingListAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
@@ -367,13 +373,12 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 private
 class OnSwipeDismissCallBack implements OnDismissCallback {
 
-	private final ArrayAdapter<ListModel> mAdapter;
 
 	@Nullable
 	private Toast mToast;
 
 	OnSwipeDismissCallBack ( final ArrayAdapter<ListModel> adapter ) {
-		mAdapter = adapter;
+
 	}
 
 	@Override
@@ -382,7 +387,7 @@ class OnSwipeDismissCallBack implements OnDismissCallback {
 
 //todo bad code T^T
 		for ( int position : reverseSortedPositions ) {
-			setCurrentList ( mAdapter.getItem ( position ), position );
+			setCurrentList ( mLandingListAdapter.getItem ( position ), position );
 		}
 		Log.d ( TAG, "onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
