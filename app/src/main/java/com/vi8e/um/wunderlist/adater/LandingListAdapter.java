@@ -31,10 +31,8 @@ static ArrayList<ListModel> lists;
 boolean              mIsLongClick;
 ListModel            listModel;
 Context              mContext;
-View convertView;
 
-RelativeLayout rowListBg;
-
+private static final String TAG = LandingActivity.class.getSimpleName ();
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
 	super ( context );
@@ -52,9 +50,8 @@ ArrayList<ListModel> getArrayList () {
 public
 View getView ( final int position, View convertView, ViewGroup parent ) {
 
-	this.convertView = convertView;
-
 	listModel = getItem ( position );
+	listModel.setRootView ( convertView );
 	// Check if an existing view is being reused, otherwise inflate the view
 	if ( convertView == null ) {
 		convertView = LayoutInflater.from ( mContext ).inflate ( R.layout.list_row_landing, parent, false );
@@ -69,12 +66,11 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-	convertView.setOnClickListener ( getOnClick ( listModel, mContext,position ) );
-	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
-	rowListBg = ( RelativeLayout ) convertView.findViewById ( R.id.row_list_bg );
-
 	tvLateTask.setVisibility ( View.GONE );
 	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel, mContext ) ) );
+
+	convertView.setOnClickListener ( getOnClick ( listModel, mContext, position ) );
+	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
 
 	// Return the completed view to render on screen
 	return convertView;
@@ -96,6 +92,8 @@ View getContentView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 }
 
 int getCurrentTaskCount ( ListModel listModel, Context context ) {
+
+	Log.d ( TAG, "getCurrmetTaskCount");
 	TaskSelection where = new TaskSelection ();
 
 	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
@@ -110,18 +108,16 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 		@Override public
 		boolean onLongClick ( View v ) {
 			mIsLongClick = true;
-			Log.d ( "onLongClick", "position=" + position );
+			Log.d ( "onLongClick", "position=" + position + "List title= " + listModel.getTitle () );
 			//remove ( listModel );
 			LandingActivity.setCurrentList ( listModel, position );
 			LandingActivity.setMenuList ();
-
-			rowListBg.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+			RelativeLayout rowListRootView = (RelativeLayout)listModel.getRootView ().findViewById ( R.id.row_list_root_view );
+			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
 			return false;
 		}
 	};
 }
-
-
 
 @NonNull public
 View.OnClickListener getOnClick ( final ListModel listModel, final Context context, final int position ) {

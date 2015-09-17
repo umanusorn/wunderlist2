@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.Model;
 
 import android.content.ContentValues;
 import android.util.Log;
+import android.view.View;
 
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 
@@ -19,6 +20,7 @@ boolean isDisturb;
 String  imgPath;
 String  title;
 String  type;
+View rootView;
 
 public
 ListModel ( String id, String title ) {
@@ -26,6 +28,13 @@ ListModel ( String id, String title ) {
 	Log.d ( "NewListModel", "id=" + id );
 	this.id = id;
 	this.title = title;
+}
+
+public
+ListModel ( String title ) {
+	setDefault ();
+	this.title = title;
+
 }
 
 void setDefault () {
@@ -43,30 +52,6 @@ void setDefault () {
 }
 
 public
-ContentValues getValues (){
-	ContentValues values = new ContentValues (  );
-	values.put ( ListColumns.LIST_TITLE, title );
-	values.put ( ListColumns.IMG_PATH,imgPath );
-	values.put ( ListColumns.ISDISTURB,isDisturb );
-
-	values.put ( ListColumns.ISPINNED,isPinned );
-	values.put ( ListColumns.FOLDER_ID,folderId );
-	values.put ( ListColumns.NUM_CURRENT_TASK,numCurrentTask );
-
-	values.put ( ListColumns.NUM_LATE_TASK,numLateTask );
-	//values.put ( ListColumns._ID,id );
-
-	return values;
-}
-
-public
-ListModel ( String title ) {
-	setDefault ();
-	this.title = title;
-
-}
-
-public
 ListModel ( ListModel listModel) {
 	this.title = listModel.getTitle ();
 	this.imgPath = listModel.getImgPath ();
@@ -77,30 +62,6 @@ ListModel ( ListModel listModel) {
 	this.numLateTask = listModel.getNumLateTask ();
 	this.id = listModel.getId ();
 
-}
-
-public
-ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
-	this.title = title; //
-	this.imgPath = imgPath;
-	this.isDisturb = isDisturb;
-	this.isPinned = isPinned;
-	this.folderId = folderId;
-	this.numCurrentTask = numCurrentTask;
-	this.numLateTask = numLateTask;
-	this.id = id;
-
-}
-
-public
-String getType () {
-
-	return type;
-}
-
-public
-void setType ( String type ) {
-	this.type = type;
 }
 
 public
@@ -159,18 +120,8 @@ boolean isPinned () {
 }
 
 public
-void setIsPinned ( boolean isPinned ) {
-	this.isPinned = isPinned;
-}
-
-public
 boolean isDisturb () {
 	return isDisturb;
-}
-
-public
-void setIsDisturb ( boolean isDisturb ) {
-	this.isDisturb = isDisturb;
 }
 
 public
@@ -181,5 +132,66 @@ String getImgPath () {
 public
 void setImgPath ( String imgPath ) {
 	this.imgPath = imgPath;
+}
+
+public
+ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
+	this.title = title; //
+	this.imgPath = imgPath;
+	this.isDisturb = isDisturb;
+	this.isPinned = isPinned;
+	this.folderId = folderId;
+	this.numCurrentTask = numCurrentTask;
+	this.numLateTask = numLateTask;
+	this.id = id;
+
+}
+
+public
+View getRootView () {
+	return rootView;
+}
+
+public
+void setRootView ( View rootView ) {
+	this.rootView = rootView;
+}
+
+public
+ContentValues getValues () {
+	ContentValues values = new ContentValues ();
+	values.put ( ListColumns.LIST_TITLE, title );
+	values.put ( ListColumns.IMG_PATH,imgPath );
+	values.put ( ListColumns.ISDISTURB,isDisturb );
+
+	values.put ( ListColumns.ISPINNED,isPinned );
+	values.put ( ListColumns.FOLDER_ID,folderId );
+	values.put ( ListColumns.NUM_CURRENT_TASK,numCurrentTask );
+
+	values.put ( ListColumns.NUM_LATE_TASK,numLateTask );
+	//values.put ( ListColumns._ID,id );
+
+	return values;
+}
+
+public
+String getType () {
+
+	return type;
+}
+
+public
+void setType ( String type ) {
+	this.type = type;
+}
+
+public
+void setIsPinned ( boolean isPinned ) {
+	this.isPinned = isPinned;
+}
+
+public
+void setIsDisturb ( boolean isDisturb ) {
+	this.isDisturb = isDisturb;
 }
 }
