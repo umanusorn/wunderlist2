@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -97,13 +99,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	setListView ();
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-
 	int minHeight = ( int ) Utility.getListHeight ( thisActivity );
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
 	nestedScrollView.setMinimumHeight ( minHeight );
 
+
 }
 
+public static
+void setActiveToolBar () {
+	toolbar.setBackgroundDrawable( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
+}
+
+public static
+void setInActiveToolBar () {
+	toolbar.setBackgroundDrawable( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent) ) );
+}
 private
 void setListView () {
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
@@ -130,18 +141,16 @@ void setListView () {
 }
 
 public static
-void setCurrentList ( final ListModel listModel, final int position ) {
-	currentList = listModel;
+void setCurrentList ( final int position ) {
+	//currentList = listModel;
 	currentListPosition = position;
+	currentList=mLandingListAdapter.getItem ( position );
 }
 
 
 private static
 class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
-
 	private final DynamicListView mListView;
-
-
 	MyOnItemLongClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
@@ -150,8 +159,16 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 	public
 	boolean onItemLongClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
 		Log.d ( TAG, "onItemLongClick" );
+
+
+		setCurrentList ( position );
+		setMenuList ();
+		RelativeLayout rowListRootView = currentList.getRowListRootView ();
+		rowListRootView.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400 ) );
+		setActiveToolBar ();
+
 		if ( mListView != null ) {
-			Log.d ( TAG, "StartDrag" );
+			Log.d ( TAG, "StartDrag position="+position );
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
 				View relativeLayout = view.findViewById ( R.id.row_list_root_view );
@@ -395,7 +412,7 @@ class OnSwipeDismissCallBack implements OnDismissCallback {
 
 //todo bad code T^T
 		for ( int position : reverseSortedPositions ) {
-			setCurrentList ( mLandingListAdapter.getItem ( position ), position );
+			setCurrentList ( position );
 		}
 		Log.d ( TAG, "onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );

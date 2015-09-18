@@ -160,11 +160,7 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			mIsLongClick = true;
 			Log.d ( "onLongClick", "position=" + position + "List title= " + listModel.getTitle () );
 			//remove ( listModel );
-			LandingActivity.setCurrentList ( listModel, position );
-			LandingActivity.setMenuList ();
-			RelativeLayout rowListRootView = listModel.getRowListRootView ();
 
-			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
 			return false;
 		}
 	};
@@ -179,7 +175,7 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 
 			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
 
-			LandingActivity.setCurrentList ( listModel, position );
+			LandingActivity.setCurrentList ( position );
 			//if ( ! mIsLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
 			//}
