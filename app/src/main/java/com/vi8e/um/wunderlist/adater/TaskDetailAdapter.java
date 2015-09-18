@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -67,8 +68,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	// Populate the data into the template view using the data object
 	tvTitle.setText ( rowData.getTitle () );
-	setUpCompletedBg ( rowData, rowBg, cardView );
-	//chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+	//setUpCompletedBg ( rowData, rowBg, cardView );
+	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 	//setUpStar ( rowData, star, res );
 
 	try {
@@ -170,22 +171,18 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			//TaskModel rowData=getItem ( position );
 			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
 
-				TaskActivity.taskAdapterComplete.insert ( rowData, 0 );
-				TaskActivity.taskAdapterInComplete.remove ( rowData );
-				//inCompleteList.remove ( position );
+				//TaskDetailActivity.taskAdapterComplete.insert ( rowData, 0 );
+				//TaskActivity.taskAdapterInComplete.remove ( rowData );
 			}
 			else {
-				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
-				TaskActivity.taskAdapterComplete.remove ( rowData );
+				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
 			}
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
+			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
 		}
 	};
 }

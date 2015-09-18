@@ -30,9 +30,9 @@ import java.util.ArrayList;
 public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
-private ListView          listViewComplete;
+public static ListView          listViewComplete;
 private Activity          thisActivity;
-private TaskDetailAdapter taskAdapterComplete;
+public static TaskDetailAdapter taskAdapterComplete;
 
 EditText editTextTitle;
 

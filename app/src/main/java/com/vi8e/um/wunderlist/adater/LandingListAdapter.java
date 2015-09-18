@@ -83,14 +83,14 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
 			if ( ! LandingActivity.isDragging () ) {
 				try {
-					setActiveListBgColor ( position );
+					//setActiveListBgColor ( position );
 				}
 				catch ( IndexOutOfBoundsException e ) {
 
 					Log.e ( TAG, e.getMessage () );
 					listView.deferNotifyDataSetChanged ();
 					LandingActivity.setUpOnResume ();
-					setActiveListBgColor ( position );
+					//setActiveListBgColor ( position );
 				}
 			}
 			else {
@@ -106,7 +106,6 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 					setInActiveListBgColor ( position,thisAdapter,mContext );
 				}
 			}
-
 
 			return false;
 		}
@@ -160,8 +159,6 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 		boolean onLongClick ( View v ) {
 			LandingActivity.isLongClick = true;
 			Log.d ( "onLongClick", "position=" + position + "List title= " + listModel.getTitle () );
-			//remove ( listModel );
-
 			return false;
 		}
 	};

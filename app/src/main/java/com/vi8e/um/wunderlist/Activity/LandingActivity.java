@@ -162,11 +162,9 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 	boolean onItemLongClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
 		Log.d ( TAG, "onItemLongClick" );
 
-
 		setCurrentList ( position );
 		setMenuList ();
-		RelativeLayout rowListRootView = currentList.getRowListRootView ();
-		rowListRootView.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400 ) );
+		setActiveList ();
 		setActiveToolBar ();
 
 		if ( mListView != null ) {
@@ -174,7 +172,6 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
 				LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
-
 				isDragging = true;
 			}
 			catch ( ClassCastException e ) {
@@ -183,21 +180,24 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			catch ( IllegalStateException e ) {
 				Log.e ( TAG, e.getMessage () );
 			}
-
 		}
 		return true;
 	}
+}
+
+public static
+void setActiveList () {
+	RelativeLayout rowListRootView = currentList.getRowListRootView ();
+	rowListRootView.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400_trans50 ) );
 }
 
 private
 class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 
 	private final DynamicListView mListView;
-
 	MyOnItemClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
-
 	@Override
 	public
 	void onItemClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
