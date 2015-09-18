@@ -204,6 +204,7 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	void onItemMoved ( final int originalPosition, final int newPosition ) {
 
 		Log.d ( TAG, "onItemMoved" );
+		isDragging=false;
 		updateListPosition ( originalPosition, newPosition );
 	}
 

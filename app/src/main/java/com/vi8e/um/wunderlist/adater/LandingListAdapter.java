@@ -180,9 +180,9 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
 
 			LandingActivity.setCurrentList ( listModel, position );
-			if ( ! mIsLongClick ) {
+			//if ( ! mIsLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
-			}
+			//}
 			mIsLongClick = false;
 		}
 	};

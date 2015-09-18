@@ -7,5 +7,15 @@
         <!-- Support library compatibility -->
 
         <item name="windowActionBarOverlay">true</item>
+
+
+
+
+
+
+
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
     </style>
 </resources>
