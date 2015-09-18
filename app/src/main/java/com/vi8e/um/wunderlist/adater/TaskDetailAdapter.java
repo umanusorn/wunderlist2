@@ -171,7 +171,8 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+
+		//	rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
 			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
