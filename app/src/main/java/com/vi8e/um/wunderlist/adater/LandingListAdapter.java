@@ -30,6 +30,7 @@ class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements
 static ArrayList<ListModel> lists;
 ListModel listModel;
 Context   mContext;
+LandingListAdapter thisAdapter;
 
 private static final String TAG = LandingActivity.class.getSimpleName ();
 
@@ -93,14 +94,14 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 			}
 			else {
 				try {
-					setInActiveListBgColor ( position );
+					setInActiveListBgColor ( position,thisAdapter,mContext );
 				}
 				catch ( IndexOutOfBoundsException e ) {
 
 					Log.e ( TAG, e.getMessage () );
 					listView.deferNotifyDataSetChanged ();
 					LandingActivity.setUpOnResume ();
-					setInActiveListBgColor ( position );
+					setInActiveListBgColor ( position,thisAdapter,mContext );
 				}
 			}
 
@@ -119,10 +120,10 @@ void setActiveListBgColor ( int position ) {
 	rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.red_400 ) );
 }
 
-public
-void setInActiveListBgColor ( int position ) {
-	RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
-	rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.white ) );
+public static
+void setInActiveListBgColor ( int position ,LandingListAdapter landingListAdapter,Context context) {
+	RelativeLayout rowListRootView = landingListAdapter.getItem ( position ).getRowListRootView ();
+	rowListRootView.setBackgroundColor ( context.getResources ().getColor ( R.color.white ) );
 	rowListRootView.setAlpha ( ( float ) 1.0 );
 }
 

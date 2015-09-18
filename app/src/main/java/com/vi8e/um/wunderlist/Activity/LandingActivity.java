@@ -173,12 +173,7 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			Log.d ( TAG, "StartDrag position="+position );
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
-				View relativeLayout = view.findViewById ( R.id.row_list_root_view );
-
-				if(!isLongClick){
-					relativeLayout.setAlpha ( ( float ) 1.0 );
-					relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.white ) );
-				}
+				LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
 
 				isDragging = true;
 			}
@@ -229,6 +224,7 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 		Log.d ( TAG, "onItemMoved" );
 		isDragging=false;
 		updateListPosition ( originalPosition, newPosition );
+		setInActiveToolBar ();
 	}
 
 	public
