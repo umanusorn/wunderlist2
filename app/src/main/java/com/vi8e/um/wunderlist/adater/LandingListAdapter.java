@@ -29,11 +29,12 @@ public
 class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements UndoAdapter {
 
 static ArrayList<ListModel> lists;
-boolean              mIsLongClick;
-ListModel            listModel;
-Context              mContext;
+boolean   mIsLongClick;
+ListModel listModel;
+Context   mContext;
 
 private static final String TAG = LandingActivity.class.getSimpleName ();
+
 public
 LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
 	super ( context );
@@ -73,21 +74,36 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	convertView.setOnClickListener ( getOnClick ( listModel, mContext, position ) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
+
+
 	convertView.setOnTouchListener ( new View.OnTouchListener () {
 		@Override public
 		boolean onTouch ( View v, MotionEvent event ) {
-			Log.d ( TAG,"onTouch" );
+			Log.d ( TAG, "onTouch" );
 			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
-			try {
-				RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
-				rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
-			}catch ( IndexOutOfBoundsException e ){
+			if ( ! LandingActivity.isDragging () ) {
+				try {
+					setActiveListBgColor ( position );
+				}
+				catch ( IndexOutOfBoundsException e ) {
 
-				Log.e ( TAG,e.getMessage () );
-				listView.deferNotifyDataSetChanged ();
-				LandingActivity.setUpOnResume ();
-				RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
-				rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
+					Log.e ( TAG, e.getMessage () );
+					listView.deferNotifyDataSetChanged ();
+					LandingActivity.setUpOnResume ();
+					setActiveListBgColor ( position );
+				}
+			}
+			else {
+				try {
+					setInActiveListBgColor ( position );
+				}
+				catch ( IndexOutOfBoundsException e ) {
+
+					Log.e ( TAG, e.getMessage () );
+					listView.deferNotifyDataSetChanged ();
+					LandingActivity.setUpOnResume ();
+					setInActiveListBgColor ( position );
+				}
 			}
 
 
@@ -97,6 +113,19 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 	// Return the completed view to render on screen
 	return convertView;
+}
+
+public
+void setActiveListBgColor ( int position ) {
+	RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+	rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.red_400 ) );
+}
+
+public
+void setInActiveListBgColor ( int position ) {
+	RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+	rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.white ) );
+	rowListRootView.setAlpha ( ( float ) 1.0 );
 }
 
 @NonNull @Override public
@@ -115,8 +144,7 @@ View getContentView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 }
 
 int getCurrentTaskCount ( ListModel listModel, Context context ) {
-
-	Log.d ( TAG, "getCurrmetTaskCount");
+	Log.d ( TAG, "getCurrentTaskCount" );
 	TaskSelection where = new TaskSelection ();
 	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
 	int count = where.count ( context.getContentResolver () );
@@ -135,7 +163,8 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			LandingActivity.setCurrentList ( listModel, position );
 			LandingActivity.setMenuList ();
 			RelativeLayout rowListRootView = listModel.getRowListRootView ();
-			rowListRootView.setAlpha ( ( float ) 0.5 );
+
+			rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.blue_400 ) );
 			return false;
 		}
 	};

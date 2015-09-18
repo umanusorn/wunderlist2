@@ -72,6 +72,13 @@ public static LandingListAdapter mLandingListAdapter;
 static        Activity           thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
+
+public static
+boolean isDragging () {
+	return isDragging;
+}
+
+private static boolean isDragging;
 private static final int INITIAL_DELAY_MILLIS = 100;
 
 @Override
@@ -81,7 +88,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
-
+	sContext=getApplicationContext ();
 	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
@@ -113,12 +120,13 @@ void setListView () {
 
 	listView.enableDragAndDrop ();
 	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
-	listView.setOnItemMovedListener ( new MyOnItemMovedListener ( mLandingListAdapter ) );
+	listView.setOnItemMovedListener ( new MyOnItemMovedListener () );
 	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
 
 	//listView.enableSimpleSwipeUndo ();
 	listView.enableSwipeToDismiss ( simpleSwipeUndoAdapter );
 	listView.setOnItemClickListener ( new MyOnItemClickListener ( listView ) );
+
 }
 
 public static
@@ -133,6 +141,7 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 
 	private final DynamicListView mListView;
 
+
 	MyOnItemLongClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
@@ -145,6 +154,10 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			Log.d ( TAG, "StartDrag" );
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+				View relativeLayout = view.findViewById ( R.id.row_list_root_view );
+				relativeLayout.setAlpha ( ( float ) 0.5 );
+				relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400 ) );
+				isDragging = true;
 			}
 			catch ( ClassCastException e ) {
 				Log.e ( TAG, e.getMessage () );
@@ -178,12 +191,12 @@ class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 private
 class MyOnItemMovedListener implements OnItemMovedListener {
 
-	private final LandingListAdapter mAdapter;
+	//private final LandingListAdapter mAdapter;
 
 	private Toast mToast;
 
-	MyOnItemMovedListener ( final LandingListAdapter adapter ) {
-		mAdapter = adapter;
+	MyOnItemMovedListener ( /*final LandingListAdapter adapter */ ) {
+		//mAdapter = adapter;
 	}
 
 	@Override
@@ -197,20 +210,20 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	public
 	void updateListPosition ( int originalPosition, int newPosition ) {
 		if ( originalPosition != newPosition ) {
-			ListModel item = mAdapter.getItem ( originalPosition );
-			mAdapter.moveItem ( item, newPosition );
+			ListModel item = mLandingListAdapter.getItem ( originalPosition );
+			mLandingListAdapter.moveItem ( item, newPosition );
 		}
 	}
 }
 
 public static
-void setUpOnResume (){
+void setUpOnResume () {
 //	mLandingListAdapter.clear ();
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
 }
 
 public static
-LandingListAdapter setUpAdapterListView ( Activity activity, Context context,  LandingListAdapter landingListAdapter ) {
+LandingListAdapter setUpAdapterListView ( Activity activity, Context context, LandingListAdapter landingListAdapter ) {
 
 	listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
 	Cursor c = QueryHelper.getListValueCursor ( context );
@@ -278,12 +291,6 @@ void initToolbar () {
 
 private
 void initInstances () {
-/*
-	drawerLayout = ( DrawerLayout ) findViewById ( R.id.drawerLayout );
-	drawerToggle = new ActionBarDrawerToggle ( LandingActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world );
-	drawerLayout.setDrawerListener ( drawerToggle );
-*/
-
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
 	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
