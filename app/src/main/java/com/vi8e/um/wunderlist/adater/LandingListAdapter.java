@@ -39,6 +39,7 @@ LandingListAdapter ( Context context, ArrayList<ListModel> listModels ) {
 	super ( context );
 	this.lists = listModels;
 	this.mContext = context;
+	thisAdapter=this;
 
 }
 
@@ -94,6 +95,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 			}
 			else {
 				try {
+
 					setInActiveListBgColor ( position,thisAdapter,mContext );
 				}
 				catch ( IndexOutOfBoundsException e ) {
