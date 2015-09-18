@@ -155,8 +155,8 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
 				View relativeLayout = view.findViewById ( R.id.row_list_root_view );
-				relativeLayout.setAlpha ( ( float ) 0.5 );
-				relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400 ) );
+				relativeLayout.setAlpha ( ( float ) 1.0 );
+				relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.white ) );
 				isDragging = true;
 			}
 			catch ( ClassCastException e ) {
