@@ -21,7 +21,6 @@ import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
 
-
 /**
  * Created by um.anusorn on 8/25/2015.
  */
@@ -29,7 +28,6 @@ public
 class LandingListAdapter extends ExpandableListItemAdapter<ListModel> implements UndoAdapter {
 
 static ArrayList<ListModel> lists;
-boolean   mIsLongClick;
 ListModel listModel;
 Context   mContext;
 
@@ -157,7 +155,7 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 	return new View.OnLongClickListener () {
 		@Override public
 		boolean onLongClick ( View v ) {
-			mIsLongClick = true;
+			LandingActivity.isLongClick = true;
 			Log.d ( "onLongClick", "position=" + position + "List title= " + listModel.getTitle () );
 			//remove ( listModel );
 
@@ -173,13 +171,13 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 		@Override public
 		void onClick ( View v ) {
 
-			Log.d ( "onClick", "isLongClick=" + mIsLongClick );
+			Log.d ( "onClick", "isLongClick=" + LandingActivity.isLongClick );
 
 			LandingActivity.setCurrentList ( position );
-			//if ( ! mIsLongClick ) {
+			//if ( ! isLongClick ) {
 				IntentCaller.taskActivity ( context, listModel );
 			//}
-			mIsLongClick = false;
+			LandingActivity.isLongClick = false;
 		}
 	};
 }

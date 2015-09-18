@@ -66,14 +66,15 @@ CollapsingToolbarLayout collapsingToolbarLayout;
 ActionBarDrawerToggle   drawerToggle;
 CoordinatorLayout       rootLayout;
 FloatingActionButton    fabBtn;
-static DynamicListView         listView;
-NestedScrollView        nestedScrollView;
+static DynamicListView listView;
+NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
 static        Activity           thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
+public static boolean isLongClick;
 
 public static
 boolean isDragging () {
@@ -90,7 +91,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
-	sContext=getApplicationContext ();
+	sContext = getApplicationContext ();
 	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
@@ -108,13 +109,14 @@ void onCreate ( Bundle savedInstanceState ) {
 
 public static
 void setActiveToolBar () {
-	toolbar.setBackgroundDrawable( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
+	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
 }
 
 public static
 void setInActiveToolBar () {
-	toolbar.setBackgroundDrawable( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent) ) );
+	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
 }
+
 private
 void setListView () {
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
@@ -144,7 +146,7 @@ public static
 void setCurrentList ( final int position ) {
 	//currentList = listModel;
 	currentListPosition = position;
-	currentList=mLandingListAdapter.getItem ( position );
+	currentList = mLandingListAdapter.getItem ( position );
 }
 
 
@@ -172,8 +174,12 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			try {
 				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
 				View relativeLayout = view.findViewById ( R.id.row_list_root_view );
-				relativeLayout.setAlpha ( ( float ) 1.0 );
-				relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.white ) );
+
+				if(!isLongClick){
+					relativeLayout.setAlpha ( ( float ) 1.0 );
+					relativeLayout.setBackgroundColor ( sContext.getResources ().getColor ( R.color.white ) );
+				}
+
 				isDragging = true;
 			}
 			catch ( ClassCastException e ) {
