@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -57,18 +58,17 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
 	// Lookup view for data population
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
-	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
-	//CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
-	//ListView listView =(ListView)cardView.get
-	star.setVisibility ( View.GONE );
 
-	// Populate the data into the template view using the data object
-	tvTitle.setText ( rowData.getTitle () );
-	//setUpCompletedBg ( rowData, rowBg, cardView );
-	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+	setView ( rowData, tvTitle, chkBox );
 	return convertView;
+}
+
+public
+void setView ( SubTaskModel rowData, TextView tvTitle, ImageView chkBox ) {
+	tvTitle.setText ( rowData.getTitle () );
+	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 }
 
 
@@ -80,12 +80,13 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 
 		//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
 			Log.d ( "TaskAdapter", "getIsComplete=" + rowData.getIsComplete () );
-			if ( rowData.getIsComplete () ) {
+			if ( rowData.isComplete () ) {
 				//todo don't know why cant use completeList to add element
 
 			}
 			else {
 				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
+				Utility.toggleImgCompleteData ( v, ( TaskModel ) rowData, TaskDetailActivity.sContext);
 			}
 			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
 		}
@@ -94,7 +95,7 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 
 private
 void setUpCompletedBg ( SubTaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
-	if ( rowData.getIsComplete () ) {
+	if ( rowData.isComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
 		cardView.setAlpha ( ( float ) 0.5 );
 	}

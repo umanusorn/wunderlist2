@@ -16,14 +16,21 @@ String title;
 String isComplete;
 
 public
-boolean getIsComplete () {
+String getIsComplete () {
+	return isComplete;
+}
+public boolean isComplete(){
 	return Boolean.valueOf ( isComplete );
 }
-
 
 public
 String getTaskId () {
 	return taskId;
+}
+
+public
+SubTaskModel ( String title ) {
+	this.title = title;
 }
 
 public

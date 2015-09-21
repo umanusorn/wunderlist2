@@ -8,7 +8,7 @@ import com.vi8e.um.wunderlist.provider.task.TaskColumns;
  * Created by um.anusorn on 8/27/2015.
  */
 public
-class TaskModel extends ListModel {
+class TaskModel extends SubTaskModel{
 
 String isStar;
 String isComplete;
@@ -60,17 +60,17 @@ void setNote ( String note ) {
 
 public
 TaskModel (  ContentValues values ){
-	super (values.getAsString ( TaskColumns.TASK_TITLE ));
+	super ( values.getAsString ( TaskColumns.TASK_TITLE ) );
 //	super ( id );
 	setValues ( values );
 }
 
 
-public
+/*public
 TaskModel ( String id, ContentValues values ){
 	super ( id );
 	setValues ( values );
-}
+}*/
 
 public
 TaskModel ( String title, String isStar, String isComplete, String listID, long currentTime ) {
@@ -91,7 +91,7 @@ ContentValues getValues (){
 	values.put ( TaskColumns.ISCOMPLETE, isComplete );
 	values.put ( TaskColumns.LISTID, listId );
 	values.put ( TaskColumns.NOTE, note );
-	values.put ( TaskColumns.CREATE_DATE,createDate );
+	values.put ( TaskColumns.CREATE_DATE, createDate );
 	values.put ( TaskColumns.DUETO_DATE, getDueToDate () );
 	values.put ( TaskColumns.REMINDER_DATE, getReminderDate () );
 	return values;
@@ -109,11 +109,6 @@ public void setValues(ContentValues values){
 	this.setReminderDate ( values.getAsString ( TaskColumns.REMINDER_DATE ) );
 
 }
-
-
-
-
-
 
 public
 String getCreateDate () {
@@ -141,6 +136,12 @@ String getReminderDate () {
 }
 
 public
+TaskModel ( String id, ContentValues values ){
+	super ( id );
+	setValues ( values );
+}
+
+public
 void setReminderDate ( String reminderDate ) {
 	ReminderDate = reminderDate;
 }
@@ -161,20 +162,6 @@ public String getIsStar(){
 public
 void setIsStar ( String isStar ) {
 	this.isStar = isStar;
-}
-
-public boolean isComplete(){
-	return Boolean.valueOf ( isComplete );
-}
-
-public
-String getIsComplete () {
-	return isComplete;
-}
-
-public
-void setIsComplete ( String isComplete ) {
-	this.isComplete = isComplete;
 }
 
 }

@@ -40,6 +40,7 @@ class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
 public static ListView          listViewComplete;
 private       Activity          thisActivity;
+public static Context sContext;
 public static TaskDetailAdapter taskAdapterComplete;
 
 EditText editTextTitle;
@@ -82,20 +83,10 @@ void onCreate ( Bundle savedInstanceState ) {
 private
 void setViewValues () {
 
-
+	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
 	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
 	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
-
-	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, getApplicationContext () );
-
-	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
-	star.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Utility.toggleImgStarData ( v, mTaskModel, getApplicationContext () );
-		}
-	} );
 
 	noteLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -103,9 +94,6 @@ void setViewValues () {
 			IntentCaller.taskNoteActivity ( getApplicationContext (), mTaskModel );
 		}
 	} );
-
-//	noteEditText
-
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
 	Utility.toggleImgCompleteData ( checkBox, mTaskModel, getApplicationContext () );
 	checkBox.setOnClickListener ( new View.OnClickListener () {
@@ -114,7 +102,7 @@ void setViewValues () {
 			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
 		}
 	} );
-	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
+
 
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -130,9 +118,6 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	//listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
 
 	SubtaskSelection where = new SubtaskSelection ();
-
-	//Log.d ( TAG, "taskId=" + listId + " getIsComplete=" + isComplete );
-
 	where.taskid ( TaskActivity.currentTask.getId () );
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
@@ -146,9 +131,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 
 	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
 	taskDetailAdapter = new TaskDetailAdapter ( context, arrayOfList );
-// Attach the adapter to a ListView
-
-	listView.setAdapter ( taskDetailAdapter );
+  listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
 		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
@@ -177,9 +160,6 @@ void setView () {
 protected
 void onPause () {
 	super.onPause ();
-	//setMenuNormal ();
-
-	//ListModel currentList= LandingActivity.currentList;
 	TaskModel currentTask = TaskActivity.currentTask;
 	currentTask.setTitle ( editTextTitle.getText ().toString () );
 	String id = currentTask.getId ();
@@ -194,18 +174,13 @@ void
 onResume () {
 	super.onResume ();
 	Log.d ( "OnResume", "" );
-
 	setView ();
-
 	setViewValues ();
-
-
 }
 
 @Override
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
-	// Inflate the menu; this adds items to the action bar if it is present.
 	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
 	return true;
 }

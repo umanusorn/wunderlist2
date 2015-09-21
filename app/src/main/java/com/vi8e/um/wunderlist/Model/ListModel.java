@@ -14,13 +14,14 @@ class ListModel {
 
 
 String  id;
+String  title;
 int     numLateTask;
 int     numCurrentTask;
 int     folderId;
 boolean isPinned;
 boolean isDisturb;
 String  imgPath;
-String  title;
+
 String  type;
 View rootView;
 
