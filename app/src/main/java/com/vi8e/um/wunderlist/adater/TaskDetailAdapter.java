@@ -54,7 +54,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	// Get the data item for this position
 	rowData = getItem ( position );
 
-	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
+	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_sub_task, parent, false );
 	// Lookup view for data population
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
@@ -79,14 +79,9 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 
 		//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
 			Log.d ( "TaskAdapter", "getIsComplete=" + rowData.getIsComplete () );
-			if ( rowData.isComplete () ) {
-				//todo don't know why cant use completeList to add element
 
-			}
-			else {
-				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
 				Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext);
-			}
+
 			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
 		}
 	};

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.vi8e.um.wunderlist.Model.ListModel;
@@ -135,6 +136,7 @@ boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Context context ) 
 	Resources res = context.getResources ();
 	Drawable normal = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkbox );
 	Drawable clicked = res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
+	RelativeLayout rootView =(RelativeLayout)v.getParent ();
 	return toggleImgCompleteData ( v, rowData, normal, clicked );
 }
 

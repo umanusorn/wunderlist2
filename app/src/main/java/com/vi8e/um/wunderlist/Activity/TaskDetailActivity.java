@@ -50,7 +50,7 @@ Boolean showComplete = true;
 TaskModel      mTaskModel;
 RelativeLayout noteLayout;
 
-ImageView star, checkBox;
+ImageView star, checkBoxTitle;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 
@@ -60,7 +60,7 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task_detail );
-sContext=getApplicationContext ();
+	sContext = getApplicationContext ();
 	thisActivity = this;
 	mTaskModel = TaskActivity.currentTask;
 
@@ -95,8 +95,8 @@ void setViewValues () {
 		}
 	} );
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
-	Utility.toggleImgCompleteData ( checkBox, mTaskModel, getApplicationContext () );
-	checkBox.setOnClickListener ( new View.OnClickListener () {
+	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
 			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
@@ -147,7 +147,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 private
 void setView () {
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
+	checkBoxTitle = ( ImageView ) findViewById ( R.id.chkBox );
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
 	star = ( ImageView ) findViewById ( R.id.star );
 	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
