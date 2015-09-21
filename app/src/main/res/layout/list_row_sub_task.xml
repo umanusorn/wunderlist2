@@ -2,39 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_margin="0dp"
                 android:backgroundTintMode="src_atop"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/subTaskRootRow"
+
         >
 
-    <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/chkBox"
-            android:src="@mipmap/wl_icon_task_detail_checkbox"
-            android:layout_gravity="center_vertical"
-            android:tintMode="src_atop"
-            android:tint="@color/grey_600"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-
-
-    <TextView
-            android:layout_width="wrap_content"
+    <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:background="@color/white"
+            android:id="@+id/subTaskRootRow"
+            android:padding="5dp"
+            android:layout_margin="0dp"
+            >
 
-            android:id="@+id/listtitle"
-            android:textColor="@color/grey_600"
-            android:textSize="15sp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/chkBox"
-            android:layout_toEndOf="@+id/chkBox"/>
+        <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/chkBox"
+                android:src="@mipmap/wl_icon_task_detail_checkbox"
+                android:layout_gravity="center_vertical"
+                android:tintMode="src_atop"
+                android:tint="@color/grey_600"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
 
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+
+                android:id="@+id/listtitle"
+                android:textColor="@color/grey_600"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/chkBox"
+                android:layout_toEndOf="@+id/chkBox"/>
+
+    </RelativeLayout>
 </RelativeLayout>
