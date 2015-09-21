@@ -1,7 +1,9 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,32 +20,37 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Dialog.CustomDialog;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.IntentCaller;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
 public static ListView          listViewComplete;
-private Activity          thisActivity;
+private       Activity          thisActivity;
 public static TaskDetailAdapter taskAdapterComplete;
 
 EditText editTextTitle;
 
 Boolean isStar       = false;
 Boolean showComplete = true;
-TaskModel mTaskModel;
+TaskModel      mTaskModel;
 RelativeLayout noteLayout;
 
 ImageView star, checkBox;
-TextView noteEditText;
+TextView       noteEditText;
 RelativeLayout addSubTask;
 
 
@@ -80,8 +87,7 @@ void setViewValues () {
 	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
 
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
-	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,getApplicationContext () );
 
 	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
@@ -113,7 +119,7 @@ void setViewValues () {
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showAddSubTaskDialog (thisActivity,taskAdapterComplete,listViewComplete  );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, taskAdapterComplete, listViewComplete );
 		}
 	} );
 }
@@ -125,8 +131,8 @@ void setView () {
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
 	star = ( ImageView ) findViewById ( R.id.star );
 	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
-	noteLayout =(RelativeLayout )findViewById ( R.id.noteLayout );
-	addSubTask=(RelativeLayout)findViewById ( R.id.addSubTask );
+	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
+	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
 
 }
 
@@ -160,15 +166,35 @@ void onPause () {
 }
 
 public static
-TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, boolean isComplete ) {
+TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, Context context ) {
+
+	//listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
+
+	SubtaskSelection where = new SubtaskSelection();
+
+	//Log.d ( TAG, "taskId=" + listId + " getIsComplete=" + isComplete );
+
+	where.taskid ( TaskActivity.currentTask.getId () );
+	Cursor c = where.query ( context.getContentResolver () );
+	c.moveToFirst ();
+	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
+
+	c.moveToFirst ();
+
+	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
+	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
+
+	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
+	taskDetailAdapter = new TaskDetailAdapter ( context, arrayOfList );
+// Attach the adapter to a ListView
 
 	listView.setAdapter ( taskDetailAdapter );
-	for ( int i = 0 ; i < 3 ; i++ ) {
-		Log.d ( "loop", "" + i );
-		TaskModel taskModel = new TaskModel ( "Dummy", String.valueOf ( false ), String.valueOf ( false ), "0", System.currentTimeMillis () );
-		taskModel.setIsComplete ( String.valueOf ( isComplete ) );
-		taskDetailAdapter.insert ( taskModel, 0 );
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
+		ContentValues values = allListValues.get ( i );
+		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns._ID ), values.getAsString (SubtaskColumns.SUBTASK_TITLE ),values.getAsString (SubtaskColumns._ID  ),values.getAsString (SubtaskColumns.ISCOMPLETE ) ) );
 	}
+
 	Utility.setTaskListViewHeight ( listView );
 	return taskDetailAdapter;
 }

@@ -40,7 +40,7 @@ void setTaskListViewHeight ( ListView listView ) {
 		View listItem = listAdapter.getView ( i, null, listView );
 		try {
 			ListModel listModel = ( ListModel ) listAdapter.getItem ( i );
-			Log.d ( "Data ", listModel.getTitle () );// + "isStar [" + taskModel.isStar () + "] isComplete" + taskModel.isComplete () );
+			Log.d ( "Data ", listModel.getTitle () );// + "isStar [" + taskModel.isStar () + "] getIsComplete" + taskModel.getIsComplete () );
 		}
 		catch ( Exception e ) {
 			Log.e ( "setListViewHeight", e.getMessage () );

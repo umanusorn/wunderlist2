@@ -22,7 +22,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = UmSQLiteHelper.class.getSimpleName();
 
     public static final String DATABASE_FILE_NAME = "um.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static UmSQLiteHelper sInstance;
     private final Context mContext;
     private final UmSQLiteHelperCallbacks mOpenHelperCallbacks;
@@ -55,7 +55,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
             + SubtaskColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + SubtaskColumns.SUBTASK_TITLE + " TEXT DEFAULT '0', "
             + SubtaskColumns.TASKID + " TEXT DEFAULT '0', "
-            + SubtaskColumns.COMPLETE + " TEXT DEFAULT '0' "
+            + SubtaskColumns.ISCOMPLETE + " TEXT DEFAULT '0' "
             + " );";
 
     public static final String SQL_CREATE_TABLE_TASK = "CREATE TABLE IF NOT EXISTS "

@@ -15,6 +15,8 @@ import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskCursor;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
@@ -29,6 +31,13 @@ import java.util.List;
 public
 class QueryHelper {
 
+public static
+Cursor getSubTaskValueCursor ( Context context ) {
+	SubtaskSelection selection = new SubtaskSelection ();
+	String[] projection = SubtaskColumns.ALL_COLUMNS;
+	SubtaskCursor cursor = selection.query ( context.getContentResolver (), projection );
+	return cursor;
+}
 
 public static
 Cursor getListValueCursor ( Context context ) {

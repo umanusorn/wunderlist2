@@ -56,13 +56,13 @@ public class SubtaskContentValues extends AbstractContentValues {
         return this;
     }
 
-    public SubtaskContentValues putComplete(@Nullable String value) {
-        mContentValues.put(SubtaskColumns.COMPLETE, value);
+    public SubtaskContentValues putIscomplete(@Nullable String value) {
+        mContentValues.put(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskContentValues putCompleteNull() {
-        mContentValues.putNull(SubtaskColumns.COMPLETE);
+    public SubtaskContentValues putIscompleteNull() {
+        mContentValues.putNull(SubtaskColumns.ISCOMPLETE);
         return this;
     }
 }

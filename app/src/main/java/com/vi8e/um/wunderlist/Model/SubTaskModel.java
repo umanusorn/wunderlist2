@@ -13,7 +13,13 @@ class SubTaskModel {
 String id;
 String taskId;
 String title;
-String Complete;
+String isComplete;
+
+public
+boolean getIsComplete () {
+	return Boolean.valueOf ( isComplete );
+}
+
 
 public
 String getTaskId () {
@@ -27,22 +33,23 @@ void setTaskId ( String taskId ) {
 
 public
 String getComplete () {
-	return Complete;
+	return isComplete;
 }
 
 public
-void setComplete ( String complete ) {
-	Complete = complete;
+void setIsComplete ( String isComplete ) {
+	this.isComplete = isComplete;
 }
 
 public
-SubTaskModel ( String title, String taskId, String id ) {
+SubTaskModel ( String title, String taskId, String id, String isComplete ) {
 	//setDefault ();
 	Log.d ( "newSubTask", "id=" + id );
 
 	this.title = title;
 	this.taskId = taskId;
 	this.id = id;
+	this.isComplete=isComplete;
 }
 public
 SubTaskModel ( String title, String taskId ) {
@@ -56,10 +63,11 @@ ContentValues getValues () {
 	ContentValues values = new ContentValues ();
 	values.put ( SubtaskColumns.SUBTASK_TITLE, title );
 	values.put ( SubtaskColumns.TASKID, taskId );
-	values.put ( SubtaskColumns.COMPLETE, getComplete ());
+	values.put ( SubtaskColumns.ISCOMPLETE, getComplete ());
 	//values.put ( ListColumns._ID,id );
 	return values;
 }
+
 
 public
 String getTitle () {

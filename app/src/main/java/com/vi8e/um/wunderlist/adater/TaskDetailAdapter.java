@@ -9,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
-import com.vi8e.um.wunderlist.Model.TaskModel;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -26,16 +24,16 @@ import java.util.ArrayList;
  * Created by um.anusorn on 8/25/2015.
  */
 public
-class TaskDetailAdapter extends ArrayAdapter<TaskModel> {
+class TaskDetailAdapter extends ArrayAdapter<SubTaskModel> {
 
 Context              mContext;
 Resources            res;
-ArrayList<TaskModel> lists;
+ArrayList<SubTaskModel> lists;
 boolean              mIsLongClick;
 
 public
 TaskDetailAdapter ( Context context,
-                    ArrayList<TaskModel> lists ) {
+                    ArrayList<SubTaskModel> lists ) {
 
 	super ( context, 0, lists );
 	this.lists = lists;
@@ -44,7 +42,7 @@ TaskDetailAdapter ( Context context,
 }
 
 public
-ArrayList<TaskModel> getArrayList () {
+ArrayList<SubTaskModel> getArrayList () {
 	return lists;
 }
 
@@ -52,7 +50,7 @@ ArrayList<TaskModel> getArrayList () {
 public
 View getView ( final int position, View convertView, final ViewGroup parent ) {
 
-	final TaskModel rowData;
+	final SubTaskModel rowData;
 	// Get the data item for this position
 	rowData = getItem ( position );
 
@@ -62,7 +60,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final ImageView star = ( ImageView ) convertView.findViewById ( R.id.star );
 	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
-	CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
+	//CardView cardView = ( CardView ) convertView.findViewById ( R.id.card_view );
 	//ListView listView =(ListView)cardView.get
 	star.setVisibility ( View.GONE );
 
@@ -70,48 +68,19 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvTitle.setText ( rowData.getTitle () );
 	//setUpCompletedBg ( rowData, rowBg, cardView );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
-	//setUpStar ( rowData, star, res );
-
-	try {
-		star.setOnClickListener ( new View.OnClickListener () {
-			@Override public
-			void onClick ( View v ) {
-				onClickStar ( v, rowData );
-			}
-		} );
-
-	}
-	catch ( NullPointerException e ) {
-		Log.e ( "error on setonClick", rowData.getTitle () + ":" + e.toString () );
-		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
-	}
-
-	//convertView.setOnClickListener ( onClickTask ( tvTitle, position ) );
-	//convertView.setOnLongClickListener ( onLongClickTask ( rowData, position ) );
-	// Return the completed view to render on screen
 	return convertView;
 }
 
-void onClickStar ( View v, TaskModel rowData ) {
-	if ( ! rowData.isComplete () ) {
-		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-		Utility.toggleImgStarData ( v,
-		                            rowData,
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-	}
-}
 
 @NonNull public static
-View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
 
-		//	rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
-			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
-			if ( rowData.isComplete () ) {
+		//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
+			Log.d ( "TaskAdapter", "getIsComplete=" + rowData.getIsComplete () );
+			if ( rowData.getIsComplete () ) {
 				//todo don't know why cant use completeList to add element
 
 			}
@@ -124,71 +93,12 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 }
 
 private
-void setUpCompletedBg ( TaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
-	if ( rowData.isComplete () ) {
+void setUpCompletedBg ( SubTaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
+	if ( rowData.getIsComplete () ) {
 		rowBg.setAlpha ( ( float ) 0.5 );
 		cardView.setAlpha ( ( float ) 0.5 );
 	}
 }
 
-private static
-void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
-	if ( rowData.isStar () ) {
-		try {
-			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-		}
-		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg Star", rowData.getTitle () + ":" + e.toString () );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
-		}
-
-	}
-	else {
-		try {
-			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
-		}
-		catch ( NullPointerException e ) {
-			Log.e ( "error on setBg unStar", rowData.getTitle () + ":" + e.toString () );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
-		}
-	}
-}
-
-@NonNull public
-View.OnClickListener onClickTask ( final TextView tvTitle, final int position ) {
-	return new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-
-			TaskActivity.currentTask = getItem ( position );
-
-		}
-	};
-}
-
-@NonNull private
-View.OnLongClickListener onLongClickTask ( TaskModel taskModel, final int position ) {
-	return new View.OnLongClickListener () {
-		@Override public
-		boolean onLongClick ( View v ) {
-			mIsLongClick = true;
-			Log.d ( "onLongClick", "position=" + position );
-			//remove ( listModel );
-			TaskActivity.currentTask = getItem ( position );
-			TaskActivity.setMenuList ();
-			return false;
-		}
-	};
-}
-
-public
-void addList ( TaskModel object, ListView listView ) {
-	super.add ( object );
-	Utility.setTaskListViewHeight ( listView );
-}
 
 }

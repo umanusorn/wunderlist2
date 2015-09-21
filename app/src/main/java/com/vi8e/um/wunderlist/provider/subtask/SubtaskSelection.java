@@ -156,43 +156,43 @@ public class SubtaskSelection extends AbstractSelection<SubtaskSelection> {
         return this;
     }
 
-    public SubtaskSelection complete(String... value) {
-        addEquals(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscomplete(String... value) {
+        addEquals(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection completeNot(String... value) {
-        addNotEquals(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscompleteNot(String... value) {
+        addNotEquals(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection completeLike(String... value) {
-        addLike(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscompleteLike(String... value) {
+        addLike(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection completeContains(String... value) {
-        addContains(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscompleteContains(String... value) {
+        addContains(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection completeStartsWith(String... value) {
-        addStartsWith(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscompleteStartsWith(String... value) {
+        addStartsWith(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection completeEndsWith(String... value) {
-        addEndsWith(SubtaskColumns.COMPLETE, value);
+    public SubtaskSelection iscompleteEndsWith(String... value) {
+        addEndsWith(SubtaskColumns.ISCOMPLETE, value);
         return this;
     }
 
-    public SubtaskSelection orderByComplete(boolean desc) {
-        orderBy(SubtaskColumns.COMPLETE, desc);
+    public SubtaskSelection orderByIscomplete(boolean desc) {
+        orderBy(SubtaskColumns.ISCOMPLETE, desc);
         return this;
     }
 
-    public SubtaskSelection orderByComplete() {
-        orderBy(SubtaskColumns.COMPLETE, false);
+    public SubtaskSelection orderByIscomplete() {
+        orderBy(SubtaskColumns.ISCOMPLETE, false);
         return this;
     }
 }
