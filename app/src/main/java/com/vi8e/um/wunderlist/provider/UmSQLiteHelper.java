@@ -22,7 +22,7 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
     private static final String TAG = UmSQLiteHelper.class.getSimpleName();
 
     public static final String DATABASE_FILE_NAME = "um.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static UmSQLiteHelper sInstance;
     private final Context mContext;
     private final UmSQLiteHelperCallbacks mOpenHelperCallbacks;

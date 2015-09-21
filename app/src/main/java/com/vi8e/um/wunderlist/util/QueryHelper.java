@@ -8,11 +8,13 @@ import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
@@ -95,12 +97,12 @@ public static
 }
 
 public static
-void addSubTaskToDB ( Context context, String title,ListView listView ) {
+void addSubTaskToDB ( Context context, String title,String taskId,ListView listView ) {
 
 	Log.d ( "addListToDb", "" );
-	Uri uri = addListToDB ( context, title );
+	Uri uri = addSubTaskToDB ( context, title,taskId );
 	Log.d ( "ChkColumn ", "title" + title + "newId=" + getIdFromUri ( uri ) );
-	updateListAdapter ( title, listView, uri );
+	//updateListAdapter ( title, listView, uri );
 }
 
 public static
@@ -122,9 +124,9 @@ Uri addListToDB ( Context context, String title ) {
 }
 
 public static
-Uri addSubTaskToDB ( Context context, String title ) {
-	ListModel listModel = new ListModel ( title );
-	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+Uri addSubTaskToDB ( Context context, String title, String taskId ) {
+	SubTaskModel subTaskModel = new SubTaskModel ( title,taskId );
+	return context.getContentResolver ().insert ( SubtaskColumns.CONTENT_URI, subTaskModel.getValues () );
 }
 
 public static

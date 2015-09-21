@@ -104,7 +104,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
 	nestedScrollView.setMinimumHeight ( minHeight );
 
-	mLandingListAdapter.onClickList ( 0, thisActivity, mLandingListAdapter.getItem ( 0 ));
+//	mLandingListAdapter.onClickList ( 0, thisActivity, mLandingListAdapter.getItem ( 0 ));
 
 }
 

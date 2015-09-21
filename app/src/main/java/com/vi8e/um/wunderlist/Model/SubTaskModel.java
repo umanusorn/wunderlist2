@@ -3,7 +3,6 @@ package com.vi8e.um.wunderlist.Model;
 import android.content.ContentValues;
 import android.util.Log;
 
-import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 
 
@@ -55,14 +54,12 @@ SubTaskModel ( String title, String taskId ) {
 public
 ContentValues getValues () {
 	ContentValues values = new ContentValues ();
-	values.put ( ListColumns.LIST_TITLE, title );
+	values.put ( SubtaskColumns.SUBTASK_TITLE, title );
 	values.put ( SubtaskColumns.TASKID, taskId );
+	values.put ( SubtaskColumns.COMPLETE, getComplete ());
 	//values.put ( ListColumns._ID,id );
 	return values;
 }
-
-
-
 
 public
 String getTitle () {
