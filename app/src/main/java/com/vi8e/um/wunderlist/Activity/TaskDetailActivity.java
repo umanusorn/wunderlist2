@@ -192,7 +192,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
-		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns._ID ), values.getAsString (SubtaskColumns.SUBTASK_TITLE ),values.getAsString (SubtaskColumns._ID  ),values.getAsString (SubtaskColumns.ISCOMPLETE ) ) );
+		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ), values.getAsString (SubtaskColumns.TASKID ),values.getAsString (SubtaskColumns._ID  ),values.getAsString (SubtaskColumns.ISCOMPLETE ) ) );
 	}
 
 	Utility.setTaskListViewHeight ( listView );
