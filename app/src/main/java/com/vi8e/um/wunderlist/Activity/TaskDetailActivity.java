@@ -60,7 +60,7 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_task_detail );
-
+sContext=getApplicationContext ();
 	thisActivity = this;
 	mTaskModel = TaskActivity.currentTask;
 

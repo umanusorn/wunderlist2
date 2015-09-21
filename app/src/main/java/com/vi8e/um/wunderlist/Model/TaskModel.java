@@ -11,7 +11,6 @@ public
 class TaskModel extends SubTaskModel{
 
 String isStar;
-String isComplete;
 String listId;
 String note="";
 String createDate,DueToDate,ReminderDate;

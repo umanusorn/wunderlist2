@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 
@@ -129,7 +130,7 @@ boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable
 
 
 public static
-boolean toggleImgCompleteData ( View v, TaskModel rowData, Context context ) {
+boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Context context ) {
 
 	Resources res = context.getResources ();
 	Drawable normal = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkbox );
@@ -138,7 +139,7 @@ boolean toggleImgCompleteData ( View v, TaskModel rowData, Context context ) {
 }
 
 public static
-boolean toggleImgCompleteData ( View v, TaskModel rowData, Drawable normal, Drawable clicked ) {
+boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Drawable normal, Drawable clicked ) {
 
 	if ( rowData.isComplete () ) {
 		v.setBackground ( normal );

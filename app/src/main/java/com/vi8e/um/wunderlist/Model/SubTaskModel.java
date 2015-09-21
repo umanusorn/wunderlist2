@@ -15,12 +15,18 @@ String taskId;
 String title;
 String isComplete;
 
+public boolean isComplete(){
+	return Boolean.valueOf ( isComplete );
+}
+
 public
 String getIsComplete () {
 	return isComplete;
 }
-public boolean isComplete(){
-	return Boolean.valueOf ( isComplete );
+
+public
+void setIsComplete ( String isComplete ) {
+	this.isComplete = isComplete;
 }
 
 public
@@ -41,11 +47,6 @@ void setTaskId ( String taskId ) {
 public
 String getComplete () {
 	return isComplete;
-}
-
-public
-void setIsComplete ( String isComplete ) {
-	this.isComplete = isComplete;
 }
 
 public

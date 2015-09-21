@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
-import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -86,7 +85,7 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 			}
 			else {
 				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
-				Utility.toggleImgCompleteData ( v, ( TaskModel ) rowData, TaskDetailActivity.sContext);
+				Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext);
 			}
 			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
 		}

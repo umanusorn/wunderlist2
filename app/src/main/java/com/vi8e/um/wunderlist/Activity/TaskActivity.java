@@ -103,7 +103,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 	listView.setAdapter ( taskAdapter );
 	TaskSelection where = new TaskSelection ();
 
-	Log.d ( TAG, "taskId=" + listId + " getIsComplete=" + isComplete );
+	Log.d ( TAG, "listId=" + listId + " getIsComplete=" + isComplete );
 	where.iscomplete ( String.valueOf ( isComplete ) ).and ().listid ( listId );
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
