@@ -31,6 +31,7 @@ Resources            res;
 ArrayList<SubTaskModel> lists;
 boolean              mIsLongClick;
 
+private static final String TAG = TaskDetailAdapter.class.getSimpleName ();
 public
 TaskDetailAdapter ( Context context,
                     ArrayList<SubTaskModel> lists ) {
@@ -78,11 +79,9 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 		void onClick ( View v ) {
 
 		//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
-			Log.d ( "TaskAdapter", "getIsComplete=" + rowData.getIsComplete () );
-
-				Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext);
-
-			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
+			Log.d ( TAG, "getIsComplete= " + rowData.getIsComplete () );
+			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext);
+			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
 		}
 	};
 }

@@ -38,9 +38,9 @@ import java.util.List;
 public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
-public static ListView          listViewComplete;
+public static ListView          listViewSubTask;
 private       Activity          thisActivity;
-public static Context sContext;
+public static Context           sContext;
 public static TaskDetailAdapter taskAdapterComplete;
 
 EditText editTextTitle;
@@ -76,8 +76,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 
 	setViewValues ();
-
-
+	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
 }
 
 private
@@ -86,7 +85,6 @@ void setViewValues () {
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
 	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
 	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, getApplicationContext () );
 
 	noteLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -95,7 +93,10 @@ void setViewValues () {
 		}
 	} );
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
-	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+
+
+
+//Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
 	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -114,9 +115,11 @@ void setViewValues () {
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showAddSubTaskDialog ( thisActivity, taskAdapterComplete, listViewComplete );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, taskAdapterComplete, listViewSubTask );
 		}
 	} );
+
+	taskAdapterComplete = setUpAdapterListView ( this, listViewSubTask, taskAdapterComplete, getApplicationContext () );
 }
 
 public static
@@ -146,14 +149,13 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 		                                           values.getAsString ( SubtaskColumns._ID ),
 		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
-
-	Utility.setTaskListViewHeight ( listView );
+	Utility.setTaskListViewHeight (listViewSubTask );
 	return taskDetailAdapter;
 }
 
 private
 void setView () {
-	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	listViewSubTask = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	checkBoxTitle = ( ImageView ) findViewById ( R.id.chkBox );
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
 	star = ( ImageView ) findViewById ( R.id.star );
