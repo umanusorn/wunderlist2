@@ -291,13 +291,13 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showEditTextDialog ( thisActivity, landingListAdapter, listView );
+			CustomDialog.showAddListDialog ( thisActivity, landingListAdapter, listView );
 		}
 	} );
 	toDoBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showEditTextDialog ( thisActivity, landingListAdapter, listView );
+			CustomDialog.showAddListDialog ( thisActivity, landingListAdapter, listView );
 		}
 	} );
 }

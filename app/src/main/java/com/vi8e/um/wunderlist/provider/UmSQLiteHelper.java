@@ -54,7 +54,8 @@ public class UmSQLiteHelper extends SQLiteOpenHelper {
             + SubtaskColumns.TABLE_NAME + " ( "
             + SubtaskColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + SubtaskColumns.SUBTASK_TITLE + " TEXT DEFAULT '0', "
-            + SubtaskColumns.TASKID + " TEXT DEFAULT '0' "
+            + SubtaskColumns.TASKID + " TEXT DEFAULT '0', "
+            + SubtaskColumns.COMPLETE + " TEXT DEFAULT '0' "
             + " );";
 
     public static final String SQL_CREATE_TABLE_TASK = "CREATE TABLE IF NOT EXISTS "

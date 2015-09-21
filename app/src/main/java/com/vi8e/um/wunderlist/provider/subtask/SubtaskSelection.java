@@ -155,4 +155,44 @@ public class SubtaskSelection extends AbstractSelection<SubtaskSelection> {
         orderBy(SubtaskColumns.TASKID, false);
         return this;
     }
+
+    public SubtaskSelection complete(String... value) {
+        addEquals(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection completeNot(String... value) {
+        addNotEquals(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection completeLike(String... value) {
+        addLike(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection completeContains(String... value) {
+        addContains(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection completeStartsWith(String... value) {
+        addStartsWith(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection completeEndsWith(String... value) {
+        addEndsWith(SubtaskColumns.COMPLETE, value);
+        return this;
+    }
+
+    public SubtaskSelection orderByComplete(boolean desc) {
+        orderBy(SubtaskColumns.COMPLETE, desc);
+        return this;
+    }
+
+    public SubtaskSelection orderByComplete() {
+        orderBy(SubtaskColumns.COMPLETE, false);
+        return this;
+    }
 }

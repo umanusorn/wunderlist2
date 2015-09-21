@@ -21,6 +21,8 @@ public class SubtaskColumns implements BaseColumns {
 
     public static final String TASKID = "taskId";
 
+    public static final String COMPLETE = "complete";
+
 
     public static final String DEFAULT_ORDER = TABLE_NAME + "." +_ID;
 
@@ -28,7 +30,8 @@ public class SubtaskColumns implements BaseColumns {
     public static final String[] ALL_COLUMNS = new String[] {
             _ID,
             SUBTASK_TITLE,
-            TASKID
+            TASKID,
+            COMPLETE
     };
     // @formatter:on
 
@@ -37,6 +40,7 @@ public class SubtaskColumns implements BaseColumns {
         for (String c : projection) {
             if (c.equals(SUBTASK_TITLE) || c.contains("." + SUBTASK_TITLE)) return true;
             if (c.equals(TASKID) || c.contains("." + TASKID)) return true;
+            if (c.equals(COMPLETE) || c.contains("." + COMPLETE)) return true;
         }
         return false;
     }

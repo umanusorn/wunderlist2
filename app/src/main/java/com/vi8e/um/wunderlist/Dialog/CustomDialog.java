@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
+import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 
 
@@ -17,8 +18,10 @@ public
 class CustomDialog {
 
 
+
+
 public static
-void showEditTextDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
+void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Add List" )
@@ -26,7 +29,25 @@ void showEditTextDialog ( final Activity thisContext, final LandingListAdapter l
 			.input ( "Add List", "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), landingListAdapter, listView );
+					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), listView );
+					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
+					//Utility.setTaskListViewHeight ( listView );
+				}
+			} )
+			.negativeText ( "CANCEL" )
+			.show ();
+}
+
+public static
+void showAddSubTaskDialog ( final Activity thisContext, final TaskDetailAdapter taskDetailAdapter, final ListView listView ) {
+	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
+			//.customView ( R.layout.dialog_todo, true )
+			.title ( "Add subTask" )
+			.positiveText ( "ADD" )
+			.input ( "Add subTask", "", new MaterialDialog.InputCallback () {
+				@Override public
+				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
+					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), listView );
 					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
 					//Utility.setTaskListViewHeight ( listView );
 				}

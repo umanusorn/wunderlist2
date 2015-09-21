@@ -9,7 +9,6 @@ import android.widget.ListView;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
-import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
@@ -87,7 +86,16 @@ List<ContentValues> getValuesFromCursor ( Cursor c, String[] ALL_COLUMNS ) {
 }
 
 public static
-void addListToDB ( Context context, String title, LandingListAdapter landingListAdapter, ListView listView ) {
+ void addListToDB ( Context context, String title,ListView listView ) {
+
+	Log.d ( "addListToDb", "" );
+	Uri uri = addListToDB ( context, title );
+	Log.d ( "ChkColumn ", "title" + title + "newId=" + getIdFromUri ( uri ) );
+	updateListAdapter ( title, listView, uri );
+}
+
+public static
+void addSubTaskToDB ( Context context, String title,ListView listView ) {
 
 	Log.d ( "addListToDb", "" );
 	Uri uri = addListToDB ( context, title );
@@ -101,9 +109,22 @@ public static
 	Utility.setTaskListViewHeight ( listView );
 }
 
+
 public static
 String getIdFromUri ( Uri uri ) {
 	return uri.getPathSegments ().get ( 1 );
+}
+
+public static
+Uri addListToDB ( Context context, String title ) {
+	ListModel listModel = new ListModel ( title );
+	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
+}
+
+public static
+Uri addSubTaskToDB ( Context context, String title ) {
+	ListModel listModel = new ListModel ( title );
+	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
 }
 
 public static
@@ -114,25 +135,9 @@ void updateListAdapter ( ListModel listModel, ListView listView) {
 }
 
 public static
-Uri addListToDB ( Context context, String title ) {
-	ListModel listModel = new ListModel ( title );
-	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
-}
-
-public static
 Uri addListToDB ( Context context, ListModel listModel ) {
 	return context.getContentResolver ().insert ( ListColumns.CONTENT_URI, listModel.getValues () );
 }
-
-
-public static
-Uri addTaskToDB ( Context context, TaskModel taskModel ) {
-	Log.d ( "addTaskToDb", "" );
-	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
-	Log.d ( "ChkColumn ", "title" + taskModel.getTitle () + "taskId=" + getIdFromUri ( uri ) + "listId" + taskModel.getListId () );
-return uri;
-}
-
 
 public static
 void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter, ListView listView ) {
@@ -143,6 +148,13 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 	Utility.setTaskListViewHeight ( listView );
 }
 
+public static
+Uri addTaskToDB ( Context context, TaskModel taskModel ) {
+	Log.d ( "addTaskToDb", "" );
+	Uri uri = context.getContentResolver ().insert ( TaskColumns.CONTENT_URI, taskModel.getValues () );
+	Log.d ( "ChkColumn ", "title" + taskModel.getTitle () + "taskId=" + getIdFromUri ( uri ) + "listId" + taskModel.getListId () );
+return uri;
+}
 
 public static
 void genListAndTask ( Context context ) {

@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Dialog.CustomDialog;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
@@ -112,7 +113,7 @@ void setViewValues () {
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-
+			CustomDialog.showAddSubTaskDialog (thisActivity,taskAdapterComplete,listViewComplete  );
 		}
 	} );
 }

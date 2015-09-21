@@ -93,6 +93,36 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	return convertView;
 }
 
+void onClickStar ( View v, TaskModel rowData ) {
+	if ( ! rowData.isComplete () ) {
+		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
+		Utility.toggleImgStarData ( v,
+		                            rowData,
+		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+	}
+}
+
+@NonNull public static
+View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+
+		//	rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
+			if ( rowData.isComplete () ) {
+				//todo don't know why cant use completeList to add element
+
+			}
+			else {
+				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
+			}
+			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
+		}
+	};
+}
+
 private
 void setUpCompletedBg ( TaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
 	if ( rowData.isComplete () ) {
@@ -128,16 +158,6 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	}
 }
 
-void onClickStar ( View v, TaskModel rowData ) {
-	if ( ! rowData.isComplete () ) {
-		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-		Utility.toggleImgStarData ( v,
-		                            rowData,
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
-	}
-}
-
 @NonNull public
 View.OnClickListener onClickTask ( final TextView tvTitle, final int position ) {
 	return new View.OnClickListener () {
@@ -150,7 +170,6 @@ View.OnClickListener onClickTask ( final TextView tvTitle, final int position ) 
 	};
 }
 
-
 @NonNull private
 View.OnLongClickListener onLongClickTask ( TaskModel taskModel, final int position ) {
 	return new View.OnLongClickListener () {
@@ -162,26 +181,6 @@ View.OnLongClickListener onLongClickTask ( TaskModel taskModel, final int positi
 			TaskActivity.currentTask = getItem ( position );
 			TaskActivity.setMenuList ();
 			return false;
-		}
-	};
-}
-
-@NonNull public static
-View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
-	return new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-
-		//	rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
-			Log.d ( "TaskAdapter", "isComplete=" + rowData.getIsComplete () );
-			if ( rowData.isComplete () ) {
-				//todo don't know why cant use completeList to add element
-
-			}
-			else {
-				TaskDetailActivity.taskAdapterComplete.remove ( rowData );
-			}
-			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewComplete );
 		}
 	};
 }

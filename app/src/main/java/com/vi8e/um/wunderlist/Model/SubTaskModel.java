@@ -14,6 +14,27 @@ class SubTaskModel {
 String id;
 String taskId;
 String title;
+String Complete;
+
+public
+String getTaskId () {
+	return taskId;
+}
+
+public
+void setTaskId ( String taskId ) {
+	this.taskId = taskId;
+}
+
+public
+String getComplete () {
+	return Complete;
+}
+
+public
+void setComplete ( String complete ) {
+	Complete = complete;
+}
 
 public
 SubTaskModel ( String title, String taskId, String id ) {

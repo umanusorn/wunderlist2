@@ -22,4 +22,11 @@ public interface SubtaskModel extends BaseModel {
      */
     @Nullable
     String getTaskid();
+
+    /**
+     * Get the {@code complete} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    String getComplete();
 }

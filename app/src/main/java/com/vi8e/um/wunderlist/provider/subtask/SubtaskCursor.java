@@ -42,4 +42,14 @@ public class SubtaskCursor extends AbstractCursor implements SubtaskModel {
         String res = getStringOrNull(SubtaskColumns.TASKID);
         return res;
     }
+
+    /**
+     * Get the {@code complete} value.
+     * Can be {@code null}.
+     */
+    @Nullable
+    public String getComplete() {
+        String res = getStringOrNull(SubtaskColumns.COMPLETE);
+        return res;
+    }
 }
