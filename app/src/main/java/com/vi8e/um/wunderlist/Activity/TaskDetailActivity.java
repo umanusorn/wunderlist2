@@ -43,6 +43,7 @@ RelativeLayout noteLayout;
 
 ImageView star, checkBox;
 TextView noteEditText;
+RelativeLayout addSubTask;
 
 
 @Override
@@ -72,6 +73,11 @@ void onCreate ( Bundle savedInstanceState ) {
 
 private
 void setViewValues () {
+
+
+	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
+	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
+
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
 	taskAdapterComplete = new TaskDetailAdapter ( getApplication (), completeList );
 	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, false );
@@ -102,6 +108,13 @@ void setViewValues () {
 		}
 	} );
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
+
+	addSubTask.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+
+		}
+	} );
 }
 
 private
@@ -112,8 +125,8 @@ void setView () {
 	star = ( ImageView ) findViewById ( R.id.star );
 	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
 	noteLayout =(RelativeLayout )findViewById ( R.id.noteLayout );
-	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
-	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
+	addSubTask=(RelativeLayout)findViewById ( R.id.addSubTask );
+
 }
 
 @Override

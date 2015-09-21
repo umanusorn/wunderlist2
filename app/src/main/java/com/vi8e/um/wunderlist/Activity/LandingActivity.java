@@ -36,6 +36,7 @@ import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.OnItemMovedList
 import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.TouchViewDraggableManager;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.SimpleSwipeUndoAdapter;
+import com.vi8e.um.wunderlist.Dialog.CustomDialog;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -45,7 +46,6 @@ import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
-import com.vi8e.um.wunderlist.util.CustomDialog;
 import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -104,6 +104,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
 	nestedScrollView.setMinimumHeight ( minHeight );
 
+	mLandingListAdapter.onClickList ( 0, thisActivity, mLandingListAdapter.getItem ( 0 ));
 
 }
 
@@ -335,7 +336,7 @@ void onConfigurationChanged ( Configuration newConfig ) {
 protected
 void onPause () {
 	super.onPause ();
-	setMenuNormal ();
+	//setMenuNormal ();
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
 	saveListAdapterToDb ();
@@ -374,10 +375,6 @@ public static
 void setMenuNormal () {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
-
-//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
-
 }
 
 public static

@@ -12,9 +12,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Dialog.ConfirmDialog;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
-import com.vi8e.um.wunderlist.util.ConfirmDialog;
 import com.vi8e.um.wunderlist.util.Init;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 

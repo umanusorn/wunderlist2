@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
 import android.util.Log;
 import android.widget.ListView;
@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
+import com.vi8e.um.wunderlist.util.QueryHelper;
 
 
 /**

@@ -294,20 +294,12 @@
                     android:layout_centerHorizontal="true"/>
 
 
-            <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="3dp"
-
-                    android:layout_below="@+id/rowBg"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true">
-
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="0dp"
-                        android:id="@+id/relativeLayout"
+                        android:id="@+id/addSubTask"
+                        android:background="@color/white"
                         android:layout_below="@+id/rowBg"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true">
@@ -341,7 +333,6 @@
 
                 </RelativeLayout>
 
-            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
