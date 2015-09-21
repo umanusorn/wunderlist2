@@ -87,7 +87,7 @@ void setViewValues () {
 	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
 
 	ArrayList<TaskModel> completeList = new ArrayList<TaskModel> ();
-	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete,getApplicationContext () );
+	taskAdapterComplete = setUpAdapterListView ( this, listViewComplete, taskAdapterComplete, getApplicationContext () );
 
 	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
@@ -124,53 +124,12 @@ void setViewValues () {
 	} );
 }
 
-private
-void setView () {
-	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
-	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
-	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
-	star = ( ImageView ) findViewById ( R.id.star );
-	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
-	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
-	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
-
-}
-
-@Override
-protected
-void
-onResume () {
-	super.onResume ();
-	Log.d ( "OnResume", "" );
-
-	setView ();
-
-	setViewValues ();
-
-
-}
-
-@Override
-protected
-void onPause () {
-	super.onPause ();
-	//setMenuNormal ();
-
-	//ListModel currentList= LandingActivity.currentList;
-	TaskModel currentTask = TaskActivity.currentTask;
-	currentTask.setTitle ( editTextTitle.getText ().toString () );
-	String id = currentTask.getId ();
-	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
-
-}
-
 public static
 TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, Context context ) {
 
 	//listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
 
-	SubtaskSelection where = new SubtaskSelection();
+	SubtaskSelection where = new SubtaskSelection ();
 
 	//Log.d ( TAG, "taskId=" + listId + " getIsComplete=" + isComplete );
 
@@ -192,11 +151,55 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
-		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ), values.getAsString (SubtaskColumns.TASKID ),values.getAsString (SubtaskColumns._ID  ),values.getAsString (SubtaskColumns.ISCOMPLETE ) ) );
+		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
+		                                           values.getAsString ( SubtaskColumns.TASKID ),
+		                                           values.getAsString ( SubtaskColumns._ID ),
+		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
 
 	Utility.setTaskListViewHeight ( listView );
 	return taskDetailAdapter;
+}
+
+private
+void setView () {
+	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
+	checkBox = ( ImageView ) findViewById ( R.id.chkBox );
+	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
+	star = ( ImageView ) findViewById ( R.id.star );
+	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
+	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
+	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
+
+}
+
+@Override
+protected
+void onPause () {
+	super.onPause ();
+	//setMenuNormal ();
+
+	//ListModel currentList= LandingActivity.currentList;
+	TaskModel currentTask = TaskActivity.currentTask;
+	currentTask.setTitle ( editTextTitle.getText ().toString () );
+	String id = currentTask.getId ();
+	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
+	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
+
+}
+
+@Override
+protected
+void
+onResume () {
+	super.onResume ();
+	Log.d ( "OnResume", "" );
+
+	setView ();
+
+	setViewValues ();
+
+
 }
 
 @Override
@@ -210,16 +213,11 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 @Override
 public
 boolean onOptionsItemSelected ( MenuItem item ) {
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
 	int id = item.getItemId ();
 
-	//noinspection SimplifiableIfStatement
 	if ( id == R.id.action_settings ) {
 		return true;
 	}
-
 	return super.onOptionsItemSelected ( item );
 }
 }
