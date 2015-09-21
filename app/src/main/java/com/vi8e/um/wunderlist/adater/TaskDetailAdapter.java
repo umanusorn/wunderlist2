@@ -26,12 +26,14 @@ import java.util.ArrayList;
 public
 class TaskDetailAdapter extends ArrayAdapter<SubTaskModel> {
 
-Context              mContext;
-Resources            res;
+Context                 mContext;
+Resources               res;
 ArrayList<SubTaskModel> lists;
-boolean              mIsLongClick;
-
+RelativeLayout          rootView;
+TextView tvTitle;
+ImageView chkBox;
 private static final String TAG = TaskDetailAdapter.class.getSimpleName ();
+
 public
 TaskDetailAdapter ( Context context,
                     ArrayList<SubTaskModel> lists ) {
@@ -57,18 +59,18 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_sub_task, parent, false );
 	// Lookup view for data population
-	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
-	final ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
-	RelativeLayout rowBg = ( RelativeLayout ) convertView.findViewById ( R.id.rowBg );
-
-	setView ( rowData, tvTitle, chkBox );
+	tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
+	chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
+	rootView = ( RelativeLayout ) convertView.findViewById ( R.id.subTaskRootRow );
+	setView ( rowData);
 	return convertView;
 }
 
 public
-void setView ( SubTaskModel rowData, TextView tvTitle, ImageView chkBox ) {
+void setView ( SubTaskModel rowData ) {
 	tvTitle.setText ( rowData.getTitle () );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+
 }
 
 
@@ -78,9 +80,9 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 		@Override public
 		void onClick ( View v ) {
 
-		//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
+			//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
 			Log.d ( TAG, "getIsComplete= " + rowData.getIsComplete () );
-			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext);
+			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext );
 			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
 		}
 	};

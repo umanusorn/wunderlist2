@@ -40,19 +40,14 @@ void setTaskListViewHeight ( ListView listView ) {
 	int desiredWidth = View.MeasureSpec.makeMeasureSpec ( listView.getWidth (), View.MeasureSpec.AT_MOST );
 	for ( int i = 0 ; i < listAdapter.getCount () ; i++ ) {
 		View listItem = listAdapter.getView ( i, null, listView );
-		/*try {
-			ListModel listModel = ( ListModel ) listAdapter.getItem ( i );
-			Log.d ( "Data ", listModel.getTitle () );// + "isStar [" + taskModel.isStar () + "] getIsComplete" + taskModel.getIsComplete () );
-		}
-		catch ( Exception e ) {
-			Log.e ( "setListViewHeight", e.getMessage () );
-		}*/
-		listItem.measure ( desiredWidth, View.MeasureSpec.UNSPECIFIED );
-		Log.d ( "setTaskListViewHeight","height= "+totalHeight );
+		listItem.measure ( desiredWidth, View.MeasureSpec.UNSPECIFIED );//UNSPECIFIED
+
 		totalHeight += listItem.getMeasuredHeight ();
+		Log.d ( "setTaskListViewHeight","height= "+totalHeight );
 	}
 	ViewGroup.LayoutParams params = listView.getLayoutParams ();
 	totalHeight+=( listView.getDividerHeight () * ( listAdapter.getCount () - 1 ) );
+
 	Log.d ( "setTaskListViewHeight","height= "+totalHeight );
 	params.height = totalHeight ;
 	listView.setLayoutParams ( params );

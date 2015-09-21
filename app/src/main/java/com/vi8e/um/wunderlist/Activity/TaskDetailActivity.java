@@ -76,7 +76,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 
 	setViewValues ();
-	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+	taskAdapterComplete.setNotifyOnChange ( true );
+
+	Utility.setTaskListViewHeight ( listViewSubTask );
 }
 
 private
@@ -96,7 +98,7 @@ void setViewValues () {
 
 
 
-//Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
 	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -149,6 +151,8 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 		                                           values.getAsString ( SubtaskColumns._ID ),
 		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
+
+
 	Utility.setTaskListViewHeight (listViewSubTask );
 	return taskDetailAdapter;
 }
