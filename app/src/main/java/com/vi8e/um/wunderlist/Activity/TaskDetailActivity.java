@@ -102,6 +102,13 @@ void setViewValues () {
 			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
 		}
 	} );
+	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
+	star.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Utility.toggleImgStarData ( v, mTaskModel, getApplicationContext () );
+		}
+	} );
 
 
 	addSubTask.setOnClickListener ( new View.OnClickListener () {

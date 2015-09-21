@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -116,14 +117,15 @@ public static
 boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable clicked ) {
 
 	Log.d ( "toggleImgData", "isStar=" + rowData.getIsStar () );
+	ImageView imageView =(ImageView)v;
 
 	if ( rowData.isStar () ) {
-		v.setBackground ( normal );
+		imageView.setImageDrawable ( normal );
 		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
 		return false;
 	}
 	else {
-		v.setBackground ( clicked );
+		imageView.setImageDrawable ( clicked );
 		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
 		return true;
 	}
@@ -140,16 +142,18 @@ boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Context context ) 
 	return toggleImgCompleteData ( v, rowData, normal, clicked );
 }
 
+
 public static
 boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Drawable normal, Drawable clicked ) {
-
+	ImageView imageView =(ImageView)v;
 	if ( rowData.isComplete () ) {
-		v.setBackground ( normal );
+
+		imageView.setImageDrawable ( normal );
 		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 		return false;
 	}
 	else {
-		v.setBackground ( clicked );
+		imageView.setImageDrawable ( clicked );
 		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 		return true;
 	}
