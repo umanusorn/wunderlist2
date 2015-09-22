@@ -104,10 +104,12 @@ void setUpCompletedBg ( TaskModel rowData, RelativeLayout rowBg, CardView cardVi
 
 private static
 void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
+	//todo combine with toggle star
 	if ( rowData.isStar () ) {
+		star.setBackground ( null );
 		try {
 			Log.d ( "Set Bg isStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+			star.setImageDrawable ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg Star", rowData.getTitle () + ":" + e.toString () );
@@ -119,7 +121,7 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 	else {
 		try {
 			Log.d ( "Set Bg unStar=", "" + rowData.isStar () + ":" + rowData.getTitle () );
-			star.setBackground ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
+			star.setImageDrawable ( res.getDrawable ( R.mipmap.wl_task_detail_ribbon ) );
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg unStar", rowData.getTitle () + ":" + e.toString () );

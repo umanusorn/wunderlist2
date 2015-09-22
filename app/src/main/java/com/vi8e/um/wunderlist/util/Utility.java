@@ -113,8 +113,9 @@ public static
 boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable clicked ) {
 
 	Log.d ( "toggleImgData", "isStar=" + rowData.getIsStar () );
-	ImageView imageView =(ImageView)v;
 
+	ImageView imageView =(ImageView)v;
+	imageView.setBackground ( null );
 	if ( rowData.isStar () ) {
 		imageView.setImageDrawable ( normal );
 		rowData.setIsStar ( String.valueOf ( ! rowData.isStar () ) );
