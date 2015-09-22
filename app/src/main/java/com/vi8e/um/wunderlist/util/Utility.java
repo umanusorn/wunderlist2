@@ -133,7 +133,7 @@ boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Context context ) 
 
 	Resources res = context.getResources ();
 	Drawable normal = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkbox );
-	Drawable clicked = res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected );
+	Drawable clicked = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkedbox );
 	RelativeLayout rootView =(RelativeLayout)v.getParent ();
 	return toggleImgCompleteData ( v, rowData, normal, clicked );
 }
@@ -143,7 +143,6 @@ public static
 boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Drawable normal, Drawable clicked ) {
 	ImageView imageView =(ImageView)v;
 	if ( rowData.isComplete () ) {
-
 		imageView.setImageDrawable ( normal );
 		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
 		return false;

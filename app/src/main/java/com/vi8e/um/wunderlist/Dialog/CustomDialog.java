@@ -77,7 +77,6 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activi
 					         TaskDetailActivity.setUpAdapterListView ();
 				         }
 			         }
-
 			       )
 			.
 

@@ -41,7 +41,7 @@ private static final String TAG = LandingActivity.class.getSimpleName ();
 public static ListView          listViewSubTask;
 public static Activity          thisActivity;
 public static Context           sContext;
-public static TaskDetailAdapter taskDetailAdapter;
+public static TaskDetailAdapter subTaskAdapter;
 
 EditText editTextTitle;
 
@@ -76,7 +76,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 
 	setViewValues ();
-	taskDetailAdapter.setNotifyOnChange ( true );
+	subTaskAdapter.setNotifyOnChange ( true );
 
 	Utility.setTaskListViewHeight ( listViewSubTask );
 }
@@ -97,8 +97,7 @@ void setViewValues () {
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
 
 
-
-Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
 	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -117,17 +116,17 @@ Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showAddSubTaskDialog ( thisActivity, taskDetailAdapter, listViewSubTask );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
 		}
 	} );
 
-	taskDetailAdapter = setUpAdapterListView ( this, listViewSubTask, taskDetailAdapter, getApplicationContext () );
+	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
 }
 
 
 public static
 TaskDetailAdapter setUpAdapterListView(){
-	return setUpAdapterListView ( thisActivity, listViewSubTask, taskDetailAdapter, sContext );
+	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 
 public static
@@ -181,6 +180,27 @@ void onPause () {
 	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
 	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
 
+
+	saveSubTaskAdapterToDb ();
+
+}
+
+private
+void saveSubTaskAdapterToDb () {
+	for ( int i = 0 ; i < subTaskAdapter.getCount () ; i++ ) {
+		//ListModel recordData = mLandingListAdapter.getArrayList ().get ( i );
+		SubTaskModel recordData = subTaskAdapter.getItem ( i );
+		String id = recordData.getId ();
+		Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
+		//try {
+			getContentResolver ().update ( uri, recordData.getValues (), null, null );
+
+		/*catch ( IllegalArgumentException e ) {
+			Log.e ( "errorOnUpdateData", e.getMessage () );
+			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
+			Log.d ( "ChkColumn ", "title" + recordData.getTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
+		}*/
+	}
 }
 
 @Override

@@ -3,7 +3,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +69,12 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 public
 void setView ( final SubTaskModel rowData ) {
 	tvTitle.setText ( rowData.getTitle () );
+	Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 rootView.setOnClickListener ( new View.OnClickListener () {
 	@Override public
 	void onClick ( View v ) {
-		CustomDialog.showUpdateSubTaskDialog (rowData,TaskDetailActivity.thisActivity,TaskDetailActivity.taskDetailAdapter,TaskDetailActivity.listViewSubTask  );
+		CustomDialog.showUpdateSubTaskDialog (rowData,TaskDetailActivity.thisActivity,TaskDetailActivity.subTaskAdapter,TaskDetailActivity.listViewSubTask  );
 	}
 } );
 }
@@ -87,9 +87,9 @@ View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 		void onClick ( View v ) {
 
 			//	rowData.setIsComplete ( String.valueOf ( ! rowData.getIsComplete () ) );
-			Log.d ( TAG, "getIsComplete= " + rowData.getIsComplete () );
+
 			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext );
-			Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
+			//Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
 		}
 	};
 }

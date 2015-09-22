@@ -15,6 +15,32 @@ String taskId;
 String title;
 String isComplete;
 
+public
+SubTaskModel ( String title ) {
+	this.title = title;
+}
+
+public
+SubTaskModel ( String title, String taskId, String id, String isComplete ) {
+	//setDefault ();
+	Log.d ( "newSubTask", "id=" + id );
+
+	this.title = title;
+	this.taskId = taskId;
+	this.id = id;
+	this.isComplete=isComplete;
+}
+
+public
+SubTaskModel ( String title, String taskId ) {
+
+	this.title = title;
+	this.taskId = taskId;
+	if(getIsComplete ()==null )
+		setIsComplete ( String.valueOf ( false ) );
+
+}
+
 public boolean isComplete(){
 	return Boolean.valueOf ( isComplete );
 }
@@ -35,34 +61,7 @@ String getTaskId () {
 }
 
 public
-SubTaskModel ( String title ) {
-	this.title = title;
-}
-
-public
 void setTaskId ( String taskId ) {
-	this.taskId = taskId;
-}
-
-public
-String getComplete () {
-	return isComplete;
-}
-
-public
-SubTaskModel ( String title, String taskId, String id, String isComplete ) {
-	//setDefault ();
-	Log.d ( "newSubTask", "id=" + id );
-
-	this.title = title;
-	this.taskId = taskId;
-	this.id = id;
-	this.isComplete=isComplete;
-}
-public
-SubTaskModel ( String title, String taskId ) {
-
-	this.title = title;
 	this.taskId = taskId;
 }
 
@@ -76,6 +75,10 @@ ContentValues getValues () {
 	return values;
 }
 
+public
+String getComplete () {
+	return isComplete;
+}
 
 public
 String getTitle () {
