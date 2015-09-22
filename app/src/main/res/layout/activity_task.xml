@@ -87,16 +87,25 @@
                             android:layout_below="@+id/star"
                             android:layout_centerHorizontal="true"/>
 
-                    <TextView
+                    <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="COMPLETED TO-DOS "
-                            android:textColor="@color/white"
-                            android:background="@color/transparent_black"
-                            android:id="@+id/tvComplete"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"/>
+                            android:padding="10dp"
+                            >
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="COMPLETED TO-DOS "
+                                android:textColor="@color/white"
+                                android:background="@color/transparent_black"
+                                android:id="@+id/tvComplete"
+
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
+
 
                     <ListView
                             android:layout_width="wrap_content"
@@ -131,12 +140,12 @@
                     android:background="@android:drawable/sym_contact_card"/>
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/imageView8"
-                android:background="@android:drawable/sym_contact_card"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageView8"
+                    android:background="@android:drawable/sym_contact_card"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
 
             <ImageView
                     android:layout_width="40dp"
