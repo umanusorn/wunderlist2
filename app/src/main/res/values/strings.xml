@@ -16,4 +16,5 @@
     <string name="title_activity_task_note">TaskNoteActivity</string>
     <string name="removed_positions">removed_positions</string>
     <string name="content_delete_list">will be deleted forever.</string>
+    <string name="remind_me">Remind me</string>
 </resources>

@@ -43,16 +43,17 @@ public static Activity          thisActivity;
 public static Context           sContext;
 public static TaskDetailAdapter subTaskAdapter;
 
-EditText editTextTitle;
 
 Boolean isStar       = false;
 Boolean showComplete = true;
+
+EditText editTextTitle;
 TaskModel      mTaskModel;
 RelativeLayout noteLayout;
-
 ImageView star, checkBoxTitle;
 TextView       noteEditText;
 RelativeLayout addSubTask;
+RelativeLayout calendarLayout;
 
 
 @Override
@@ -87,7 +88,6 @@ void setViewValues () {
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
 	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
 	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
-
 	noteLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -96,6 +96,12 @@ void setViewValues () {
 	} );
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
 
+	calendarLayout.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			CustomDialog.showReminderDialog ( thisActivity,listViewSubTask );
+		}
+	} );
 
 	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
 	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
@@ -112,21 +118,13 @@ void setViewValues () {
 		}
 	} );
 
-
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
 			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
 		}
 	} );
-
 	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
-}
-
-
-public static
-TaskDetailAdapter setUpAdapterListView(){
-	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 
 public static
@@ -167,7 +165,13 @@ void setView () {
 	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
 	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
 	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
+	calendarLayout = (RelativeLayout)findViewById ( R.id.calendatLayout );
 
+}
+
+public static
+TaskDetailAdapter setUpAdapterListView(){
+	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 
 @Override
@@ -179,8 +183,6 @@ void onPause () {
 	String id = currentTask.getId ();
 	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
 	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
-
-
 	saveSubTaskAdapterToDb ();
 
 }

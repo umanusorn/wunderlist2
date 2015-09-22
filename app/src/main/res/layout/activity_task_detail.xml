@@ -210,7 +210,6 @@
     <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:id="@+id/scrollView"
             android:layout_below="@+id/rowBg"
             android:layout_above="@+id/relativeLayout2">
@@ -223,68 +222,75 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_height="wrap_content">
 
-
-            <android.support.v7.widget.CardView
-
-                    android:id="@+id/card_view"
-                    android:layout_width="match_parent"
+            <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    card_view:cardCornerRadius="3dp"
-                    android:padding="10dp"
                     android:layout_below="@+id/rowBg"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true">
+                    android:padding="5dp"
+                    android:id="@+id/calendatLayout"
+                    >
 
-                <RelativeLayout
+                <android.support.v7.widget.CardView
+
+                        android:id="@+id/card_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:id="@+id/calendatLayout"
-                        android:layout_below="@+id/rowBg"
+                        card_view:cardCornerRadius="3dp"
+                        android:padding="10dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true">
 
-                    <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:id="@+id/imageView"
-                            android:src="@mipmap/wl_icon_task_detail_checkbox"
-                            android:layout_gravity="center_vertical"
-                            android:tintMode="src_atop"
-                            android:tint="@color/grey_600"
-                            android:layout_centerVertical="true"
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+
+                            android:layout_below="@+id/rowBg"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"/>
+                            android:layout_alignParentStart="true">
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:padding="@dimen/md_listitem_control_margin"
-                            android:text="Set Date &amp; Reminder"
-                            android:id="@+id/textView"
-                            android:textColor="@color/grey_800"
-                            android:layout_alignWithParentIfMissing="false"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/imageView"
-                            android:layout_toEndOf="@+id/imageView"/>
+                        <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:id="@+id/imageView"
+                                android:src="@mipmap/wl_icon_task_detail_checkbox"
+                                android:layout_gravity="center_vertical"
+                                android:tintMode="src_atop"
+                                android:tint="@color/grey_600"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"/>
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/md_listitem_control_margin"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="1"
-                            android:id="@+id/textView3"
-                            android:textColor="@color/grey_600"
-                            android:layout_alignTop="@+id/textView"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:padding="@dimen/md_listitem_control_margin"
+                                android:text="Set Date &amp; Reminder"
+                                android:id="@+id/textView"
+                                android:textColor="@color/grey_800"
+                                android:layout_alignWithParentIfMissing="false"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/imageView"
+                                android:layout_toEndOf="@+id/imageView"/>
 
-                </RelativeLayout>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/md_listitem_control_margin"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="1"
+                                android:id="@+id/textView3"
+                                android:textColor="@color/grey_600"
+                                android:layout_alignTop="@+id/textView"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
 
-            </android.support.v7.widget.CardView>
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
 
 
             <ListView
@@ -293,6 +299,12 @@
                     android:id="@+id/listViewTaskInComplete"
                     android:layout_centerHorizontal="true"/>
 
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="1dp"
+                    android:layout_below="@+id/rowBg"
+                    >
 
                 <RelativeLayout
                         android:layout_width="match_parent"
@@ -300,7 +312,6 @@
                         android:paddingTop="1dp"
                         android:id="@+id/addSubTask"
                         android:background="@color/white"
-                        android:layout_below="@+id/rowBg"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true">
 
@@ -332,6 +343,8 @@
 
 
                 </RelativeLayout>
+
+            </RelativeLayout>
 
 
             <android.support.v7.widget.CardView

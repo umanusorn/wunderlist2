@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -22,6 +23,16 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
 public
 class CustomDialog {
 
+
+public static
+void showReminderDialog ( final Activity thisContext, final ListView listView ) {
+	MaterialDialog reminderDialog = new MaterialDialog.Builder ( thisContext )
+			.customView ( R.layout.dialog_reminder, true )
+			.show ();
+
+	View view =reminderDialog.getCustomView ();
+
+}
 
 public static
 void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
