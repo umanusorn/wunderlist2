@@ -39,9 +39,9 @@ public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
 public static ListView          listViewSubTask;
-public static      Activity          thisActivity;
+public static Activity          thisActivity;
 public static Context           sContext;
-public static TaskDetailAdapter taskAdapterComplete;
+public static TaskDetailAdapter taskDetailAdapter;
 
 EditText editTextTitle;
 
@@ -76,7 +76,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 
 	setViewValues ();
-	taskAdapterComplete.setNotifyOnChange ( true );
+	taskDetailAdapter.setNotifyOnChange ( true );
 
 	Utility.setTaskListViewHeight ( listViewSubTask );
 }
@@ -117,17 +117,17 @@ Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showAddSubTaskDialog ( thisActivity, taskAdapterComplete, listViewSubTask );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, taskDetailAdapter, listViewSubTask );
 		}
 	} );
 
-	taskAdapterComplete = setUpAdapterListView ( this, listViewSubTask, taskAdapterComplete, getApplicationContext () );
+	taskDetailAdapter = setUpAdapterListView ( this, listViewSubTask, taskDetailAdapter, getApplicationContext () );
 }
 
 
 public static
 TaskDetailAdapter setUpAdapterListView(){
-	return setUpAdapterListView ( thisActivity, listViewSubTask, taskAdapterComplete, sContext );
+	return setUpAdapterListView ( thisActivity, listViewSubTask, taskDetailAdapter, sContext );
 }
 
 public static

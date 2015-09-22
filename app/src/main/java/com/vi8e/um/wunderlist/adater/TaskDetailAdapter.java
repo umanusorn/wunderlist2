@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Dialog.CustomDialog;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.Utility;
@@ -67,10 +68,15 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 }
 
 public
-void setView ( SubTaskModel rowData ) {
+void setView ( final SubTaskModel rowData ) {
 	tvTitle.setText ( rowData.getTitle () );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
-
+rootView.setOnClickListener ( new View.OnClickListener () {
+	@Override public
+	void onClick ( View v ) {
+		CustomDialog.showUpdateSubTaskDialog (rowData,TaskDetailActivity.thisActivity,TaskDetailActivity.taskDetailAdapter,TaskDetailActivity.listViewSubTask  );
+	}
+} );
 }
 
 

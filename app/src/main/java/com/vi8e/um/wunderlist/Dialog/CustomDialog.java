@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -7,9 +8,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 
 
@@ -18,8 +21,6 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
  */
 public
 class CustomDialog {
-
-
 
 
 public static
@@ -57,6 +58,34 @@ void showAddSubTaskDialog ( final Activity thisContext, final TaskDetailAdapter 
 			} )
 			.negativeText ( "CANCEL" )
 			.show ();
+}
+
+
+public static
+void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activity, final TaskDetailAdapter taskDetailAdapter, final ListView listView ) {
+	new MaterialDialog.Builder ( activity )
+			.title ( "Edit" )
+			.positiveText ( "ACCEPT" )
+			.input ( rowData.getTitle (), rowData.getTitle (), new MaterialDialog.InputCallback () {
+				         @Override public
+				         void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
+
+					         rowData.setTitle ( String.valueOf ( charSequence ));
+					         String id = rowData.getId ();
+					         Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
+					         activity.getContentResolver ().update ( uri, rowData.getValues (), null, null );
+					         TaskDetailActivity.setUpAdapterListView ();
+				         }
+			         }
+
+			       )
+			.
+
+					negativeText ( "CANCEL" )
+
+			.
+
+					show ();
 }
 
 public static
