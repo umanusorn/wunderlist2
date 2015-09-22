@@ -93,17 +93,24 @@
                             android:padding="10dp"
                             >
 
-                        <TextView
+                        <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="COMPLETED TO-DOS "
-                                android:textColor="@color/white"
-                                android:background="@color/transparent_black"
-                                android:id="@+id/tvComplete"
 
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true"/>
+                                android:background="@color/transparent_black"
+                                android:padding="5dp"
+                                >
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMPLETED TO-DOS "
+                                    android:textColor="@color/white"
+                                    android:id="@+id/tvComplete"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
 
