@@ -6,6 +6,7 @@ import android.widget.ListView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.LandingListAdapter;
 import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
@@ -49,6 +50,7 @@ void showAddSubTaskDialog ( final Activity thisContext, final TaskDetailAdapter 
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
 					QueryHelper.addSubTaskToDB ( thisContext, String.valueOf ( charSequence ), TaskActivity.currentTask.getId (), listView );
+					TaskDetailActivity.setUpAdapterListView ();
 					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
 					//Utility.setTaskListViewHeight ( listView );
 				}

@@ -39,7 +39,7 @@ public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = LandingActivity.class.getSimpleName ();
 public static ListView          listViewSubTask;
-private       Activity          thisActivity;
+public static      Activity          thisActivity;
 public static Context           sContext;
 public static TaskDetailAdapter taskAdapterComplete;
 
@@ -124,11 +124,14 @@ Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext
 	taskAdapterComplete = setUpAdapterListView ( this, listViewSubTask, taskAdapterComplete, getApplicationContext () );
 }
 
+
+public static
+TaskDetailAdapter setUpAdapterListView(){
+	return setUpAdapterListView ( thisActivity, listViewSubTask, taskAdapterComplete, sContext );
+}
+
 public static
 TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, Context context ) {
-
-	//listView = ( DynamicListView ) activity.findViewById ( R.id.listViewTaskInComplete );
-
 	SubtaskSelection where = new SubtaskSelection ();
 	where.taskid ( TaskActivity.currentTask.getId () );
 	Cursor c = where.query ( context.getContentResolver () );
@@ -151,7 +154,6 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 		                                           values.getAsString ( SubtaskColumns._ID ),
 		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
-
 
 	Utility.setTaskListViewHeight (listViewSubTask );
 	return taskDetailAdapter;
