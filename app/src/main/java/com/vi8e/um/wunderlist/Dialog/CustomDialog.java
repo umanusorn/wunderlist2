@@ -27,10 +27,11 @@ class CustomDialog {
 public static
 void showReminderDialog ( final Activity thisContext, final ListView listView ) {
 	MaterialDialog reminderDialog = new MaterialDialog.Builder ( thisContext )
-			.customView ( R.layout.dialog_reminder, true )
+			.customView ( R.layout.dialog_reminder, false )
 			.show ();
 
 	View view =reminderDialog.getCustomView ();
+
 
 }
 
