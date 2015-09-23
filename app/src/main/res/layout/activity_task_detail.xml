@@ -266,7 +266,7 @@
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:padding="@dimen/md_listitem_control_margin"
-                                android:text="Set Date &amp; Reminder"
+                                android:text="@string/reminder_text_task_detail"
                                 android:id="@+id/reminder_text_taskDetail"
                                 android:textColor="@color/grey_800"
                                 android:layout_alignWithParentIfMissing="false"

@@ -30,6 +30,7 @@ import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.QueryHelper;
+import com.vi8e.um.wunderlist.util.UiMng;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ ImageView      star, checkBoxTitle;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
-TextView       reminderText;
+public static TextView       reminderText;
 
 
 @Override
@@ -142,7 +143,11 @@ void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText,
 	if( reminderTime!=null && !reminderTime.isEmpty () ){
 		Date date= new Date (  );
 		date.setTime ( Long.parseLong ( reminderTime) );
-		ReminderDialog.setTextViewReminderDateTime ( date, reminderText, context );
+		ReminderDialog.setTextViewReminder ( date, reminderText, context );
+	}
+	else{
+		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ));
+		UiMng.setBlackText ( context,reminderText );
 	}
 }
 

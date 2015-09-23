@@ -45,7 +45,8 @@ SlideDateTimeListener getSlideDateTimeListener () {
 		public
 		void onDateTimeSet ( Date date ) {
 			TaskActivity.currentTask.setReminderDate ( String.valueOf ( date.getTime () ) );
-			setTextViewReminderDateTime ( date, reminderText,mContext );
+			setTextViewReminder ( date, reminderText, mContext );
+
 
 		}
 
@@ -58,7 +59,7 @@ SlideDateTimeListener getSlideDateTimeListener () {
 }
 
 public static
-void setTextViewReminderDateTime ( Date date,TextView reminderText, Context context) {
+void setTextViewReminder ( Date date, TextView reminderText, Context context ) {
 	try {
 		reminderText.setText ( "Reminder " + UiMng.getYesterdayOrTodayOrTmr ( date ) + " at " + UiMng.getTimeHHmm ( date ) );
 	}
@@ -98,6 +99,8 @@ void setView ( final MaterialDialog materialDialog ) {
 	remove.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
+			TaskDetailActivity.currentTask.setReminderDate ( null );
+			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask,TaskDetailActivity.reminderText,mContext );
 			materialDialog.dismiss ();
 		}
 	} );
@@ -105,7 +108,7 @@ void setView ( final MaterialDialog materialDialog ) {
 		@Override public
 		void onClick ( View v ) {
 
-			//TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.mCurrentTask, );
+			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask,TaskDetailActivity.reminderText,mContext );
 			materialDialog.dismiss ();
 		}
 	} );
