@@ -12,6 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
+import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.UiMng;
@@ -35,6 +36,18 @@ static Context  mContext;
 static private       SlideDateTimeListener listener = getSlideDateTimeListener ();
 private static final String                TAG      = LandingActivity.class.getSimpleName ();
 
+public static
+Date getDate () {
+	return date;
+}
+
+public static
+void setDate ( Date date ) {
+	ReminderDialog.date = date;
+}
+
+static Date date;
+
 @NonNull private static
 SlideDateTimeListener getSlideDateTimeListener () {
 	return new SlideDateTimeListener () {
@@ -42,11 +55,7 @@ SlideDateTimeListener getSlideDateTimeListener () {
 		@Override
 		public
 		void onDateTimeSet ( Date date ) {
-			// Do something with the date. This Date object contains
-			// the date and time that the user has selected.
-			long currentTime = Calendar.getInstance ().getTimeInMillis ();
-			;
-
+			setDate ( date );
 			try {
 				reminderText.setText ( "Reminder " + UiMng.getYesterdayOrTodayOrTmr ( date ) + " at " + UiMng.getTimeHHmm ( date ) );
 			}
@@ -99,6 +108,7 @@ void setView ( final MaterialDialog materialDialog ) {
 	save.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
+			TaskActivity.currentTask.setReminderDate ( String.valueOf ( getDate ().getTime () ) );
 			materialDialog.dismiss ();
 		}
 	} );
