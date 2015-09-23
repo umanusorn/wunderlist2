@@ -105,10 +105,9 @@ void setViewValues () {
 	String reminderTime = mTaskModel.getReminderDate ();
 	Log.d ( TAG,"reminderTime= "+reminderTime );
 	if( reminderTime!=null && !reminderTime.isEmpty () ){
-
 		Date date= new Date (  );
 		date.setTime ( Long.parseLong ( reminderTime) );
-		ReminderDialog.setTextViewReminderDateTime ( date,reminderText );
+		ReminderDialog.setTextViewReminderDateTime ( date,reminderText,sContext );
 	}
 
 	calendarLayout.setOnClickListener ( new View.OnClickListener () {
