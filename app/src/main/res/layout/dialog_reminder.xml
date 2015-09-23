@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/remind_me"
-                        android:textSize="@dimen/medium_text_size"
+                        android:textSize="@dimen/small_text_size"
                         android:id="@+id/reminder_text"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView10"

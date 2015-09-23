@@ -22,11 +22,6 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
 public
 class CustomDialog {
 
-
-
-
-
-
 public static
 void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
