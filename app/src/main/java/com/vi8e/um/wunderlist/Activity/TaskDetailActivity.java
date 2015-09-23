@@ -51,13 +51,13 @@ Boolean isStar       = false;
 Boolean showComplete = true;
 
 EditText       editTextTitle;
-TaskModel      mTaskModel;
+public static TaskModel      currentTask;
 RelativeLayout noteLayout;
 ImageView      star, checkBoxTitle;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
-TextView reminderText;
+TextView       reminderText;
 
 
 @Override
@@ -67,7 +67,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setContentView ( R.layout.activity_task_detail );
 	sContext = getApplicationContext ();
 	thisActivity = this;
-	mTaskModel = TaskActivity.currentTask;
+	currentTask = TaskActivity.currentTask;
 
 	sFragmentManager = getSupportFragmentManager ();
 
@@ -92,23 +92,17 @@ private
 void setViewValues () {
 
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
-	mTaskModel.setIsStar ( String.valueOf ( ! mTaskModel.isStar () ) );
-	noteEditText.setText ( String.valueOf ( mTaskModel.getNote () ) );
+	currentTask.setIsStar ( String.valueOf ( ! currentTask.isStar () ) );
+	noteEditText.setText ( String.valueOf ( currentTask.getNote () ) );
 	noteLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			IntentCaller.taskNoteActivity ( getApplicationContext (), mTaskModel );
+			IntentCaller.taskNoteActivity ( getApplicationContext (), currentTask );
 		}
 	} );
-	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
+	currentTask.setIsComplete ( String.valueOf ( ! currentTask.isComplete () ) );
 
-	String reminderTime = mTaskModel.getReminderDate ();
-	Log.d ( TAG,"reminderTime= "+reminderTime );
-	if( reminderTime!=null && !reminderTime.isEmpty () ){
-		Date date= new Date (  );
-		date.setTime ( Long.parseLong ( reminderTime) );
-		ReminderDialog.setTextViewReminderDateTime ( date,reminderText,sContext );
-	}
+	setTextViewReminderFromTaskDB ( currentTask, reminderText,sContext );
 
 	calendarLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -117,18 +111,18 @@ void setViewValues () {
 		}
 	} );
 
-	Utility.toggleImgCompleteData ( checkBoxTitle, mTaskModel, getApplicationContext () );
+	Utility.toggleImgCompleteData ( checkBoxTitle, currentTask, getApplicationContext () );
 	checkBoxTitle.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Utility.toggleImgCompleteData ( v, mTaskModel, getApplicationContext () );
+			Utility.toggleImgCompleteData ( v, currentTask, getApplicationContext () );
 		}
 	} );
-	Utility.toggleImgStarData ( star, mTaskModel, getApplicationContext () );
+	Utility.toggleImgStarData ( star, currentTask, getApplicationContext () );
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Utility.toggleImgStarData ( v, mTaskModel, getApplicationContext () );
+			Utility.toggleImgStarData ( v, currentTask, getApplicationContext () );
 		}
 	} );
 
@@ -139,6 +133,17 @@ void setViewValues () {
 		}
 	} );
 	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
+}
+
+public static
+void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
+	String reminderTime = taskModel.getReminderDate ();
+	Log.d ( TAG, "reminderTime= " + reminderTime );
+	if( reminderTime!=null && !reminderTime.isEmpty () ){
+		Date date= new Date (  );
+		date.setTime ( Long.parseLong ( reminderTime) );
+		ReminderDialog.setTextViewReminderDateTime ( date, reminderText, context );
+	}
 }
 
 public static

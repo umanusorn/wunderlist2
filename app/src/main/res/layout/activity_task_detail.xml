@@ -274,24 +274,10 @@
                                 android:layout_toRightOf="@+id/imageView"
                                 android:layout_toEndOf="@+id/imageView"/>
 
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/md_listitem_control_margin"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="1"
-                                android:id="@+id/textView3"
-                                android:textColor="@color/grey_600"
-                                android:layout_alignTop="@+id/textView"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"/>
-
                     </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
             </RelativeLayout>
-
 
             <ListView
                     android:layout_width="wrap_content"

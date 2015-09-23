@@ -36,17 +36,6 @@ static Context  mContext;
 static private       SlideDateTimeListener listener = getSlideDateTimeListener ();
 private static final String                TAG      = LandingActivity.class.getSimpleName ();
 
-public static
-Date getDate () {
-	return date;
-}
-
-public static
-void setDate ( Date date ) {
-	ReminderDialog.date = date;
-}
-
-static Date date;
 
 @NonNull private static
 SlideDateTimeListener getSlideDateTimeListener () {
@@ -55,7 +44,7 @@ SlideDateTimeListener getSlideDateTimeListener () {
 		@Override
 		public
 		void onDateTimeSet ( Date date ) {
-			setDate ( date );
+			TaskActivity.currentTask.setReminderDate ( String.valueOf ( date.getTime () ) );
 			setTextViewReminderDateTime ( date, reminderText,mContext );
 
 		}
@@ -95,6 +84,7 @@ void showReminderDialog ( final Activity thisContext, final ListView listView, C
 	reminderDialog.getContext ();
 	setView ( reminderDialog );
 	mContext = context;
+	TaskDetailActivity.setTextViewReminderFromTaskDB (TaskDetailActivity.currentTask,reminderText,context  );
 
 }
 
@@ -114,7 +104,7 @@ void setView ( final MaterialDialog materialDialog ) {
 	save.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			TaskActivity.currentTask.setReminderDate ( String.valueOf ( getDate ().getTime () ) );
+
 			//TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.mCurrentTask, );
 			materialDialog.dismiss ();
 		}
