@@ -2,7 +2,6 @@ package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
 import android.net.Uri;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -24,16 +23,9 @@ public
 class CustomDialog {
 
 
-public static
-void showReminderDialog ( final Activity thisContext, final ListView listView ) {
-	MaterialDialog reminderDialog = new MaterialDialog.Builder ( thisContext )
-			.customView ( R.layout.dialog_reminder, false )
-			.show ();
-
-	View view =reminderDialog.getCustomView ();
 
 
-}
+
 
 public static
 void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
@@ -82,7 +74,7 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activi
 				         @Override public
 				         void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
 
-					         rowData.setTitle ( String.valueOf ( charSequence ));
+					         rowData.setTitle ( String.valueOf ( charSequence ) );
 					         String id = rowData.getId ();
 					         Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
 					         activity.getContentResolver ().update ( uri, rowData.getValues (), null, null );

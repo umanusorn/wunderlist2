@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Dialog.CustomDialog;
+import com.vi8e.um.wunderlist.Dialog.ReminderDialog;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -42,6 +43,8 @@ public static ListView          listViewSubTask;
 public static Activity          thisActivity;
 public static Context           sContext;
 public static TaskDetailAdapter subTaskAdapter;
+public static
+android.support.v4.app.FragmentManager sFragmentManager;
 
 
 Boolean isStar       = false;
@@ -64,6 +67,8 @@ void onCreate ( Bundle savedInstanceState ) {
 	sContext = getApplicationContext ();
 	thisActivity = this;
 	mTaskModel = TaskActivity.currentTask;
+
+	sFragmentManager = getSupportFragmentManager ();
 
 	getWindow ().setSoftInputMode (
 			WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -99,7 +104,7 @@ void setViewValues () {
 	calendarLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			CustomDialog.showReminderDialog ( thisActivity,listViewSubTask );
+			ReminderDialog.showReminderDialog ( thisActivity, listViewSubTask,sContext );
 		}
 	} );
 

@@ -16,6 +16,7 @@
         <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/add_reminder"
                 android:background="@drawable/boundary_bottom"
                 >
 
@@ -37,6 +38,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/remind_me"
                         android:textSize="@dimen/medium_text_size"
+                        android:id="@+id/reminder_text"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/imageView10"
                         android:layout_toEndOf="@+id/imageView10"/>
@@ -55,10 +57,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/relativeLayout">
+                android:id="@+id/save_reminder">
 
             <TextView
                     android:layout_width="wrap_content"
@@ -73,8 +76,9 @@
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/relativeLayout"
-                android:layout_toStartOf="@+id/relativeLayout">
+                android:id="@+id/remove_reminder"
+                android:layout_toLeftOf="@+id/save_reminder"
+                android:layout_toStartOf="@+id/save_reminder">
 
             <TextView
                     android:layout_width="wrap_content"

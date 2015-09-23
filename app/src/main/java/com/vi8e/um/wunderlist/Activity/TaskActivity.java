@@ -60,8 +60,11 @@ static        Activity             thisActivity;
 static        String               listId;
 public static TaskModel            currentTask;
 static        Menu                 menu;
-private int prevScrollPosition = 0;
-private boolean isPrevScrollUp = true;
+private int     prevScrollPosition = 0;
+private boolean isPrevScrollUp     = true;
+
+
+
 
 @Override
 protected
@@ -81,7 +84,6 @@ void onCreate ( Bundle savedInstanceState ) {
 	listViewComplete = ( ListView ) findViewById ( R.id.listViewTaskComplete );
 	setUpAdater ();
 	toggleShowCompleteListView ();
-
 }
 
 private
@@ -94,6 +96,8 @@ void setUpAdater () {
 	taskAdapterInComplete = new TaskAdapter ( getApplication (), inCompleteList );
 	listViewIncomplete = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	taskAdapterInComplete = setUpAdapterListView ( getApplicationContext (), listViewIncomplete, taskAdapterInComplete, false );
+
+
 }
 
 public static
