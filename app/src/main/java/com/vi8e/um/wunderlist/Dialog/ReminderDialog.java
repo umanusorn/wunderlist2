@@ -56,19 +56,7 @@ SlideDateTimeListener getSlideDateTimeListener () {
 		public
 		void onDateTimeSet ( Date date ) {
 			setDate ( date );
-			try {
-				reminderText.setText ( "Reminder " + UiMng.getYesterdayOrTodayOrTmr ( date ) + " at " + UiMng.getTimeHHmm ( date ) );
-			}
-			catch ( ParseException e ) {
-				Log.e ( TAG, e.getMessage () + e.toString () );
-			}
-
-			if ( ! date.before ( Calendar.getInstance ().getTime () ) ) {
-				UiMng.setBlueText ( mContext, reminderText );
-			}
-			else {
-				UiMng.setRedText ( mContext, reminderText );
-			}
+			setTextViewReminderDateTime ( date,reminderText );
 		}
 
 		@Override
@@ -77,6 +65,23 @@ SlideDateTimeListener getSlideDateTimeListener () {
 			// Overriding onDateTimeCancel() is optional.
 		}
 	};
+}
+
+public static
+void setTextViewReminderDateTime ( Date date,TextView reminderText ) {
+	try {
+		reminderText.setText ( "Reminder " + UiMng.getYesterdayOrTodayOrTmr ( date ) + " at " + UiMng.getTimeHHmm ( date ) );
+	}
+	catch ( ParseException e ) {
+		Log.e ( TAG, e.getMessage () + e.toString () );
+	}
+
+	if ( ! date.before ( Calendar.getInstance ().getTime () ) ) {
+		UiMng.setBlueText ( mContext, reminderText );
+	}
+	else {
+		UiMng.setRedText ( mContext, reminderText );
+	}
 }
 
 

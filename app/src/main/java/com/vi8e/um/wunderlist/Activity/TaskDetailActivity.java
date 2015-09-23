@@ -33,6 +33,7 @@ import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -46,17 +47,17 @@ public static TaskDetailAdapter subTaskAdapter;
 public static
 android.support.v4.app.FragmentManager sFragmentManager;
 
-
 Boolean isStar       = false;
 Boolean showComplete = true;
 
-EditText editTextTitle;
+EditText       editTextTitle;
 TaskModel      mTaskModel;
 RelativeLayout noteLayout;
-ImageView star, checkBoxTitle;
+ImageView      star, checkBoxTitle;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
+TextView reminderText;
 
 
 @Override
@@ -101,10 +102,19 @@ void setViewValues () {
 	} );
 	mTaskModel.setIsComplete ( String.valueOf ( ! mTaskModel.isComplete () ) );
 
+	String reminderTime = mTaskModel.getReminderDate ();
+	Log.d ( TAG,"reminderTime= "+reminderTime );
+	if( reminderTime!=null && !reminderTime.isEmpty () ){
+
+		Date date= new Date (  );
+		date.setTime ( Long.parseLong ( reminderTime) );
+		ReminderDialog.setTextViewReminderDateTime ( date,reminderText );
+	}
+
 	calendarLayout.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			ReminderDialog.showReminderDialog ( thisActivity, listViewSubTask,sContext );
+			ReminderDialog.showReminderDialog ( thisActivity, listViewSubTask, sContext );
 		}
 	} );
 
@@ -148,7 +158,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 
 	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
 	taskDetailAdapter = new TaskDetailAdapter ( context, arrayOfList );
-  listView.setAdapter ( taskDetailAdapter );
+	listView.setAdapter ( taskDetailAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
 		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
@@ -157,7 +167,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
 
-	Utility.setTaskListViewHeight (listViewSubTask );
+	Utility.setTaskListViewHeight ( listViewSubTask );
 	return taskDetailAdapter;
 }
 
@@ -170,12 +180,13 @@ void setView () {
 	noteEditText = ( TextView ) findViewById ( R.id.noteEdittext );
 	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
 	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
-	calendarLayout = (RelativeLayout)findViewById ( R.id.calendatLayout );
+	calendarLayout = ( RelativeLayout ) findViewById ( R.id.calendatLayout );
+	reminderText = (TextView)findViewById ( R.id.reminder_text_taskDetail );
 
 }
 
 public static
-TaskDetailAdapter setUpAdapterListView(){
+TaskDetailAdapter setUpAdapterListView () {
 	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 
@@ -200,7 +211,7 @@ void saveSubTaskAdapterToDb () {
 		String id = recordData.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
 		//try {
-			getContentResolver ().update ( uri, recordData.getValues (), null, null );
+		getContentResolver ().update ( uri, recordData.getValues (), null, null );
 
 		/*catch ( IllegalArgumentException e ) {
 			Log.e ( "errorOnUpdateData", e.getMessage () );
