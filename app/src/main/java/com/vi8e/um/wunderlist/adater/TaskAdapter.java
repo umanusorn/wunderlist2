@@ -71,6 +71,11 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	tvTitle.setText ( rowData.getTitle () );
 	setUpCompletedBg ( rowData, rowBg, cardView );
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+
+	//todo to be fix late i need only to change the img
+	Utility.toggleImgCompleteData ( chkBox, rowData, getContext () );
+	Utility.toggleImgCompleteData ( chkBox,rowData,getContext () );
+
 	setUpStar ( rowData, star, res );
 
 	try {
