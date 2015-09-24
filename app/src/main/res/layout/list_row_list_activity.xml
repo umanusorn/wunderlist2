@@ -84,9 +84,6 @@ android:id="@+id/rowBg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView4"
-                    android:layout_below="@+id/listtitle"
-                    android:layout_toRightOf="@+id/textView2"
-                    android:layout_toEndOf="@+id/textView2"
                     android:src="@drawable/abc_list_pressed_holo_dark"/>
 
             <LinearLayout
@@ -101,11 +98,11 @@ android:id="@+id/rowBg"
                     android:layout_centerVertical="true">
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
-
+                        android:singleLine="true"
                         android:id="@+id/listtitle"
                         android:textColor="@color/grey_600"
                         android:textSize="15sp"
@@ -120,6 +117,7 @@ android:id="@+id/rowBg"
                         android:text="Small Text"
                         android:id="@+id/textView2"
                         android:textColor="@color/red_600"
+
                         android:visibility="gone"
                         android:layout_below="@+id/chkBox"
                         android:layout_alignLeft="@+id/listtitle"
