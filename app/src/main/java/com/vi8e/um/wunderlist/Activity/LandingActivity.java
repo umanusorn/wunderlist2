@@ -241,6 +241,7 @@ public static
 void setUpOnResume () {
 //	mLandingListAdapter.clear ();
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
+	setInActiveToolBar ();
 }
 
 public static

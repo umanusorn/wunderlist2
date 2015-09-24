@@ -52,15 +52,18 @@
             android:layout_height="match_parent"
             android:id="@+id/nested_scroll_view"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:fillViewport="true"
             >
 
-
-        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-                android:id="@+id/listViewTaskInComplete"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+            <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+                    android:id="@+id/listViewTaskInComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <include layout="@layout/floating_action_btn"/>
