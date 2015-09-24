@@ -49,6 +49,7 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 		@Override public
 		boolean onKey ( View v, int keyCode, KeyEvent event ) {
 			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
+				LandingActivity.currentList.setTitle ( editText.getText ().toString () );
 finish ();
 			}
 			return false;

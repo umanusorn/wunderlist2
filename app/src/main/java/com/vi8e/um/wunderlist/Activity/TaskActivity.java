@@ -78,7 +78,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	String title = bundle.getString ( ListConst.KEY_TITLE );
 	listId = bundle.getString ( ListConst.KEY_ID );
 
-	setToolBar ( toolbar, title );
+	setToolBar ( toolbar );
 	setUpContent ();
 	setView ();
 	thisActivity = this;
@@ -126,14 +126,26 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 }
 
 private
-void setToolBar ( Toolbar toolbar, String title ) {
+void setToolBar ( Toolbar toolbar ) {
 	toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
 	setSupportActionBar ( toolbar );
 	toolbar.setVisibility ( View.VISIBLE );
 	toolbar.setBackgroundColor ( getResources ().getColor ( R.color.transparent_white_50 ) );
-	getSupportActionBar ().setTitle ( title );
+	try {
+		getSupportActionBar ().setTitle ( LandingActivity.currentList.getTitle () );
+		toolbar.setTitle (  LandingActivity.currentList.getTitle ());
+	}catch ( Exception e ){
+		Log.e (TAG,e.getMessage ()  );
+	}
+
 
 	toolbar.setTitle ( title );
+	/*toolbar.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			IntentCaller.listDetailActivity ( getApplicationContext (), LandingActivity.currentList );
+		}
+	} );*/
 	getSupportActionBar ().setDisplayShowTitleEnabled ( true );
 	getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
 	getSupportActionBar ().setDisplayShowHomeEnabled ( true );
@@ -264,6 +276,7 @@ void onPause () {
 	//setMenuNormal ();
 	adapterToDb ( taskAdapterComplete );
 	adapterToDb ( taskAdapterInComplete );
+
 }
 
 void adapterToDb ( TaskAdapter taskAdapter ) {
@@ -295,6 +308,7 @@ onResume () {
 	super.onResume ();
 	Log.d ( "OnResume", "" );
 	setUpAdater ();
+	setToolBar ( toolbar );
 
 }
 
