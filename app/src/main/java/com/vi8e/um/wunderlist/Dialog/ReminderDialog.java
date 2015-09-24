@@ -135,9 +135,9 @@ void setView ( final MaterialDialog materialDialog ) {
 
 public static void createNewCalendar(Context context){
 	ContentValues values = new ContentValues();
-	values.put(
+	values.put (
 			CalendarContract.Calendars.ACCOUNT_NAME,
-			MY_ACCOUNT_NAME);
+			MY_ACCOUNT_NAME );
 	values.put(
 			CalendarContract.Calendars.ACCOUNT_TYPE,
 			CalendarContract.ACCOUNT_TYPE_LOCAL);
@@ -216,8 +216,6 @@ return 0;
 public static int AddEventToCalendar(TaskModel taskModel) {
 	// TODO Auto-generated method stub
 	ContentValues event = new ContentValues ();
-
-
 	/*long cal_id=getCalendarId ( TaskDetailActivity.sContext );
 	if(cal_id==-1){
 		createNewCalendar ( mContext );
@@ -226,32 +224,39 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 
 
 //todo fix calendar id
+
+	Uri l_uri=null;
 	event.put( CalendarContract.Events.CALENDAR_ID,5);
 	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
 
-	long reminderDate = Long.parseLong ( taskModel.getReminderDate () );
-	Log.d ( TAG, "remidnerTime=" + reminderDate );
-	event.put(CalendarContract.Events.DTSTART, reminderDate );
-	event.put(CalendarContract.Events.DTEND, reminderDate + 60*60*1000);
+	String reminderDateString = taskModel.getReminderDate ();
 
-	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
-	//event.put("allDay", 0);
-	//status: 0~ tentative; 1~ confirmed; 2~ canceled
-	//event.put("eventStatus", 1);
-	//0~ default; 1~ confidential; 2~ private; 3~ public
-	//event.put("visibility", 0);
-	//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
-	//event.put("transparency", 0);
-	//0~ false; 1~ true
-	event.put("hasAlarm", 1);
-	Uri add_eventUri;
-	if ( Build.VERSION.SDK_INT >= 8) {
-		add_eventUri = Uri.parse("content://com.android.calendar/events");
-	} else {
-		add_eventUri = Uri.parse("content://calendar/events");
+	if( reminderDateString!=null && !reminderDateString.isEmpty () ){
+		long reminderDate = Long.parseLong ( taskModel.getReminderDate () );
+		Log.d ( TAG, "remidnerTime=" + reminderDate );
+		event.put(CalendarContract.Events.DTSTART, reminderDate );
+		event.put(CalendarContract.Events.DTEND, reminderDate + 60*60*1000);
+
+		event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
+		//event.put("allDay", 0);
+		//status: 0~ tentative; 1~ confirmed; 2~ canceled
+		//event.put("eventStatus", 1);
+		//0~ default; 1~ confidential; 2~ private; 3~ public
+		//event.put("visibility", 0);
+		//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
+		//event.put("transparency", 0);
+		//0~ false; 1~ true
+		event.put("hasAlarm", 1);
+		Uri add_eventUri;
+		if ( Build.VERSION.SDK_INT >= 8) {
+			add_eventUri = Uri.parse("content://com.android.calendar/events");
+		} else {
+			add_eventUri = Uri.parse("content://calendar/events");
+		}
+
+		l_uri = mContext.getContentResolver().insert(add_eventUri, event);
 	}
 
-	Uri l_uri = mContext.getContentResolver().insert(add_eventUri, event);
 	if(l_uri != null)
 	{
 		long eventID = Long.parseLong(l_uri.getLastPathSegment());
