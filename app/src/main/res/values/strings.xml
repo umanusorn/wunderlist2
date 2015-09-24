@@ -18,4 +18,6 @@
     <string name="content_delete_list">will be deleted forever.</string>
     <string name="remind_me">Remind me</string>
     <string name="reminder_text_task_detail"><![CDATA[Set Date & Reminder]]></string>
+    <string name="view_completed_to_do">VIEW COMPLETED TO-DOS</string>
+    <string name="completed_to_do">COMPLETED TO-DOS</string>
 </resources>

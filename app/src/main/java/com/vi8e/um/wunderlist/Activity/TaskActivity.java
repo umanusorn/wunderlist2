@@ -63,8 +63,7 @@ public static TaskModel            currentTask;
 static        Menu                 menu;
 private int     prevScrollPosition = 0;
 private boolean isPrevScrollUp     = true;
-
-
+TextView tvComplete;
 
 
 @Override
@@ -156,7 +155,7 @@ View.OnClickListener onCLickStar () {
 }
 
 void setView () {
-	TextView tvComplete = ( TextView ) findViewById ( R.id.tvComplete );
+	tvComplete = ( TextView ) findViewById ( R.id.tvComplete );
 	tvComplete.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
@@ -165,7 +164,7 @@ void setView () {
 	} );
 	ImageView star = ( ImageView ) findViewById ( R.id.star );
 	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
-	final RelativeLayout bottomBar=(RelativeLayout)findViewById ( R.id.bottomBar );
+	final RelativeLayout bottomBar = ( RelativeLayout ) findViewById ( R.id.bottomBar );
 	bottomBar.setVisibility ( View.GONE );
 	star.setOnClickListener ( onCLickStar () );
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
@@ -177,25 +176,25 @@ void setView () {
 		@Override public
 		void onScrollChanged () {
 			int currentScrollPosition = scrollView.getScrollY (); ;
-			if ( prevScrollPosition < currentScrollPosition && !isPrevScrollUp) {
+			if ( prevScrollPosition < currentScrollPosition && ! isPrevScrollUp ) {
 				Log.d ( TAG, "scroll up" );
 				Animation bottomOut = AnimationUtils.loadAnimation ( getApplicationContext (),
-				                                                     R.anim.abc_slide_out_bottom);
-				bottomBar.startAnimation(bottomOut);
+				                                                     R.anim.abc_slide_out_bottom );
+				bottomBar.startAnimation ( bottomOut );
 				bottomBar.setVisibility ( View.GONE );
 
-				isPrevScrollUp=true;
+				isPrevScrollUp = true;
 			}
-			else if(prevScrollPosition > currentScrollPosition && isPrevScrollUp){
+			else if ( prevScrollPosition > currentScrollPosition && isPrevScrollUp ) {
 				Log.d ( TAG, "scroll down" );
 				Animation bottomIn = AnimationUtils.loadAnimation ( getApplicationContext (),
 				                                                    R.anim.abc_slide_in_bottom );
-				bottomBar.startAnimation(bottomIn);
+				bottomBar.startAnimation ( bottomIn );
 				bottomBar.setVisibility ( View.VISIBLE );
-				isPrevScrollUp=false;
+				isPrevScrollUp = false;
 			}
-		prevScrollPosition =currentScrollPosition;
-	}
+			prevScrollPosition = currentScrollPosition;
+		}
 	} );
 
 }
@@ -215,8 +214,8 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 				editText.setText ( "" );
 				View view = thisActivity.getCurrentFocus ();
 				if ( view != null ) {
-				//	InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
-				//	imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
+					//	InputMethodManager imm = ( InputMethodManager ) getSystemService ( Context.INPUT_METHOD_SERVICE );
+					//	imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 				}
 			}
 			return false;
@@ -224,12 +223,15 @@ View.OnKeyListener onAddViaEditText ( final EditText editText ) {
 	};
 }
 
+public
 void toggleShowCompleteListView () {
 	showComplete = ! showComplete;
 	if ( showComplete ) {
+		tvComplete.setText ( getString ( R.string.completed_to_do ) );
 		listViewComplete.setVisibility ( View.VISIBLE );
 	}
 	else {
+		tvComplete.setText ( getString ( R.string.view_completed_to_do ) );
 		listViewComplete.setVisibility ( View.GONE );
 	}
 }
