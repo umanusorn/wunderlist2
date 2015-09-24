@@ -28,7 +28,7 @@ SubTaskModel ( String title, String taskId, String id, String isComplete ) {
 	this.title = title;
 	this.taskId = taskId;
 	this.id = id;
-	this.isComplete=isComplete;
+	this.isComplete = isComplete;
 }
 
 public
@@ -36,12 +36,14 @@ SubTaskModel ( String title, String taskId ) {
 
 	this.title = title;
 	this.taskId = taskId;
-	if(getIsComplete ()==null )
+	if ( getIsComplete () == null ) {
 		setIsComplete ( String.valueOf ( false ) );
+	}
 
 }
 
-public boolean isComplete(){
+public
+boolean isComplete () {
 	return Boolean.valueOf ( isComplete );
 }
 
@@ -70,7 +72,7 @@ ContentValues getValues () {
 	ContentValues values = new ContentValues ();
 	values.put ( SubtaskColumns.SUBTASK_TITLE, title );
 	values.put ( SubtaskColumns.TASKID, taskId );
-	values.put ( SubtaskColumns.ISCOMPLETE, getComplete ());
+	values.put ( SubtaskColumns.ISCOMPLETE, getComplete () );
 	//values.put ( ListColumns._ID,id );
 	return values;
 }

@@ -70,7 +70,8 @@ public
 void setView ( final SubTaskModel rowData, ImageView chkBox) {
 	tvTitle.setText ( rowData.getTitle () );
 	Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
-	//chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+	//Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
+	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 rootView.setOnClickListener ( new View.OnClickListener () {
 	@Override public
 	void onClick ( View v ) {
