@@ -169,7 +169,7 @@ return uri;
 
 public static
 void genListAndTask ( Context context ) {
-	for ( int i = 0 ; i < 15 ; i++ ) {
+	for ( int i = 0 ; i < 7 ; i++ ) {
 		Uri uri = addListToDB ( context, "Category " + ( i + 1 ) );
 
 		for ( int j = 0 ; j < i ; j++ ) {
