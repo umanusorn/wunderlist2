@@ -1,6 +1,10 @@
 package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +18,14 @@ import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.util.UiMng;
 
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 
 /**
@@ -100,7 +106,7 @@ void setView ( final MaterialDialog materialDialog ) {
 		@Override public
 		void onClick ( View v ) {
 			TaskDetailActivity.currentTask.setReminderDate ( null );
-			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask,TaskDetailActivity.reminderText,mContext );
+			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask, TaskDetailActivity.reminderText, mContext );
 			materialDialog.dismiss ();
 		}
 	} );
@@ -109,6 +115,7 @@ void setView ( final MaterialDialog materialDialog ) {
 		void onClick ( View v ) {
 
 			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask,TaskDetailActivity.reminderText,mContext );
+			AddEventToCalendar(TaskActivity.currentTask);
 			materialDialog.dismiss ();
 		}
 	} );
@@ -119,8 +126,43 @@ void setView ( final MaterialDialog materialDialog ) {
 		}
 	} );
 
-
 }
+
+
+public static int AddEventToCalendar(TaskModel taskModel) {
+	// TODO Auto-generated method stub
+	ContentValues event = new ContentValues ();
+
+	event.put( CalendarContract.Events.CALENDAR_ID, taskModel.getId ());
+	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
+	event.put(CalendarContract.Events.DTSTART, System.currentTimeMillis ());
+	event.put(CalendarContract.Events.DTEND, System.currentTimeMillis() + 5*1000);
+	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
+	event.put("allDay", 0);
+	//status: 0~ tentative; 1~ confirmed; 2~ canceled
+	event.put("eventStatus", 1);
+	//0~ default; 1~ confidential; 2~ private; 3~ public
+	//event.put("visibility", 0);
+	//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
+	//event.put("transparency", 0);
+	//0~ false; 1~ true
+	event.put("hasAlarm", 1);
+	Uri add_eventUri;
+	if ( Build.VERSION.SDK_INT >= 8) {
+		add_eventUri = Uri.parse("content://com.android.calendar/events");
+	} else {
+		add_eventUri = Uri.parse("content://calendar/events");
+	}
+	Uri l_uri = mContext.getContentResolver().insert(add_eventUri, event);
+	if(l_uri != null)
+	{
+		long eventID = Long.parseLong(l_uri.getLastPathSegment());
+		return (int) eventID;
+	}
+	else
+		return 0;
+}
+
 
 public static
 void showDateTimeDialog () {
