@@ -33,6 +33,7 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adater.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
+import com.vi8e.um.wunderlist.util.IntentCaller;
 import com.vi8e.um.wunderlist.util.QueryHelper;
 import com.vi8e.um.wunderlist.util.Utility;
 
@@ -168,12 +169,24 @@ void setView () {
 	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
 	final RelativeLayout bottomBar = ( RelativeLayout ) findViewById ( R.id.bottomBar );
 	bottomBar.setVisibility ( View.GONE );
+	bottomBar.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			IntentCaller.listDetailActivity ( getApplicationContext (), LandingActivity.currentList );
+		}
+	} );
 	star.setOnClickListener ( onCLickStar () );
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
 	editText.setOnKeyListener ( onAddViaEditText ( editText ) );
+//todo Demo
+	//setBottomBarTrig ( scrollView, bottomBar );
 
+}
+
+private
+void setBottomBarTrig ( final ScrollView scrollView, final RelativeLayout bottomBar ) {
 	scrollView.getViewTreeObserver ().addOnScrollChangedListener ( new ViewTreeObserver.OnScrollChangedListener () {
 		@Override public
 		void onScrollChanged () {
@@ -198,7 +211,6 @@ void setView () {
 			prevScrollPosition = currentScrollPosition;
 		}
 	} );
-
 }
 
 

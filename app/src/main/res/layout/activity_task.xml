@@ -156,14 +156,15 @@
             <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:visibility="gone"
                     android:id="@+id/imageView7"
                     android:background="@android:drawable/sym_contact_card"/>
 
             <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:id="@+id/imageView8"
-                    android:background="@android:drawable/sym_contact_card"
+                    android:id="@+id/editListInTaskActivity"
+                    android:background="@android:drawable/ic_menu_edit"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"/>
 
@@ -171,7 +172,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:id="@+id/imageView9"
-                    android:background="@android:drawable/ic_menu_edit"
+android:visibility="gone"
+                    android:background="@android:drawable/sym_contact_card"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"/>
