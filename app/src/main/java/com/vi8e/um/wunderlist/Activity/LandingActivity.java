@@ -348,6 +348,7 @@ void onPause () {
 	//setMenuNormal ();
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
+	setInActiveToolBar ();
 	saveListAdapterToDb ();
 }
 
