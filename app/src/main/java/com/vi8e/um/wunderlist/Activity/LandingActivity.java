@@ -71,7 +71,7 @@ NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
-static        Activity           thisActivity;
+static        AppCompatActivity          thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
 public static boolean isLongClick;
@@ -91,6 +91,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Fabric.with ( this, new Crashlytics () );
 	setContentView ( R.layout.activity_landing );
 	thisActivity = this;
+
 	sContext = getApplicationContext ();
 	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
@@ -110,11 +111,17 @@ void onCreate ( Bundle savedInstanceState ) {
 
 public static
 void setActiveToolBar () {
+
+	//toolbar
+
+	thisActivity.getSupportActionBar ().setTitle ( currentList.getTitle () );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
 }
 
 public static
 void setInActiveToolBar () {
+
+	toolbar.setTitle ( "" );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
 }
 
@@ -315,7 +322,8 @@ private
 void initInstances () {
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
+	//todo demo
+	//collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
 
 }
 
