@@ -21,6 +21,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -142,6 +143,18 @@ void setToolBar ( Toolbar toolbar, String title ) {
 	} );
 }
 
+@NonNull private
+View.OnClickListener onCLickStar () {
+	return new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			isStar = Utility.toggleImg ( v,
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
+			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+		}
+	};
+}
+
 void setView () {
 	TextView tvComplete = ( TextView ) findViewById ( R.id.tvComplete );
 	tvComplete.setOnClickListener ( new View.OnClickListener () {
@@ -150,11 +163,11 @@ void setView () {
 			toggleShowCompleteListView ();
 		}
 	} );
+	ImageView star = ( ImageView ) findViewById ( R.id.star );
 	final ScrollView scrollView = ( ScrollView ) findViewById ( R.id.scrollView );
 	final RelativeLayout bottomBar=(RelativeLayout)findViewById ( R.id.bottomBar );
 	bottomBar.setVisibility ( View.GONE );
-
-
+	star.setOnClickListener ( onCLickStar () );
 	final EditText editText = ( EditText ) findViewById ( R.id.editText );
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );

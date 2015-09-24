@@ -53,7 +53,7 @@
                     android:layout_toStartOf="@+id/star"/>
 
             <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="25dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/star"
                     android:src="@mipmap/wl_task_detail_ribbon"
