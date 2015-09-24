@@ -79,7 +79,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	convertView.setOnTouchListener ( new View.OnTouchListener () {
 		@Override public
 		boolean onTouch ( View v, MotionEvent event ) {
-			Log.d ( TAG, "onTouch" );
+			//Log.d ( TAG, "onTouch" );
 			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
 			if ( ! LandingActivity.isDragging () ) {
 				try {

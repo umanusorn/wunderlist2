@@ -222,9 +222,9 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	public
 	void onItemMoved ( final int originalPosition, final int newPosition ) {
 
-		Log.d ( TAG, "onItemMoved" );
+		Log.d ( TAG, "onItemMoved originalPos="+originalPosition+" newPos="+newPosition );
 		isDragging=false;
-		updateListPosition ( originalPosition, newPosition );
+		//updateListPosition ( originalPosition, newPosition);
 		setInActiveToolBar ();
 	}
 
@@ -466,7 +466,6 @@ void duplicateSpecificList () {
 
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( taskCursor, TaskColumns.ALL_COLUMNS );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-
 		ContentValues values = allListValues.get ( i );
 		Log.d ( TAG, "duplicating " + values.getAsString ( TaskColumns.TASK_TITLE ) );
 		values.put ( TaskColumns.LISTID, uri.getPathSegments ().get ( 1 ) );
