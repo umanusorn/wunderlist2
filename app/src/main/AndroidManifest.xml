@@ -55,12 +55,14 @@
         <activity
             android:name=".Activity.ListDetailActivity"
             android:label="@string/title_activity_list_detail"
+            android:windowSoftInputMode="adjustNothing|stateVisible"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activity.TaskNoteActivity"
             android:label="@string/title_activity_task_note"
             android:windowSoftInputMode="adjustNothing|stateVisible"
+            android:screenOrientation="portrait"
                 >
         </activity>
     </application>

@@ -129,7 +129,9 @@ void setToolBar ( Toolbar toolbar, String title ) {
 	toolbar = ( Toolbar ) findViewById ( R.id.toolbar );
 	setSupportActionBar ( toolbar );
 	toolbar.setVisibility ( View.VISIBLE );
+	toolbar.setBackgroundColor ( getResources ().getColor ( R.color.transparent_white_50 ) );
 	getSupportActionBar ().setTitle ( title );
+
 	toolbar.setTitle ( title );
 	getSupportActionBar ().setDisplayShowTitleEnabled ( true );
 	getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );

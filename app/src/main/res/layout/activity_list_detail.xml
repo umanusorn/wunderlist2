@@ -39,6 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/listName"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+
                 android:layout_below="@+id/tvListName"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

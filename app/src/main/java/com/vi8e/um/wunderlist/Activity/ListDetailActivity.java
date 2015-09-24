@@ -3,10 +3,13 @@ package com.vi8e.um.wunderlist.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.vi8e.um.wunderlist.Model.ListConst;
@@ -34,8 +37,23 @@ void onCreate ( Bundle savedInstanceState ) {
 	String title = bundle.getString ( ListConst.KEY_TITLE );
 	listId = bundle.getString ( ListConst.KEY_ID );
 	listName = (EditText)findViewById ( R.id.listName );
-
 	listName.setText ( title );
+	listName.setHint ( "set list name" );
+	listName.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
+	listName.setOnKeyListener ( onAddViaEditText ( listName ) );
+}
+
+@NonNull private
+View.OnKeyListener onAddViaEditText ( final EditText editText ) {
+	return new View.OnKeyListener () {
+		@Override public
+		boolean onKey ( View v, int keyCode, KeyEvent event ) {
+			if ( keyCode == KeyEvent.KEYCODE_ENTER && event.getAction () != KeyEvent.ACTION_DOWN ) {
+finish ();
+			}
+			return false;
+		}
+	};
 }
 
 @Override
