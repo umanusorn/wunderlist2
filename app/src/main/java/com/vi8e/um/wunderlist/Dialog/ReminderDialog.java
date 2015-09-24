@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract;
@@ -42,6 +43,7 @@ static Activity mActivity;
 static Context  mContext;
 static private       SlideDateTimeListener listener = getSlideDateTimeListener ();
 private static final String                TAG      = LandingActivity.class.getSimpleName ();
+public static final String MY_ACCOUNT_NAME ="WunderList2";
 
 
 @NonNull private static
@@ -115,8 +117,9 @@ void setView ( final MaterialDialog materialDialog ) {
 		@Override public
 		void onClick ( View v ) {
 
-			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask,TaskDetailActivity.reminderText,mContext );
-			AddEventToCalendar(TaskActivity.currentTask);
+			TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask, TaskDetailActivity.reminderText, mContext );
+			AddEventToCalendar ( TaskActivity.currentTask );
+		//	addEventToCalIntent ( TaskActivity.currentTask );
 			materialDialog.dismiss ();
 		}
 	} );
@@ -130,24 +133,111 @@ void setView ( final MaterialDialog materialDialog ) {
 }
 
 
+public static void createNewCalendar(Context context){
+	ContentValues values = new ContentValues();
+	values.put(
+			CalendarContract.Calendars.ACCOUNT_NAME,
+			MY_ACCOUNT_NAME);
+	values.put(
+			CalendarContract.Calendars.ACCOUNT_TYPE,
+			CalendarContract.ACCOUNT_TYPE_LOCAL);
+	values.put(
+			CalendarContract.Calendars.NAME,
+			"GrokkingAndroid Calendar");
+	values.put(
+			CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+			"GrokkingAndroid Calendar");
+	values.put(
+			CalendarContract.Calendars.CALENDAR_COLOR,
+			0xffff0000);
+	values.put(
+			CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL,
+			CalendarContract.Calendars.CAL_ACCESS_OWNER);
+	values.put(
+			CalendarContract.Calendars.OWNER_ACCOUNT,
+			"some.account@googlemail.com");
+	values.put(
+			CalendarContract.Calendars.CALENDAR_TIME_ZONE,
+			"Europe/Berlin");
+	values.put(
+			CalendarContract.Calendars.SYNC_EVENTS,
+			1);
+	Uri.Builder builder =
+			CalendarContract.Calendars.CONTENT_URI.buildUpon();
+	builder.appendQueryParameter (
+			CalendarContract.Calendars.ACCOUNT_NAME,
+			"com.grokkingandroid" );
+	builder.appendQueryParameter (
+			CalendarContract.Calendars.ACCOUNT_TYPE,
+			CalendarContract.ACCOUNT_TYPE_LOCAL );
+	builder.appendQueryParameter (
+			CalendarContract.CALLER_IS_SYNCADAPTER,
+			"true" );
+	Uri uri =
+			context.getContentResolver ().insert(builder.build(), values);
+}
+
+/*
+public static long getCalendarId(Context context) {
+	Uri uri = CalendarContract.Calendars.CONTENT_URI;
+	String[] projection = new String[] {
+			CalendarContract.Calendars._ID,
+			CalendarContract.Calendars.ACCOUNT_NAME,
+			CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+			CalendarContract.Calendars.NAME,
+			CalendarContract.Calendars.CALENDAR_COLOR
+	};
+
+	Cursor calendarCursor = context.managedQuery(uri, projection, null, null, null);
+}
+*/
+
+
+public static long addEventToCalIntent(TaskModel taskModel){
+
+	long reminderDate = Long.parseLong ( taskModel.getReminderDate () );
+
+	Intent intent = new Intent(Intent.ACTION_INSERT)
+			.setType("vnd.android.cursor.item/event")
+			.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, reminderDate)
+			.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, reminderDate+60*60*1000)
+			.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY , false) // just included for completeness
+			.putExtra( CalendarContract.Events.TITLE, "My Awesome Event")
+			.putExtra( CalendarContract.Events.DESCRIPTION, "Heading out with friends to do something awesome.")
+			.putExtra( CalendarContract.Events.EVENT_LOCATION, "Earth")
+			.putExtra( CalendarContract.Events.RRULE, "FREQ=DAILY;COUNT=10")
+			.putExtra ( CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY )
+			.putExtra( CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE)
+			.putExtra( Intent.EXTRA_EMAIL, "my.friend@example.com").setFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	mContext.startActivity ( intent );
+return 0;
+}
+
 public static int AddEventToCalendar(TaskModel taskModel) {
 	// TODO Auto-generated method stub
 	ContentValues event = new ContentValues ();
 
-	event.put( CalendarContract.Events.CALENDAR_ID, taskModel.getId ());
+
+	/*long cal_id=getCalendarId ( TaskDetailActivity.sContext );
+	if(cal_id==-1){
+		createNewCalendar ( mContext );
+		cal_id=getCalendarId ( mContext );
+	}*/
+
+
+//todo fix calendar id
+	event.put( CalendarContract.Events.CALENDAR_ID,5);
 	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
-	event.put(CalendarContract.Events.DTSTART, System.currentTimeMillis ());
-	event.put(CalendarContract.Events.DTEND, System.currentTimeMillis() + 5*1000);
 
 	long reminderDate = Long.parseLong ( taskModel.getReminderDate () );
-	Log.d ( TAG,"remidnerTime="+reminderDate );
+	Log.d ( TAG, "remidnerTime=" + reminderDate );
 	event.put(CalendarContract.Events.DTSTART, reminderDate );
 	event.put(CalendarContract.Events.DTEND, reminderDate + 60*60*1000);
 
 	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
-	event.put("allDay", 0);
+	//event.put("allDay", 0);
 	//status: 0~ tentative; 1~ confirmed; 2~ canceled
-	event.put("eventStatus", 1);
+	//event.put("eventStatus", 1);
 	//0~ default; 1~ confidential; 2~ private; 3~ public
 	//event.put("visibility", 0);
 	//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
@@ -160,6 +250,7 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 	} else {
 		add_eventUri = Uri.parse("content://calendar/events");
 	}
+
 	Uri l_uri = mContext.getContentResolver().insert(add_eventUri, event);
 	if(l_uri != null)
 	{
@@ -169,8 +260,6 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 	else
 		return 0;
 }
-
-
 
 /*
 public static int AddEventToCalendar(TaskModel taskModel) {
