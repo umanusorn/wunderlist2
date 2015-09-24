@@ -1,5 +1,6 @@
 package com.vi8e.um.wunderlist.Dialog;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
@@ -91,7 +92,7 @@ void showReminderDialog ( final Activity thisContext, final ListView listView, C
 	reminderDialog.getContext ();
 	setView ( reminderDialog );
 	mContext = context;
-	TaskDetailActivity.setTextViewReminderFromTaskDB (TaskDetailActivity.currentTask,reminderText,context  );
+	TaskDetailActivity.setTextViewReminderFromTaskDB ( TaskDetailActivity.currentTask, reminderText, context );
 
 }
 
@@ -137,6 +138,12 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
 	event.put(CalendarContract.Events.DTSTART, System.currentTimeMillis ());
 	event.put(CalendarContract.Events.DTEND, System.currentTimeMillis() + 5*1000);
+
+	long reminderDate = Long.parseLong ( taskModel.getReminderDate () );
+	Log.d ( TAG,"remidnerTime="+reminderDate );
+	event.put(CalendarContract.Events.DTSTART, reminderDate );
+	event.put(CalendarContract.Events.DTEND, reminderDate + 60*60*1000);
+
 	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
 	event.put("allDay", 0);
 	//status: 0~ tentative; 1~ confirmed; 2~ canceled
@@ -161,6 +168,53 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 	}
 	else
 		return 0;
+}
+
+
+
+/*
+public static int AddEventToCalendar(TaskModel taskModel) {
+	// TODO Auto-generated method stub
+	ContentValues event = new ContentValues ();
+
+	event.put( CalendarContract.Events.CALENDAR_ID, taskModel.getId ());
+	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
+	event.put(CalendarContract.Events.DTSTART, System.currentTimeMillis ());
+	event.put(CalendarContract.Events.DTEND, System.currentTimeMillis() + 65*1000);
+	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
+	event.put(CalendarContract.Events.ALL_DAY, 0);
+	//status: 0~ tentative; 1~ confirmed; 2~ canceled
+	event.put(CalendarContract.Events.STATUS, 1);
+	//0~ default; 1~ confidential; 2~ private; 3~ public
+	//event.put(CalendarContract.Events.VISIBLE, 0);
+	//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
+	//event.put("transparency", 0);
+	//0~ false; 1~ true
+	event.put(CalendarContract.Events.HAS_ALARM, 1);
+	Uri add_eventUri;
+	if ( Build.VERSION.SDK_INT >= 8) {
+		add_eventUri = Uri.parse("content://com.android.calendar/events");
+	} else {
+		add_eventUri = Uri.parse("content://calendar/events");
+	}
+	Uri l_uri = mContext.getContentResolver().insert ( add_eventUri, event );
+	if(l_uri != null)
+	{
+		long eventID = Long.parseLong(l_uri.getLastPathSegment());
+		return (int) eventID;
+	}
+	else
+		return 0;
+
+
+
+}
+*/
+
+public static void removeCurrentTaskreminder(){
+	Uri reminderUri = ContentUris.withAppendedId (
+			CalendarContract.Reminders.CONTENT_URI, Long.parseLong ( TaskActivity.currentTask.getId () ) );
+	int rows = mContext.getContentResolver ().delete ( reminderUri, null, null );
 }
 
 

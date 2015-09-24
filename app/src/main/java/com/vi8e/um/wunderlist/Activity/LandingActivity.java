@@ -153,9 +153,9 @@ void setCurrentList ( final int position ) {
 
 private static
 class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
-	private final DynamicListView mListView;
+	//private final DynamicListView mListView;
 	MyOnItemLongClickListener ( final DynamicListView listView ) {
-		mListView = listView;
+
 	}
 
 	@Override
@@ -168,10 +168,10 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		setActiveList ();
 		setActiveToolBar ();
 
-		if ( mListView != null ) {
+		if ( listView != null ) {
 			Log.d ( TAG, "StartDrag position="+position );
 			try {
-				mListView.startDragging ( position - mListView.getHeaderViewsCount () );
+				listView .startDragging ( position - listView.getHeaderViewsCount () );
 				LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
 				isDragging = true;
 			}
@@ -491,6 +491,7 @@ void deleteSpecificList ( Context context ) {
 	//todo dont know why cannot delete via .remove(currentList)
 	//mLandingListAdapter.remove ( currentList );
 	mLandingListAdapter.remove ( currentListPosition );
+
 }
 
 }

@@ -272,8 +272,8 @@ onResume () {
 @Override
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
-	getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
-	TaskActivity.menu = menu;
+	//getMenuInflater ().inflate ( R.menu.menu_task_detail, menu );
+	//TaskActivity.menu = menu;
 	return true;
 }
 
