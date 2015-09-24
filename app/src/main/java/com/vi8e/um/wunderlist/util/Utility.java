@@ -130,27 +130,31 @@ boolean toggleImgStarData ( View v, TaskModel rowData, Drawable normal, Drawable
 
 
 public static
-boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Context context ) {
-
+boolean toggleImgCompleteData ( View v, SubTaskModel subTaskModel, Context context ) {
+	boolean isComplete = subTaskModel.isComplete ();
+	Log.d ( "toggleImgCompleteData","isComplete= " + isComplete );
 	Resources res = context.getResources ();
 	Drawable normal = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkbox );
 	Drawable clicked = res.getDrawable ( R.mipmap.wl_icon_task_detail_checkedbox );
 	RelativeLayout rootView =(RelativeLayout)v.getParent ();
-	return toggleImgCompleteData ( v, rowData, normal, clicked );
+	return toggleImgCompleteData ( v, subTaskModel, normal, clicked );
 }
 
 
 public static
-boolean toggleImgCompleteData ( View v, SubTaskModel rowData, Drawable normal, Drawable clicked ) {
+boolean toggleImgCompleteData ( View v, SubTaskModel subTaskModel, Drawable normal, Drawable clicked ) {
 	ImageView imageView =(ImageView)v;
-	if ( rowData.isComplete () ) {
+
+	boolean isComplete = subTaskModel.isComplete ();
+	Log.d ( "","isComplete= " + isComplete );
+	if ( isComplete ) {
 		imageView.setImageDrawable ( normal );
-		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+		subTaskModel.setIsComplete ( String.valueOf ( ! isComplete ) );
 		return false;
 	}
 	else {
 		imageView.setImageDrawable ( clicked );
-		rowData.setIsComplete ( String.valueOf ( ! rowData.isComplete () ) );
+		subTaskModel.setIsComplete ( String.valueOf ( ! isComplete ) );
 		return true;
 	}
 }

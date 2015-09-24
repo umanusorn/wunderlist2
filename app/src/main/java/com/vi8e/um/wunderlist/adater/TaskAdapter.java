@@ -56,7 +56,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	// Get the data item for this position
 	rowData = getItem ( position );
 
-	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_list_activity, parent, false );
+	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_task_activity, parent, false );
 	// Lookup view for data population
 	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
