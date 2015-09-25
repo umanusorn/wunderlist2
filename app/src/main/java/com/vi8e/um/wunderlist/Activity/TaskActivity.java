@@ -192,8 +192,8 @@ void setView () {
 	editText.setHint ( "Add a to-do in \"" + title + "\"" );
 	editText.setImeActionLabel ( "ADD", KeyEvent.KEYCODE_ENTER );
 	editText.setOnKeyListener ( onAddViaEditText ( editText ) );
-//todo Demo
-	//setBottomBarTrig ( scrollView, bottomBar );
+
+	setBottomBarTrig ( scrollView, bottomBar );
 
 }
 

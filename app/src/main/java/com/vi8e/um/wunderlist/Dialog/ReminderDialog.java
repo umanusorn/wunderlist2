@@ -214,7 +214,7 @@ return 0;
 }
 
 public static int AddEventToCalendar(TaskModel taskModel) {
-	// TODO Auto-generated method stub
+
 	ContentValues event = new ContentValues ();
 	/*long cal_id=getCalendarId ( TaskDetailActivity.sContext );
 	if(cal_id==-1){
@@ -265,45 +265,6 @@ public static int AddEventToCalendar(TaskModel taskModel) {
 	else
 		return 0;
 }
-
-/*
-public static int AddEventToCalendar(TaskModel taskModel) {
-	// TODO Auto-generated method stub
-	ContentValues event = new ContentValues ();
-
-	event.put( CalendarContract.Events.CALENDAR_ID, taskModel.getId ());
-	event.put(CalendarContract.Events.TITLE, taskModel.getTitle ());
-	event.put(CalendarContract.Events.DTSTART, System.currentTimeMillis ());
-	event.put(CalendarContract.Events.DTEND, System.currentTimeMillis() + 65*1000);
-	event.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault ().toString ());
-	event.put(CalendarContract.Events.ALL_DAY, 0);
-	//status: 0~ tentative; 1~ confirmed; 2~ canceled
-	event.put(CalendarContract.Events.STATUS, 1);
-	//0~ default; 1~ confidential; 2~ private; 3~ public
-	//event.put(CalendarContract.Events.VISIBLE, 0);
-	//0~ opaque, no timing conflict is allowed; 1~ transparency, allow overlap of scheduling
-	//event.put("transparency", 0);
-	//0~ false; 1~ true
-	event.put(CalendarContract.Events.HAS_ALARM, 1);
-	Uri add_eventUri;
-	if ( Build.VERSION.SDK_INT >= 8) {
-		add_eventUri = Uri.parse("content://com.android.calendar/events");
-	} else {
-		add_eventUri = Uri.parse("content://calendar/events");
-	}
-	Uri l_uri = mContext.getContentResolver().insert ( add_eventUri, event );
-	if(l_uri != null)
-	{
-		long eventID = Long.parseLong(l_uri.getLastPathSegment());
-		return (int) eventID;
-	}
-	else
-		return 0;
-
-
-
-}
-*/
 
 public static void removeCurrentTaskreminder(){
 	Uri reminderUri = ContentUris.withAppendedId (

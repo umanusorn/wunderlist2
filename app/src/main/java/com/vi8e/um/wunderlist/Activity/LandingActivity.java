@@ -322,8 +322,8 @@ private
 void initInstances () {
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-	//todo demo
-	//collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
+
+	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
 
 }
 

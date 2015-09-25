@@ -23,7 +23,6 @@
             fab:fab_icon="@mipmap/wl_actionbar_list"
             fab:fab_colorNormal="@color/green_500"
             fab:fab_title="2"/>
-<!--todo demo-->
         <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/action_a"
                 android:layout_width="wrap_content"
@@ -32,7 +31,6 @@
                 fab:fab_colorNormal="@color/blue_500"
                 android:tintMode="src_atop"
                 android:tint="@color/white"
-                android:visibility="gone"
                 fab:fab_title="1"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
