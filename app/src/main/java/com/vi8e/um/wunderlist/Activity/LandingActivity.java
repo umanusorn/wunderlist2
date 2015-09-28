@@ -71,10 +71,10 @@ NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
-static        AppCompatActivity          thisActivity;
+static        AppCompatActivity  thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
-public static boolean isLongClick;
+public static boolean            isLongClick;
 
 public static
 boolean isDragging () {
@@ -113,7 +113,6 @@ public static
 void setActiveToolBar () {
 
 	//toolbar
-
 	thisActivity.getSupportActionBar ().setTitle ( currentList.getTitle () );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
 }
@@ -176,9 +175,9 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		setActiveToolBar ();
 
 		if ( listView != null ) {
-			Log.d ( TAG, "StartDrag position="+position );
+			Log.d ( TAG, "StartDrag position=" + position );
 			try {
-				listView .startDragging ( position - listView.getHeaderViewsCount () );
+				listView.startDragging ( position - listView.getHeaderViewsCount () );
 				LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
 				isDragging = true;
 			}
@@ -196,16 +195,21 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 public static
 void setActiveList () {
 	RelativeLayout rowListRootView = currentList.getRowListRootView ();
-	rowListRootView.setBackgroundColor ( sContext.getResources ().getColor ( R.color.blue_400_trans50 ) );
+
+	rowListRootView.setBackgroundColor (
+			sContext.getResources ().getColor (
+					R.color.blue_400_trans50 ) );
 }
 
 private
 class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 
 	private final DynamicListView mListView;
+
 	MyOnItemClickListener ( final DynamicListView listView ) {
 		mListView = listView;
 	}
+
 	@Override
 	public
 	void onItemClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
@@ -221,6 +225,7 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 
 	private Toast mToast;
 
+
 	MyOnItemMovedListener ( /*final LandingListAdapter adapter */ ) {
 		//mAdapter = adapter;
 	}
@@ -229,8 +234,8 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	public
 	void onItemMoved ( final int originalPosition, final int newPosition ) {
 
-		Log.d ( TAG, "onItemMoved originalPos="+originalPosition+" newPos="+newPosition );
-		isDragging=false;
+		Log.d ( TAG, "onItemMoved originalPos=" + originalPosition + " newPos=" + newPosition );
+		isDragging = false;
 		//updateListPosition ( originalPosition, newPosition);
 		setInActiveToolBar ();
 	}
@@ -239,6 +244,8 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 	void updateListPosition ( int originalPosition, int newPosition ) {
 		if ( originalPosition != newPosition ) {
 			ListModel item = mLandingListAdapter.getItem ( originalPosition );
+
+
 			mLandingListAdapter.moveItem ( item, newPosition );
 		}
 	}
