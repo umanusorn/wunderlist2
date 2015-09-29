@@ -22,6 +22,7 @@ import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.util.DateTimeHelper;
 import com.vi8e.um.wunderlist.util.UiMng;
 
 import java.text.ParseException;
@@ -70,7 +71,7 @@ SlideDateTimeListener getSlideDateTimeListener () {
 public static
 void setTextViewReminder ( Date date, TextView reminderText, Context context ) {
 	try {
-		reminderText.setText ( "Reminder " + UiMng.getYesterdayOrTodayOrTmr ( date ) + " at " + UiMng.getTimeHHmm ( date ) );
+		reminderText.setText ( "Reminder " + DateTimeHelper.getYesterdayOrTodayOrTmr ( date ) + " at " + DateTimeHelper.getTimeHHmm ( date ) );
 	}
 	catch ( ParseException e ) {
 		Log.e ( TAG, e.getMessage () + e.toString () );
