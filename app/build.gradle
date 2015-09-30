@@ -53,7 +53,7 @@ android {
         versionProps.store(versionPropsFile.newWriter(), null)
         defaultConfig {
             applicationId "com.vi8e.um.wunderlist2"
-            minSdkVersion 16
+            minSdkVersion 18
             targetSdkVersion 23
             versionCode code
             versionName "UmDev" + code

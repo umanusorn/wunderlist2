@@ -26,14 +26,12 @@ public static
 void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
-			.title ( "Add List" )
+			.title ( thisContext.getString ( R.string.add_list ) )
 			.positiveText ( "ADD" )
-			.input ( "Add List", "", new MaterialDialog.InputCallback () {
+			.input ( thisContext.getString ( R.string.add_list ), "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
 					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), listView );
-					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
-					//Utility.setTaskListViewHeight ( listView );
 				}
 			} )
 			.negativeText ( "CANCEL" )

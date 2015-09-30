@@ -300,8 +300,7 @@ private
 void setFloatingActionBtnClickListener ( View view, final ListView listView, final LandingListAdapter landingListAdapter ) {
 	com.getbase.floatingactionbutton.FloatingActionButton newListBtn
 			= ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
-	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id
-			                                                                                                                                              .action_b );
+	com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
 
 	newListBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
