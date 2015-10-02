@@ -29,7 +29,16 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button genListTask = ( Button ) findViewById ( R.id.genListTask );
 	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
+  Button login = (Button)findViewById ( R.id.login );
 
+	login.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+			startActivity ( i );
+			//startActivityForResult(i, REQUEST_CODE_LOGIN);
+		}
+	} );
 
 	genListTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
