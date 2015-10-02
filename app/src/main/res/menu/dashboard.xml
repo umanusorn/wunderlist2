@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.vi8e.ecomerce.DashboardActivity" >
+	<item
+        android:id="@+id/action_shoping"
+        android:showAsAction="always"
+        android:actionLayout="@layout/shoppingcart_icon"
+        android:title="Shoping Cart"/>
+	
+</menu>
+

@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin_larger">24dp</dimen>
+    <dimen name="activity_horizontal_margin_reverse">-16dp</dimen>
+    
+    <dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="activity_component_margin">8dp</dimen>
+	<dimen name="activity_component_margin_small">4dp</dimen>
+	<dimen name="activity_component_margin_small_half">2dp</dimen>
+	<dimen name="activity_component_margin_1dp">1dp</dimen>
+	<dimen name="activity_component_default_height">48dp</dimen>
+	<dimen name="activity_component_default_height_drawer">36dp</dimen>
+	<dimen name="activity_component_default_height_smaller">43dp</dimen>
+	<dimen name="activity_half_component_default_height">24dp</dimen>
+	<dimen name="text_size_title_large">20sp</dimen>
+	<dimen name="text_size_icon_large">28sp</dimen>
+	<dimen name="text_size_icon_XXL">48dp</dimen>
+	<dimen name="text_size_title">18sp</dimen>
+	<dimen name="text_size_subtitle">16sp</dimen>
+	<dimen name="text_size_content">14sp</dimen>
+	<dimen name="text_size_content_dp">12dp</dimen>
+		<dimen name="text_size_content_small">12sp</dimen>
+		<dimen name="text_size_content_smaller">10sp</dimen>
+	<dimen name="text_size_button">14sp</dimen>
+	<dimen name="drawer_width">300dp</dimen>
+</resources>

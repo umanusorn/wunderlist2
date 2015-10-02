@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items">
+        <item>@drawable/item1</item>
+        <item>@drawable/item2</item>
+        <item>@drawable/item3</item>
+        <item>@drawable/item4</item>
+        <item>@drawable/item5</item>
+        <item>@drawable/item6</item>
+        <item>@drawable/item7</item>
+        <item>@drawable/item8</item>
+        <item>@drawable/item9</item>
+        <item>@drawable/item10</item>
+        <item>@drawable/item11</item>
+        <item>@drawable/item12</item>
+        
+        </string-array>
+</resources>

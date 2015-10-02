@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="beige">#fbf9f7</color>
+    <color name="light_grey">#F6F6F6</color>
+    <color name="black_translucent">#55000000</color>
+    <color name="background_color">#f9a61a</color>
+    <color name="separator">#D9D9D9</color>
+    <color name="error_color">#FF0000</color>
+    <color name="dark_grey">#333333</color>
+    <color name="background_grey">#ebebeb</color>
+    <color name="background_grey_darker">#bbbbbb</color>
+    <color name="list_separator_grey">#d2d2d2</color>
+    <color name="orange">#ff9000</color>
+    <color name="list_background">#303030</color><!--
+    <color name="list_divider">#272727</color>-->
+    <color name="lighter_grey">#f5f5f5</color>
+    <color name="grey_title_color">#7d7d7d</color>
+    <color name="grey_subtitle_color">#a9a9a9</color>
+    <color name="gallery_frame_color">#ededed</color>
+    <color name="green_shoppingcart_font">#008000</color>
+    <color name="green_light_bacground_banner">#589901</color>
+    <color name="green_dark_bacground_banner">#174b03</color>
+    <color name="red_light_bacground_banner">#e60405</color>
+    <color name="red_dark_bacground_banner">#b40202</color>
+    <color name="grid_spearator_grey">#dedede</color>
+    <color name="red_background">#fc002b</color>
+    <color name="green_background">#589906</color>
+    <color name="light_grey_background">#eaeaea</color>
+    <color name="text_color_grey">#888888</color>
+    <color name="green_title_dialog">#079c5b</color>
+    <color name="brown_text_shoppingcart_empty">#6f490a</color>
+    <color name="grey_gallery_border">#d7d7d7</color>
+    <color name="search_bar_grey">#c9c8ce</color>
+
+    <color name="product_brand">#4d4d4d</color>
+    <color name="product_title">#AEAAA1</color>
+    <color name="product_code_price">#3e3e3e</color>
+
+
+</resources>

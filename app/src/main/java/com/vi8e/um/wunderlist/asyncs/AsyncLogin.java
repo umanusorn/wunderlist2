@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.async.asyncs;
+package com.vi8e.um.wunderlist.asyncs;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

@@ -89,7 +89,7 @@ def getDate() {
 }
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
 
     compile('com.afollestad.material-dialogs:commons:0.8.1.0@aar') {
