@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/gallery_frame_color"
+    android:padding="@dimen/activity_component_margin_small_half" >
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/item1" />
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:background="@color/lighter_grey"
+        android:paddingTop="@dimen/activity_half_component_default_height"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/textViewItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brownies Kukus"
+            android:textColor="@color/grey_title_color"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textViewItemDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet"
+            android:lines="4"
+            android:textColor="@color/grey_subtitle_color"
+            android:textSize="@dimen/text_size_subtitle" />
+    </LinearLayout>
+</RelativeLayout>

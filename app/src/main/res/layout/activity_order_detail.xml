@@ -1,0 +1,556 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vi8e.giant.OrderDetailActivity"
+    android:orientation="vertical">
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+	    android:layout_marginLeft="@dimen/activity_component_margin"
+	    android:layout_marginRight="@dimen/activity_component_margin"
+        android:scrollbars="none">
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+		    <LinearLayout android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:background="@color/background_grey">
+			    <TextView
+			        android:id="@+id/textViewOrderId"
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:layout_gravity="center_vertical"
+			        android:layout_marginTop="@dimen/activity_component_margin"
+			        android:layout_marginLeft="@dimen/activity_component_margin"
+			        android:textColor="@color/black"
+			        android:layout_marginBottom="@dimen/activity_component_margin"
+			        android:textStyle="bold"
+			        android:textSize="@dimen/text_size_subtitle"/>
+
+			    <ImageButton
+			        android:id="@+id/imageButtonCollapseOrder"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:background="@null"
+			        android:src="@drawable/ic_action_collapse" />
+			        		        
+		    </LinearLayout>
+		    <LinearLayout android:id="@+id/linearOrder"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">
+				<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.4"
+				        android:text="Order Date: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewDate"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.6"
+				        android:gravity="right"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				</LinearLayout>
+				<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.4"
+				        android:text="Total Purchase: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewTotal"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.6"
+				        android:gravity="right"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				</LinearLayout>
+				<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.4"
+				        android:text="Order Status: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewStatus"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.6"
+				        android:gravity="right"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				</LinearLayout>		
+			</LinearLayout>
+			<LinearLayout android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:background="@color/background_grey">
+			   <TextView
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:layout_gravity="center_vertical"
+			        android:layout_marginTop="@dimen/activity_component_margin"
+			        android:layout_marginLeft="@dimen/activity_component_margin"
+			        android:text="Delivery Address"
+			        android:textColor="@color/black"
+			        android:layout_marginBottom="@dimen/activity_component_margin"
+			        android:textStyle="bold"
+			        android:textSize="@dimen/text_size_subtitle"/>
+			   <ImageButton
+			        android:id="@+id/imageButtonCollapseDelivery"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:background="@null"
+			        android:src="@drawable/ic_action_collapse" />
+			</LinearLayout>	
+			<LinearLayout android:id="@+id/linearDeliveryContainer"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical">
+			   <LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:id="@+id/textViewNameTitle"
+				        android:layout_width="0dp"
+				        android:layout_weight="0.1"
+				        android:layout_height="wrap_content"
+				        android:text="Email: "
+				        android:gravity="center_horizontal"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewName"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.9"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>	
+			    </LinearLayout>
+			   	<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:id="@+id/textViewEmailTitle"
+				        android:layout_width="0dp"
+				        android:layout_weight="0.1"
+				        android:layout_height="wrap_content"
+				        android:gravity="center_horizontal"
+				        android:text="Email: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewEmail"
+				        android:layout_width="0dp"
+				        android:layout_weight="0.9"
+				        android:layout_height="wrap_content"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>	
+				</LinearLayout>	  
+				<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:id="@+id/textViewPhoneTitle"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.1"
+				        android:gravity="center_horizontal"
+				        android:text="Phone: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewPhone"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.9"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>	
+				</LinearLayout>	
+				<LinearLayout android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:paddingLeft="@dimen/activity_component_margin"
+				    android:paddingRight="@dimen/activity_component_margin"
+				    android:orientation="horizontal"> 
+				    <TextView
+				        android:id="@+id/textViewAddressTitle"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.1"
+				        android:gravity="center_horizontal"
+				        android:text="Address: "
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+				    <TextView
+				        android:id="@+id/textViewAddress1"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.9"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>
+			    </LinearLayout>
+		    </LinearLayout>	
+			<LinearLayout android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:background="@color/background_grey">
+				<TextView
+			        android:layout_width="0dp"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:layout_gravity="center_vertical"
+			        android:layout_marginTop="@dimen/activity_component_margin"
+			        android:layout_marginLeft="@dimen/activity_component_margin"
+			        android:text="Product(s)"
+			        android:textColor="@color/black"
+			        android:layout_marginBottom="@dimen/activity_component_margin"
+			        android:textStyle="bold"
+			        android:textSize="@dimen/text_size_subtitle"/>	
+		        <ImageButton
+			        android:id="@+id/imageButtonCollapseProduct"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:background="@null"
+			        android:src="@drawable/ic_action_collapse" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/linearProduct"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical">
+				<LinearLayout android:id="@+id/linearStandard"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginTop="@dimen/activity_component_margin"
+				    android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/textViewDeliveryStandard"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				   	 	android:paddingRight="@dimen/activity_component_margin"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>	
+				    <View android:layout_width="match_parent"
+				        android:layout_height="0.5dp"
+				        android:layout_marginLeft="@dimen/activity_component_margin"
+				    	android:layout_marginRight="@dimen/activity_component_margin"
+				        android:background="@color/dark_grey"/>
+				    <LinearLayout android:id="@+id/parentStandard"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				    	android:paddingRight="@dimen/activity_component_margin"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:orientation="vertical">
+				        
+				    </LinearLayout>	
+				</LinearLayout>        
+				<LinearLayout android:id="@+id/linearConcess1"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/textViewDeliveryConcess1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				    	android:paddingRight="@dimen/activity_component_margin"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>		
+					<View android:layout_width="match_parent"
+				        android:layout_height="0.5dp"
+				        android:layout_marginLeft="@dimen/activity_component_margin"
+				    	android:layout_marginRight="@dimen/activity_component_margin"
+				        android:background="@color/dark_grey"/>
+				    <LinearLayout android:id="@+id/parentConcess1"
+				        android:layout_width="match_parent"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:layout_height="wrap_content"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				    	android:paddingRight="@dimen/activity_component_margin"
+				        android:orientation="vertical">
+				        
+				    </LinearLayout>	
+				</LinearLayout>        
+				<LinearLayout android:id="@+id/linearConcess2"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/textViewDeliveryConcess2"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				    	android:paddingRight="@dimen/activity_component_margin"
+				        android:textColor="@color/black"
+				        android:textSize="@dimen/text_size_subtitle"/>	
+				    <View android:layout_width="match_parent"
+				        android:layout_height="0.5dp"
+				        android:layout_marginLeft="@dimen/activity_component_margin"
+				    	android:layout_marginRight="@dimen/activity_component_margin"
+				        android:background="@color/dark_grey"/>	
+				    <LinearLayout android:id="@+id/parentConcess2"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:paddingLeft="@dimen/activity_component_margin"
+				    	android:paddingRight="@dimen/activity_component_margin"
+				        android:layout_marginBottom="@dimen/activity_component_margin"
+				        android:orientation="vertical">
+				        
+				    </LinearLayout>	
+				</LinearLayout> 
+			</LinearLayout>
+	</LinearLayout>        
+    </ScrollView>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@color/background_grey_darker"
+	    android:paddingLeft="@dimen/activity_component_margin"
+	    android:paddingRight="@dimen/activity_component_margin"
+	    android:orientation="vertical">
+		<ImageButton
+		    android:id="@+id/imageButtonExpand"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:background="@null"
+		    android:src="@drawable/ic_action_collapse" />
+		<LinearLayout 
+		    android:id="@+id/linearDetail"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:visibility="gone"
+		    android:orientation="vertical">
+			<LinearLayout 
+			    android:id="@+id/linearStaffDiscount"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:id="@+id/textViewStaffDiscountTitle"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.6"
+				    android:singleLine="true"
+				    android:text="Staff discount: "
+				    android:gravity="right"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewStaffDiscount"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.4"
+				    android:gravity="right"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearDiscount2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin_small"
+		        android:orientation="vertical">
+
+				<LinearLayout
+				    android:id="@+id/linearSubtotal"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal" >
+
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_marginBottom="@dimen/activity_component_margin_small"
+				        android:layout_weight="0.6"
+				        android:singleLine="true"
+				        android:gravity="right"
+				        android:text="Subtotal: "
+				        android:textSize="@dimen/text_size_subtitle" />
+
+				    <TextView
+				        android:id="@+id/textViewSubtotal"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_marginBottom="@dimen/activity_component_margin_small"
+				        android:layout_weight="0.4"
+				        android:gravity="right"
+				        android:textSize="@dimen/text_size_subtitle" />
+				</LinearLayout>
+		
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearDelivery"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.6"
+				    android:singleLine="true"
+				    android:gravity="right"
+				    android:text="Delivery Charge: "
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewDeliveryCharge"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.4"
+				    android:gravity="right"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearDiscount3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin_small"
+		        android:orientation="vertical">		
+			</LinearLayout>	
+			<LinearLayout 
+			    android:id="@+id/linearRounding"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.6"
+				    android:gravity="right"
+				    android:singleLine="true"
+				    android:text="Rounding: "
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewRounding"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.4"
+				    android:gravity="right"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>			
+			    		    
+		</LinearLayout>
+		<LinearLayout 
+		    android:id="@+id/linearTotal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">		
+			<TextView
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0.6"
+			    android:singleLine="true"
+			    android:gravity="right"
+			    android:text="Total Purchase: "
+			    android:textSize="@dimen/text_size_subtitle"/>
+			<TextView
+			    android:id="@+id/textViewTotalPurchase"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0.4"
+			    android:gravity="right"
+			    android:textSize="@dimen/text_size_subtitle"/>
+		</LinearLayout>
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_marginBottom="@dimen/activity_component_margin_small"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal">
+		    <TextView
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.6"
+		        android:singleLine="true"
+		        android:gravity="right"
+		        android:text="(incl 7% GST) "
+		        android:textSize="@dimen/text_size_content_smaller"/>
+			<TextView
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.4"
+		        android:textColor="@color/black"
+		        android:gravity="right"
+		        android:textSize="@dimen/text_size_subtitle" />
+		</LinearLayout>		        
+				
+		<LinearLayout 
+		    android:id="@+id/linearGST"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal">		
+			<TextView
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0.6"
+			    android:gravity="right"
+			    android:singleLine="true"
+			    android:text="GST: "
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_subtitle"/>
+			<TextView
+			    android:id="@+id/textViewGST"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0.4"
+			    android:singleLine="true"
+			    android:gravity="right"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_subtitle"/>
+		</LinearLayout>										
+	    <Button
+	        android:id="@+id/buttonReorder"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="@dimen/activity_component_margin"
+	        android:background="@drawable/background_button_orange"
+	        android:text="Re-Order" />
+	</LinearLayout>
+</LinearLayout>

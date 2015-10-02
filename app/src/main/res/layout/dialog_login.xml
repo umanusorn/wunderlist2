@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_component_margin">
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+	    android:gravity="center_horizontal"
+	    android:background="@drawable/background_dialog"
+        android:orientation="vertical">
+		<LinearLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="@dimen/activity_horizontal_margin"
+		    android:paddingRight="@dimen/activity_horizontal_margin"
+		    android:paddingTop="@dimen/activity_vertical_margin"
+		    android:paddingBottom="@dimen/activity_vertical_margin"
+		    android:orientation="vertical" >
+		
+		    <TextView
+		        android:id="@+id/textViewTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/white"
+		        android:textSize="22sp"
+		        android:text="Title" />
+		
+		</LinearLayout>
+	<!-- 	<View android:id="@+id/titleDividerTop"
+			android:layout_width="match_parent"
+			android:layout_height="2dip"
+			android:background="@color/orange" /> -->
+		<!-- <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="@dimen/activity_component_margin"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:textSize="@dimen/text_size_subtitle"
+		    android:textColor="@color/black"
+		    android:text="Email"/> -->
+		<com.vi8e.giantapp.widgets.EditTextClearButton
+		    android:id="@+id/editTextEmail"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/black"
+		    android:hint="Email Address"
+			android:textColorHint="@android:color/darker_gray"
+		    android:inputType="textEmailAddress"
+			android:ellipsize="start"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginBottom="@dimen/activity_component_margin"
+		    style="@style/MyEditText"/>
+		<!-- <TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="@dimen/activity_component_margin"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:textSize="@dimen/text_size_subtitle"
+		    android:textColor="@color/black"
+		    android:text="Password"/> -->
+		<com.vi8e.giantapp.widgets.EditTextClearButton
+		    android:id="@+id/editTextPassword"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textColor="@color/black"
+			android:textColorHint="@android:color/darker_gray"
+		    android:hint="Password"
+			android:ellipsize="start"
+		    android:inputType="textPassword"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginBottom="@dimen/activity_component_margin"
+		    style="@style/MyEditText"/>
+		<TextView
+		    android:id="@+id/textViewError"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginBottom="@dimen/activity_component_margin"
+		    android:textColor="#ff0000"
+		    android:text="Value cannot be blank"
+		    android:visibility="gone"/>
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginRight="@dimen/activity_horizontal_margin"
+		    android:layout_marginBottom="@dimen/activity_vertical_margin"
+		    android:orientation="horizontal">
+			<Button
+			    android:id="@+id/buttonNegative"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+		    	android:layout_marginRight="@dimen/activity_component_margin_small"
+			    android:layout_weight="0.5"
+			    android:background="@drawable/background_button_dialog"
+			    android:text="Cancel" />
+		    <Button
+			    android:id="@+id/buttonPositive"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0.5"
+			    android:layout_marginLeft="@dimen/activity_component_margin_small"
+			    android:background="@drawable/background_button_dialog"
+			    android:text="Log In" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

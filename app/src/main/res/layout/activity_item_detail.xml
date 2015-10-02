@@ -1,0 +1,264 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background_grey"
+	android:orientation="vertical">
+	<ScrollView android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:scrollbars="none"
+	    android:layout_marginLeft="@dimen/activity_component_margin"
+	    android:layout_marginRight="@dimen/activity_component_margin"
+	    android:background="@color/white"
+	    android:layout_weight="1">
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/activity_component_margin"
+			android:paddingRight="@dimen/activity_component_margin"
+			android:background="@color/white">
+			<RelativeLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center_horizontal"
+			    android:layout_marginTop="@dimen/activity_component_margin"
+			    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+			    android:layout_marginRight="@dimen/activity_horizontal_margin"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:padding="@dimen/activity_component_margin_small_half">
+				<ImageView
+				    android:id="@+id/imageViewItem"
+				    android:layout_width="match_parent"
+				    android:layout_height="120dp"
+				    android:scaleType="fitCenter"
+				    android:adjustViewBounds="true"
+				    android:layout_centerInParent="true" />
+			</RelativeLayout>
+			<View android:layout_width="match_parent"
+			    android:layout_height="0.5dp"
+			    android:background="@color/dark_grey"/>
+			<TextView
+		       android:id="@+id/textViewTitle"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:textStyle="bold"
+		       android:textColor="@color/product_code_price"
+		       android:paddingTop="@dimen/activity_component_margin_small"
+		       android:textSize="@dimen/text_size_title_large"/>
+			<TextView
+		       android:id="@+id/textViewBrand"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:textColor="@color/black"
+		       android:paddingTop="@dimen/activity_component_margin"
+		       android:textSize="@dimen/text_size_subtitle"/>
+			<TextView
+		       android:id="@+id/textViewCode"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:textColor="@color/black"
+		       android:paddingTop="@dimen/activity_component_margin"
+		       android:textSize="@dimen/text_size_subtitle"/>
+			<LinearLayout android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+				<TextView
+			       android:layout_width="wrap_content"
+			       android:layout_height="wrap_content"
+			       android:paddingTop="@dimen/activity_component_margin"
+			       android:textSize="@dimen/text_size_subtitle"
+			       android:text="Availability: "
+			       android:textColor="@color/black"/>	  	  
+				<TextView
+			       android:id="@+id/textViewAvailability"
+			       android:layout_width="wrap_content"
+			       android:layout_height="wrap_content"
+			       android:paddingTop="@dimen/activity_component_margin"
+			       android:textSize="@dimen/text_size_subtitle"
+			       android:text="item not available"
+			       android:visibility="visible"
+			       android:textColor="@color/error_color"/>	  	  
+				    			    
+			</LinearLayout>
+			
+			
+	
+		    <LinearLayout 
+		        android:id="@+id/linearWeight"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		        android:visibility="gone"
+		        android:orientation="horizontal">
+				<ImageView
+				    android:id="@+id/imageView1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:src="@drawable/ic_weight" />
+				<TextView
+			       android:id="@+id/textViewWeight"
+			       android:layout_width="wrap_content"
+			       android:layout_height="wrap_content"
+			       android:layout_marginLeft="2dp"
+			       android:paddingTop="@dimen/activity_component_margin"
+			       android:textSize="@dimen/text_size_subtitle"/>		           
+			        		        
+		    </LinearLayout>
+			<TextView
+		       android:id="@+id/textViewPrice"
+		       android:layout_width="fill_parent"
+		       android:layout_height="wrap_content"
+		       android:gravity="right"
+		       android:textSize="@dimen/text_size_title"/>
+			<TextView
+		       android:id="@+id/textViewDiscountPrice"
+		       android:layout_width="fill_parent"
+		       android:layout_height="wrap_content"
+		       android:gravity="right"
+		       android:visibility="invisible"
+		       android:textColor="@color/error_color"
+		       android:textSize="@dimen/text_size_title_large"
+		       android:text="Rp 50.000,00" />
+			<!-- <LinearLayout android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:layout_marginTop="@dimen/activity_component_margin">
+			    <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Quantity:"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<EditText
+				    android:id="@+id/editTextQuantity"
+				    android:layout_width="wrap_content"
+				    android:layout_height="45dp"
+				    android:ems="3"
+				    android:gravity="center_vertical|right"
+				    android:text="1"
+				    android:maxLength="3"
+				    android:inputType="number" />
+			</LinearLayout> -->
+			<LinearLayout 
+			    android:id="@+id/linearItemList"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:visibility="visible"
+				android:gravity="center_vertical">
+
+				<TextView
+				    android:id="@+id/textView1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Select Product"
+				    android:layout_marginRight="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<Spinner
+				    android:id="@+id/spinnerItemList"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content" />
+			</LinearLayout>
+			<TextView 
+			    android:id="@+id/textViewStamps"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:background="@color/green_background"
+			    android:textColor="@color/white"
+			    android:textSize="@dimen/text_size_subtitle"
+			    android:paddingRight="@dimen/activity_component_margin"
+			    android:paddingLeft="@dimen/activity_component_margin"
+			    android:text="* 3 Stamps Required"
+			     android:visibility="gone"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:padding="@dimen/activity_component_margin_small"/>
+			<TextView 
+			    android:id="@+id/textViewAdditionalNote"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:background="@color/green_background"
+			    android:textColor="@color/white"
+			    android:paddingRight="@dimen/activity_component_margin"
+			    android:paddingLeft="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_subtitle"
+			    android:text="* AdditionalNote"
+			     android:visibility="gone"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:padding="@dimen/activity_component_margin_small"/>
+		</LinearLayout>	    
+	</ScrollView>
+
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="@color/background_grey_darker"
+	    android:padding="@dimen/activity_component_margin">
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:minHeight="@dimen/activity_component_default_height"
+		    android:orientation="horizontal">
+
+			<LinearLayout
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:minHeight="@dimen/activity_component_default_height"
+			    android:gravity="center_vertical"
+			    android:layout_weight="0.4"
+			    android:background="@drawable/background_green_quantity"
+			    android:orientation="horizontal" >
+
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="Quantity: "
+			        android:textColor="@color/white"
+			        android:textSize="@dimen/text_size_subtitle" />
+
+			    <EditText
+			        android:id="@+id/editTextQuantity"
+			        android:layout_width="wrap_content"
+			        android:layout_height="38dp"
+			        android:ems="3"
+			        android:gravity="center_vertical|right"
+			        android:inputType="number"
+			        android:maxLength="3"
+			        android:text="1" 
+			        android:background="@drawable/background_edittext_qty"/>
+			</LinearLayout>
+
+			<Button 
+			    android:id="@+id/buttonAddToCart"
+			    android:layout_width="0dp"
+			    android:layout_weight="0.3"
+			    android:layout_height="match_parent"
+			    android:clickable="true"
+			    android:padding="2dp"
+			    android:text="@string/icon_addtocart"
+			    android:textColor="@color/black"
+			    android:textSize="@dimen/text_size_subtitle"
+			    android:background="@drawable/selector_button_addtocart"/>
+			<View android:layout_width="1dp"
+			    android:layout_height="match_parent"
+			    android:background="#bf7d26"/>
+			<ImageButton
+			    android:id="@+id/buttonAddToList"
+			    android:layout_width="0dp"
+			    android:layout_weight="0.3"
+			    android:layout_height="match_parent"
+			    android:clickable="true"
+			    android:padding="2dp"
+			    android:src="@drawable/shopping_list_small"
+			    android:background="@drawable/selector_button_addtolist"/>
+		</LinearLayout>
+		<!-- <Button
+	        android:id="@+id/buttonAddToCart"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Add To Cart" /> -->	
+	       <!-- <Button
+	        android:id="@+id/buttonAddToList"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="Add To Shopping List" 
+	        android:background="@drawable/background_button_orange"/> -->
+	</LinearLayout>     	
+</LinearLayout>

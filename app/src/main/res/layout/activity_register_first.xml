@@ -1,0 +1,422 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vi8e.giantapp.RegisterFirstActivity" >
+	<ScrollView android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:scrollbars="none">
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+		    android:paddingBottom="@dimen/activity_component_margin"
+		    android:paddingLeft="@dimen/activity_component_margin"
+		    android:paddingRight="@dimen/activity_component_margin"
+		    android:paddingTop="@dimen/activity_component_margin"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+			<LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+		        <TextView
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Account type"
+		            android:textSize="@dimen/text_size_subtitle"/>
+		
+		        <RadioGroup
+		            android:id="@+id/radioGroupAccountType"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:gravity="center_vertical"
+		            android:layout_gravity="center_vertical"
+		            android:layout_marginBottom="@dimen/activity_component_margin" 
+		            android:orientation="horizontal">
+		
+		            <RadioButton
+		                android:id="@+id/radioResidental"
+		                android:layout_width="0dp"
+		                android:layout_weight="0.5"
+		                android:layout_height="wrap_content"
+		                android:button="@drawable/selector_button_radio"
+		                android:checked="true"
+		                android:textColor="@color/text_color_grey"
+		                android:textSize="@dimen/text_size_subtitle"
+		                android:text="Residential" />
+		
+		            <RadioButton
+		                android:id="@+id/radioCorporate"
+		                android:layout_width="0dp"
+		                android:layout_weight="0.5"
+		                android:layout_height="wrap_content"
+		                android:textColor="@color/text_color_grey"
+		                android:button="@drawable/selector_button_radio"
+		                android:textSize="@dimen/text_size_subtitle"
+		                android:text="Corporate" />
+		        </RadioGroup>
+				    		    
+			</LinearLayout>
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Email Address *"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>
+	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	            android:id="@+id/editTextEmail"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:singleLine="true"
+	            android:ems="10"
+	            android:inputType="textEmailAddress" />
+	        <TextView
+	            android:id="@+id/textViewErrorEmail"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/error_color"
+	            android:textSize="@dimen/text_size_subtitle"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:visibility="gone"
+	            android:text="Medium Text"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Password *"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>        
+	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	            android:id="@+id/editTextPassword"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:singleLine="true"
+	            android:ems="10"
+	            android:inputType="textPassword"/>
+			<TextView
+	            android:id="@+id/textViewErrorPassword"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/error_color"
+	            android:textSize="@dimen/text_size_subtitle"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:visibility="gone"
+	            android:text="Medium Text"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />        
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Confirm Password *"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>
+	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	            android:id="@+id/editTextRepeatPassword"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:singleLine="true"
+	            android:ems="10"
+	            android:inputType="textPassword"/>
+			<TextView
+	            android:id="@+id/textViewErrorRepeatPassword"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/error_color"
+	            android:textSize="@dimen/text_size_subtitle"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:visibility="gone"
+	            android:text="Medium Text"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />        
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Title"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>
+	        <Spinner
+	            android:id="@+id/spinnerTitle"
+	            android:layout_width="match_parent"
+	            android:textColor="@color/text_color_grey"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:layout_height="wrap_content" />
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="First Name *"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>
+	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	            android:id="@+id/editTextFirstName"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:singleLine="true"
+	            android:ems="10"/>
+			<TextView
+	            android:id="@+id/textViewErrorFirstName"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/error_color"
+	            android:textSize="@dimen/text_size_subtitle"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:visibility="gone"
+	            android:text="Medium Text"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />        
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Last Name *"
+			    android:layout_marginBottom="@dimen/activity_component_margin_small"
+			    android:textSize="@dimen/text_size_subtitle"/>
+			<com.vi8e.giantapp.widgets.EditTextClearButton
+	            android:id="@+id/editTextLastName"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:singleLine="true"
+	            android:ems="10"/>
+			<TextView
+	            android:id="@+id/textViewErrorLastName"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="@color/error_color"
+	            android:textSize="@dimen/text_size_subtitle"
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:visibility="gone"
+	            android:text="Medium Text"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />        
+			<LinearLayout 
+			    android:id="@+id/linearResidential"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical">
+		        <LinearLayout android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal">
+			        <TextView
+			            android:id="@+id/textViewDFSG"
+			            android:layout_width="0dp"
+			            android:layout_weight="1"
+			            android:layout_height="wrap_content"
+			            android:text="Are You an Employee of DFSG?"
+			            android:textSize="@dimen/text_size_subtitle"/>
+					<CheckBox android:id="@+id/checkBoxDFSG"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"/>
+			            	            
+		        </LinearLayout>
+		        <LinearLayout android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="vertical"
+		            android:visibility="gone"
+		            android:id="@+id/linearDFSG">
+			        <TextView
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:text="DFSG Staff ID *"
+					    android:layout_marginBottom="@dimen/activity_component_margin_small"
+					    android:textSize="@dimen/text_size_subtitle"/>
+					<com.vi8e.giantapp.widgets.EditTextClearButton
+			            android:id="@+id/editTextDFSG"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_marginBottom="@dimen/activity_component_margin"
+			            android:singleLine="true"
+			            android:ems="10" />
+		        </LinearLayout>
+				<TextView
+		            android:id="@+id/textViewErrorDFSG"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/error_color"
+		            android:textSize="@dimen/text_size_subtitle"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:visibility="gone"
+		            android:text="Medium Text"
+		            android:textAppearance="?android:attr/textAppearanceMedium" />        
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="NRIC/Passport *"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>		
+		        <com.vi8e.giantapp.widgets.EditTextClearButton
+		            android:id="@+id/editTextNRIC"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:singleLine="true"
+		            android:ems="10" />
+				<TextView
+		            android:id="@+id/textViewErrorNRIC"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/error_color"
+		            android:textSize="@dimen/text_size_subtitle"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:visibility="gone"
+		            android:text="Medium Text"
+		            android:textAppearance="?android:attr/textAppearanceMedium" />        
+		        
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Date of Birth *"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+		        <com.vi8e.giantapp.widgets.EditTextClearButton
+		            android:id="@+id/editTextDOB"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:singleLine="true"
+		            android:clickable="true"
+		        	android:focusableInTouchMode="false"
+		            android:ems="10" />
+				<TextView
+		            android:id="@+id/textViewErrorDOB"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textColor="@color/error_color"
+		            android:textSize="@dimen/text_size_subtitle"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:visibility="gone"
+		            android:text="Medium Text"
+		            android:textAppearance="?android:attr/textAppearanceMedium" />        
+		        
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Race"
+				    android:layout_marginBottom="@dimen/activity_component_margin_small"
+				    android:textSize="@dimen/text_size_subtitle"/>
+		        <Spinner
+		            android:id="@+id/spinnerRace"
+		            android:layout_width="match_parent"
+		            android:textColor="@color/text_color_grey"
+		            android:layout_marginBottom="@dimen/activity_component_margin"
+		            android:layout_height="wrap_content" />
+				    		    
+			</LinearLayout>
+			<LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:layout_marginBottom="@dimen/activity_component_margin">
+		        <TextView
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:text="Require Halal Product?"
+					android:textSize="@dimen/text_size_subtitle"/>
+	
+		        <CheckBox
+		            android:id="@+id/checkBoxHalal"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" />
+				    		    
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginBottom="@dimen/activity_component_margin">
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="Use PAssion Card?"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+				<CheckBox
+					android:id="@+id/checkBoxPAssionCard"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:id="@+id/llPAssionCard"
+				android:visibility="gone"
+				android:layout_marginBottom="@dimen/activity_component_margin"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="PAssion Card ID *"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+				<com.vi8e.giantapp.widgets.EditTextClearButton
+					android:id="@+id/editTextPAssionCard"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:singleLine="true"
+					android:ems="10" />
+
+				<TextView
+					android:id="@+id/textViewErrorPassionCard"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/error_color"
+					android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:visibility="gone"
+					android:text="Medium Text"
+					android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			</LinearLayout>
+
+
+	       <!--  <RadioGroup
+	            android:id="@+id/radioGroupHalal"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content" 
+	            android:layout_marginBottom="@dimen/activity_component_margin"
+	            android:orientation="horizontal">
+	
+	            <RadioButton
+	                android:id="@+id/radioHalal"
+	                android:layout_width="0dp"
+	                android:layout_weight="0.5"
+	                android:layout_height="wrap_content"
+	                android:checked="true"
+	                android:text="Yes" 
+	                android:button="@drawable/selector_button_radio"/>
+	
+	            <RadioButton
+	                android:id="@+id/radioNoHalal"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="0.5"
+	                android:button="@drawable/selector_button_radio"
+	                android:text="No" />
+	
+	        </RadioGroup> -->
+	        
+	
+	
+	    </LinearLayout>
+	</ScrollView>
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:padding="@dimen/activity_component_margin"
+	    android:background="@color/background_grey_darker">
+		<Button
+           android:id="@+id/buttonNext"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/background_button_orange"
+           android:text="Next" />
+	</LinearLayout>
+</LinearLayout>

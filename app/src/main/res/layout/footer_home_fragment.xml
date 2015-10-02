@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+     <!-- android:paddingLeft="@dimen/activity_component_margin"
+    android:paddingRight="@dimen/activity_component_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" -->
+ 	<!-- <LinearLayout 
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:minHeight="@dimen/activity_component_default_height_smaller"
+ 	    android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:paddingLeft="@dimen/activity_component_margin"
+ 	    android:paddingRight="@dimen/activity_component_margin"
+ 	    android:gravity="center_vertical"
+ 	    android:background="@drawable/background_header_green"
+ 	    android:orientation="horizontal"> -->
+
+<!--  		<TextView
+ 		    android:layout_width="0dp"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_weight="1"
+ 		    android:text="ALL CATEGORIES"
+ 		    android:textColor="@color/white"
+ 		    android:textStyle="bold"
+ 		    android:textSize="@dimen/text_size_subtitle"/>
+
+ 		<TextView
+ 		    android:id="@+id/textViewSeeAll"
+ 		    android:layout_width="wrap_content"
+ 		    android:layout_height="wrap_content"
+ 		    android:text="See All"
+ 		    android:textColor="@color/white"
+ 		    android:textStyle="bold"
+ 		    android:textSize="@dimen/text_size_subtitle"/>
+
+ 		<ImageButton
+ 		    android:id="@+id/imageButtonExpand"
+ 		    android:layout_width="wrap_content"
+ 		    android:layout_height="wrap_content"
+ 		    android:src="@drawable/ic_action_expand" 
+ 		    android:background="@null"/>
+ 	    
+ 	</LinearLayout>
+ 	<LinearLayout 
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:orientation="vertical">
+		<com.vi8e.giantapp.widgets.ExpandableGridView
+		    android:id="@+id/gridViewDepartment"
+	 	    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@color/white"
+		    android:numColumns="2" >
+		</com.vi8e.giantapp.widgets.ExpandableGridView>
+	 	    	    
+ 	</LinearLayout> -->
+
+    
+ 	
+ 	<LinearLayout 
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:paddingLeft="@dimen/activity_component_margin"
+ 	    android:paddingRight="@dimen/activity_component_margin"
+  	    android:minHeight="@dimen/activity_component_default_height_smaller"
+ 	    android:gravity="center_vertical"
+ 	    android:background="#FF0000"
+ 	    android:orientation="horizontal"
+		android:id="@+id/llHorizontal">
+ 		<TextView
+ 		    android:layout_width="0dp"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_weight="1"
+ 		    android:text="GREAT OFFERS FROM GIANT"
+ 		    android:textColor="@color/white"
+ 		    android:textStyle="bold"
+ 		    android:textSize="@dimen/text_size_subtitle"
+			android:id="@+id/lblGreatOffers" />
+ 	</LinearLayout>
+ 	<View android:layout_width="match_parent"
+ 	    android:layout_height="1dp"
+ 	    android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:layout_marginBottom="@dimen/activity_component_margin"
+ 	    android:background="@color/black"/>
+ 	<ProgressBar
+	    android:id="@+id/progressBarGreatOffer"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_width="wrap_content"
+	    android:visibility="gone"
+	    android:layout_height="wrap_content" />
+ 	<HorizontalScrollView
+        android:id="@+id/horizontalScrollViewGreatOffer"
+        android:background="@color/grid_spearator_grey"
+  		android:layout_marginLeft="@dimen/activity_component_margin"
+    	android:layout_marginRight="@dimen/activity_component_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:scrollbars="none">
+        <LinearLayout
+            android:id="@+id/layoutScrollItemsGreatOffer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >          
+        </LinearLayout>
+    </HorizontalScrollView>
+    <!-- <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:orientation="vertical"></LinearLayout> -->
+ 	<!-- <LinearLayout 
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:paddingLeft="@dimen/activity_component_margin"
+ 	    android:paddingRight="@dimen/activity_component_margin"
+ 	    android:minHeight="@dimen/activity_component_default_height_smaller"
+ 	    android:gravity="center_vertical"
+ 	    android:background="@drawable/background_header_red"
+ 	    android:orientation="horizontal">
+ 		<TextView
+ 		    android:layout_width="0dp"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_weight="1"
+ 		    android:text="GREAT OFFERS FROM GIANT"
+ 		    android:textColor="@color/white"
+ 		    android:textStyle="bold"
+ 		    android:textSize="@dimen/text_size_subtitle"/>
+ 	</LinearLayout> -->
+	<!-- <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_marginLeft="@dimen/activity_component_margin"
+ 	    android:layout_marginRight="@dimen/activity_component_margin"
+ 	    android:orientation="horizontal"
+	    android:visibility="gone">
+	    <Button 
+	        android:id="@+id/buttonExclusive"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.5"
+	        android:text="Exclusive Deal"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:textColor="@color/black"
+	        android:background="@drawable/custom_tab_indicator"/>
+	    <View android:layout_width="1dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/grey_subtitle_color"
+	        android:layout_margin="@dimen/activity_component_margin_small_half"></View>
+	    <Button 
+	        android:id="@+id/buttonGiantBrand"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.5"
+	        android:text="Giant Brand"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:textColor="@color/black"
+	        android:background="@drawable/custom_tab_indicator"/>
+		<View android:layout_width="1dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/grey_subtitle_color"
+	        android:layout_margin="@dimen/activity_component_margin_small_half"></View>
+	    <Button 
+	        android:id="@+id/buttonBulk"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.5"
+	        android:text="Bulk Special"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:textColor="@color/black"
+	        android:background="@drawable/custom_tab_indicator"/>			    
+	</LinearLayout>        
+    <Button
+        android:id="@+id/buttonLoadMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:text="Load More" 
+		style="@style/MyButton"/>
+
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/activity_component_margin"
+			android:visibility="gone"
+	      	android:orientation="horizontal">
+		    <Button 
+		        android:id="@+id/buttonDareToCompare"
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.5"
+		        android:text="Dare To Compare"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:textColor="@color/black"
+		        android:background="@drawable/custom_tab_indicator"/>
+		    <View android:layout_width="1dp"
+		        android:layout_height="match_parent"
+		        android:background="@color/grey_subtitle_color"
+		        android:layout_margin="@dimen/activity_component_margin_small_half"></View>
+		    <Button 
+		        android:id="@+id/buttonCatalogue"
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.5"
+		        android:text="Catalogue"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:textColor="@color/black"
+		        android:background="@drawable/custom_tab_indicator"/>
+		    <View android:layout_width="1dp"
+		        android:layout_height="match_parent"
+		        android:background="@color/grey_subtitle_color"
+		        android:layout_margin="@dimen/activity_component_margin_small_half"></View>
+		    <Button 
+		        android:id="@+id/buttonPromotion"
+		        android:layout_height="wrap_content"
+		        android:layout_width="0dp"
+		        android:layout_weight="0.5"
+		        android:text="Promotion"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:textColor="@color/black"
+		        android:background="@drawable/custom_tab_indicator"/>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/linearCatalog"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:visibility="gone"
+		    android:orientation="vertical" 
+		    android:gravity="center_horizontal">
+		    <ImageView
+		        android:id="@+id/imageViewTab2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:adjustViewBounds="true"
+		        android:src="@drawable/catalogue" />
+		</LinearLayout>     -->
+</LinearLayout>

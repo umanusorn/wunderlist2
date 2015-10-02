@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_component_margin"
+    android:paddingRight="@dimen/activity_component_margin"
+    android:paddingTop="@dimen/activity_component_margin"
+    android:paddingBottom="@dimen/activity_component_margin"
+    android:orientation="horizontal" >
+	<LinearLayout android:layout_width="0dp"
+	    android:layout_weight="1"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/textViewName"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/black"
+	        android:text="title"
+	        android:textSize="@dimen/text_size_subtitle"/>
+	    <TextView
+	        android:id="@+id/textViewQty"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/black"
+	        android:text="5 item(s)"
+	        android:textSize="@dimen/text_size_subtitle"/>
+	</LinearLayout>
+<!-- 	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <Button
+	        android:id="@+id/buttonEdit"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.3333"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="@dimen/activity_component_margin_small"
+	        android:text="Edit" />
+	    <Button
+	        android:id="@+id/buttonDelete"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="@dimen/activity_component_margin_small"
+	        android:layout_marginLeft="@dimen/activity_component_margin_small"
+	        android:layout_weight="0.333"
+	        android:text="Delete" />
+	    <Button
+	        android:id="@+id/buttonView"
+	        android:layout_width="0dp"
+	        android:layout_marginLeft="@dimen/activity_component_margin_small"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.333"
+	        android:text="View" />
+	</LinearLayout>
+ -->
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_vertical"
+	    android:src="@drawable/ic_action_next_item" />
+
+</LinearLayout>

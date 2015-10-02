@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <Button
+	        android:id="@+id/buttonContShopping"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.5"
+	        android:layout_height="wrap_content"
+	        android:text="Continue Shopping" 
+	        android:layout_margin="@dimen/activity_component_margin"
+	        android:textSize="@dimen/text_size_button"
+	        android:background="@drawable/background_button_green"/>
+	    <Button
+	        android:id="@+id/buttonUpdate"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.5"
+	        android:layout_height="wrap_content"
+	        android:text="Update Cart" 
+	        android:layout_margin="@dimen/activity_component_margin"
+	        android:textSize="@dimen/text_size_button"
+	        android:background="@drawable/background_button_green"/>
+		    	    
+	</LinearLayout>
+
+    <!-- <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discount code"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_subtitle"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+	    <EditText
+	        android:id="@+id/editTextDiscountCode"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:singleLine="true"
+	        android:layout_marginRight="@dimen/activity_component_margin"
+	        android:layout_marginBottom="@dimen/activity_component_margin"
+	        android:hint="Enter your coupon here"
+	        android:ems="10" 
+	        android:textColor="@color/black"
+	        android:background="@drawable/selector_edittext"/>
+		<Button
+	        android:id="@+id/buttonApply"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Apply" 
+	        android:textSize="@dimen/text_size_button"
+	        android:background="@drawable/background_button"/>
+    </LinearLayout>
+	<TextView
+		    android:id="@+id/textViewErrorCoupon"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="Medium Text"
+		    android:visibility="gone"
+		    android:textSize="@dimen/text_size_subtitle"
+		    android:layout_marginBottom="@dimen/activity_component_margin"
+		    android:textColor="@color/error_color"/> -->
+    
+	
+<!-- 	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+	        android:gravity="right"
+	        android:text="Sub-Total:"
+	        android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_subtitle" />
+		<TextView
+		    android:id="@+id/textViewSubtotal"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3"
+	        android:gravity="right"
+	        android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_subtitle" />
+			    	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/linearStaffdisc"
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+	        android:gravity="right"
+	        android:text="Staff Discount: "
+	        android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_subtitle" />
+		<TextView
+		    android:id="@+id/textViewStaffDisc"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3"
+	        android:gravity="right"
+	        android:textColor="@color/error_color"
+	        android:textSize="@dimen/text_size_subtitle" />
+			    	    
+	</LinearLayout>	
+	<LinearLayout 
+	    android:id="@+id/containerVoucher"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:gravity="right"
+	        android:textColor="@color/black"
+	        android:text="Savings: "
+	        android:textSize="@dimen/text_size_subtitle" />
+		<TextView
+		    android:id="@+id/textViewSaving"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+			    	    
+	</LinearLayout>	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:text="Delivery Charge:"
+	        android:textSize="@dimen/text_size_subtitle"/>
+		<TextView
+		    android:id="@+id/textViewShipping"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/containerCoupon"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/linearCoupon"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:orientation="horizontal">
+		<LinearLayout 
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:gravity="center_vertical"
+		    android:layout_weight="0.5">
+			<ImageButton
+			    android:id="@+id/imageButtonDeleteCoupon"
+			    android:layout_width="32dp"
+			    android:layout_height="32dp"
+			    android:src="@drawable/clear" 
+			    android:layout_gravity="right"
+			    android:background="@null"/>
+	
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/black"
+		        android:gravity="right"
+		        android:text="E-Coupon coupon22:"
+		        android:textSize="@dimen/text_size_subtitle"/>
+			    		    
+		</LinearLayout>
+		<TextView
+		    android:id="@+id/textViewCoupon"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:textColor="@color/error_color"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+	    		    	    
+	</LinearLayout>
+	
+ 	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:text="Total Purchase:"
+	        android:textSize="@dimen/text_size_subtitle"/>
+		<TextView
+		    android:id="@+id/textViewGrandTotal"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+	    		    	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_marginBottom="@dimen/activity_component_margin"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.7"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:text="(incl 7% GST)"
+	        android:textSize="@dimen/text_size_content"/>
+		<TextView
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.3"
+	        android:textColor="@color/black"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+	</LinearLayout> -->
+    <!-- <Button
+        android:id="@+id/buttonCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:text="Check out"
+        android:textSize="@dimen/text_size_button"
+        android:background="@drawable/background_button"/> -->
+</LinearLayout>

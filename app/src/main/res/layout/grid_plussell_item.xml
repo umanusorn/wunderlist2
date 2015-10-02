@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gallery_item"
+    android:orientation="vertical">
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <ImageView
+	        android:id="@+id/imageViewPicture"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:adjustViewBounds="true"
+	        android:scaleType="fitCenter"
+	        android:layout_gravity="center_horizontal"
+	        android:layout_margin="@dimen/activity_component_margin"
+	        android:src="@drawable/item1" />
+	    <LinearLayout android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical">
+		    <TextView
+		        android:id="@+id/textViewItemBrand"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/activity_component_margin_small"
+		        android:layout_marginRight="@dimen/activity_component_margin_small"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:text="Giant"
+		        android:lines="1"
+		        android:textColor="@color/grey_title_color"
+		        android:textSize="@dimen/text_size_content"/>
+			<TextView
+		        android:id="@+id/textViewItemName"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="@dimen/activity_component_margin_small"
+		        android:layout_marginRight="@dimen/activity_component_margin_small"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:text="Brownies Kukus"
+		        android:lines="1"
+		        android:textColor="@color/black"
+		        android:textSize="@dimen/text_size_content"/>    
+			<TextView
+			    android:id="@+id/textViewCode"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Code: 5149007"
+			    android:layout_marginLeft="@dimen/activity_component_margin_small"
+		        android:layout_marginRight="@dimen/activity_component_margin_small"
+			    android:textColor="@color/grey_subtitle_color"
+			    android:textSize="@dimen/text_size_content" />
+		        	        
+	    </LinearLayout>
+		    	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<TextView
+		    android:id="@+id/textViewPrice"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="Only for: S$50.00"
+		    android:layout_marginLeft="@dimen/activity_component_margin_small"
+	        android:layout_marginRight="@dimen/activity_component_margin_small"
+		    android:textColor="@color/black"
+		    android:textSize="@dimen/text_size_content" />
+	        <TextView
+	            android:id="@+id/textViewMinus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+		        android:textColor="@color/orange"
+		        android:textSize="@dimen/text_size_title_large"
+		        android:textStyle="bold"
+		        android:clickable="true"
+		        android:focusable="false"
+	            android:text="   -   " />
+	        <TextView
+	            android:id="@+id/textViewQty"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+		        android:textColor="@color/black"
+		        android:textSize="@dimen/text_size_content"
+	            android:text="1" />
+	        <TextView
+	            android:id="@+id/textViewPlus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+		        android:textColor="@color/orange"
+		        android:textSize="@dimen/text_size_title_large"
+		        android:textStyle="bold"
+		        android:clickable="true"
+		        android:focusable="false"
+	            android:text="   +   " />
+		    
+	</LinearLayout>
+
+</LinearLayout>

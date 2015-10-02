@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/textViewMarquee"
+        android:background="@drawable/background_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_content"
+        android:textColor="@color/white"
+        android:singleLine="true"
+		android:ellipsize="marquee" 
+		android:marqueeRepeatLimit="marquee_forever"
+		android:scrollHorizontally="true" 
+		android:focusable="true" 
+		android:focusableInTouchMode="true" 
+		android:freezesText="true"
+		android:layout_marginBottom="@dimen/activity_component_margin"
+        android:text="Exclusive promotions specially selected for you, only to be found in Giant Online" />
+     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:scrollbars="none">
+        <LinearLayout
+            android:id="@+id/layoutScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >          
+        </LinearLayout>
+	</HorizontalScrollView>
+	<Button 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Load more"
+	    android:layout_margin="@dimen/activity_component_margin"/>	
+    <!-- <GridView
+        android:id="@+id/gridViewExclusive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="@dimen/activity_component_margin"
+        android:verticalSpacing="@dimen/activity_component_margin"
+        android:numColumns="2" >
+    </GridView> -->
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+  <!--   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_component_margin"
+        android:text="Purchase With Purchase"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_subtitle"/> -->
+    <com.vi8e.giantapp.widgets.WrapViewPager
+ 	    android:id="@+id/pager"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_marginBottom="@dimen/activity_component_margin"
+ 	    android:layout_height="wrap_content">
+ 	</com.vi8e.giantapp.widgets.WrapViewPager>
+	<TextView
+	    android:id="@+id/textViewLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icon_arrow_left"
+        android:textColor="@color/black_translucent"
+        android:paddingLeft="@dimen/activity_component_margin"
+        android:paddingRight="@dimen/activity_component_margin"
+        android:textSize="@dimen/text_size_icon_large"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:layout_centerVertical="true"/>
+	<TextView
+	    android:id="@+id/textViewRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/icon_arrow_right"
+        android:paddingLeft="@dimen/activity_component_margin"
+        android:paddingRight="@dimen/activity_component_margin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size_icon_large"
+        android:clickable="true"
+        android:textColor="@color/black_translucent"/>
+<!-- 	<ListView
+        android:id="@+id/listViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+ --><!--     <GridView
+        android:id="@+id/gridViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="@dimen/activity_component_margin"
+        android:verticalSpacing="@dimen/activity_component_margin"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:scrollbars="none"
+        android:numColumns="2" >
+    </GridView>
+ -->
+</RelativeLayout>

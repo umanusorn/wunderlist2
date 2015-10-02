@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:padding="@dimen/activity_component_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PAssion Card ID *"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:textSize="@dimen/text_size_subtitle"/>
+
+    <com.vi8e.giantapp.widgets.EditTextClearButton
+        android:id="@+id/editTextPassionCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:singleLine="true"
+        android:ems="10"/>
+
+    <TextView
+        android:id="@+id/textViewErrorPassionCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/error_color"
+        android:textSize="@dimen/text_size_subtitle"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:visibility="gone"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_button_orange"
+        android:text="Link PAssion Card" />
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    	<LinearLayout 
+	    android:id="@+id/linearCoupon"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:orientation="horizontal">
+		<LinearLayout 
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:gravity="center_vertical"
+		    android:layout_weight="0.6">
+			<ImageButton
+			    android:id="@+id/imageButtonDeleteCoupon"
+			    android:layout_width="32dp"
+			    android:layout_height="32dp"
+			    android:src="@drawable/clear" 
+			    android:layout_gravity="right"
+			    android:background="@null"/>
+	
+		    <TextView
+		        android:id="@+id/textViewTitle"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:singleLine="true"
+		        android:layout_height="wrap_content"
+		        android:gravity="right"
+		        android:textColor="@color/black"
+		        android:text="E-Coupon coupon22:"
+		        android:textSize="@dimen/text_size_subtitle"/>
+			    		    
+		</LinearLayout>
+		<TextView
+		    android:id="@+id/textViewCoupon"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.4"
+	        android:textColor="@color/error_color"
+	        android:gravity="right"
+	        android:textSize="@dimen/text_size_subtitle" />
+	    		    	    
+	</LinearLayout>
+	
+
+</LinearLayout>

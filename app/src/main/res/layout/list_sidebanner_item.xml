@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/background_grey">
+    <View android:layout_width="@dimen/activity_component_margin"
+        android:layout_height="match_parent"
+        android:background="@color/background_grey"/>
+    <RelativeLayout
+        android:id="@+id/linear1stItem"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="0.5"
+        android:clickable="true"
+        android:paddingLeft="@dimen/activity_component_margin_small"
+        android:paddingRight="@dimen/activity_component_margin_small"
+        android:layout_marginRight="@dimen/activity_component_margin_small"
+        android:background="@drawable/background_list_home"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
+        <TextView 
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="SPRING"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true" />
+        <TextView 
+            android:id="@+id/textViewSubtitles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewTitle"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:text="CLEANING"
+            android:textSize="16sp"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ivSideBanner1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+	 <RelativeLayout
+        android:id="@+id/linear2ndItem"
+	    android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/activity_component_margin_small"
+        android:layout_weight="0.5"
+        android:paddingLeft="@dimen/activity_component_margin_small"
+        android:paddingRight="@dimen/activity_component_margin_small"
+        android:clickable="true"
+        android:background="@drawable/background_list_home"
+         android:paddingTop="3dp"
+         android:paddingBottom="3dp">
+        <TextView 
+            android:id="@+id/textViewTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:text="SPRING"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_centerInParent="true" />
+        <TextView 
+            android:id="@+id/textViewSubtitles2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewTitle2"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:text="CLEANING"
+            android:textSize="16dp"
+            android:layout_centerHorizontal="true"
+            android:textIsSelectable="false" />
+
+         <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/ivSideBanner2"
+             android:layout_centerInParent="true" />
+     </RelativeLayout>
+<!-- 	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="@color/white"
+	    android:minHeight="@dimen/activity_component_default_height">
+		<LinearLayout android:layout_width="0dp"
+		    android:layout_height="match_parent"
+		    android:orientation="horizontal"
+		    android:gravity="center_vertical"
+		    android:layout_weight="0.5">
+			<ImageView
+			    android:id="@+id/imageViewItem1"
+			    android:layout_width="wrap_content"
+			    android:layout_height="match_parent"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitCenter"
+			    android:src="@drawable/ic_bulk" />
+	
+			<TextView
+			    android:id="@+id/textViewItem1"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="@dimen/activity_component_margin_small"
+			    android:text="Medium Text"
+			    android:textColor="@color/black"
+			    android:singleLine="true"
+			    android:textSize="@dimen/text_size_subtitle" />
+			    		    
+		</LinearLayout>
+		<View android:layout_width="0.5dp"
+		    android:layout_height="match_parent"
+		    android:background="@color/background_grey"/>
+		<LinearLayout android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:gravity="center_vertical"
+		    android:layout_weight="0.5">
+			<ImageView
+			    android:id="@+id/imageViewItem2"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitCenter"
+			    android:src="@drawable/ic_loyalty" />
+	
+			<TextView
+			    android:id="@+id/textViewItem2"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="@dimen/activity_component_margin_small"
+			    android:text="Medium Text"
+			    android:textColor="@color/black"
+			    android:singleLine="true"
+			    android:textAppearance="?android:attr/textAppearanceMedium" 
+			    android:textSize="@dimen/text_size_subtitle"/>
+	    </LinearLayout>
+	</LinearLayout>
+	<View android:layout_width="match_parent"
+	    android:layout_height="0.5dp"
+	    android:background="@color/background_grey"/> -->
+
+    <!-- <ImageView
+        android:id="@+id/imageViewItem"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.12"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/menu1" /> -->
+    <View android:layout_width="@dimen/activity_component_margin"
+        android:layout_height="match_parent"
+        android:background="@color/background_grey"/>
+    
+</LinearLayout>

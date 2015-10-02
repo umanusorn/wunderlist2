@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vi8e.giant.ShoppingListActivity" >
+     <TextView
+        android:id="@+id/textViewNoItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:padding="@dimen/activity_component_margin"
+        android:text="You do not have any shopping list yet"
+        android:textSize="@dimen/text_size_subtitle"/>
+    <ListView
+        android:id="@+id/listViewShoppingList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

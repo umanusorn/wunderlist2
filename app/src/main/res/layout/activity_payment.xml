@@ -1,0 +1,200 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:fillViewport="true"
+		android:layout_weight="1">
+		<LinearLayout
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="fill_parent"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/activity_component_margin"
+			tools:context="com.vi8e.giant.PaymentActivity" >
+
+			<RadioGroup
+				android:id="@+id/radioGroupPayment"
+				android:layout_width="wrap_content"
+				android:layout_marginLeft="@dimen/activity_component_margin"
+				android:layout_marginRight="@dimen/activity_component_margin"
+				android:layout_marginBottom="@dimen/activity_component_margin"
+				android:layout_height="wrap_content">
+			</RadioGroup>
+			<LinearLayout
+				android:id="@+id/linearAdditional1"
+				android:visibility="gone"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/activity_component_margin"
+				android:layout_marginRight="@dimen/activity_component_margin"
+				android:orientation="vertical">
+
+				<TextView
+					android:id="@+id/textViewTitleAdditional"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+				<com.vi8e.giantapp.widgets.EditTextClearButton
+					android:id="@+id/editTextAdditional"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:singleLine="true"
+					android:inputType="number"
+					android:ems="10"/>
+				<TextView
+					android:id="@+id/textViewTitleAdditionalError"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/error_color"
+					android:visibility="gone"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/linearAdditional2"
+				android:orientation="vertical"
+				android:layout_marginLeft="@dimen/activity_component_margin"
+				android:layout_marginRight="@dimen/activity_component_margin"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="New Text"
+					android:id="@+id/textViewTitleAdditional2"
+					android:textSize="@dimen/text_size_subtitle" />
+
+				<com.vi8e.giantapp.widgets.EditTextClearButton
+					android:id="@+id/editTextAdditional2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:singleLine="true"
+					android:ems="10"/>
+				<TextView
+					android:id="@+id/textViewTitleAdditionalError2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/error_color"
+					android:visibility="gone"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/linearAdditionalDate"
+				android:orientation="vertical"
+				android:layout_marginLeft="@dimen/activity_component_margin"
+				android:layout_marginRight="@dimen/activity_component_margin"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="New Text"
+					android:id="@+id/textViewTitleAdditionalDate"
+					android:textSize="@dimen/text_size_subtitle" />
+				<LinearLayout
+					android:id="@+id/llDateMonth"
+					android:orientation="horizontal"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+
+					<Spinner
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/spinMonth"
+						android:layout_weight="0.5"
+						android:layout_marginRight="5dp" />
+
+					<Spinner
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/spinYear"
+						android:layout_weight="0.5"
+						android:layout_marginLeft="5dp" />
+				</LinearLayout>
+
+				<TextView
+					android:id="@+id/textViewTitleAdditionalErrorDate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/error_color"
+					android:visibility="gone"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/llPassionCard"
+				android:layout_marginRight="@dimen/activity_component_margin"
+				android:layout_marginLeft="@dimen/activity_component_margin"
+				android:layout_marginBottom="@dimen/activity_component_margin"
+				android:visibility="invisible"
+				android:layout_marginTop="10dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:text="PASSION CARD"
+					android:id="@+id/textView"
+					android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginBottom="12dp"
+					android:textStyle="bold" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/txtPassionCard"
+					android:layout_marginBottom="8dp"
+					android:text=" " />
+
+				<com.vi8e.giantapp.widgets.EditTextClearButton
+					android:id="@+id/editTextPassionCard"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:hint="Input $ amount of redemption"
+					android:singleLine="true"
+					android:ems="10"
+					android:visibility="invisible"
+					android:inputType="numberDecimal" />
+			</LinearLayout>
+
+		</LinearLayout>
+	</ScrollView>
+
+	<LinearLayout android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/activity_component_margin"
+		android:gravity="bottom"
+		android:layout_gravity="bottom"
+		android:background="@color/background_grey_darker">
+		<Button
+			android:id="@+id/buttonNext"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:background="@drawable/background_button_orange"
+			android:text="Proceed to Next Step" />
+
+	</LinearLayout>
+</LinearLayout>

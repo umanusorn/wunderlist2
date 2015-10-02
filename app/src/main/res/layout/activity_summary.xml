@@ -1,0 +1,866 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vi8e.giantapp.UpdateProfileActivity" >
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+        
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+			android:paddingBottom="@dimen/activity_component_margin"
+    		android:paddingLeft="@dimen/activity_component_margin"
+   		 	android:paddingRight="@dimen/activity_component_margin"
+    		android:paddingTop="@dimen/activity_component_margin"
+		    android:orientation="vertical">
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="PAYMENT INFORMATION"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_title"/>
+			<View android:layout_width="match_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/orange"
+			    android:layout_marginBottom="@dimen/activity_component_margin"/>
+			 <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="First Name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_name" />
+				<TextView
+				    android:id="@+id/textViewFirstNameBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<!-- <TextView
+				    android:id="@+id/textViewLastNameBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				 -->
+			</LinearLayout>	
+			<!-- <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Last Name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout> -->
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Email"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_email" />
+				<TextView
+				    android:id="@+id/textViewEmailBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address" />
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Address"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewAddressBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+			        android:textColor="@android:color/transparent"
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address"/>
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text=""
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewAddress2Billing"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+			        android:textColor="@android:color/transparent"
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address"/>
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Postal Code"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewPostalBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="horizontal">
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_phone" />
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Contact Number"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewContactBilling"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_vertical_margin"
+		        android:orientation="horizontal">
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_payment" />
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Payment Method"
+				    android:textSize="@dimen/text_size_subtitle" /> -->
+				<TextView
+				    android:id="@+id/textViewPaymentMethod"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>		
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="DELIVERY INFORMATION"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_title"/>
+			<View android:layout_width="match_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/orange"
+			    android:layout_marginBottom="@dimen/activity_component_margin"/>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="First Name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_name" />
+				<TextView
+				    android:id="@+id/textViewFirstNameShipping"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<!-- <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Last Name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewLastNameShipping"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout> -->
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+		        <com.vi8e.giantapp.widgets.CustomTextView
+		            android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address" />
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Address"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewAddressShipping"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">	
+		        <com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+			        android:textColor="@android:color/transparent"
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address"/>
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text=""
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewAddress2Shipping"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+		        <com.vi8e.giantapp.widgets.CustomTextView
+				    android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+			        android:textColor="@android:color/transparent"
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_address"/>
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Postal Code"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewPostalShipping"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+		        <com.vi8e.giantapp.widgets.CustomTextView
+		            android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="@dimen/text_size_title_large"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_phone" />
+				<!-- <TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Contact Number"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/> -->
+				<TextView
+				    android:id="@+id/textViewContactShipping"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:gravity="left"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<!-- <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Shipping Method"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewShippingMethod"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout> -->
+			<LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="vertical">
+		        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+		            android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_halal" /> -->
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="Require Halal Product"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:textStyle="bold" />
+				<TextView
+				    android:id="@+id/textViewHalal"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+					android:gravity="right"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginLeft="28dp"
+					android:layout_marginTop="3dp" />
+			</LinearLayout>
+
+			<LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="vertical">
+		        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+		            android:layout_marginRight="@dimen/activity_component_margin"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_size_subtitle"
+					
+			     	my:customFont="fontawesome-webfont.ttf"
+			        android:text="@string/ic_unavailable" /> -->
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="If Item Unavailable"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:textStyle="bold" />
+				<TextView
+				    android:id="@+id/textViewUnavailable"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+					android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginTop="3dp"
+					android:layout_marginLeft="28dp" />
+			</LinearLayout>
+
+			<LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="vertical">
+		        <LinearLayout android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal">
+			        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+			            android:layout_marginRight="@dimen/activity_component_margin"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:textSize="@dimen/text_size_subtitle"
+
+				     	my:customFont="fontawesome-webfont.ttf"
+				        android:text="@string/ic_message" /> -->
+					<TextView
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:text="Special Message:"
+					    android:textSize="@dimen/text_size_subtitle"
+						android:textStyle="bold" />
+		        </LinearLayout>
+				<TextView
+				    android:id="@+id/textViewMessage"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="28dp"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginTop="3dp" />
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/linearStandard"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="vertical">
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<com.vi8e.giantapp.widgets.CustomTextView
+                        android:layout_marginRight="@dimen/activity_component_margin"
+                        android:layout_width="@dimen/text_size_title_large"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_subtitle"
+                         my:customFont="fontawesome-webfont.ttf"
+                        android:text="@string/ic_delivery" />
+
+					<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Standard Delivery:"
+                        android:textSize="@dimen/text_size_subtitle"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+				    android:id="@+id/textViewStandard"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+					android:gravity="right"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginTop="3dp"
+					android:layout_marginLeft="28dp" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="New Text"
+					android:id="@+id/txtTime"
+					android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginLeft="28dp"
+					android:layout_marginTop="3dp" />
+
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearConcess1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_component_margin"
+		        android:orientation="vertical">
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<com.vi8e.giantapp.widgets.CustomTextView
+                        android:layout_marginRight="@dimen/activity_component_margin"
+                        android:layout_width="@dimen/text_size_title_large"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_subtitle"
+                         my:customFont="fontawesome-webfont.ttf"
+                        android:text="@string/ic_delivery" />
+
+					<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Special Delivery I:"
+                        android:textSize="@dimen/text_size_subtitle"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+				    android:id="@+id/textViewConcess1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+					android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginLeft="28dp"
+					android:layout_marginTop="3dp" />
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearConcess2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="@dimen/activity_vertical_margin"
+		        android:orientation="vertical">
+
+				<LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+					<com.vi8e.giantapp.widgets.CustomTextView
+                        android:layout_marginRight="@dimen/activity_component_margin"
+                        android:layout_width="@dimen/text_size_title_large"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_subtitle"
+                         my:customFont="fontawesome-webfont.ttf"
+                        android:text="@string/ic_delivery" />
+
+					<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Special Delivery II:"
+                        android:textSize="@dimen/text_size_subtitle"
+						android:textStyle="bold" />
+				</LinearLayout>
+
+				<TextView
+				    android:id="@+id/textViewConcess2"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+					android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"
+					android:layout_marginTop="3dp"
+					android:layout_marginLeft="28dp" />
+			</LinearLayout>
+
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="Payment Information"
+			    android:layout_marginBottom="@dimen/activity_component_margin"
+			    android:textSize="@dimen/text_size_title"/>
+			<View android:layout_width="match_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/orange"
+			    android:layout_marginBottom="@dimen/activity_component_margin"/>        
+			    
+			<LinearLayout 
+			    android:id="@+id/linearSubtotal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="Subtotal"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewSubtotal"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearStaffDiscount"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:id="@+id/textViewStaffDiscountTitle"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="Staff Discount"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewStaffDiscount"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearDiscount2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">		
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/linearPassionCard"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				android:orientation="horizontal">
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.7"
+					android:gravity="right"
+					android:text="PAssion Card Redemption"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+					android:id="@+id/textViewPassionCard"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.3"
+					android:gravity="right"
+					android:text="First name"
+					android:layout_marginBottom="@dimen/activity_component_margin"
+					android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+
+			<LinearLayout 
+			    android:id="@+id/linearDelivery"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="Delivery Charge"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewDeliveryCharge"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+			    android:id="@+id/linearDiscount3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">		
+			</LinearLayout>	
+			<LinearLayout 
+			    android:id="@+id/linearRounding"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="Rounding"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewRounding"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>			
+			<LinearLayout 
+			    android:id="@+id/linearTotal"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="Total Purchase"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewTotal"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+			<LinearLayout 
+				    android:layout_width="match_parent"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.7"
+				        android:gravity="right"
+				        android:text="(incl 7% GST)"
+				        android:textSize="@dimen/text_size_content_smaller"/>
+					<TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.3"
+				        android:gravity="right"
+				        android:textSize="@dimen/text_size_subtitle" />
+			</LinearLayout>		
+			<LinearLayout 
+			    android:id="@+id/linearGST"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal">		
+				<TextView
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.7"
+				    android:gravity="right"
+				    android:text="GST"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+				<TextView
+				    android:id="@+id/textViewGST"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.3"
+				    android:gravity="right"
+				    android:text="First name"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:textSize="@dimen/text_size_subtitle"/>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/txtPCPoint"
+				android:gravity="right"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="right"
+				android:layout_marginBottom="@dimen/activity_component_margin"
+				android:textSize="@dimen/text_size_subtitle"/>
+
+		</LinearLayout>
+	</ScrollView>
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:background="@color/background_grey_darker"
+	    android:padding="@dimen/activity_component_margin">
+		<Button
+		    android:id="@+id/buttonNext"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/background_button_orange"
+		    android:text="Place Order" />
+		    	    
+	</LinearLayout>
+</LinearLayout>

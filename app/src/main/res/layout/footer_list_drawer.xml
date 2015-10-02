@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<!-- 	<View android:layout_width="match_parent"
+   	    android:layout_height="0.5dp"
+   	    android:background="@color/background_color"/>  -->
+  <!--  	<View android:layout_width="match_parent"
+   	    android:layout_height="0.5dp"
+   	    android:background="@color/black"/>-->
+   		
+    <!-- <LinearLayout 
+       android:id="@+id/linearCorporate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_component_margin"
+        android:paddingRight="@dimen/activity_component_margin"
+        android:background="@drawable/selector_background_drawer"
+        android:clickable="true"
+        android:orientation="horizontal">   	
+        <TextView
+	        android:id="@+id/textViewCorporate"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:minHeight="@dimen/activity_component_default_height"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:text="Corporate"
+	        android:gravity="center_vertical"/>
+	</LinearLayout>
+   	<View android:layout_width="match_parent"
+   	    android:layout_height="0.5dp"
+   	    android:background="@color/black"/>
+   <LinearLayout 
+       android:id="@+id/linearCareer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_component_margin"
+        android:paddingRight="@dimen/activity_component_margin"
+        android:background="@drawable/selector_background_drawer"
+        android:clickable="true"
+        android:orientation="horizontal">   	
+		<TextView
+	        android:id="@+id/textViewCareer"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:minHeight="@dimen/activity_component_default_height"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:text="Career"
+	        android:gravity="center_vertical"/>
+   	</LinearLayout>
+   	<View android:layout_width="match_parent"
+   	    android:layout_height="0.5dp"
+   	    android:background="@color/black"/> -->
+   <LinearLayout 
+        android:id="@+id/linearMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:paddingTop="@dimen/activity_component_margin_small"
+    	android:paddingBottom="@dimen/activity_component_margin_small"
+        android:paddingLeft="@dimen/activity_component_margin"
+        android:paddingRight="@dimen/activity_component_margin"
+        android:background="@drawable/selector_background_drawer3"
+        android:clickable="true"
+        android:orientation="horizontal">  
+		<TextView
+	        android:id="@+id/textViewMore"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:text="Help"
+	        android:gravity="center_vertical"/>
+		<ImageView
+	        android:id="@+id/imageViewArrow"
+	        android:visibility="gone"
+	        android:layout_width="20dp"
+	        android:layout_height="20dp"
+	        android:src="@drawable/ic_action_expand" />
+   	</LinearLayout>   	   
+   	<LinearLayout android:id="@+id/linearFooter"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:visibility="gone"
+   	    android:orientation="vertical">
+	   <LinearLayout 
+	        android:id="@+id/linearFAQ"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+	    	android:paddingBottom="@dimen/activity_component_margin_small"
+	        android:paddingLeft="@dimen/activity_component_margin"
+	        android:paddingRight="@dimen/activity_component_margin"
+	        android:background="@drawable/selector_background_drawer2"
+	        android:clickable="true"
+	        android:orientation="horizontal">  
+	        <ImageView
+		        android:id="@+id/imageViewIcon"
+		        android:layout_width="20dp"
+		        android:layout_height="20dp"
+		        android:layout_marginRight="@dimen/activity_vertical_margin"
+		        android:src="@null"/>
+		    <TextView
+		        android:id="@+id/textViewFAQ"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:singleLine="true"
+		        android:text="FAQ"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:gravity="center_vertical"/>
+	   	</LinearLayout>
+	   	<!-- <View android:layout_width="match_parent"
+	  	    android:layout_height="0.5dp"
+	  	    android:background="@color/black"/>   -->   
+	   <LinearLayout 
+	       android:id="@+id/linearPrivacy"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+	    	android:paddingBottom="@dimen/activity_component_margin_small"
+	        android:paddingLeft="@dimen/activity_component_margin"
+	        android:paddingRight="@dimen/activity_component_margin"
+	        android:background="@drawable/selector_background_drawer2"
+	        android:clickable="true"
+	        android:orientation="horizontal">   	
+	        <ImageView
+		        android:layout_width="20dp"
+		        android:layout_height="20dp"
+		        android:layout_marginRight="@dimen/activity_vertical_margin"
+		        android:src="@null"/>
+	        <TextView
+		        android:id="@+id/textViewPrivacy"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:text="Privacy Policy"
+		        android:gravity="center_vertical"/>
+		</LinearLayout>
+	   <!-- 	<View android:layout_width="match_parent"
+	   	    android:layout_height="0.5dp"
+	   	    android:background="@color/black"/>-->
+	   <LinearLayout 
+	       android:id="@+id/linearTerms"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+	    	android:paddingBottom="@dimen/activity_component_margin_small"
+	        android:paddingLeft="@dimen/activity_component_margin"
+	        android:paddingRight="@dimen/activity_component_margin"
+	        android:background="@drawable/selector_background_drawer2"
+	        android:clickable="true"
+	        android:orientation="horizontal">   	
+	        <ImageView
+		        android:layout_width="20dp"
+		        android:layout_height="20dp"
+		        android:layout_marginRight="@dimen/activity_vertical_margin"
+		        android:src="@null"/>
+	        <TextView
+		        android:id="@+id/textViewTerms"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:text="Terms and Conditions"
+		        android:gravity="center_vertical"/>
+		</LinearLayout>
+
+		<LinearLayout
+	       	android:id="@+id/linearCopyright"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+	    	android:paddingBottom="@dimen/activity_component_margin_small"
+	        android:paddingLeft="@dimen/activity_component_margin"
+	        android:paddingRight="@dimen/activity_component_margin"
+	        android:background="@drawable/selector_background_drawer2"
+	        android:clickable="true"
+	        android:orientation="horizontal">   
+	        <ImageView
+		        android:layout_width="20dp"
+		        android:layout_height="20dp"
+		        android:layout_marginRight="@dimen/activity_vertical_margin"
+		        android:src="@null"/>	
+	        <TextView
+		        android:id="@+id/textViewCopyright"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:textSize="@dimen/text_size_subtitle"
+		        android:text="Copyright Statement"
+		        android:gravity="center_vertical"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/linearLicenses"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+			android:paddingBottom="@dimen/activity_component_margin_small"
+			android:paddingLeft="@dimen/activity_component_margin"
+			android:paddingRight="@dimen/activity_component_margin"
+			android:background="@drawable/selector_background_drawer2"
+			android:clickable="true"
+			android:orientation="horizontal">
+			<ImageView
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_marginRight="@dimen/activity_vertical_margin"
+				android:src="@null"/>
+			<TextView
+				android:id="@+id/textViewlLicenses"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/text_size_subtitle"
+				android:text="Licenses"
+				android:gravity="center_vertical"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/linearVersion"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_component_margin_small"
+			android:paddingBottom="@dimen/activity_component_margin_small"
+			android:paddingLeft="@dimen/activity_component_margin"
+			android:paddingRight="@dimen/activity_component_margin"
+			android:background="@drawable/selector_background_drawer2"
+			android:clickable="true"
+			android:orientation="vertical">
+
+			<ImageView
+				android:layout_width="fill_parent"
+				android:layout_height="0.5dp"
+				android:id="@+id/ivLine"
+				android:background="@android:color/white"
+				android:layout_marginBottom="10dp"
+				android:layout_marginTop="10dp"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ImageView
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_marginRight="@dimen/activity_vertical_margin"
+					android:src="@null"/>
+				<TextView
+					android:id="@+id/textViewVersion"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:textSize="12sp"
+					android:textColor="#BDBDBD"
+					android:text="Licenses"
+					android:gravity="center_vertical"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/textViewMarquee"
+        android:background="@drawable/background_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_content"
+        android:textColor="@color/white"
+        android:singleLine="true"
+		android:ellipsize="marquee" 
+		android:marqueeRepeatLimit="marquee_forever"
+		android:scrollHorizontally="true" 
+		android:focusable="true" 
+		android:focusableInTouchMode="true" 
+		android:freezesText="true"
+		android:layout_marginBottom="@dimen/activity_component_margin"
+        android:text="We bring you bigger savings when you buy big with us" />
+ 	<HorizontalScrollView
+	        android:id="@+id/horizontalScrollViewBulk"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:scrollbars="none">
+	        <LinearLayout
+	            android:id="@+id/layoutScrollBulk"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >          
+	        </LinearLayout>
+	</HorizontalScrollView>
+	<Button 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Load more"
+	    android:layout_margin="@dimen/activity_component_margin"/>	
+   <!--  <GridView
+		android:id="@+id/gridViewBulk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="@dimen/activity_component_margin"
+        android:verticalSpacing="@dimen/activity_component_margin"
+        android:numColumns="2" >
+    </GridView> -->
+
+</LinearLayout>

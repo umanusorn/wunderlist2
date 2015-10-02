@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vi8e.giant.ShoppingListItemActivity" >
+	<LinearLayout  android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:layout_marginLeft="@dimen/activity_component_margin"
+	    android:layout_marginRight="@dimen/activity_component_margin"
+	    android:background="@color/white"
+	    android:orientation="vertical">
+	    <LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_margin="@dimen/activity_component_margin"
+		    android:gravity="center_vertical">
+		    <TextView
+		        android:id="@+id/textViewTitle"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:text="Medium Text"
+		        android:textColor="@color/black"
+		        android:textSize="@dimen/text_size_subtitle" />
+		
+		    <ImageButton
+		        android:id="@+id/imageButtonEdit"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:background="@null"
+		        android:src="@drawable/ic_action_edit" />
+			    	    
+		</LinearLayout>
+	    <TextView
+	        android:id="@+id/textViewEmpty"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_vertical_margin"
+	        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+	        android:layout_marginRight="@dimen/activity_horizontal_margin"
+	        android:layout_marginBottom="@dimen/activity_component_margin"
+	        android:text="Your Shopping List is empty, select an item to add to the List."
+	        android:visibility="gone"
+	        android:textColor="@color/black"
+	        android:textSize="@dimen/text_size_subtitle"/>
+	    <ListView
+	        android:id="@+id/listViewItems"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	    </ListView>
+	</LinearLayout>
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="@dimen/activity_component_margin"
+	    android:background="@color/background_grey_darker"
+	    android:orientation="vertical">
+	    <Button
+	        android:id="@+id/buttonAddAll"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Add All to Cart" />
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin">
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <EditText
+	        android:id="@+id/editTextName"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10" 
+	        android:hint="Your name (required)">
+	    </EditText>
+	    <EditText
+	        android:id="@+id/editTextEmail"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:ems="10" 
+	        android:hint="Your e-mail (required)">
+	    </EditText>
+		<EditText
+	        android:id="@+id/editTextSubject"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:ems="10" 
+	        android:hint="Subject">
+	    </EditText>
+	
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+		    android:text="Message" />
+	
+	    <EditText
+	        android:id="@+id/editTextMessage"
+	        android:layout_width="match_parent"
+	        android:layout_height="200dp"
+	        android:gravity="top"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:ems="10" >
+	    </EditText>
+
+	    <Button
+	        android:id="@+id/buttonSubmit"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="Submit" />
+
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="HEAD OFFICE" />
+
+	    <TextView
+	        android:id="@+id/textView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="JAWA BARAT:" />
+
+	    <TextView
+	        android:id="@+id/textView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Jl. Rancabolang No. 29 Bandung,\nPhone: 022-751 4657, 92754190" />
+	    <TextView
+	        android:id="@+id/textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="JAWA TIMUR:" />
+
+	    <TextView
+	        android:id="@+id/textView6"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Jl. Tropodo 1 No. 129 Wanu – Widoarjo 61256,\nPhone: 031-8686725 / 031-91171435" />		
+	    <TextView
+	        android:id="@+id/textView7"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="JAWA TENGAH:" />
+	    <TextView
+	        android:id="@+id/textView8"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Jl. Wates km. 7,2 Pasekan Kidul, Balecatur Yogyakarta,\nPhone: 0274-911678" />	
+	</LinearLayout>
+</ScrollView>
+

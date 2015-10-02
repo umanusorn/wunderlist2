@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+       <shape>
+            <!-- <gradient 
+           	    android:startColor="#ed3129"
+           	    android:endColor="#ca211c"
+           	    android:angle="270"/> -->
+           	<gradient 
+           	    android:startColor="#098750"
+           	    android:endColor="#07623a"
+           	    android:angle="270"/>
+        </shape>        
+    </item>
+	<item android:state_window_focused="false" 
+		android:state_enabled="false">
+		<shape>
+			<gradient 
+           	    android:startColor="#098750"
+           	    android:endColor="#07623a"
+           	    android:angle="270"/>	    
+           <!--  <gradient 
+           	    android:startColor="#ed3129"
+           	    android:endColor="#ca211c"
+           	    android:angle="270"/> -->
+		</shape>
+	    	    
+	</item>
+    <item android:state_window_focused="false"  android:state_enabled="true">
+        <shape>
+           	<!-- <gradient 
+           	    android:startColor="#098750"
+           	    android:endColor="#07623a"
+           	    android:angle="270"/> -->
+           <solid android:color="@color/orange"/>
+        </shape>        
+    </item>
+    <item android:state_enabled="true">
+        <shape>
+            <solid android:color="@color/orange"/>
+           	<!-- <gradient 
+           	    android:startColor="#098750"
+           	    android:endColor="#07623a"
+           	    android:angle="270"/> -->
+        </shape>        
+    </item>
+	<item>
+		<shape>
+            <solid android:color="@color/background_grey_darker" />
+		</shape>
+	</item>    
+</selector>

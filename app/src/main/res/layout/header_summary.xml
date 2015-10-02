@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_title"
+        android:text="Are these correct?" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_subtitle"
+        android:layout_marginTop="@dimen/activity_component_margin"
+        android:text="Delivery Method" />
+
+    <TextView
+        android:id="@+id/textViewIsDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_content"
+        android:text="Home Delivery" />
+	<View
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dp"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:background="@color/dark_grey"/>
+	<LinearLayout 
+	    android:id="@+id/linearAddress"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="Address" />
+	
+	    <TextView
+	        android:id="@+id/textViewAddress"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+	        android:textSize="@dimen/text_size_content"
+	        android:text="Manyar Jaya Viii, Surabaya, 60118" />
+		<View
+		    android:layout_width="match_parent"
+		    android:layout_height="0.5dp"
+		    android:layout_marginTop="@dimen/activity_component_margin"
+		    android:background="@color/dark_grey"/>
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/linearStore"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+	        android:textSize="@dimen/text_size_subtitle"
+	        android:layout_marginTop="@dimen/activity_component_margin"
+	        android:text="Store to Pickup" />
+	
+	    <TextView
+	        android:id="@+id/textViewStore"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+	        android:textSize="@dimen/text_size_content"
+	        android:text="Amanda Mayjend" />
+		<View
+		    android:layout_width="match_parent"
+		    android:layout_height="0.5dp"
+		    android:layout_marginTop="@dimen/activity_component_margin"
+		    android:background="@color/dark_grey"/>
+	</LinearLayout>	
+	
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_subtitle"
+        android:layout_marginTop="@dimen/activity_component_margin"
+        android:text="Payment" />
+
+    <TextView
+        android:id="@+id/textViewPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_content"
+        android:text="Paypal" />
+	<View
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dp"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:background="@color/dark_grey"/>	
+	    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/dark_grey"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/text_size_title"
+        android:text="Payment Information" />
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:orientation="horizontal">
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+	        android:text="Subtotal" />
+
+	    <TextView
+	        android:id="@+id/textViewSubtotal"
+	        android:layout_width="fill_parent"
+	        android:gravity="right"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+        	android:textStyle="bold"
+	        android:layout_height="wrap_content"
+	        android:text="Rp.1000,00" />
+
+	</LinearLayout>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:orientation="horizontal">
+		<TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+	        android:text="Delivery Fee" />    
+ 		<TextView
+	        android:id="@+id/textViewDeliveryFee"
+	        android:layout_width="fill_parent"
+	        android:gravity="right"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+        	android:textStyle="bold"
+	        android:layout_height="wrap_content"
+	        android:text="Rp.100,00" />	        
+    </LinearLayout>
+	<View
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dp"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:background="@color/dark_grey"/>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/activity_component_margin"
+	    android:orientation="horizontal">
+		<TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+	        android:text="Total" />    
+ 		<TextView
+	        android:id="@+id/textViewTotal"
+	        android:layout_width="fill_parent"
+	        android:gravity="right"
+	        android:textColor="@color/dark_grey"
+        	android:textSize="@dimen/text_size_subtitle"
+        	android:textStyle="bold"
+	        android:layout_height="wrap_content"
+	        android:text="Rp.100,00" />	        
+    </LinearLayout>		  
+	<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/dark_grey"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_component_margin"
+        android:textSize="@dimen/text_size_title"
+        android:text="In My Cart" />	      
+</LinearLayout>

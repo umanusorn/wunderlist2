@@ -1,0 +1,219 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.vi8e.giant.ShoppingCartActivity" >
+	<LinearLayout android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.1"
+	    android:paddingTop="@dimen/activity_component_margin"
+	    android:orientation="vertical"
+	    android:layout_marginLeft="@dimen/activity_component_margin"
+	    android:layout_marginRight="@dimen/activity_component_margin">
+	    <ListView
+	        android:id="@+id/listViewShopping"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/transparent"
+	        android:divider="@null"
+	        android:scrollbars="none">
+	    </ListView>
+		<LinearLayout 
+	        android:id="@+id/linearNoItem"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="0.1"
+	        android:gravity="center"
+	        android:orientation="vertical">
+		        <ImageView
+			        android:id="@+id/imageView1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:src="@drawable/cart_big" />
+		
+		        <TextView
+		            android:id="@+id/textView1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:layout_marginTop="@dimen/activity_component_margin"
+		            android:text="Your shopping cart is empty"
+		            android:textColor="@color/text_color_grey"
+		            android:textSize="@dimen/text_size_title"/>
+	    </LinearLayout>
+	</LinearLayout>
+	<LinearLayout 
+	    android:id="@+id/linearBottom"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:paddingLeft="@dimen/activity_component_margin"
+	    android:paddingRight="@dimen/activity_component_margin"
+	    android:background="@color/background_grey_darker">
+
+		<ImageButton
+		    android:id="@+id/imageButtonExpand"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:background="@null"
+		    android:src="@drawable/ic_action_collapse" />
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginBottom="@dimen/activity_component_margin">
+		    <Button
+		        android:id="@+id/buttonApply"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Use Coupon" 
+		        android:layout_gravity="bottom"
+		        android:textSize="@dimen/text_size_button"
+		        android:background="@drawable/background_button_green"/>
+		    <LinearLayout android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical">
+		        <LinearLayout android:id="@+id/linearDetail"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:visibility="gone"
+		            android:orientation="vertical">
+					<LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_marginBottom="@dimen/activity_component_margin"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal">
+						<TextView
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.6"
+					        android:gravity="right"
+					        android:text="Sub-Total:"
+					        android:singleLine="true"
+					        android:textSize="@dimen/text_size_subtitle" />
+						<TextView
+						    android:id="@+id/textViewSubtotal"
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.4"
+					        android:gravity="right"
+					        android:textSize="@dimen/text_size_subtitle" />
+							    	    
+					</LinearLayout>
+					<LinearLayout 
+					    android:id="@+id/linearStaffdisc"
+					    android:layout_width="match_parent"
+					    android:layout_marginBottom="@dimen/activity_component_margin"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal">
+						<TextView
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.6"
+					        android:singleLine="true"
+					        android:gravity="right"
+					        android:text="Staff Discount: "
+					        android:textSize="@dimen/text_size_subtitle" />
+						<TextView
+						    android:id="@+id/textViewStaffDisc"
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.4"
+					        android:gravity="right"
+					        android:textColor="@color/error_color"
+					        android:textSize="@dimen/text_size_subtitle" />
+							    	    
+					</LinearLayout>	
+					<LinearLayout 
+					    android:id="@+id/containerVoucher"
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="vertical">
+					</LinearLayout>
+					<LinearLayout 
+					    android:layout_width="match_parent"
+					    android:layout_marginBottom="@dimen/activity_component_margin"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal">
+					    <TextView
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.6"
+					        android:singleLine="true"
+					        android:gravity="right"
+					        android:text="Delivery Charge:"
+					        android:textSize="@dimen/text_size_subtitle"/>
+						<TextView
+						    android:id="@+id/textViewShipping"
+					        android:layout_width="0dp"
+					        android:layout_height="wrap_content"
+					        android:layout_weight="0.4"
+					        android:gravity="right"
+					        android:textSize="@dimen/text_size_subtitle" />
+					</LinearLayout>
+					<LinearLayout 
+					    android:id="@+id/containerCoupon"
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="vertical">
+					    
+					</LinearLayout>
+			            		            
+		        </LinearLayout>
+			 	<LinearLayout 
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.6"
+					        android:singleLine="true"
+				        android:gravity="right"
+				        android:text="Total Purchase:"
+				        android:textSize="@dimen/text_size_subtitle"/>
+					<TextView
+					    android:id="@+id/textViewGrandTotal"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.4"
+				        android:gravity="right"
+				        android:textSize="@dimen/text_size_subtitle" />
+				    		    	    
+				</LinearLayout>
+				<LinearLayout 
+				    android:layout_width="match_parent"
+				    android:layout_marginBottom="@dimen/activity_component_margin"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    <TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.6"
+						android:singleLine="true"
+				        android:gravity="right"
+				        android:text="(incl 7% GST)"
+				        android:textSize="@dimen/text_size_content_smaller"/>
+					<TextView
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:layout_weight="0.4"
+				        android:gravity="right"
+				        android:textSize="@dimen/text_size_subtitle" />
+				</LinearLayout>		        
+		    </LinearLayout>
+		</LinearLayout>
+		<Button
+	        android:id="@+id/buttonCheckout"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="@dimen/activity_component_margin"
+	        android:text="Proceed to Checkout"
+	        android:textSize="@dimen/text_size_button"
+	        android:background="@drawable/background_button_orange"/>
+	    
+	</LinearLayout>
+</LinearLayout>
