@@ -19,19 +19,19 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Dialog.CustomDialog;
-import com.vi8e.um.wunderlist.Dialog.ReminderDialog;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.adapters.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
+import com.vi8e.um.wunderlist.dialogs.ReminderDialog;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
-import com.vi8e.um.wunderlist.util.IntentCaller;
-import com.vi8e.um.wunderlist.util.QueryHelper;
-import com.vi8e.um.wunderlist.util.UiMng;
-import com.vi8e.um.wunderlist.util.Utility;
+import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.UiMng;
+import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Dialog;
+package com.vi8e.um.wunderlist.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
@@ -122,7 +122,7 @@ public class MyAlertDialog extends DialogFragment {
 //				
 //			}
 //		});
-		//Dialog dialog=builder.create();
+		//dialogs dialog=builder.create();
 		Dialog dialog=new Dialog (getActivity());
 		dialog.requestWindowFeature( Window.FEATURE_NO_TITLE);
 		dialog.setContentView(view);

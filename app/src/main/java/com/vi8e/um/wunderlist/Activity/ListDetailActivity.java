@@ -16,7 +16,7 @@ import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
-import com.vi8e.um.wunderlist.util.ActivityUi;
+import com.vi8e.um.wunderlist.utils.ActivityUi;
 
 
 public

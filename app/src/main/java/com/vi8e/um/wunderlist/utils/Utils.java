@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.utils;
 
 import org.apache.http.conn.util.InetAddressUtils;
 

@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

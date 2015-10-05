@@ -1,6 +1,6 @@
 package test.com.vi8e.um.wunderlist.util;
 
-import com.vi8e.um.wunderlist.util.DateTimeHelper;
+import com.vi8e.um.wunderlist.utils.DateTimeHelper;
 
 import junit.framework.Assert;
 import junit.framework.Test;

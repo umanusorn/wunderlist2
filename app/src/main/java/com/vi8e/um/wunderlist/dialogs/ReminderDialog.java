@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Dialog;
+package com.vi8e.um.wunderlist.dialogs;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -22,8 +22,8 @@ import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.util.DateTimeHelper;
-import com.vi8e.um.wunderlist.util.UiMng;
+import com.vi8e.um.wunderlist.utils.DateTimeHelper;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.text.ParseException;
 import java.util.Calendar;

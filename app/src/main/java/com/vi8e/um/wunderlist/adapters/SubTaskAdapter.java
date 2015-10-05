@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.adater;
+package com.vi8e.um.wunderlist.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -14,8 +14,8 @@ import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
-import com.vi8e.um.wunderlist.util.IntentCaller;
-import com.vi8e.um.wunderlist.util.Utility;
+import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 

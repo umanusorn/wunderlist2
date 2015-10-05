@@ -16,16 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vi8e.um.wunderlist.Dialog.MyAlertDialog;
-import com.vi8e.um.wunderlist.Dialog.MyAlertDialog.MyAlertDialogListener;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.asyncs.AsyncCartInfo;
 import com.vi8e.um.wunderlist.asyncs.AsyncGetCartId;
 import com.vi8e.um.wunderlist.asyncs.AsyncLogin;
+import com.vi8e.um.wunderlist.dialogs.MyAlertDialog;
+import com.vi8e.um.wunderlist.dialogs.MyAlertDialog.MyAlertDialogListener;
 import com.vi8e.um.wunderlist.sharedprefs.CartManagement;
 import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
-import com.vi8e.um.wunderlist.util.AsyncResponse;
-import com.vi8e.um.wunderlist.util.ConnectionDetector;
+import com.vi8e.um.wunderlist.utils.AsyncResponse;
+import com.vi8e.um.wunderlist.utils.ConnectionDetector;
 
 import org.json.JSONException;
 import org.json.JSONObject;

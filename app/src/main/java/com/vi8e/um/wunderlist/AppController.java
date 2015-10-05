@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.vi8e.um.wunderlist.util.LruBitmapCache;
+import com.vi8e.um.wunderlist.utils.LruBitmapCache;
 
 
 public class AppController extends Application {

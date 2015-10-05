@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.util.QueryHelper;
+import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 
 public

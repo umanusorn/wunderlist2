@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.adater;
+package com.vi8e.um.wunderlist.adapters;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.util.IntentCaller;
-import com.vi8e.um.wunderlist.util.Utility;
+import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 

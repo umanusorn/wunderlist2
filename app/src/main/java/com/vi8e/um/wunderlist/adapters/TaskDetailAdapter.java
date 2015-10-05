@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.adater;
+package com.vi8e.um.wunderlist.adapters;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
-import com.vi8e.um.wunderlist.Dialog.CustomDialog;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.util.Utility;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
+import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 

@@ -7,8 +7,8 @@ import android.util.Log;
 
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
-import com.vi8e.um.wunderlist.util.AsyncResponse;
-import com.vi8e.um.wunderlist.util.Utils;
+import com.vi8e.um.wunderlist.utils.AsyncResponse;
+import com.vi8e.um.wunderlist.utils.Utils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

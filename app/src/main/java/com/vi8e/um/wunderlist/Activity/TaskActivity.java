@@ -30,12 +30,12 @@ import android.widget.TextView;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.TaskAdapter;
+import com.vi8e.um.wunderlist.adapters.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
-import com.vi8e.um.wunderlist.util.IntentCaller;
-import com.vi8e.um.wunderlist.util.QueryHelper;
-import com.vi8e.um.wunderlist.util.Utility;
+import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 import java.util.List;

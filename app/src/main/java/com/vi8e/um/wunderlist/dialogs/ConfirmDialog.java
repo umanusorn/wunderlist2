@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Dialog;
+package com.vi8e.um.wunderlist.dialogs;
 
 /**
  * Created by um2013 on 2/14/2014.

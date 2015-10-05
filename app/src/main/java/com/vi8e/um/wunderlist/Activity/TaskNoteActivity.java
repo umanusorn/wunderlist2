@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
-import com.vi8e.um.wunderlist.util.ActivityUi;
+import com.vi8e.um.wunderlist.utils.ActivityUi;
 
 
 public

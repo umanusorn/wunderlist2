@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.sharedprefs.CartManagement;
-import com.vi8e.um.wunderlist.util.AsyncResponse;
+import com.vi8e.um.wunderlist.utils.AsyncResponse;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

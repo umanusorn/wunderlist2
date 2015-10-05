@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.utils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;

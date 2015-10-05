@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Dialog;
+package com.vi8e.um.wunderlist.dialogs;
 import android.app.Activity;
 import android.net.Uri;
 import android.util.Log;
@@ -10,10 +10,10 @@ import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adater.LandingListAdapter;
-import com.vi8e.um.wunderlist.adater.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
+import com.vi8e.um.wunderlist.adapters.TaskDetailAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
-import com.vi8e.um.wunderlist.util.QueryHelper;
+import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 
 /**

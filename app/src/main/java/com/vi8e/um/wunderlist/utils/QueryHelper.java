@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
-import com.vi8e.um.wunderlist.adater.TaskAdapter;
+import com.vi8e.um.wunderlist.adapters.TaskAdapter;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 import com.vi8e.um.wunderlist.provider.list.ListCursor;
 import com.vi8e.um.wunderlist.provider.list.ListSelection;

@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.util;
+package com.vi8e.um.wunderlist.utils;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
