@@ -31,6 +31,15 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
   Button login = (Button)findViewById ( R.id.login );
 	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
+	Button myAccount = (Button)findViewById ( R.id.myAccount );
+
+	myAccount.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent i=new Intent(getApplicationContext(), MyAccountActivity.class);
+			startActivity(i);
+		}
+	} );
 
 	updateProfile.setOnClickListener ( new View.OnClickListener () {
 		@Override public

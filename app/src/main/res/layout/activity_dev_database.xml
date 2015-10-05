@@ -237,8 +237,8 @@
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="New Button"
-                        android:id="@+id/button4" android:layout_column="0"/>
+                        android:text="my Account"
+                        android:id="@+id/myAccount" android:layout_column="0"/>
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

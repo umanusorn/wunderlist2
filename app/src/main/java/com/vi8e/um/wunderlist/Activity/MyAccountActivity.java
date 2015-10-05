@@ -58,8 +58,8 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_my_account );
-	getActionBar ().setDisplayHomeAsUpEnabled ( true );
-	getActionBar ().setHomeButtonEnabled ( true );
+//	getActionBar ().setDisplayHomeAsUpEnabled ( true );
+//	getActionBar ().setHomeButtonEnabled ( true );
 	session = new SessionManagement ( getApplicationContext () );
 	cartHeader = new CartManagement ( getApplicationContext () );
 	passionCardMenuText = "Link Up PAssion Card";

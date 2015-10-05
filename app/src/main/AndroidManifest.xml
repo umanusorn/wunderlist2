@@ -76,10 +76,11 @@
 
         <activity
                 android:name=".Activity.UpdateProfileActivity"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"/>
 
-
-    </activity>
+        <activity
+                android:name=".Activity.MyAccountActivity"
+                android:screenOrientation="portrait"/>
         <activity android:name=".Activity.LoginActivity"
                   android:screenOrientation="portrait"
                 />
