@@ -37,7 +37,7 @@ import java.util.ArrayList;
 
 //import com.google.android.gms.analytics.GoogleAnalytics;
 //import com.vi8e.giant.OrderListActivity;
-//import com.vi8e.giant.R;
+//import com.vi8e.um.wunderlist.R;
 //import com.vi8e.giant.ShoppingListActivity;
 //import com.vi8e.um.wunderlist.application.MyApp;
 

@@ -79,6 +79,16 @@
                 android:screenOrientation="portrait"/>
 
         <activity
+                android:name=".Activity.RegisterFirstActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".Activity.RegisterSecondActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".Activity.RegisterThirdActivity"
+                android:screenOrientation="portrait"/>
+
+        <activity
                 android:name=".Activity.MyAccountActivity"
                 android:screenOrientation="portrait"/>
         <activity android:name=".Activity.LoginActivity"

@@ -220,8 +220,8 @@
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="updateProfile"
-                        android:id="@+id/updateProfile" android:layout_column="1"/>
+                        android:text="sign up"
+                        android:id="@+id/signUp" android:layout_column="1"/>
             </TableRow>
             <TableRow
                     android:layout_width="match_parent"
@@ -242,8 +242,8 @@
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="New Button"
-                        android:id="@+id/button5" android:layout_column="1"/>
+                        android:text="updateProfile"
+                        android:id="@+id/updateProfile" android:layout_column="1"/>
             </TableRow>
             <TableRow
                     android:layout_width="match_parent"
