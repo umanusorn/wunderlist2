@@ -52,13 +52,13 @@
  	    android:layout_marginRight="@dimen/activity_component_margin"
  	    android:layout_marginBottom="@dimen/activity_component_margin"
 	    android:orientation="vertical">
-		<com.vi8e.giantapp.widgets.ExpandableGridView
+		<com.vi8e.um.wunderlist.widgets.ExpandableGridView
 		    android:id="@+id/gridViewDepartment"
 	 	    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:background="@color/white"
 		    android:numColumns="2" >
-		</com.vi8e.giantapp.widgets.ExpandableGridView>
+		</com.vi8e.um.wunderlist.widgets.ExpandableGridView>
 	 	    	    
  	</LinearLayout> -->
 

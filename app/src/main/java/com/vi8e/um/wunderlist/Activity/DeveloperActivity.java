@@ -30,6 +30,15 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
   Button login = (Button)findViewById ( R.id.login );
+	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
+
+	updateProfile.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent i=new Intent(getApplicationContext(), UpdateProfileActivity.class);
+			startActivity(i);
+		}
+	} );
 
 	login.setOnClickListener ( new View.OnClickListener () {
 		@Override public

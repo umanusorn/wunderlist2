@@ -63,7 +63,7 @@ void onPreExecute () {
 protected
 String doInBackground ( String... params ) {
 	uRL = activity.getApplicationContext ().getResources ().getString ( R.string.server_url ) +
-	      activity.getApplication().getResources().getString( R.string.get_cart_info);
+	      activity.getApplication().getResources().getString(R.string.get_cart_info);
 		String outPut="";
 		JSONObject jParams=new JSONObject ();
 		try {

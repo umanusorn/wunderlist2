@@ -47,14 +47,14 @@
             android:layout_height="wrap_content">
             
         </ListView>
-        <!-- <com.vi8e.giantapp.widgets.HFGridView 
+        <!-- <com.vi8e.um.wunderlist.widgets.HFGridView
             android:id="@+id/gridViewItems"
             android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
         	android:numColumns="2" >
             
-        </com.vi8e.giantapp.widgets.HFGridView>-->	
+        </com.vi8e.um.wunderlist.widgets.HFGridView>-->
 	</LinearLayout>
 </LinearLayout>
 

@@ -8,7 +8,7 @@
 
               android:orientation="vertical"
               android:gravity="center_horizontal">
-    <!--tools:context="com.vi8e.giantapp.LandingActivity"-->
+    <!--tools:context="com.vi8e.um.wunderlist.LandingActivity"-->
 <!--     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -72,8 +72,8 @@ void onCreate ( Bundle savedInstanceState ) {
 	textViewError.setVisibility ( View.GONE );
 	textViewRegisterLater = ( TextView ) findViewById ( R.id.textViewLater );
 	buttonRegister.setOnClickListener ( this );
-	buttonLogin.setOnClickListener(this);
-		textViewForgot.setOnClickListener(this);
+	buttonLogin.setOnClickListener ( this );
+	textViewForgot.setOnClickListener(this);
 		textViewRegisterLater.setOnClickListener(this);
 		session=new SessionManagement(getApplicationContext());
 		cartHeader=new CartManagement(getApplicationContext());

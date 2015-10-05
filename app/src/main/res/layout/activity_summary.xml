@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vi8e.giantapp.UpdateProfileActivity" >
+    tools:context="com.vi8e.um.wunderlist.UpdateProfileActivity" >
     <ScrollView android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -37,7 +37,7 @@
 				    android:text="First Name"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/> -->
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
 				    android:text="Email"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/> -->
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="@dimen/activity_component_margin"
 		        android:orientation="horizontal">
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="@dimen/activity_vertical_margin"
 		        android:orientation="horizontal">
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
 				    android:text="First Name"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/> -->
-				<com.vi8e.giantapp.widgets.CustomTextView
+				<com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">		
-		        <com.vi8e.giantapp.widgets.CustomTextView
+		        <com.vi8e.um.wunderlist.widgets.CustomTextView
 		            android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -322,7 +322,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">	
-		        <com.vi8e.giantapp.widgets.CustomTextView
+		        <com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -349,7 +349,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">		
-		        <com.vi8e.giantapp.widgets.CustomTextView
+		        <com.vi8e.um.wunderlist.widgets.CustomTextView
 				    android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -376,7 +376,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:orientation="horizontal">		
-		        <com.vi8e.giantapp.widgets.CustomTextView
+		        <com.vi8e.um.wunderlist.widgets.CustomTextView
 		            android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="@dimen/text_size_title_large"
 			        android:layout_height="wrap_content"
@@ -423,7 +423,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="@dimen/activity_component_margin"
 		        android:orientation="vertical">
-		        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+		        <!-- <com.vi8e.um.wunderlist.widgets.CustomTextView
 		            android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -453,7 +453,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="@dimen/activity_component_margin"
 		        android:orientation="vertical">
-		        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+		        <!-- <com.vi8e.um.wunderlist.widgets.CustomTextView
 		            android:layout_marginRight="@dimen/activity_component_margin"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
@@ -485,7 +485,7 @@
 		        <LinearLayout android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
 		            android:orientation="horizontal">
-			        <!-- <com.vi8e.giantapp.widgets.CustomTextView
+			        <!-- <com.vi8e.um.wunderlist.widgets.CustomTextView
 			            android:layout_marginRight="@dimen/activity_component_margin"
 				        android:layout_width="wrap_content"
 				        android:layout_height="wrap_content"
@@ -522,7 +522,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent">
 
-					<com.vi8e.giantapp.widgets.CustomTextView
+					<com.vi8e.um.wunderlist.widgets.CustomTextView
                         android:layout_marginRight="@dimen/activity_component_margin"
                         android:layout_width="@dimen/text_size_title_large"
                         android:layout_height="wrap_content"
@@ -570,7 +570,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content">
 
-					<com.vi8e.giantapp.widgets.CustomTextView
+					<com.vi8e.um.wunderlist.widgets.CustomTextView
                         android:layout_marginRight="@dimen/activity_component_margin"
                         android:layout_width="@dimen/text_size_title_large"
                         android:layout_height="wrap_content"
@@ -607,7 +607,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-					<com.vi8e.giantapp.widgets.CustomTextView
+					<com.vi8e.um.wunderlist.widgets.CustomTextView
                         android:layout_marginRight="@dimen/activity_component_margin"
                         android:layout_width="@dimen/text_size_title_large"
                         android:layout_height="wrap_content"

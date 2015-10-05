@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vi8e.giantapp.MyAccountActivity" >
+    tools:context="com.vi8e.um.wunderlist.MyAccountActivity" >
 
     <ListView
         android:id="@+id/listViewMenuAccount"

@@ -40,7 +40,7 @@
 					android:layout_marginBottom="@dimen/activity_component_margin"
 					android:textSize="@dimen/text_size_subtitle"/>
 
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 					android:id="@+id/editTextAdditional"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 					android:id="@+id/textViewTitleAdditional2"
 					android:textSize="@dimen/text_size_subtitle" />
 
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 					android:id="@+id/editTextAdditional2"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
 					android:layout_marginBottom="8dp"
 					android:text=" " />
 
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 					android:id="@+id/editTextPassionCard"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

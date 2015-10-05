@@ -62,13 +62,13 @@ String doInBackground ( String... params ) {
 	//JSONObject jObject=new JSONObject();
 	//JSONObject jRequest=new JSONObject();
 	JSONObject jParams = new JSONObject ();
-	try {
+		try {
 			//jObject.put("auth", Utils.auth);
 			jParams.put("client_type", "android");
 			jParams.put("client_name", android.os.Build.MODEL);
 			jParams.put("client_version", android.os.Build.VERSION.RELEASE);
 			jParams.put("retries", "0");
-			jParams.put("ip", Utils.getIPAddress ( true ));
+			jParams.put("ip", Utils.getIPAddress(true));
 			jParams.put("app_version", activity.getResources().getString(R.string.app_version));
 			jParams.put("email", params[0]);
 			jParams.put("password",params[1]);

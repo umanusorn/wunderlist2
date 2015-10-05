@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    tools:context="com.vi8e.giantapp.UpdateProfileActivity" >
+    tools:context="com.vi8e.um.wunderlist.UpdateProfileActivity" >
 	<ScrollView 
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
@@ -23,7 +23,7 @@
 			    android:text="First name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextFirst"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
 			    android:text="Last name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextLast"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
 			    android:text="Postal code *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextPostal"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
 			    android:text="Address *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextAddress"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
 			    android:text="Second Address"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextAddress2"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"
 				android:id="@+id/txtHomeNumberLabel" />
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextHome"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
 			    android:text="Mobile number *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextMobile"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
 			    android:text="Office number"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextOffice"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"

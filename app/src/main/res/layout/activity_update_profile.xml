@@ -3,7 +3,7 @@
      xmlns:tools="http://schemas.android.com/tools"
      android:layout_height="match_parent"
      android:orientation="vertical"
-    tools:context="com.vi8e.giantapp.UpdateProfileActivity" >
+    tools:context="com.vi8e.um.wunderlist.UpdateProfileActivity" >
 	<ScrollView
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
@@ -22,7 +22,7 @@
 			    android:text="Email address *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextEmail"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
 			    android:text="Account type *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextAccountType"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 			    android:text="First name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextFirst"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
 			    android:text="Last name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextLast"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 					    android:text="DFSG Staff ID *"
 					    android:layout_marginBottom="@dimen/activity_component_margin"
 					    android:textSize="@dimen/text_size_subtitle"/>
-					<com.vi8e.giantapp.widgets.EditTextClearButton
+					<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 			            android:id="@+id/editTextDFSG"
 			            android:layout_width="match_parent"
 			            android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
 				    android:text="Nationality"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextNationality"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
 				    android:text="NRIC / Passport *"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextNRIC"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
 				    android:text="Date of birth *"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextDOB"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
 				    android:text="Company name"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextCompany"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -262,7 +262,7 @@
 				    android:text="Company reg no"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextRegNo"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -285,7 +285,7 @@
 				    android:text="DFSG Vcode"
 				    android:layout_marginBottom="@dimen/activity_component_margin"
 				    android:textSize="@dimen/text_size_subtitle"/>
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextDFSGVCODE"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"

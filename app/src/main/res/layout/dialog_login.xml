@@ -41,7 +41,7 @@
 		    android:textSize="@dimen/text_size_subtitle"
 		    android:textColor="@color/black"
 		    android:text="Email"/> -->
-		<com.vi8e.giantapp.widgets.EditTextClearButton
+		<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		    android:id="@+id/editTextEmail"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 		    android:textSize="@dimen/text_size_subtitle"
 		    android:textColor="@color/black"
 		    android:text="Password"/> -->
-		<com.vi8e.giantapp.widgets.EditTextClearButton
+		<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		    android:id="@+id/editTextPassword"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"

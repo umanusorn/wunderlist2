@@ -10,7 +10,7 @@
         android:layout_marginBottom="@dimen/activity_component_margin"
         android:textSize="@dimen/text_size_subtitle"/>
 
-    <com.vi8e.giantapp.widgets.EditTextClearButton
+    <com.vi8e.um.wunderlist.widgets.EditTextClearButton
         android:id="@+id/editTextPassionCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

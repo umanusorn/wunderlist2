@@ -67,7 +67,7 @@ String doInBackground ( String... params ) {
 		try {
 			//jObject.put("auth", Utils.auth);
 			jParams.put("customer_id", (session.getCustomerId()==null||session.getCustomerId().equals("")?"0":session.getCustomerId()));
-			jParams.put("ip_address", Utils.getIPAddress ( true ));
+			jParams.put("ip_address", Utils.getIPAddress(true));
 			//jObject.put("params", jParams);
 			Log.i ( "input", jParams.toString () );
 			//String encryptAuth=Encryptor.Encrypt(jObject.toString());

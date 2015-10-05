@@ -64,8 +64,8 @@ protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_update_profile );
-	getActionBar ().setHomeButtonEnabled ( true );
-	getActionBar ().setDisplayHomeAsUpEnabled ( true );
+	//getActionBar ().setHomeButtonEnabled ( true );
+	//getActionBar ().setDisplayHomeAsUpEnabled ( true );
 	session = new SessionManagement ( getApplicationContext () );
 	linearCorporate = ( LinearLayout ) findViewById ( R.id.linearCorporate );
 	linearResidential = ( LinearLayout ) findViewById ( R.id.linearResidential );
@@ -211,7 +211,7 @@ void onCreate ( Bundle savedInstanceState ) {
 			session.setLastName(editTextLast.getText().toString());
 			finish();
 		} else if (tag.equals("serverdown")) {
-			//// TODO: 10/5/2015  
+			//// TODO: 10/5/2015
 			/*Intent intent = new Intent (UpdateProfileActivity.this, DashboardActivity.class);
 			intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("EXIT", true);

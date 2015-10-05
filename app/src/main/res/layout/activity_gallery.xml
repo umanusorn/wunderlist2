@@ -26,7 +26,7 @@
 			android:layout_height="match_parent"
 			android:orientation="vertical"
 			android:layout_centerInParent="true">
-		    <com.vi8e.giantapp.widgets.EditTextClearButton
+		    <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextSearch"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
 		        android:choiceMode="singleChoice"
 		        android:divider="@null" />
 	    </LinearLayout>
-  	    <!-- <com.vi8e.giantapp.widgets.CustomTextView
+  	    <!-- <com.vi8e.um.wunderlist.widgets.CustomTextView
   	        android:id="@+id/textViewUp"
   	        android:clickable="true"
   	        android:layout_alignParentRight="true"

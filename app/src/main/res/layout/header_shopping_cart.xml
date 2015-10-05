@@ -12,12 +12,12 @@
         android:text="Purchase With Purchase"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_subtitle"/> -->
-    <com.vi8e.giantapp.widgets.WrapViewPager
+    <com.vi8e.um.wunderlist.widgets.WrapViewPager
  	    android:id="@+id/pager"
  	    android:layout_width="match_parent"
  	    android:layout_marginBottom="@dimen/activity_component_margin"
  	    android:layout_height="wrap_content">
- 	</com.vi8e.giantapp.widgets.WrapViewPager>
+ 	</com.vi8e.um.wunderlist.widgets.WrapViewPager>
 	<TextView
 	    android:id="@+id/textViewLeft"
         android:layout_width="wrap_content"

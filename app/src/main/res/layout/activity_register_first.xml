@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.vi8e.giantapp.RegisterFirstActivity" >
+    tools:context="com.vi8e.um.wunderlist.RegisterFirstActivity" >
 	<ScrollView android:layout_width="match_parent"
 	    android:layout_height="0dp"
 	    android:layout_weight="1"
@@ -66,7 +66,7 @@
 			    android:text="Email Address *"
 			    android:layout_marginBottom="@dimen/activity_component_margin_small"
 			    android:textSize="@dimen/text_size_subtitle"/>
-	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextEmail"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
 			    android:text="Password *"
 			    android:layout_marginBottom="@dimen/activity_component_margin_small"
 			    android:textSize="@dimen/text_size_subtitle"/>        
-	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextPassword"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 			    android:text="Confirm Password *"
 			    android:layout_marginBottom="@dimen/activity_component_margin_small"
 			    android:textSize="@dimen/text_size_subtitle"/>
-	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextRepeatPassword"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
 			    android:text="First Name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin_small"
 			    android:textSize="@dimen/text_size_subtitle"/>
-	        <com.vi8e.giantapp.widgets.EditTextClearButton
+	        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextFirstName"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
 			    android:text="Last Name *"
 			    android:layout_marginBottom="@dimen/activity_component_margin_small"
 			    android:textSize="@dimen/text_size_subtitle"/>
-			<com.vi8e.giantapp.widgets.EditTextClearButton
+			<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 	            android:id="@+id/editTextLastName"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
 					    android:text="DFSG Staff ID *"
 					    android:layout_marginBottom="@dimen/activity_component_margin_small"
 					    android:textSize="@dimen/text_size_subtitle"/>
-					<com.vi8e.giantapp.widgets.EditTextClearButton
+					<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 			            android:id="@+id/editTextDFSG"
 			            android:layout_width="match_parent"
 			            android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
 				    android:text="NRIC/Passport *"
 				    android:layout_marginBottom="@dimen/activity_component_margin_small"
 				    android:textSize="@dimen/text_size_subtitle"/>		
-		        <com.vi8e.giantapp.widgets.EditTextClearButton
+		        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextNRIC"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
 				    android:text="Date of Birth *"
 				    android:layout_marginBottom="@dimen/activity_component_margin_small"
 				    android:textSize="@dimen/text_size_subtitle"/>
-		        <com.vi8e.giantapp.widgets.EditTextClearButton
+		        <com.vi8e.um.wunderlist.widgets.EditTextClearButton
 		            android:id="@+id/editTextDOB"
 		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
@@ -355,7 +355,7 @@
 					android:text="PAssion Card ID *"
 					android:textSize="@dimen/text_size_subtitle"/>
 
-				<com.vi8e.giantapp.widgets.EditTextClearButton
+				<com.vi8e.um.wunderlist.widgets.EditTextClearButton
 					android:id="@+id/editTextPAssionCard"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
