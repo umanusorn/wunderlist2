@@ -1,9 +1,10 @@
 package com.vi8e.um.wunderlist.Activity;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import com.vi8e.um.wunderlist.dialogs.MyAlertDialog;
 import com.vi8e.um.wunderlist.dialogs.MyAlertDialog.MyAlertDialogListener;
 import com.vi8e.um.wunderlist.sharedprefs.CartManagement;
 import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
+import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.AsyncResponse;
 import com.vi8e.um.wunderlist.utils.ConnectionDetector;
 
@@ -33,7 +35,7 @@ import org.json.JSONObject;
 //import com.google.android.gms.analytics.GoogleAnalytics;
 
 
-public class LoginActivity extends Activity implements OnClickListener,AsyncResponse,MyAlertDialogListener{
+public class LoginActivity extends AppCompatActivity implements OnClickListener,AsyncResponse,MyAlertDialogListener{
 private EditText editTextEmail, editTextPassword;
 private Button buttonLogin, buttonRegister;
 private TextView textViewForgot, textViewRegisterLater, textViewError;
@@ -43,13 +45,15 @@ private SessionManagement  session;
 private CartManagement     cartHeader;
 private ConnectionDetector internet;
 private AsyncCartInfo      asyncCartInfo;
-
+Toolbar toolBar;
+String title="Log In";
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_login );
 	internet = new ConnectionDetector ( getApplicationContext () );
+	ActivityUi.setToolBar ( this, toolBar, title );
 	Intent i = getIntent ();
 	if ( i.getBooleanExtra ( "loggedIn", false ) ) {
 		//todo
@@ -73,8 +77,8 @@ void onCreate ( Bundle savedInstanceState ) {
 	textViewRegisterLater = ( TextView ) findViewById ( R.id.textViewLater );
 	buttonRegister.setOnClickListener ( this );
 	buttonLogin.setOnClickListener ( this );
-	textViewForgot.setOnClickListener(this);
-		textViewRegisterLater.setOnClickListener(this);
+	textViewForgot.setOnClickListener ( this );
+	textViewRegisterLater.setOnClickListener(this);
 		session=new SessionManagement(getApplicationContext());
 		cartHeader=new CartManagement(getApplicationContext());
 		//((MyApp)getApplication()).getTracker(MyApp.TrackerName.APP_TRACKER);
