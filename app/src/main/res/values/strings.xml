@@ -21,4 +21,5 @@
     <string name="view_completed_to_do">VIEW COMPLETED TO-DOS</string>
     <string name="completed_to_do">COMPLETED TO-DOS</string>
     <string name="add_list">Add List</string>
+    <string name="title_activity_comment">CommentActivity</string>
 </resources>

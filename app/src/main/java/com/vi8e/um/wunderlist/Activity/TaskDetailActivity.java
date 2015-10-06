@@ -3,6 +3,7 @@ package com.vi8e.um.wunderlist.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ ImageView      star, checkBoxTask;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
+RelativeLayout bottomRoot;
 public static TextView reminderText;
 
 
@@ -87,53 +89,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Utility.setTaskListViewHeight ( listViewSubTask );
 }
 
-private
-void setViewValues () {
 
-	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
-	currentTask.setIsStar ( String.valueOf ( ! currentTask.isStar () ) );
-	noteEditText.setText ( String.valueOf ( currentTask.getNote () ) );
-	noteLayout.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			IntentCaller.taskNoteActivity ( getApplicationContext (), currentTask );
-		}
-	} );
-	currentTask.setIsComplete ( String.valueOf ( ! currentTask.isComplete () ) );
-
-	setTextViewReminderFromTaskDB ( currentTask, reminderText, sContext );
-
-	calendarLayout.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			ReminderDialog.showReminderDialog ( thisActivity, listViewSubTask, sContext );
-		}
-	} );
-
-	Utility.toggleImgCompleteData ( checkBoxTask, currentTask, getApplicationContext () );
-	checkBoxTask.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Utility.toggleImgCompleteData ( v, currentTask, getApplicationContext () );
-		}
-	} );
-	Utility.toggleImgStarData ( star, currentTask, getApplicationContext () );
-	star.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Utility.toggleImgStarData ( v, currentTask, getApplicationContext () );
-		}
-	} );
-
-	addSubTask.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			Log.d ( "","addSubTask" );
-			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
-		}
-	} );
-	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
-}
 
 public static
 void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
@@ -192,12 +148,62 @@ void setView () {
 	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
 	calendarLayout = ( RelativeLayout ) findViewById ( R.id.calendatLayout );
 	reminderText = (TextView)findViewById ( R.id.reminder_text_taskDetail );
-
+  bottomRoot =(RelativeLayout)findViewById ( R.id.bottomRoot );
 }
 
-public static
-TaskDetailAdapter setUpAdapterListView () {
-	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
+private
+void setViewValues () {
+
+	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
+	currentTask.setIsStar ( String.valueOf ( ! currentTask.isStar () ) );
+	noteEditText.setText ( String.valueOf ( currentTask.getNote () ) );
+	noteLayout.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			IntentCaller.taskNoteActivity ( getApplicationContext (), currentTask );
+		}
+	} );
+	currentTask.setIsComplete ( String.valueOf ( ! currentTask.isComplete () ) );
+
+	setTextViewReminderFromTaskDB ( currentTask, reminderText, sContext );
+
+	calendarLayout.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			ReminderDialog.showReminderDialog ( thisActivity, listViewSubTask, sContext );
+		}
+	} );
+
+	Utility.toggleImgCompleteData ( checkBoxTask, currentTask, getApplicationContext () );
+	checkBoxTask.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Utility.toggleImgCompleteData ( v, currentTask, getApplicationContext () );
+		}
+	} );
+	Utility.toggleImgStarData ( star, currentTask, getApplicationContext () );
+	star.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Utility.toggleImgStarData ( v, currentTask, getApplicationContext () );
+		}
+	} );
+
+	addSubTask.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Log.d ( "","addSubTask" );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
+		}
+	} );
+	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
+	bottomRoot.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			Intent i=new Intent ( getApplicationContext (),CommentActivity.class);
+			startActivity ( i );
+		}
+	} );
 }
 
 @Override
@@ -240,6 +246,11 @@ onResume () {
 	setView ();
 	setViewValues ();
 	setUpAdapterListView ();
+}
+
+public static
+TaskDetailAdapter setUpAdapterListView () {
+	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 
 @Override

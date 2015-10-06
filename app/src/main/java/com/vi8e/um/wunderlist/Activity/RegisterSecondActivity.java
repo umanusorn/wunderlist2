@@ -106,6 +106,7 @@ void onCreate ( Bundle savedInstanceState ) {
 			textViewHomeNumber.setText("Home Number");
 			textViewMobileNumber.setText("Mobile Number *");
 			textViewOfficeNumber.setText("Office Number *");
+
 		}
 		buttonNext.setOnClickListener ( this );
 		editTextPostal.setOnFocusChangeListener ( new OnFocusChangeListener () {
