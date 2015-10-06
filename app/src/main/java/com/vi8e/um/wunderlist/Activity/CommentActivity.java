@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.R;
@@ -30,6 +33,9 @@ private static final String TAG = TaskDetailActivity.class.getSimpleName ();
 Toolbar mToolbar;
 String title ="Comment";
 Context thisContext;
+TextView sendComment;
+EditText editTextComment;
+static Activity thisActivity;
 public static CommentAdapter sCommentAdapter;
 public static ListView       listViewSubTask;
 @Override
@@ -38,18 +44,27 @@ void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_comment );
 	thisContext=getApplicationContext ();
+	thisActivity=this;
 	mToolbar = ( Toolbar ) findViewById ( R.id.toolbar );
 	setSupportActionBar ( mToolbar );
 	ActivityUi.setToolBar ( this, mToolbar, title );
 	mToolbar.setBackgroundColor ( getResources ().getColor ( R.color.blue_500 ) );
+editTextComment=(EditText)findViewById ( R.id.editTextComment );
+
+
+	sendComment=(TextView)findViewById ( R.id.sendComment );
+	sendComment.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View view ) {
+			QueryHelper.addCommentToDB ( thisContext, editTextComment.getText ().toString (), TaskActivity.currentTask.getId () );
+			setUpAdapterListView ( thisActivity, listViewSubTask,sCommentAdapter,thisContext);
+		}
+	} );
 	listViewSubTask = ( ListView ) findViewById ( R.id.listViewComment);
-	for ( int i = 0 ; i < 5 ; i++ ) {
+	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
-	}
-
+	}*/
 	setUpAdapterListView ( this,listViewSubTask,sCommentAdapter,thisContext );
-
-
 }
 
 void onClickSend(String title){

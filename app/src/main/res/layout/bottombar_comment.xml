@@ -79,6 +79,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="SEND"
+            android:gravity="center"
+            android:layout_centerVertical="true"
             android:id="@+id/sendComment" android:layout_alignBottom="@+id/editText3"
             android:layout_alignParentEnd="true"
             />
