@@ -148,7 +148,7 @@ void setView () {
 	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
 	calendarLayout = ( RelativeLayout ) findViewById ( R.id.calendatLayout );
 	reminderText = (TextView)findViewById ( R.id.reminder_text_taskDetail );
-  bottomRoot =(RelativeLayout)findViewById ( R.id.bottomRoot );
+  bottomRoot =(RelativeLayout)findViewById ( R.id.bottomBarRoot );
 }
 
 private

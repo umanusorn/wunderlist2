@@ -286,7 +286,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:id="@+id/bottomRoot"
+            android:id="@+id/bottomBarRoot"
             android:clipToPadding="false"
             android:elevation="10dp"
             android:background="@color/white"

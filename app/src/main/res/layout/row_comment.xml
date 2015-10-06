@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:layout_margin="0dp"
+
+                android:backgroundTintMode="src_atop">
+
+    <android.support.v7.widget.CardView
+
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="3dp"
+            android:layout_margin="0dp">
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:id="@+id/rowBg"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/chkBox"
+                    android:src="@drawable/ic_account_circle_black_18dp"
+                    android:layout_gravity="center_vertical"
+                    android:tintMode="src_atop"
+                    android:tint="@color/grey_600"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:padding="@dimen/md_listitem_control_margin"
+                    android:text="3"
+                    android:id="@+id/latetask"
+                    android:textColor="@color/red_400"
+                    android:layout_alignParentBottom="false"
+                    android:layout_toLeftOf="@+id/currentTask"
+                    android:layout_toStartOf="@+id/currentTask"
+                    android:layout_alignWithParentIfMissing="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:padding="@dimen/md_listitem_control_margin"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="1"
+                    android:id="@+id/currentTask"
+                    android:textColor="@color/grey_600"
+                    android:layout_alignTop="@+id/latetask"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/chkBox"
+                    android:layout_toRightOf="@+id/chkBox"
+                    android:layout_toEndOf="@+id/chkBox"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_centerVertical="true">
+
+                <TextView
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="User Name"
+                        android:singleLine="true"
+                        android:id="@+id/commentUserName"
+                        android:textSize="16sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/chkBox"
+                        android:layout_toEndOf="@+id/chkBox"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="commentTitle"
+                        android:id="@+id/commentTitle"
+                        android:padding="2dp"
+                        android:textSize="13sp"
+                        android:layout_below="@+id/chkBox"
+                        android:layout_alignLeft="@+id/listtitle"
+                        android:layout_alignStart="@+id/listtitle"
+                        />
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="commentTime"
+                        android:textSize="11sp"
+                        android:id="@+id/commentTime"
+                        android:textColor="@color/grey_500"
+
+                        android:layout_below="@+id/chkBox"
+                        android:layout_alignLeft="@+id/listtitle"
+                        android:layout_alignStart="@+id/listtitle"
+                        />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
