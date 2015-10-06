@@ -67,10 +67,13 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 public
 void setView ( final CommentModel rowData ) {
 	tvTitle.setText ( rowData.getTitle () );
-rootView.setOnClickListener ( new View.OnClickListener () {
+rootView.setOnLongClickListener ( new View.OnLongClickListener () {
 	@Override public
-	void onClick ( View v ) {
-		//CustomDialog.showUpdateSubTaskDialog ( rowData, TaskDetailActivity.thisActivity, TaskDetailActivity.subTaskAdapter, TaskDetailActivity.listViewSubTask );
+	boolean onLongClick ( View view ) {
+
+
+
+		return false;
 	}
 } );
 }

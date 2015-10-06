@@ -110,18 +110,18 @@ void onCreate ( Bundle savedInstanceState ) {
 }
 
 public static
-void setActiveToolBar () {
+void setActiveToolBar (AppCompatActivity thisActivity,Toolbar toolbar,String title,Context context) {
 
 	//toolbar
-	thisActivity.getSupportActionBar ().setTitle ( currentList.getTitle () );
-	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.blue_400 ) ) );
+	thisActivity.getSupportActionBar ().setTitle ( title);
+	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.blue_400 ) ) );
 }
 
 public static
-void setInActiveToolBar () {
+void setInActiveToolBar (Toolbar toolbar,Context context) {
 
 	toolbar.setTitle ( "" );
-	toolbar.setBackgroundDrawable ( new ColorDrawable ( sContext.getResources ().getColor ( R.color.transparent ) ) );
+	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.transparent ) ) );
 }
 
 private
@@ -170,9 +170,9 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		Log.d ( TAG, "onItemLongClick" );
 
 		setCurrentList ( position );
-		setMenuList ();
-		setActiveList ();
-		setActiveToolBar ();
+		setMenuList (thisActivity,menu);
+		setActiveList (currentList.getRowListRootView ());
+		setActiveToolBar (thisActivity,toolbar,currentList.getTitle () ,sContext);
 
 		if ( listView != null ) {
 			Log.d ( TAG, "StartDrag position=" + position );
@@ -193,9 +193,7 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 }
 
 public static
-void setActiveList () {
-	RelativeLayout rowListRootView = currentList.getRowListRootView ();
-
+void setActiveList (RelativeLayout rowListRootView) {
 	rowListRootView.setBackgroundColor (
 			sContext.getResources ().getColor (
 					R.color.blue_400_trans50 ) );
@@ -237,7 +235,7 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 		Log.d ( TAG, "onItemMoved originalPos=" + originalPosition + " newPos=" + newPosition );
 		isDragging = false;
 		//updateListPosition ( originalPosition, newPosition);
-		setInActiveToolBar ();
+		setInActiveToolBar (toolbar,sContext);
 	}
 
 	public
@@ -255,7 +253,7 @@ public static
 void setUpOnResume () {
 //	mLandingListAdapter.clear ();
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
-	setInActiveToolBar ();
+	setInActiveToolBar (toolbar,sContext);
 }
 
 public static
@@ -354,7 +352,7 @@ void onPause () {
 	//setMenuNormal ();
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
-	setInActiveToolBar ();
+	setInActiveToolBar (toolbar,sContext);
 	saveListAdapterToDb ();
 }
 
@@ -394,7 +392,7 @@ void setMenuNormal () {
 }
 
 public static
-void setMenuList () {
+void setMenuList (AppCompatActivity thisActivity,Menu menu) {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
 //	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );

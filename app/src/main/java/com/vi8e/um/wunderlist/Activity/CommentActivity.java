@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,45 +32,61 @@ class CommentActivity extends AppCompatActivity {
 
 private static final String TAG = TaskDetailActivity.class.getSimpleName ();
 Toolbar mToolbar;
-String title ="Comment";
-Context thisContext;
+String title = "Comment";
+Context  thisContext;
 TextView sendComment;
 EditText editTextComment;
-static Activity thisActivity;
+static        int            currentListPosition;
+public static CommentModel   currentList;
+static        Activity       thisActivity;
 public static CommentAdapter sCommentAdapter;
 public static ListView       listViewSubTask;
+
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_comment );
-	thisContext=getApplicationContext ();
-	thisActivity=this;
+	thisContext = getApplicationContext ();
+	thisActivity = this;
 	mToolbar = ( Toolbar ) findViewById ( R.id.toolbar );
 	setSupportActionBar ( mToolbar );
 	ActivityUi.setToolBar ( this, mToolbar, title );
+
 	mToolbar.setBackgroundColor ( getResources ().getColor ( R.color.blue_500 ) );
-editTextComment=(EditText)findViewById ( R.id.editTextComment );
-
-
-	sendComment=(TextView)findViewById ( R.id.sendComment );
+	editTextComment = ( EditText ) findViewById ( R.id.editTextComment );
+	sendComment = ( TextView ) findViewById ( R.id.sendComment );
 	sendComment.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			QueryHelper.addCommentToDB ( thisContext, editTextComment.getText ().toString (), TaskActivity.currentTask.getId () );
-			setUpAdapterListView ( thisActivity, listViewSubTask,sCommentAdapter,thisContext);
+			onClickSend ( editTextComment.getText ().toString () );
 		}
 	} );
-	listViewSubTask = ( ListView ) findViewById ( R.id.listViewComment);
+	listViewSubTask = ( ListView ) findViewById ( R.id.listViewComment );
 	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
 	}*/
-	setUpAdapterListView ( this,listViewSubTask,sCommentAdapter,thisContext );
+	setUpAdapterListView ( this, listViewSubTask, sCommentAdapter, thisContext );
+	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
+		@Override public
+		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int i, long l ) {
+
+			return false;
+		}
+	} );
+}
+
+
+public static
+void setCurrentList ( final int position ) {
+	//currentList = listModel;
+	currentListPosition = position;
+	currentList = sCommentAdapter.getItem ( position );
 }
 
 void onClickSend(String title){
 	QueryHelper.addCommentToDB ( thisContext, title, TaskActivity.currentTask.getId () );
-	TaskDetailActivity.setUpAdapterListView ();
+	setUpAdapterListView ( thisActivity, listViewSubTask, sCommentAdapter, thisContext );
 }
 
 public static
