@@ -9,7 +9,6 @@ import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 public
 class CommentModel extends SubTaskModel {
 
-
 String id;
 String taskId;
 String title;
@@ -17,16 +16,10 @@ String dateTime;
 String userId;
 
 public
-CommentModel ( String title ) {
-	super (title);
-	this.title = title;
-}
-
-public
 CommentModel ( String title, String taskId, String id, String dateTime, String userId ) {
 	super (title);
 	//setDefault ();
-	Log.d ( "newSubTask", "id=" + id );
+	Log.d ( "newComment", "id=" + id );
 
 	this.title = title;
 	this.taskId = taskId;
@@ -89,7 +82,7 @@ ContentValues getValues () {
 	values.put ( TaskCommentColumns.TASK_ID, taskId );
 	values.put ( TaskCommentColumns.DATETIME, getComplete () );
 	values.put ( TaskCommentColumns.USER_ID, getComplete () );
-	//values.put ( ListColumns._ID,id );
+	values.put ( TaskCommentColumns._ID,id );
 	return values;
 }
 

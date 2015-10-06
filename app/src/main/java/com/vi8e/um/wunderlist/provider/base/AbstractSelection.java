@@ -313,7 +313,8 @@ public abstract class AbstractSelection<T extends AbstractSelection<?>> {
      * @param context The context to use.
      * @return The number of rows deleted.
      */
-    public int delete(Context context) {
+    public
+    int delete ( Context context ) {
         return context.getContentResolver().delete(uri(), sel(), args());
     }
 

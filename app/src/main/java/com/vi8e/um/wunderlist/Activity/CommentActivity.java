@@ -69,11 +69,22 @@ void onCreate ( Bundle savedInstanceState ) {
 	setUpAdapterListView ( this, listViewSubTask, sCommentAdapter, thisContext );
 	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
 		@Override public
-		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int i, long l ) {
-
+		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
+			//deleteCurrentComment ( position ,thisContext);
+					view.setVisibility ( View.GONE );
+			adapterView.setVisibility ( View.GONE );
 			return false;
 		}
 	} );
+}
+
+public
+void deleteCurrentComment ( int position ,Context context) {
+		Log.d ( TAG,"pos="+position );
+		TaskCommentSelection selection = new TaskCommentSelection ();
+
+	selection.id ( Long.parseLong ( sCommentAdapter.getItem( position ).getId()));
+		selection.delete ( context );
 }
 
 
