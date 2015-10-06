@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,21 +55,18 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	final CommentModel rowData;
 	rowData = getItem ( position );
 
-	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_sub_task, parent, false );
+	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_comment, parent, false );
 	// Lookup view for data population
-	tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
-	ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
-	rootView = ( RelativeLayout ) convertView.findViewById ( R.id.subTaskRootRow );
-	setView ( rowData, chkBox );
+	tvTitle = ( TextView ) convertView.findViewById ( R.id.commentTitle );
+	//ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
+	rootView = ( RelativeLayout ) convertView.findViewById ( R.id.row_list_comment_root_view );
+	setView ( rowData );
 	return convertView;
 }
 
 public
-void setView ( final CommentModel rowData, ImageView chkBox) {
+void setView ( final CommentModel rowData ) {
 	tvTitle.setText ( rowData.getTitle () );
-	Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
-	//Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
-	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 rootView.setOnClickListener ( new View.OnClickListener () {
 	@Override public
 	void onClick ( View v ) {

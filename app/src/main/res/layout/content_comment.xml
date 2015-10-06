@@ -9,10 +9,13 @@
         tools:context="com.vi8e.um.wunderlist.Activity.CommentActivity">
 
 
-<include layout="@layout/bottombar_comment"/>
+<include layout="@layout/bottombar_comment" android:id="@+id/include"/>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listViewComment" android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" android:choiceMode="multipleChoice"/>
+            android:id="@+id/listViewComment"
+            android:choiceMode="multipleChoice"
+            android:layout_above="@+id/include"
+            android:layout_marginTop="60dp"
+            android:layout_alignParentStart="true"/>
 </RelativeLayout>
