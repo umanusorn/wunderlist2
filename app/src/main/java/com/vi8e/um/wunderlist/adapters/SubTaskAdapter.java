@@ -1,20 +1,21 @@
 package com.vi8e.um.wunderlist.adapters;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.LandingActivity;
-import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.list.ListSelection;
-import com.vi8e.um.wunderlist.provider.task.TaskSelection;
-import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
 import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
@@ -24,103 +25,83 @@ import java.util.ArrayList;
  * Created by um.anusorn on 8/25/2015.
  */
 public
-class SubTaskAdapter extends ArrayAdapter<ListModel> {
+class SubTaskAdapter extends ArrayAdapter<SubTaskModel> {
 
-
-ArrayList<ListModel> lists;
-boolean              mIsLongClick;
-ListModel listModel;
+Context                 mContext;
+Resources               res;
+ArrayList<SubTaskModel> lists;
+RelativeLayout          rootView;
+TextView                tvTitle;
+//ImageView chkBox;
+private static final String TAG = SubTaskAdapter.class.getSimpleName ();
 
 public
-SubTaskAdapter ( Context context, ArrayList<ListModel> listModels ) {
-	super ( context, 0, listModels );
-	this.lists = listModels;
+SubTaskAdapter ( Context context,
+                 ArrayList<SubTaskModel> lists ) {
+
+	super ( context, 0, lists );
+	this.lists = lists;
+	mContext = context;
+	res = context.getResources ();
 }
 
 public
-ArrayList<ListModel> getArrayList () {
+ArrayList<SubTaskModel> getArrayList () {
 	return lists;
 }
 
 @Override
 public
-View getView ( final int position, View convertView, ViewGroup parent ) {
+View getView ( final int position, View convertView, final ViewGroup parent ) {
+	Log.d ( "", "getView" );
+	final SubTaskModel rowData;
+	rowData = getItem ( position );
 
-	listModel = getItem ( position );
-	// Check if an existing view is being reused, otherwise inflate the view
-	if ( convertView == null ) {
-		convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_landing, parent, false );
-	}
-
-	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
-	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
-	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
-	final ListView listView = ( ListView ) convertView.getParent ();
-
-	tvTitle.setText ( listModel.getTitle () );
-
-	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
-	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
-	convertView.setOnClickListener ( getOnClick ( listModel, getContext () ) );
-	convertView.setOnLongClickListener ( getOnLongClick (listModel,position) );
-
-	tvLateTask.setVisibility ( View.GONE );
-	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel,getContext () ) ));
-
-	// Return the completed view to render on screen
+	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_sub_task, parent, false );
+	// Lookup view for data population
+	tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
+	ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
+	rootView = ( RelativeLayout ) convertView.findViewById ( R.id.subTaskRootRow );
+	setView ( rowData,chkBox);
 	return convertView;
 }
 
-
-int getCurrentTaskCount(ListModel listModel,Context context){
-	TaskSelection where = new TaskSelection ();
-
-	where.listid ( listModel.getId ()  );
-	int count = where.count ( context.getContentResolver () );
-	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
-	return count;
+public
+void setView ( final SubTaskModel rowData, ImageView chkBox) {
+	tvTitle.setText ( rowData.getTitle () );
+	Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
+	//Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
+	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
+rootView.setOnClickListener ( new View.OnClickListener () {
+	@Override public
+	void onClick ( View v ) {
+		CustomDialog.showUpdateSubTaskDialog (rowData,TaskDetailActivity.thisActivity,TaskDetailActivity.subTaskAdapter,TaskDetailActivity.listViewSubTask  );
+	}
+} );
 }
 
-@NonNull private
-View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int position ) {
-	return new View.OnLongClickListener () {
-		@Override public
-		boolean onLongClick ( View v ) {
-			mIsLongClick =true;
-			Log.d ( "onLongClick", "position="+ position );
-			//remove ( listModel );
-			LandingActivity.currentList=listModel;
-			LandingActivity.setMenuList ();
-			LandingActivity.currentListPosition=position;
-			ListSelection where = new ListSelection ();
-			//where.id ( Long.parseLong ( listModel.getId () ) );
-			//where.delete ( context );
-			return false;
-		}
-	};
-}
 
-@NonNull public
-View.OnClickListener getOnClick ( final ListModel listModel, final Context context) {
+@NonNull public static
+View.OnClickListener onClickChkBox ( final SubTaskModel rowData ) {
 	return new View.OnClickListener () {
-
 		@Override public
 		void onClick ( View v ) {
 
-			Log.d ( "onClick","isLongClick="+mIsLongClick );
-			if(!mIsLongClick){
-				IntentCaller.taskActivity ( context, listModel );
-			}
-			mIsLongClick=false;
+			//	rowData.setDateTime ( String.valueOf ( ! rowData.getDateTime () ) );
+			Log.d ( TAG,"onClickBox" );
+			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext );
+			//Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
 		}
 	};
 }
 
-
-public
-void addList ( ListModel object, ListView listView ) {
-
-	super.add ( object );
-	Utility.setTaskListViewHeight ( listView );
+private
+void setUpCompletedBg ( SubTaskModel rowData, RelativeLayout rowBg, CardView cardView ) {
+	if ( rowData.isComplete () ) {
+		rowBg.setAlpha ( ( float ) 0.5 );
+		cardView.setAlpha ( ( float ) 0.5 );
+	}
 }
+
+
 }

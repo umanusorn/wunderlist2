@@ -7,5 +7,12 @@
 
         tools:showIn="@layout/activity_comment"
         tools:context="com.vi8e.um.wunderlist.Activity.CommentActivity">
+
+
 <include layout="@layout/bottombar_comment"/>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewComment" android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" android:choiceMode="multipleChoice"/>
 </RelativeLayout>

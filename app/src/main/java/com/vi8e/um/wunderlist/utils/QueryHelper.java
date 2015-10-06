@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
+import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
@@ -20,6 +21,7 @@ import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
+import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,8 @@ void addSubTaskToDB ( Context context, String title,String taskId,ListView listV
 	//updateListAdapter ( title, listView, uri );
 }
 
+
+
 public static
  void updateListAdapter ( String title, ListView listView, Uri uri ) {
 	LandingActivity.mLandingListAdapter.add ( 0, new ListModel ( getIdFromUri ( uri ), title ) );
@@ -136,6 +140,12 @@ public static
 Uri addSubTaskToDB ( Context context, String title, String taskId ) {
 	SubTaskModel subTaskModel = new SubTaskModel ( title,taskId );
 	return context.getContentResolver ().insert ( SubtaskColumns.CONTENT_URI, subTaskModel.getValues () );
+}
+
+public static
+Uri addCommentToDB ( Context context, String title, String taskId ) {
+	CommentModel model = new CommentModel ( title,taskId );
+	return context.getContentResolver ().insert ( TaskCommentColumns.CONTENT_URI, model.getValues () );
 }
 
 public static

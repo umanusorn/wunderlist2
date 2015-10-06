@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adapters.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.dialogs.CustomDialog;
 import com.vi8e.um.wunderlist.dialogs.ReminderDialog;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
@@ -42,18 +42,18 @@ import java.util.List;
 public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = TaskDetailActivity.class.getSimpleName ();
-public static ListView          listViewSubTask;
-public static Activity          thisActivity;
-public static Context           sContext;
-public static TaskDetailAdapter subTaskAdapter;
+public static ListView       listViewSubTask;
+public static Activity       thisActivity;
+public static Context        sContext;
+public static SubTaskAdapter subTaskAdapter;
 public static
 android.support.v4.app.FragmentManager sFragmentManager;
 
 Boolean isStar       = false;
 Boolean showComplete = true;
 
-EditText       editTextTitle;
-public static TaskModel      currentTask;
+EditText editTextTitle;
+public static TaskModel currentTask;
 RelativeLayout noteLayout;
 ImageView      star, checkBoxTask;
 TextView       noteEditText;
@@ -90,24 +90,23 @@ void onCreate ( Bundle savedInstanceState ) {
 }
 
 
-
 public static
 void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
 	String reminderTime = taskModel.getReminderDate ();
 	Log.d ( TAG, "reminderTime= " + reminderTime );
-	if( reminderTime!=null && !reminderTime.isEmpty () ){
-		Date date= new Date (  );
-		date.setTime ( Long.parseLong ( reminderTime) );
+	if ( reminderTime != null && ! reminderTime.isEmpty () ) {
+		Date date = new Date ();
+		date.setTime ( Long.parseLong ( reminderTime ) );
 		ReminderDialog.setTextViewReminder ( date, reminderText, context );
 	}
-	else{
+	else {
 		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ));
 		UiMng.setBlackText ( context,reminderText );
 	}
 }
 
 public static
-TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, TaskDetailAdapter taskDetailAdapter, Context context ) {
+SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubTaskAdapter subTaskAdapter, Context context ) {
 	SubtaskSelection where = new SubtaskSelection ();
 	where.taskid ( TaskActivity.currentTask.getId () );
 	Cursor c = where.query ( context.getContentResolver () );
@@ -121,11 +120,11 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
 
 	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-	taskDetailAdapter = new TaskDetailAdapter ( context, arrayOfList );
-	listView.setAdapter ( taskDetailAdapter );
+	subTaskAdapter = new SubTaskAdapter ( context, arrayOfList );
+	listView.setAdapter ( subTaskAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
-		taskDetailAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
+		subTaskAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
 		                                           values.getAsString ( SubtaskColumns.TASKID ),
 		                                           values.getAsString ( SubtaskColumns._ID ),
 		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
@@ -133,7 +132,7 @@ TaskDetailAdapter setUpAdapterListView ( Activity activity, ListView listView, T
 
 	Utility.setTaskListViewHeight ( listViewSubTask );
 
-	return taskDetailAdapter;
+	return subTaskAdapter;
 }
 
 private
@@ -249,7 +248,7 @@ onResume () {
 }
 
 public static
-TaskDetailAdapter setUpAdapterListView () {
+SubTaskAdapter setUpAdapterListView () {
 	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
 }
 

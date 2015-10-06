@@ -11,7 +11,7 @@ import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
-import com.vi8e.um.wunderlist.adapters.TaskDetailAdapter;
+import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
@@ -39,7 +39,7 @@ void showAddListDialog ( final Activity thisContext, final LandingListAdapter la
 }
 
 public static
-void showAddSubTaskDialog ( final Activity thisContext, final TaskDetailAdapter taskDetailAdapter, final ListView listView ) {
+void showAddSubTaskDialog ( final Activity thisContext, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( "Add subTask" )
@@ -59,7 +59,7 @@ void showAddSubTaskDialog ( final Activity thisContext, final TaskDetailAdapter 
 
 
 public static
-void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activity, final TaskDetailAdapter taskDetailAdapter, final ListView listView ) {
+void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
 	new MaterialDialog.Builder ( activity )
 			.title ( "Edit" )
 			.positiveText ( "ACCEPT" )
