@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
@@ -77,7 +78,8 @@ void onCreate ( Bundle savedInstanceState ) {
 			ActivityUi.setActiveList ( ( RelativeLayout ) view, thisContext );
 			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
 
-			deleteCurrentComment ( position ,thisContext);
+			CustomDialog.showDialogDeleteComment ( thisActivity,sCommentAdapter,position );
+			//deleteCurrentComment ( position, thisContext, sCommentAdapter);
 			//view.setVisibility ( View.GONE );
 			//adapterView.setVisibility ( View.GONE );
 			return false;
@@ -95,15 +97,19 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	return true;
 }
 
-public
-void deleteCurrentComment ( int position ,Context context) {
+public static
+void deleteCurrentComment ( int position, Context context, CommentAdapter commentAdapter ) {
 	Log.d ( TAG,"pos="+position );
 	TaskCommentSelection selection = new TaskCommentSelection ();
-	CommentModel commentModel=sCommentAdapter.getItem( position );
+	CommentModel commentModel=commentAdapter.getItem( position );
 	String id=commentModel.getId ();
 	Log.d ( TAG,"id="+id );
 	selection.id ( Long.parseLong ( id ) );
 	selection.delete ( context );
+
+	commentAdapter.remove ( commentModel );
+	commentAdapter.notifyDataSetChanged ();
+
 }
 
 

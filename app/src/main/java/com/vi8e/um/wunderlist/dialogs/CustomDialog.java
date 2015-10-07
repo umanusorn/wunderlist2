@@ -5,11 +5,13 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.vi8e.um.wunderlist.Activity.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.adapters.CommentAdapter;
 import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
 import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
@@ -107,6 +109,29 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 			.negativeText ( "NO" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
 			.show ();
 }
+
+public static
+void showDialogDeleteComment ( final Activity thisContext, final CommentAdapter sCommentAdapter, final int currentPosition) {
+
+
+	String title = sCommentAdapter.getItem (currentPosition).getTitle ();
+	Log.d ( "CustomDialog ", title );
+	MaterialDialog diallogDelete = new MaterialDialog.Builder ( thisContext )
+			//.customView ( R.layout.dialog_todo, true )
+			.title ( "Delete Comment" )
+			.content ( "\"" + title + "\" " + thisContext.getString ( R.string.content_delete_list ) )
+			.positiveText ( "Delete" ).callback ( new MaterialDialog.ButtonCallback () {
+				@Override public
+				void onPositive ( MaterialDialog dialog ) {
+					super.onPositive ( dialog );
+					CommentActivity.deleteCurrentComment ( currentPosition, thisContext, sCommentAdapter );
+
+				}
+			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
+			.negativeText ( "NO" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
+			.show ();
+}
+
 
 
 }
