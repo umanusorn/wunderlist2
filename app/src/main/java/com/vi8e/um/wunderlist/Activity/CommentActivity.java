@@ -1,6 +1,5 @@
 package com.vi8e.um.wunderlist.Activity;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -69,17 +68,17 @@ void onCreate ( Bundle savedInstanceState ) {
 	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
 	}*/
-	setUpAdapterListView ( this, listViewSubTask, sCommentAdapter, thisContext );
+	sCommentAdapter=setUpAdapterListView ( listViewSubTask, thisContext );
 	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
 		@Override public
 		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
 
 			ActivityUi.setMenuList ( thisActivity, menu );
-			ActivityUi.setActiveList ( ( RelativeLayout) view, thisContext );
+			ActivityUi.setActiveList ( ( RelativeLayout ) view, thisContext );
 			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
 
-			//deleteCurrentComment ( position ,thisContext);
-			//		view.setVisibility ( View.GONE );
+			deleteCurrentComment ( position ,thisContext);
+			//view.setVisibility ( View.GONE );
 			//adapterView.setVisibility ( View.GONE );
 			return false;
 		}
@@ -98,11 +97,13 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 
 public
 void deleteCurrentComment ( int position ,Context context) {
-		Log.d ( TAG,"pos="+position );
-		TaskCommentSelection selection = new TaskCommentSelection ();
-
-	selection.id ( Long.parseLong ( sCommentAdapter.getItem( position ).getId()));
-		selection.delete ( context );
+	Log.d ( TAG,"pos="+position );
+	TaskCommentSelection selection = new TaskCommentSelection ();
+	CommentModel commentModel=sCommentAdapter.getItem( position );
+	String id=commentModel.getId ();
+	Log.d ( TAG,"id="+id );
+	selection.id ( Long.parseLong ( id ) );
+	selection.delete ( context );
 }
 
 
@@ -115,11 +116,11 @@ void setCurrentList ( final int position ) {
 
 void onClickSend(String title){
 	QueryHelper.addCommentToDB ( thisContext, title, TaskActivity.currentTask.getId () );
-	setUpAdapterListView ( thisActivity, listViewSubTask, sCommentAdapter, thisContext );
+	sCommentAdapter=setUpAdapterListView ( listViewSubTask, thisContext );
 }
 
 public static
-CommentAdapter setUpAdapterListView ( Activity activity, ListView listView, CommentAdapter commentAdapter, Context context ) {
+CommentAdapter setUpAdapterListView ( ListView listView, Context context ) {
 	TaskCommentSelection where = new TaskCommentSelection ();
 	where.taskId ( TaskActivity.currentTask.getId () );
 	Cursor c = where.query ( context.getContentResolver () );
@@ -133,10 +134,12 @@ CommentAdapter setUpAdapterListView ( Activity activity, ListView listView, Comm
 	ArrayList<CommentModel> arrayOfList = new ArrayList<> ();
 
 	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-	commentAdapter = new CommentAdapter ( context, arrayOfList );
+	CommentAdapter commentAdapter = new CommentAdapter ( context, arrayOfList );
 	listView.setAdapter ( commentAdapter );
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
+
+		Log.d ( TAG,"comment id="+ values.getAsString ( TaskCommentColumns._ID ));
 		commentAdapter.add ( new CommentModel ( values.getAsString ( TaskCommentColumns.COMMENT_TITLE ),
 		                                        values.getAsString ( TaskCommentColumns.TASK_ID ),
 		                                        values.getAsString ( TaskCommentColumns._ID ),
@@ -144,9 +147,7 @@ CommentAdapter setUpAdapterListView ( Activity activity, ListView listView, Comm
 		                                        values.getAsString ( TaskCommentColumns.USER_ID ) )
 		                   );
 	}
-
 	Utility.setTaskListViewHeight ( listViewSubTask );
-
 	return commentAdapter;
 }
 
