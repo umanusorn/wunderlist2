@@ -10,14 +10,13 @@
           android:icon="@android:drawable/ic_menu_preferences"
           app:showAsAction="always"
             />
-<!--
     <item android:id="@+id/search"
           android:title="@string/action_settings"
           android:orderInCategory="100"
           android:icon="@mipmap/wl_icon_search_mag"
 
           app:showAsAction="always"
-          />-->
+          />
 
 
 </menu>
