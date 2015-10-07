@@ -11,13 +11,13 @@
     </string-array>
 
     <string name="ic_name">&#xf007;</string>
-	<string name="ic_email">&#xf0e0;</string>
-	<string name="ic_address">&#xf015;</string>
-	<string name="ic_postal">&#xf041;</string>
-	<string name="ic_phone">&#xf095;</string>
-	<string name="ic_payment">&#xf0d6;</string>
-	<string name="ic_unavailable">&#xf12a;</string>
-	<string name="ic_halal">&#xf046;</string>
+    <string name="ic_email">&#xf0e0;</string>
+    <string name="ic_address">&#xf015;</string>
+    <string name="ic_postal">&#xf041;</string>
+    <string name="ic_phone">&#xf095;</string>
+    <string name="ic_payment">&#xf0d6;</string>
+    <string name="ic_unavailable">&#xf12a;</string>
+    <string name="ic_halal">&#xf046;</string>
     <string name="ic_delivery">&#xf073;</string>
     <string name="ic_message">&#xf028;</string>
     <string name="ic_blank">&#xf0c8;</string>
@@ -25,7 +25,7 @@
     <string name="ic_weight">&#xf0e4;</string>
     <string name="ic_minus">&#xf146;</string>
     <string name="ic_plus">&#xf0fe;</string>
-    
+
 
     <string name="app_version">20150520_1055</string>
     <string name="url_corporate">http://www.giantsingapore.com.sg</string>
@@ -52,7 +52,7 @@
 
     <!--<string name="web_url">https://giantonline.com.sg/</string>
 	<string name="server_url">https://giantonline.com.sg/api/</string>-->
-   
+
     <string name="web_url">http://dev.giant.vi9e.com/</string>
     <string name="server_url">http://dev.giant.vi9e.com/api/</string>
     <!--<string name="web_url">http://a8ecdb7.ngrok.com/ecommerce/</string>

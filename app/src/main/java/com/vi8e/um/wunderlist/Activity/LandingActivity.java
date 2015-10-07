@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -46,6 +44,7 @@ import com.vi8e.um.wunderlist.provider.list.ListSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
+import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.Utility;
@@ -109,21 +108,6 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
-public static
-void setActiveToolBar (AppCompatActivity thisActivity,Toolbar toolbar,String title,Context context) {
-
-	//toolbar
-	thisActivity.getSupportActionBar ().setTitle ( title);
-	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.blue_400 ) ) );
-}
-
-public static
-void setInActiveToolBar (Toolbar toolbar,Context context) {
-
-	toolbar.setTitle ( "" );
-	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.transparent ) ) );
-}
-
 private
 void setListView () {
 	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
@@ -150,7 +134,7 @@ void setListView () {
 }
 
 public static
-void setCurrentList ( final int position ) {
+void setCurrentList ( final int position, LandingListAdapter mLandingListAdapter ) {
 	//currentList = listModel;
 	currentListPosition = position;
 	currentList = mLandingListAdapter.getItem ( position );
@@ -169,10 +153,10 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 	boolean onItemLongClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
 		Log.d ( TAG, "onItemLongClick" );
 
-		setCurrentList ( position );
-		setMenuList (thisActivity,menu);
-		setActiveList (currentList.getRowListRootView ());
-		setActiveToolBar (thisActivity,toolbar,currentList.getTitle () ,sContext);
+		setCurrentList ( position, mLandingListAdapter );
+		ActivityUi.setMenuList ( thisActivity, menu );
+		ActivityUi.setActiveList ( currentList.getRowRootView (), sContext );
+		ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), sContext );
 
 		if ( listView != null ) {
 			Log.d ( TAG, "StartDrag position=" + position );
@@ -190,13 +174,6 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		}
 		return true;
 	}
-}
-
-public static
-void setActiveList (RelativeLayout rowListRootView) {
-	rowListRootView.setBackgroundColor (
-			sContext.getResources ().getColor (
-					R.color.blue_400_trans50 ) );
 }
 
 private
@@ -235,7 +212,7 @@ class MyOnItemMovedListener implements OnItemMovedListener {
 		Log.d ( TAG, "onItemMoved originalPos=" + originalPosition + " newPos=" + newPosition );
 		isDragging = false;
 		//updateListPosition ( originalPosition, newPosition);
-		setInActiveToolBar (toolbar,sContext);
+		ActivityUi.setInActiveToolBar ( toolbar, sContext );
 	}
 
 	public
@@ -253,7 +230,7 @@ public static
 void setUpOnResume () {
 //	mLandingListAdapter.clear ();
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
-	setInActiveToolBar (toolbar,sContext);
+	ActivityUi.setInActiveToolBar ( toolbar, sContext );
 }
 
 public static
@@ -352,7 +329,7 @@ void onPause () {
 	//setMenuNormal ();
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
-	setInActiveToolBar (toolbar,sContext);
+	ActivityUi.setInActiveToolBar ( toolbar, sContext );
 	saveListAdapterToDb ();
 }
 
@@ -386,17 +363,9 @@ onResume () {
 }
 
 public static
-void setMenuNormal () {
+void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
 	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
-}
-
-public static
-void setMenuList (AppCompatActivity thisActivity,Menu menu) {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
-//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
-
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, LandingActivity.menu );
 }
 
 @Override
@@ -404,7 +373,7 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
-	setMenuNormal ();
+	setMenuNormal ( thisActivity, LandingActivity.menu );
 	return true;
 }
 
@@ -425,7 +394,7 @@ class OnSwipeDismissCallBack implements OnDismissCallback {
 
 //todo bad code T^T
 		for ( int position : reverseSortedPositions ) {
-			setCurrentList ( position );
+			setCurrentList ( position, mLandingListAdapter );
 		}
 		Log.d ( TAG, "onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
@@ -447,7 +416,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 	if ( id == R.id.delete ) {
 
-		deleteSpecificList ( getApplicationContext () );
+		deleteSpecificList ( getApplicationContext (), currentList.getId () );
 	}
 
 	if ( id == R.id.duplicateList ) {
@@ -459,7 +428,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		IntentCaller.listDetailActivity ( getApplicationContext (), currentList );
 	}
 
-	setMenuNormal ();
+	setMenuNormal ( thisActivity, menu );
 
 	return super.onOptionsItemSelected ( item );
 }
@@ -490,15 +459,16 @@ void duplicateSpecificList () {
 }
 
 public static
-void deleteSpecificList ( Context context ) {
+void deleteSpecificList ( Context context, String currentListId ) {
 	Log.d ( TAG, "CurrentList title= " + currentList.getTitle () );
 
 	TaskSelection taskSelection = new TaskSelection ();
-	taskSelection.listid ( currentList.getId () );
+	//currentList.getId
+	taskSelection.listid ( currentListId );
 	taskSelection.delete ( context );
 
 	ListSelection listSelection = new ListSelection ();
-	listSelection.id ( Long.parseLong ( currentList.getId () ) );
+	listSelection.id ( Long.parseLong (currentListId) );
 	listSelection.delete ( context );
 
 	//todo dont know why cannot delete via .remove(currentList)

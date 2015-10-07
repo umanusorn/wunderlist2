@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.CommentModel;
@@ -36,11 +38,12 @@ String title = "Comment";
 Context  thisContext;
 TextView sendComment;
 EditText editTextComment;
-static        int            currentListPosition;
-public static CommentModel   currentList;
-static        Activity       thisActivity;
-public static CommentAdapter sCommentAdapter;
-public static ListView       listViewSubTask;
+static        int               currentListPosition;
+public static CommentModel      currentList;
+static        AppCompatActivity thisActivity;
+public static CommentAdapter    sCommentAdapter;
+public static ListView          listViewSubTask;
+private       Menu              menu;
 
 @Override
 protected
@@ -70,12 +73,27 @@ void onCreate ( Bundle savedInstanceState ) {
 	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
 		@Override public
 		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
+
+			ActivityUi.setMenuList ( thisActivity, menu );
+			ActivityUi.setActiveList ( ( RelativeLayout) view, thisContext );
+			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
+
 			//deleteCurrentComment ( position ,thisContext);
-					view.setVisibility ( View.GONE );
-			adapterView.setVisibility ( View.GONE );
+			//		view.setVisibility ( View.GONE );
+			//adapterView.setVisibility ( View.GONE );
 			return false;
 		}
 	} );
+}
+
+
+@Override
+public
+boolean onCreateOptionsMenu ( Menu menu ) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	this.menu = menu;
+	//setMenuNormal ();
+	return true;
 }
 
 public

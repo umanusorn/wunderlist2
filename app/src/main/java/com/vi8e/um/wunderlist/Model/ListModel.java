@@ -25,7 +25,7 @@ String  imgPath;
 String  type;
 View rootView;
 
-public RelativeLayout getRowListRootView(){
+public RelativeLayout getRowRootView (){
 	return  (RelativeLayout)getRootView ().findViewById ( R.id.row_list_root_view );
 }
 public

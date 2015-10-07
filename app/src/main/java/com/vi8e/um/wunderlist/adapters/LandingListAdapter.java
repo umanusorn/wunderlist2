@@ -80,7 +80,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 		@Override public
 		boolean onTouch ( View v, MotionEvent event ) {
 			//Log.d ( TAG, "onTouch" );
-			//RelativeLayout rowListRootView = listModel.getRowListRootView ();
+			//RelativeLayout rowListRootView = listModel.getRowRootView ();
 			if ( ! LandingActivity.isDragging () ) {
 				try {
 					//setActiveListBgColor ( position );
@@ -117,13 +117,13 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 
 public
 void setActiveListBgColor ( int position ) {
-	RelativeLayout rowListRootView = getItem ( position ).getRowListRootView ();
+	RelativeLayout rowListRootView = getItem ( position ).getRowRootView ();
 	rowListRootView.setBackgroundColor ( mContext.getResources ().getColor ( R.color.red_400 ) );
 }
 
 public static
 void setInActiveListBgColor ( int position ,LandingListAdapter landingListAdapter,Context context) {
-	RelativeLayout rowListRootView = landingListAdapter.getItem ( position ).getRowListRootView ();
+	RelativeLayout rowListRootView = landingListAdapter.getItem ( position ).getRowRootView ();
 	rowListRootView.setBackgroundColor ( context.getResources ().getColor ( R.color.white ) );
 	rowListRootView.setAlpha ( ( float ) 1.0 );
 }
@@ -180,7 +180,7 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 
 public
 void onClickList ( int position, Context context, ListModel listModel ) {
-	LandingActivity.setCurrentList ( position );
+	LandingActivity.setCurrentList ( position, LandingActivity.mLandingListAdapter );
 	//if ( ! isLongClick ) {
 	IntentCaller.taskActivity ( context, listModel );
 	//}

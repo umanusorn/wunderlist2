@@ -98,7 +98,7 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 				@Override public
 				void onPositive ( MaterialDialog dialog ) {
 					super.onPositive ( dialog );
-					LandingActivity.deleteSpecificList ( thisContext );
+					LandingActivity.deleteSpecificList ( thisContext, LandingActivity.currentList.getId () );
 					LandingActivity.mLandingListAdapter.notifyDataSetChanged ();
 					LandingActivity.setUpOnResume ();
 
