@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Activity.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.ListDetailActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
@@ -66,4 +67,10 @@ void listDetailActivity ( Context context, ListModel listModel ) {
 	context.startActivity ( intent );
 }
 
+public static
+void commentActivity ( Context applicationContext ) {
+	Intent intent=new Intent ( applicationContext,CommentActivity.class);
+	intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK );
+	applicationContext.startActivity ( intent );
+}
 }

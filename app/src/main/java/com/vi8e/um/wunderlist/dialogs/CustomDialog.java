@@ -113,7 +113,6 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 public static
 void showDialogDeleteComment ( final Activity thisContext, final CommentAdapter sCommentAdapter, final int currentPosition) {
 
-
 	String title = sCommentAdapter.getItem (currentPosition).getTitle ();
 	Log.d ( "CustomDialog ", title );
 	MaterialDialog diallogDelete = new MaterialDialog.Builder ( thisContext )

@@ -371,8 +371,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3"
-                android:enabled="false"
+                android:id="@+id/editTextBottom"
                 android:layout_centerVertical="true"
                 android:text="Add a comment..."
                 android:layout_toLeftOf="@+id/imageView5"

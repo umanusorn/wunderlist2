@@ -74,7 +74,7 @@ void onCreate ( Bundle savedInstanceState ) {
 		@Override public
 		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
 
-			ActivityUi.setMenuList ( thisActivity, menu );
+			ActivityUi.setMenuComment ( thisActivity, menu );
 			ActivityUi.setActiveList ( ( RelativeLayout ) view, thisContext );
 			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
 

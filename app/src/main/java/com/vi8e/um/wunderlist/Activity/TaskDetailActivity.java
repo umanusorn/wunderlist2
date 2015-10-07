@@ -3,7 +3,6 @@ package com.vi8e.um.wunderlist.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,7 +51,7 @@ android.support.v4.app.FragmentManager sFragmentManager;
 Boolean isStar       = false;
 Boolean showComplete = true;
 
-EditText editTextTitle;
+EditText editTextTitle,editTextBottom;
 public static TaskModel currentTask;
 RelativeLayout noteLayout;
 ImageView      star, checkBoxTask;
@@ -148,6 +147,7 @@ void setView () {
 	calendarLayout = ( RelativeLayout ) findViewById ( R.id.calendatLayout );
 	reminderText = (TextView)findViewById ( R.id.reminder_text_taskDetail );
   bottomRoot =(RelativeLayout)findViewById ( R.id.bottomBarRoot );
+	editTextBottom=(EditText)findViewById ( R.id.editTextBottom );
 }
 
 private
@@ -196,13 +196,23 @@ void setViewValues () {
 		}
 	} );
 	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
+
+	editTextBottom.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			IntentCaller.commentActivity ( TaskDetailActivity.this.getApplicationContext () );
+		}
+	} );
+
+
 	bottomRoot.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			Intent i=new Intent ( getApplicationContext (),CommentActivity.class);
-			startActivity ( i );
+			IntentCaller.commentActivity ( TaskDetailActivity.this.getApplicationContext () );
 		}
 	} );
+
+
 }
 
 @Override

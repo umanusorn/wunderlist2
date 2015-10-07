@@ -37,7 +37,7 @@ public static
 void setActiveToolBar (AppCompatActivity thisActivity,Toolbar toolbar,String title,Context context) {
 
 	//toolbar
-	thisActivity.getSupportActionBar ().setTitle ( title);
+	thisActivity.getSupportActionBar ().setTitle ( title );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.blue_400 ) ) );
 }
 
@@ -52,6 +52,14 @@ public static
 void setMenuList (AppCompatActivity thisActivity,Menu menu) {
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_list_toggle, menu );
+//	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
+
+}
+
+public static
+void setMenuComment (AppCompatActivity thisActivity,Menu menu) {
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_comment_toggle, menu );
 //	mActionBar.setBackgroundDrawable ( new ColorDrawable (sContext.getResources ().getColor ( R.color.blue_300 )) );
 
 }
