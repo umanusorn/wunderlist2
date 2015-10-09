@@ -69,7 +69,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
 	}*/
-	sCommentAdapter=setUpAdapterListView ( listViewSubTask, thisContext );
+	sCommentAdapter = setUpAdapterListView ( listViewSubTask, thisContext );
 	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
 		@Override public
 		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
@@ -84,6 +84,7 @@ void onCreate ( Bundle savedInstanceState ) {
 		}
 	} );
 }
+
 @Override
 public
 boolean onOptionsItemSelected ( MenuItem item ) {
@@ -91,7 +92,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	int id = item.getItemId ();
 	if ( id == R.id.delete ) {
 
-		deleteCurrentComment ( currentListPosition,thisContext,sCommentAdapter );
+		deleteCurrentComment ( currentListPosition, thisContext, sCommentAdapter );
 	}
 
 	setMenuNormal ( thisActivity, menu );
@@ -105,7 +106,7 @@ public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
-	setMenuNormal (thisActivity,menu);
+	setMenuNormal ( thisActivity, menu );
 	return true;
 }
 
@@ -117,11 +118,11 @@ void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
 
 public static
 void deleteCurrentComment ( int position, Context context, CommentAdapter commentAdapter ) {
-	Log.d ( TAG,"pos="+position );
+	Log.d ( TAG, "pos=" + position );
 	TaskCommentSelection selection = new TaskCommentSelection ();
-	CommentModel commentModel=commentAdapter.getItem( position );
-	String id=commentModel.getId ();
-	Log.d ( TAG,"id="+id );
+	CommentModel commentModel = commentAdapter.getItem ( position );
+	String id = commentModel.getId ();
+	Log.d ( TAG, "id=" + id );
 	selection.id ( Long.parseLong ( id ) );
 	selection.delete ( context );
 
@@ -138,9 +139,9 @@ void setCurrentList ( final int position ) {
 	currentList = sCommentAdapter.getItem ( position );
 }
 
-void onClickSend(String title){
+void onClickSend ( String title ) {
 	QueryHelper.addCommentToDB ( thisContext, title, TaskActivity.currentTask.getId () );
-	sCommentAdapter=setUpAdapterListView ( listViewSubTask, thisContext );
+	sCommentAdapter = setUpAdapterListView ( listViewSubTask, thisContext );
 }
 
 public static
@@ -163,7 +164,7 @@ CommentAdapter setUpAdapterListView ( ListView listView, Context context ) {
 	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
 		ContentValues values = allListValues.get ( i );
 
-		Log.d ( TAG,"comment id="+ values.getAsString ( TaskCommentColumns._ID ));
+		Log.d ( TAG, "comment id=" + values.getAsString ( TaskCommentColumns._ID ) );
 		commentAdapter.add ( new CommentModel ( values.getAsString ( TaskCommentColumns.COMMENT_TITLE ),
 		                                        values.getAsString ( TaskCommentColumns.TASK_ID ),
 		                                        values.getAsString ( TaskCommentColumns._ID ),
