@@ -33,6 +33,15 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
 	Button myAccount = (Button)findViewById ( R.id.myAccount );
 	Button signUp = (Button)findViewById ( R.id.signUp );
+	Button testDropbox = (Button)findViewById ( R.id.testDropbox );
+
+	testDropbox.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Intent i=new Intent ( getApplicationContext (),TestDropboxActivity.class);
+			startActivity ( i );
+		}
+	} );
 
 	signUp.setOnClickListener ( new View.OnClickListener () {
 		@Override public

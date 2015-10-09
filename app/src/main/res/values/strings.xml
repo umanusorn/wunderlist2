@@ -22,4 +22,5 @@
     <string name="completed_to_do">COMPLETED TO-DOS</string>
     <string name="add_list">Add List</string>
     <string name="title_activity_comment">CommentActivity</string>
+    <string name="title_activity_dropbox1">Dropbox1</string>
 </resources>
