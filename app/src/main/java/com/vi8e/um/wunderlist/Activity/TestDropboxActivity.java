@@ -49,6 +49,7 @@ import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.utils.dropbox.DownloadRandomPicture;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadPicture;
 
 import java.io.File;
@@ -69,8 +70,8 @@ private static final String TAG = "DBRoulette";
 // Note that this is a really insecure way to do this, and you shouldn't
 // ship code which contains your key & secret in such an obvious way.
 // Obfuscation is good.
-private static final String APP_KEY    = "urms3ujlmzwo6wg";
-private static final String APP_SECRET = "u56f3mp7druybs5";
+private static final String APP_KEY    = "u3o287hb9hajkmb";
+private static final String APP_SECRET = "b8obs2bppkgrlsu";
 
 ///////////////////////////////////////////////////////////////////////////
 //                      End app-specific settings.                       //
@@ -181,12 +182,12 @@ void onCreate ( Bundle savedInstanceState ) {
         // This is the button to take a photo
         mRoulette = (Button)findViewById(R.id.roulette_button);
 
-       /* mRoulette.setOnClickListener(new OnClickListener() {
+        mRoulette.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                DownloadRandomPicture download = new DownloadRandomPicture(DBRoulette.this, mApi, PHOTO_DIR, mImage);
+                DownloadRandomPicture download = new DownloadRandomPicture(TestDropboxActivity.this, mApi, PHOTO_DIR, mImage);
                 download.execute();
             }
-        });*/
+        });
 
         // Display the proper UI state if logged in or not
         setLoggedIn(mApi.getSession().isLinked());
@@ -236,7 +237,7 @@ void onCreate ( Bundle savedInstanceState ) {
                     uri = Uri.fromFile(new File(mCameraFileName));
                 }
                 File file = new File(mCameraFileName);
-
+								Log.d ( TAG,"before upload" );
                 if (uri != null) {
                     UploadPicture upload = new UploadPicture(this, mApi, PHOTO_DIR, file);
                     upload.execute();
