@@ -34,6 +34,18 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button myAccount = (Button)findViewById ( R.id.myAccount );
 	Button signUp = (Button)findViewById ( R.id.signUp );
 	Button testDropbox = (Button)findViewById ( R.id.testDropbox );
+	Button multiImgChooser = (Button)findViewById ( R.id.multiImgChooser );
+
+	multiImgChooser.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			Intent intent = new Intent();
+			intent.setType("image/*");
+			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+			intent.setAction(Intent.ACTION_GET_CONTENT);
+			startActivityForResult(Intent.createChooser(intent,"Select Picture"), 1);
+		}
+	} );
 
 	testDropbox.setOnClickListener ( new View.OnClickListener () {
 		@Override public

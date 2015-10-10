@@ -26,10 +26,7 @@
 
 package com.vi8e.um.wunderlist.utils.dropbox;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -63,7 +60,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
     private long mFileLen;
     private UploadRequest mRequest;
     private Context mContext;
-    private final ProgressDialog mDialog;
+   // private final ProgressDialog mDialog;
 
     private String mErrorMsg;
 
@@ -79,7 +76,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
         mPath = dropboxPath;
         mFile = file;
 
-        mDialog = new ProgressDialog(context);
+        /*mDialog = new ProgressDialog(context);
         mDialog.setMax(100);
         mDialog.setMessage("Uploading " + file.getName());
         mDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -91,7 +88,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
                 mRequest.abort();
             }
         });
-        mDialog.show();
+        mDialog.show();*/
     }
 
     @Override
@@ -167,12 +164,12 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
     @Override
     protected void onProgressUpdate(Long... progress) {
         int percent = (int)(100.0*(double)progress[0]/mFileLen + 0.5);
-        mDialog.setProgress(percent);
+        //mDialog.setProgress(percent);
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
-        mDialog.dismiss();
+        //mDialog.dismiss();
         if (result) {
             showToast("Image successfully uploaded");
         } else {
