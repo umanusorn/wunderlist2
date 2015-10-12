@@ -3,9 +3,11 @@ package com.vi8e.um.wunderlist.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -35,7 +37,10 @@ import com.vi8e.um.wunderlist.utils.Utility;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+
+import nl.changer.polypicker.ImagePickerActivity;
 
 
 public
@@ -60,7 +65,9 @@ RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
 RelativeLayout bottomRoot;
 public static TextView reminderText;
+private static final int INTENT_REQUEST_GET_IMAGES = 1130;
 
+HashSet<Uri> mMedia = new HashSet<Uri> ();
 
 @Override
 protected
@@ -99,8 +106,8 @@ void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText,
 		ReminderDialog.setTextViewReminder ( date, reminderText, context );
 	}
 	else {
-		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ));
-		UiMng.setBlackText ( context,reminderText );
+		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ) );
+		UiMng.setBlackText ( context, reminderText );
 	}
 }
 
@@ -214,6 +221,36 @@ void setViewValues () {
 
 
 }
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	super.onActivityResult(requestCode, resultCode, intent);
+
+	if (resultCode == Activity.RESULT_OK) {
+		if (requestCode == INTENT_REQUEST_GET_IMAGES) {
+			Parcelable[] parcelableUris = intent.getParcelableArrayExtra( ImagePickerActivity.EXTRA_IMAGE_URIS);
+
+			if (parcelableUris == null) {
+				return;
+			}
+
+			// Java doesn't allow array casting, this is a little hack
+			Uri[] uris = new Uri[parcelableUris.length];
+			System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
+
+			if (uris != null) {
+				for (Uri uri : uris) {
+					Log.i(TAG, " uri: " + uri);
+					mMedia.add(uri);
+				}
+
+				//showMedia();
+			}
+		}
+	}
+}
+
+
 
 @Override
 protected

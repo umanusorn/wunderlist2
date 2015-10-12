@@ -11,10 +11,26 @@ import android.widget.Button;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
+import nl.changer.polypicker.Config;
+import nl.changer.polypicker.ImagePickerActivity;
+
 
 public
 class DeveloperActivity extends Activity {
 Activity mActivity;
+private static final int INTENT_REQUEST_GET_IMAGES = 1130;
+
+private void getImages() {
+	Intent intent = new Intent(this, ImagePickerActivity.class);
+	Config config = new Config.Builder()
+			.setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
+			.setTabSelectionIndicatorColor(R.color.blue)
+			.setCameraButtonColor(R.color.green)
+			.setSelectionLimit(2)    // set photo selection limit. Default unlimited selection.
+			.build();
+	ImagePickerActivity.setConfig ( config );
+	startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
+}
 
 @Override
 protected
@@ -39,13 +55,17 @@ void onCreate ( Bundle savedInstanceState ) {
 	multiImgChooser.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Intent intent = new Intent();
-			intent.setType("image/*");
+		/*	Intent intent = new Intent();
+			intent.setType("image*//*");
 			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 			intent.setAction(Intent.ACTION_GET_CONTENT);
-			startActivityForResult(Intent.createChooser(intent,"Select Picture"), 1);
+			startActivityForResult(Intent.createChooser(intent,"Select Picture"), 1);*/
+
+			getImages ();
 		}
 	} );
+
+
 
 	testDropbox.setOnClickListener ( new View.OnClickListener () {
 		@Override public

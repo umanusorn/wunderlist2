@@ -34,8 +34,18 @@ import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.DropboxAPI.UploadRequest;
+import com.dropbox.client2.ProgressListener;
+import com.dropbox.client2.exception.DropboxException;
+import com.dropbox.client2.exception.DropboxFileSizeException;
+import com.dropbox.client2.exception.DropboxIOException;
+import com.dropbox.client2.exception.DropboxParseException;
+import com.dropbox.client2.exception.DropboxPartialFileException;
+import com.dropbox.client2.exception.DropboxServerException;
+import com.dropbox.client2.exception.DropboxUnlinkedException;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -55,9 +65,11 @@ private ProgressDialog mDialog;
 private String mErrorMsg;
 
 //new class variables:
-private int    mFilesUploaded;
-private File[] mFilesToUpload;
-private int    mCurrentFileIndex;
+private int     mFilesUploaded;
+private File[]  mFilesToUpload;
+private File[]  mToBeUploaded;
+private int     mCurrentFileIndex;
+private boolean isCancelled=false;
 
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
@@ -84,8 +96,9 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 	} );
 	mDialog.show ();
 }
+
 //// TODO: 10/10/2015
-/*@Override
+@Override
 protected
 Boolean doInBackground ( Void... params ) {
 	try {
@@ -121,12 +134,13 @@ Boolean doInBackground ( Void... params ) {
 
 			mRequest.upload();
 //// TODO: 10/10/2015
-			*//*if(!isCancelled) {
+
+			if(!isCancelled) {
 				mFilesUploaded++;
 			}
 			else {
 				return false;
-			}*//*
+			}
 
 
 		}
@@ -173,7 +187,7 @@ Boolean doInBackground ( Void... params ) {
 	} catch (FileNotFoundException e) {
 	}
 	return false;
-}*/
+}
 
 @Override
 protected void onProgressUpdate(Long... progress) {
@@ -191,11 +205,6 @@ protected void onProgressUpdate(Long... progress) {
 //// TODO: 10/10/2015
 //	mDialog.setMessage("Uploading file " + (mCurrentFileIndex+1) + " / " + filesToUpload.length);
 	mDialog.setProgress( ( int ) ((bytesUploaded / totalBytes) * 100) );
-}
-
-@Override protected
-Boolean doInBackground ( Void... params ) {
-	return null;
 }
 
 @Override
