@@ -28,7 +28,6 @@ package com.vi8e.um.wunderlist.utils.dropbox;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -81,9 +80,10 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 	//set number of files uploaded to zero.
 	mFilesUploaded = 0;
 	mFilesToUpload = filesToUpload;
+	mToBeUploaded =mFilesToUpload;
 	mCurrentFileIndex = 0;
 
-	mDialog = new ProgressDialog ( context );
+	/*mDialog = new ProgressDialog ( context );
 	mDialog.setMax ( 100 );
 	mDialog.setMessage ( "Uploading file 1 / " + filesToUpload.length );
 	mDialog.setProgressStyle ( ProgressDialog.STYLE_HORIZONTAL );
@@ -94,7 +94,7 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 			cancel ( true );
 		}
 	} );
-	mDialog.show ();
+	mDialog.show ();*/
 }
 
 //// TODO: 10/10/2015

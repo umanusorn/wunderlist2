@@ -27,9 +27,9 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView3"
-            android:layout_toRightOf="@+id/imageView3"
-            android:layout_toEndOf="@+id/imageView3"
+            android:layout_alignTop="@+id/upload"
+            android:layout_toRightOf="@+id/upload"
+            android:layout_toEndOf="@+id/upload"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_centerVertical="true" android:id="@+id/linearLayout"/>
@@ -72,7 +72,7 @@
             android:layout_centerVertical="true"
             android:text="Add a comment..."
             android:layout_toStartOf="@+id/sendComment"
-            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toRightOf="@+id/upload"
             />
     <TextView
             android:layout_width="wrap_content"
