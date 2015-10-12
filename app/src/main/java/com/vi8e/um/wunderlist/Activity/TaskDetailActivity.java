@@ -307,7 +307,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
 				for (Uri uri : uris) {
 					Log.i ( TAG, " uri: " + uri );
 					mMedia.add ( uri );
-					files[i++]=new File ( uri.getPath () );
+					files[i]=new File ( uri.toString () );
+					Log.d ( TAG,"files="+files[i].toString () );
+					i++;
+
 				}
 				UploadMultiPictures uploadMultiPictures=new UploadMultiPictures ( sContext, mApi, PHOTO_DIR,files);
 				uploadMultiPictures.execute (  );

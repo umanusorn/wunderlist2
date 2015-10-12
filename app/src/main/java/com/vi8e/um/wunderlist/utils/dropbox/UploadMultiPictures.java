@@ -52,7 +52,8 @@ import java.io.FileNotFoundException;
  * typical exception handling and flow of control for an app that uploads a
  * file from Dropbox.
  */
-public class UploadMultiPictures  extends AsyncTask<Void, Long, Boolean> {
+public
+class UploadMultiPictures extends AsyncTask<Void, Long, Boolean> {
 
 private DropboxAPI<?> mApi;
 private String        mPath;
@@ -64,11 +65,11 @@ private ProgressDialog mDialog;
 private String mErrorMsg;
 
 //new class variables:
-private int     mFilesUploaded;
-private File[]  mFilesToUpload;
-private File[]  mToBeUploaded;
-private int     mCurrentFileIndex;
-private boolean isCancelled=false;
+private int    mFilesUploaded;
+private File[] mFilesToUpload;
+private File[] mToBeUploaded;
+private int    mCurrentFileIndex;
+private boolean isCancelled = false;
 
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
@@ -79,8 +80,9 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 
 	//set number of files uploaded to zero.
 	mFilesUploaded = 0;
+	mFilesUploaded=0;
 	mFilesToUpload = filesToUpload;
-	mToBeUploaded =mFilesToUpload;
+	mToBeUploaded = mFilesToUpload;
 	mCurrentFileIndex = 0;
 
 	/*mDialog = new ProgressDialog ( context );
@@ -130,12 +132,12 @@ Boolean doInBackground ( Void... params ) {
 						                                          publishProgress ( bytes );
 					                                          }
 				                                          }
-			                                        });
+			                                          } );
 
-			mRequest.upload();
+			mRequest.upload ();
 //// TODO: 10/10/2015
 
-			if(!isCancelled) {
+			if ( ! isCancelled ) {
 				mFilesUploaded++;
 			}
 			else {
@@ -145,53 +147,66 @@ Boolean doInBackground ( Void... params ) {
 
 		}
 		return true;
-	} catch (DropboxUnlinkedException e) {
+	}
+	catch ( DropboxUnlinkedException e ) {
 		// This session wasn't authenticated properly or user unlinked
 		mErrorMsg = "This app wasn't authenticated properly.";
-	} catch (DropboxFileSizeException e) {
+	}
+	catch ( DropboxFileSizeException e ) {
 		// File size too big to upload via the API
 		mErrorMsg = "This file is too big to upload";
-	} catch (DropboxPartialFileException e) {
+	}
+	catch ( DropboxPartialFileException e ) {
 		// We canceled the operation
 		mErrorMsg = "Upload canceled";
-	} catch (DropboxServerException e) {
+	}
+	catch ( DropboxServerException e ) {
 		// Server-side exception.  These are examples of what could happen,
 		// but we don't do anything special with them here.
-		if (e.error == DropboxServerException._401_UNAUTHORIZED) {
+		if ( e.error == DropboxServerException._401_UNAUTHORIZED ) {
 			// Unauthorized, so we should unlink them.  You may want to
 			// automatically log the user out in this case.
-		} else if (e.error == DropboxServerException._403_FORBIDDEN) {
+		}
+		else if ( e.error == DropboxServerException._403_FORBIDDEN ) {
 			// Not allowed to access this
-		} else if (e.error == DropboxServerException._404_NOT_FOUND) {
+		}
+		else if ( e.error == DropboxServerException._404_NOT_FOUND ) {
 			// path not found (or if it was the thumbnail, can't be
 			// thumbnailed)
-		} else if (e.error == DropboxServerException._507_INSUFFICIENT_STORAGE) {
+		}
+		else if ( e.error == DropboxServerException._507_INSUFFICIENT_STORAGE ) {
 			// user is over quota
-		} else {
+		}
+		else {
 			// Something else
 		}
 		// This gets the Dropbox error, translated into the user's language
 		mErrorMsg = e.body.userError;
-		if (mErrorMsg == null) {
+		if ( mErrorMsg == null ) {
 			mErrorMsg = e.body.error;
 		}
-	} catch (DropboxIOException e) {
+	}
+	catch ( DropboxIOException e ) {
 		// Happens all the time, probably want to retry automatically.
 		mErrorMsg = "Network error.  Try again.";
-	} catch (DropboxParseException e) {
+	}
+	catch ( DropboxParseException e ) {
 		// Probably due to Dropbox server restarting, should retry
 		mErrorMsg = "Dropbox error.  Try again.";
-	} catch (DropboxException e) {
+	}
+	catch ( DropboxException e ) {
 		// Unknown error
 		mErrorMsg = "Unknown error.  Try again.";
-	} catch (FileNotFoundException e) {
+	}
+	catch ( FileNotFoundException e ) {
 	}
 	return false;
 }
 
 @Override
-protected void onProgressUpdate(Long... progress) {
-	Long totalBytes = Long.valueOf ( 0 );
+protected
+void onProgressUpdate ( Long... progress ) {
+	/*Long totalBytes = Long.valueOf ( 0 );
 	Long bytesUploaded = Long.valueOf ( 0 );
 	for(int i=0;i<mFilesToUpload.length;i++) {
 		Long bytes = mFilesToUpload[i].length();
@@ -204,21 +219,24 @@ protected void onProgressUpdate(Long... progress) {
 	bytesUploaded += progress[0];
 //// TODO: 10/10/2015
 //	mDialog.setMessage("Uploading file " + (mCurrentFileIndex+1) + " / " + filesToUpload.length);
-	mDialog.setProgress( ( int ) ((bytesUploaded / totalBytes) * 100) );
+	mDialog.setProgress( ( int ) ((bytesUploaded / totalBytes) * 100) );*/
 }
 
 @Override
-protected void onPostExecute(Boolean result) {
-	mDialog.dismiss();
-	if (result) {
-		showToast("Image successfully uploaded");
-	} else {
-		showToast(mErrorMsg);
+protected
+void onPostExecute ( Boolean result ) {
+	mDialog.dismiss ();
+	if ( result ) {
+		showToast ( "Image successfully uploaded" );
+	}
+	else {
+		showToast ( mErrorMsg );
 	}
 }
 
-private void showToast(String msg) {
-	Toast error = Toast.makeText(mContext, msg, Toast.LENGTH_LONG);
-	error.show();
+private
+void showToast ( String msg ) {
+	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
+	error.show ();
 }
 }
