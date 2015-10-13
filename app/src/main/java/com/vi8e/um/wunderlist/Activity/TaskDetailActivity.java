@@ -38,6 +38,7 @@ import com.vi8e.um.wunderlist.dialogs.ReminderDialog;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
+import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.UiMng;
@@ -302,13 +303,14 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
 			System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
 			File[] files =new File[ parcelableUris.length];
 			if (uris != null) {
-
+				SessionManagement session;
+				session=new SessionManagement (getApplicationContext());
 				int i=0;
 				for (Uri uri : uris) {
 					Log.i ( TAG, " uri: " + uri );
 					mMedia.add ( uri );
 					files[i]=new File ( uri.toString () );
-					Log.d ( TAG,"files="+files[i].toString () );
+					//Log.d ( TAG,"files="+files[i].toString () );
 					i++;
 
 				}

@@ -29,6 +29,7 @@ package com.vi8e.um.wunderlist.utils.dropbox;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -116,27 +117,8 @@ Boolean doInBackground ( Void... params ) {
 			// so we can cancel it later if we want to
 			FileInputStream fis = new FileInputStream ( file );
 			String path = mPath + file.getName ();
-			mRequest = mApi.putFileOverwriteRequest ( path, fis, file.length (),
-			                                          new ProgressListener () {
-				                                          @Override
-				                                          public
-				                                          long progressInterval () {
-					                                          // Update the progress bar every half-second or so
-					                                          return 500;
-				                                          }
+			mRequest = mApi.putFileRequest ( path, fis, file.length (), null, true, getUploadProgressListener () );
 
-				                                          @Override
-				                                          public
-				                                          void onProgress ( long bytes, long total ) {
-					                                          if ( isCancelled () ) {
-						                                          // This will cancel the putFile operation
-						                                          mRequest.abort ();
-					                                          }
-					                                          else {
-						                                          publishProgress ( bytes );
-					                                          }
-				                                          }
-			                                          } );
 
 			mRequest.upload ();
 //// TODO: 10/10/2015
@@ -207,6 +189,42 @@ Boolean doInBackground ( Void... params ) {
 	return false;
 }
 
+@NonNull public
+ProgressListener getUploadProgressListener () {
+	return new ProgressListener () {
+		@Override
+		public
+		void onProgress ( long bytes, long total ) {
+			if ( isCancelled () ) {
+				// This will cancel the putFile operation
+				mRequest.abort ();
+			}
+			else {
+				publishProgress ( bytes );
+			}
+		}
+
+		@Override
+		public
+		long progressInterval () {
+			// Update the progress bar every half-second or so
+			return 500;
+		}
+	};
+}
+
+@Override
+protected
+void onPostExecute ( Boolean result ) {
+//	mDialog.dismiss ();
+	if ( result ) {
+		showToast ( "Image successfully uploaded" );
+	}
+	else {
+		showToast ( mErrorMsg );
+	}
+}
+
 @Override
 protected
 void onProgressUpdate ( Long... progress ) {
@@ -224,18 +242,6 @@ void onProgressUpdate ( Long... progress ) {
 //// TODO: 10/10/2015
 //	mDialog.setMessage("Uploading file " + (mCurrentFileIndex+1) + " / " + filesToUpload.length);
 	mDialog.setProgress( ( int ) ((bytesUploaded / totalBytes) * 100) );*/
-}
-
-@Override
-protected
-void onPostExecute ( Boolean result ) {
-//	mDialog.dismiss ();
-	if ( result ) {
-		showToast ( "Image successfully uploaded" );
-	}
-	else {
-		showToast ( mErrorMsg );
-	}
 }
 
 private
