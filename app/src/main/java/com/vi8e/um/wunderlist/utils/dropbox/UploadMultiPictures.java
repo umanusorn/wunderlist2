@@ -229,7 +229,7 @@ void onProgressUpdate ( Long... progress ) {
 @Override
 protected
 void onPostExecute ( Boolean result ) {
-	mDialog.dismiss ();
+//	mDialog.dismiss ();
 	if ( result ) {
 		showToast ( "Image successfully uploaded" );
 	}
