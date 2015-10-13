@@ -135,7 +135,8 @@ void setToolBar ( Toolbar toolbar ) {
 		getSupportActionBar ().setTitle ( LandingActivity.currentList.getTitle () );
 		toolbar.setTitle (  LandingActivity.currentList.getTitle ());
 	}catch ( Exception e ){
-		Log.e (TAG,e.getMessage ()  );
+		Log.e (TAG,e.toString () );
+
 	}
 
 

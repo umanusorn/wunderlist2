@@ -29,6 +29,7 @@ package com.vi8e.um.wunderlist.utils.dropbox;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
@@ -70,6 +71,7 @@ private File[] mFilesToUpload;
 private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
 private boolean isCancelled = false;
+public static final String TAG = "UploadMulti";
 
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
@@ -80,7 +82,7 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 
 	//set number of files uploaded to zero.
 	mFilesUploaded = 0;
-	mFilesUploaded=0;
+	mFilesUploaded = 0;
 	mFilesToUpload = filesToUpload;
 	mToBeUploaded = mFilesToUpload;
 	mCurrentFileIndex = 0;
@@ -104,10 +106,12 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 protected
 Boolean doInBackground ( Void... params ) {
 	try {
+
+		Log.d ( TAG, "files num=" + mToBeUploaded.length );
 		for ( int i = 0 ; i < mToBeUploaded.length ; i++ ) {
 			mCurrentFileIndex = i;
 			File file = mToBeUploaded[ i ];
-
+			Log.d ( TAG, "loop=" + i );
 			// By creating a request, we get a handle to the putFile operation,
 			// so we can cancel it later if we want to
 			FileInputStream fis = new FileInputStream ( file );

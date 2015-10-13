@@ -107,7 +107,7 @@ private static final boolean USE_OAUTH1 = false;
 DropboxAPI<AndroidAuthSession> mApi;
 
 private boolean mLoggedIn;
-public static final int MAX_SELECTED_FILES = 2000;
+public static final int MAX_IMGS_SELECTION = 15;
 
 @Override
 protected
@@ -123,7 +123,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	AndroidAuthSession session = buildSession ();
 	mApi = new DropboxAPI<AndroidAuthSession> ( session );
 
-	mApi.getSession ().startOAuth2Authentication ( TaskDetailActivity.this );
+	//mApi.getSession ().startOAuth2Authentication ( TaskDetailActivity.this );
 
 	getWindow ().setSoftInputMode (
 			WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -208,7 +208,7 @@ private void getImages() {
 			.setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
 			.setTabSelectionIndicatorColor(R.color.blue)
 			.setCameraButtonColor(R.color.green)
-			.setSelectionLimit(2)    // set photo selection limit. Default unlimited selection.
+			.setSelectionLimit( MAX_IMGS_SELECTION )    // set photo selection limit. Default unlimited selection.
 			.build();
 	ImagePickerActivity.setConfig ( config );
 	startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
@@ -300,7 +300,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
 			// Java doesn't allow array casting, this is a little hack
 			Uri[] uris = new Uri[parcelableUris.length];
 			System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
-			File[] files =new File[ MAX_SELECTED_FILES ];
+			File[] files =new File[ parcelableUris.length];
 			if (uris != null) {
 
 				int i=0;
