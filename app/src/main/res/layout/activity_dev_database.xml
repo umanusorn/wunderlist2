@@ -251,8 +251,8 @@
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dropbox"
-                        android:id="@+id/testDropbox" android:layout_column="0"/>
+                        android:text="LinkDropbox"
+                        android:id="@+id/linkDropbox" android:layout_column="0"/>
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

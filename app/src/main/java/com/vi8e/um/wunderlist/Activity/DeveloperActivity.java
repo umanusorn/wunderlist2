@@ -49,7 +49,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
 	Button myAccount = (Button)findViewById ( R.id.myAccount );
 	Button signUp = (Button)findViewById ( R.id.signUp );
-	Button testDropbox = (Button)findViewById ( R.id.testDropbox );
+	Button testDropbox = (Button)findViewById ( R.id.linkDropbox );
 	Button multiImgChooser = (Button)findViewById ( R.id.multiImgChooser );
 
 	multiImgChooser.setOnClickListener ( new View.OnClickListener () {
@@ -70,7 +70,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	testDropbox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Intent i=new Intent ( getApplicationContext (),TestDropboxActivity.class);
+			Intent i=new Intent ( getApplicationContext (),LoginDropboxActivity.class);
 			startActivity ( i );
 		}
 	} );

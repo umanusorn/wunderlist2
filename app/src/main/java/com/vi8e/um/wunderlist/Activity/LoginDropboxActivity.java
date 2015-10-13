@@ -39,8 +39,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
@@ -49,7 +47,6 @@ import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.utils.dropbox.DownloadRandomPicture;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadPicture;
 
 import java.io.File;
@@ -59,7 +56,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class TestDropboxActivity extends Activity {
+public class LoginDropboxActivity extends Activity {
 private static final String TAG = "DBRoulette";
 
 ///////////////////////////////////////////////////////////////////////////
@@ -90,11 +87,6 @@ private boolean mLoggedIn;
 
 // Android widgets
 private Button       mSubmit;
-private LinearLayout mDisplay;
-private Button       mPhoto;
-private Button       mRoulette;
-
-private ImageView mImage;
 
 private final String PHOTO_DIR = "/Photos/";
 
@@ -116,85 +108,66 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	// Basic Android widgets
 	setContentView ( R.layout.activity_test_dropbox );
-
 	checkAppKeySetup ();
-
 	mSubmit = ( Button ) findViewById ( R.id.auth_button );
-
 	mSubmit.setOnClickListener ( new OnClickListener () {
 		public
 		void onClick ( View v ) {
-			// This logs you out if you're logged in, or vice versa
-			if ( mLoggedIn ) {
-				logOut ();
-			}
-			else {
-				// Start the remote authentication
-				if ( USE_OAUTH1 ) {
-					mApi.getSession ().startAuthentication ( TestDropboxActivity.this );
-				}
-				else {
-					mApi.getSession ().startOAuth2Authentication ( TestDropboxActivity.this );
-				}
-			}
+			toggleLoginDropbox ();
 		}
 	} );
-
-	mDisplay = ( LinearLayout ) findViewById ( R.id.logged_in_display );
-
-	// This is where a photo is displayed
-	mImage = ( ImageView ) findViewById ( R.id.image_view );
-
-	// This is the button to take a photo
-	mPhoto = ( Button ) findViewById ( R.id.photo_button );
-
-	mPhoto.setOnClickListener ( new OnClickListener () {
-		public
-		void onClick ( View v ) {
-			Intent intent = new Intent ();
-			// Picture from camera
-			intent.setAction ( MediaStore.ACTION_IMAGE_CAPTURE );
-
-			// This is not the right way to do this, but for some reason, having
-			// it store it in
-			// MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
-
-			Date date = new Date ();
-			DateFormat df = new SimpleDateFormat ( "yyyy-MM-dd-kk-mm-ss", Locale.US );
-
-			String newPicFile = df.format ( date ) + ".jpg";
-			String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
-                File outFile = new File(outPath);
-
-                mCameraFileName = outFile.toString();
-                Uri outuri = Uri.fromFile(outFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
-                Log.i(TAG, "Importing New Picture: " + mCameraFileName);
-                try {
-                    startActivityForResult(intent, NEW_PICTURE);
-                } catch (ActivityNotFoundException e) {
-                    showToast("There doesn't seem to be a camera.");
-                }
-            }
-        });
-
-
-        // This is the button to take a photo
-        mRoulette = (Button)findViewById(R.id.roulette_button);
-
-        mRoulette.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                DownloadRandomPicture download = new DownloadRandomPicture(TestDropboxActivity.this, mApi, PHOTO_DIR, mImage);
-                download.execute();
-            }
-        });
 
         // Display the proper UI state if logged in or not
         setLoggedIn(mApi.getSession().isLinked());
 
     }
 
-    @Override
+public
+void toggleLoginDropbox () {
+// This logs you out if you're logged in, or vice versa
+	if ( mLoggedIn ) {
+		logOut ();
+	}
+	else {
+		// Start the remote authentication
+		if ( USE_OAUTH1 ) {
+			mApi.getSession ().startAuthentication ( LoginDropboxActivity.this );
+		}
+		else {
+			mApi.getSession ().startOAuth2Authentication ( LoginDropboxActivity.this );
+		}
+	}
+}
+
+public
+void uploadViaCamera () {
+	Intent intent = new Intent ();
+	// Picture from camera
+	intent.setAction ( MediaStore.ACTION_IMAGE_CAPTURE );
+
+	// This is not the right way to do this, but for some reason, having
+	// it store it in
+	// MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
+
+	Date date = new Date ();
+	DateFormat df = new SimpleDateFormat ( "yyyy-MM-dd-kk-mm-ss", Locale.US );
+
+	String newPicFile = df.format ( date ) + ".jpg";
+	String outPath = new File ( Environment.getExternalStorageDirectory (), newPicFile).getPath();
+	File outFile = new File(outPath);
+
+	mCameraFileName = outFile.toString();
+	Uri outuri = Uri.fromFile(outFile);
+	intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
+	Log.i ( TAG, "Importing New Picture: " + mCameraFileName );
+	try {
+	    startActivityForResult(intent, NEW_PICTURE);
+	} catch (ActivityNotFoundException e) {
+	    showToast("There doesn't seem to be a camera.");
+	}
+}
+
+@Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("mCameraFileName", mCameraFileName);
         super.onSaveInstanceState(outState);
@@ -265,12 +238,10 @@ void onCreate ( Bundle savedInstanceState ) {
     private void setLoggedIn(boolean loggedIn) {
     	mLoggedIn = loggedIn;
     	if (loggedIn) {
-    		mSubmit.setText("Unlink from Dropbox");
-            mDisplay.setVisibility(View.VISIBLE);
+    		mSubmit.setText ( "Unlink from Dropbox" );
+            //mDisplay.setVisibility(View.VISIBLE);
     	} else {
     		mSubmit.setText("Link with Dropbox");
-            mDisplay.setVisibility(View.GONE);
-            mImage.setImageDrawable(null);
     	}
     }
 
