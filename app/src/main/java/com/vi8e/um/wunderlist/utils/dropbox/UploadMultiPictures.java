@@ -27,9 +27,11 @@
 package com.vi8e.um.wunderlist.utils.dropbox;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.NotificationCompat;
@@ -79,9 +81,9 @@ private int    mCurrentFileIndex;
 private             boolean isCancelled = false;
 public static final String  TAG         = "UploadMulti";
 
-Integer notificationID = 100;
-
-NotificationManager notificationManager;
+Integer NOTIFICATION_ID = 100;
+NotificationManager mNotifyManager;
+final NotificationCompat.Builder mBuilder;
 
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
@@ -92,10 +94,22 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 
 	//set number of files uploaded to zero.
 	mFilesUploaded = 0;
-	mFilesUploaded = 0;
 	mFilesToUpload = filesToUpload;
 	mToBeUploaded = mFilesToUpload;
 	mCurrentFileIndex = 0;
+
+	mNotifyManager =
+			( NotificationManager ) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
+	Intent intent = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
+	PendingIntent pIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
+
+
+	mBuilder = new NotificationCompat.Builder ( TaskDetailActivity.thisActivity );
+	mBuilder.setContentTitle ( "Uploading pictures to the server" )
+	        .setContentText ( "Upload in progress" )
+	        .setAutoCancel ( true )
+	        .addAction ( R.drawable.ic_action_delete, "Call", pIntent )
+	        .setSmallIcon ( R.drawable.ic_action_accept );
 
 	//showUploadProgressDialog ( filesToUpload );
 }
@@ -230,8 +244,8 @@ ProgressListener getUploadProgressListener () {
 @Override
 protected
 void onPostExecute ( Boolean result ) {
-	//notificationManager
-	mDialog.dismiss ();
+	mNotifyManager.cancel ( NOTIFICATION_ID );
+//	mDialog.dismiss ();
 	if ( result ) {
 		showToast ( "Image successfully uploaded" );
 	}
@@ -243,44 +257,40 @@ void onPostExecute ( Boolean result ) {
 @Override
 protected
 void onProgressUpdate ( Long... progress ) {
-	NotificationManager mNotifyManager;
-	final NotificationCompat.Builder mBuilder;
-	mNotifyManager =
-			(NotificationManager) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
-	mBuilder = new NotificationCompat.Builder(TaskDetailActivity.thisActivity);
-	mBuilder.setContentTitle("Uploading pictures to the server")
-	        .setContentText("Upload in progress")
-	        .setSmallIcon( R.drawable.ic_action_accept);
+
+
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
 	mBuilder.setCategory ( NotificationCompat.CATEGORY_PROGRESS );
-	new Thread(
-			new Runnable() {
+	new Thread (
+			new Runnable () {
 				@Override
-				public void run() {
+				public
+				void run () {
 					int increase;
 					// Do the "lengthy" operation 20 times
-					for (increase = 0; increase <= 100; increase+=5) {
+					for ( increase = 0; increase <= 100 ; increase += 5 ) {
 						// Sets the progress indicator to a max value, the
 						// current completion percentage, and "determinate"
 						// state
-						mBuilder.setProgress(100, increase, false);
+						mBuilder.setProgress ( 100, increase, false );
 						// Displays the progress bar for the first time.
 						finalMNotifyManager.notify ( 0, mBuilder.build () );
 						// Sleeps the thread, simulating an operation
 						// that takes time
 						try {
 							// Sleep for 5 seconds
-							Thread.sleep(5*1000);
-						} catch (InterruptedException e) {
-							Log.d(TAG, "sleep failure");
+							Thread.sleep ( 5 * 1000 );
+						}
+						catch ( InterruptedException e ) {
+							Log.d ( TAG, "sleep failure" );
 						}
 					}
 					// When the loop is finished, updates the notification
-					mBuilder.setContentText("Upload complete")
+					mBuilder.setContentText ( "Upload complete" )
 							// Removes thje progress bar
 							.setProgress ( 0, 0, false );
-					finalMNotifyManager.notify ( notificationID, mBuilder.build () );
+					finalMNotifyManager.notify ( NOTIFICATION_ID, mBuilder.build () );
 				}
 			}
 // Starts the thread by calling the run() method in its Runnable
@@ -293,18 +303,18 @@ private static
 void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
 	Long totalBytes = Long.valueOf ( 0 );
 	Long bytesUploaded = Long.valueOf ( 0 );
-	for(int i=0;i< filesToUpload.length;i++) {
-		Long bytes = filesToUpload[i].length();
+	for ( int i = 0 ; i < filesToUpload.length ; i++ ) {
+		Long bytes = filesToUpload[ i ].length ();
 		totalBytes += bytes;
 
-		if(i < currentFileIndex ) {
+		if ( i < currentFileIndex ) {
 			bytesUploaded += bytes;
 		}
 	}
-	bytesUploaded += progress[0];
+	bytesUploaded += progress[ 0 ];
 
-	dialog.setMessage("Uploading file " + ( currentFileIndex +1) + " / " + filesToUpload.length);
-	dialog.setProgress( ( int ) ((bytesUploaded / totalBytes) * 100) );
+	dialog.setMessage ( "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length );
+	dialog.setProgress ( ( int ) ( ( bytesUploaded / totalBytes ) * 100 ) );
 }
 
 private
