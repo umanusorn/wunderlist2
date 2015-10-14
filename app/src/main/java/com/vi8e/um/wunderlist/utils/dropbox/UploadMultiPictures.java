@@ -158,7 +158,6 @@ Boolean doInBackground ( Void... params ) {
 				return false;
 			}
 
-
 		}
 		return true;
 	}
@@ -232,12 +231,12 @@ ProgressListener getUploadProgressListener () {
 			}
 		}
 
-		@Override
+		/*@Override
 		public
 		long progressInterval () {
 			// Update the progress bar every half-second or so
 			return 500;
-		}
+		}*/
 	};
 }
 
@@ -275,7 +274,7 @@ void onProgressUpdate ( Long... progress ) {
 						// state
 						mBuilder.setProgress ( 100, increase, false );
 						// Displays the progress bar for the first time.
-						finalMNotifyManager.notify ( 0, mBuilder.build () );
+						finalMNotifyManager.notify ( NOTIFICATION_ID, mBuilder.build () );
 						// Sleeps the thread, simulating an operation
 						// that takes time
 						try {
@@ -299,6 +298,12 @@ void onProgressUpdate ( Long... progress ) {
 	//updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
 }
 
+private
+void showToast ( String msg ) {
+	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
+	error.show ();
+}
+
 private static
 void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
 	Long totalBytes = Long.valueOf ( 0 );
@@ -315,11 +320,5 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 
 	dialog.setMessage ( "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length );
 	dialog.setProgress ( ( int ) ( ( bytesUploaded / totalBytes ) * 100 ) );
-}
-
-private
-void showToast ( String msg ) {
-	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
-	error.show ();
 }
 }
