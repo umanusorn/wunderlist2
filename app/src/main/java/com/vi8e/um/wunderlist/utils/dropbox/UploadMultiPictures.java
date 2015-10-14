@@ -97,6 +97,11 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 	mToBeUploaded = mFilesToUpload;
 	mCurrentFileIndex = 0;
 
+	//showUploadProgressDialog ( filesToUpload );
+}
+
+public
+void showUploadProgressDialog ( File[] filesToUpload ) {
 	mDialog = new ProgressDialog ( TaskDetailActivity.thisActivity );
 	mDialog.setMax ( 100 );
 	mDialog.setMessage ( "Uploading file 1 / " + filesToUpload.length );
@@ -225,7 +230,8 @@ ProgressListener getUploadProgressListener () {
 @Override
 protected
 void onPostExecute ( Boolean result ) {
-//	mDialog.dismiss ();
+	//notificationManager
+	mDialog.dismiss ();
 	if ( result ) {
 		showToast ( "Image successfully uploaded" );
 	}
@@ -247,6 +253,7 @@ void onProgressUpdate ( Long... progress ) {
 	        .setSmallIcon( R.drawable.ic_action_accept);
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
+	mBuilder.setCategory ( NotificationCompat.CATEGORY_PROGRESS );
 	new Thread(
 			new Runnable() {
 				@Override
@@ -271,19 +278,19 @@ void onProgressUpdate ( Long... progress ) {
 					}
 					// When the loop is finished, updates the notification
 					mBuilder.setContentText("Upload complete")
-							// Removes the progress bar
-							.setProgress(0,0,false);
+							// Removes thje progress bar
+							.setProgress ( 0, 0, false );
 					finalMNotifyManager.notify ( notificationID, mBuilder.build () );
 				}
 			}
 // Starts the thread by calling the run() method in its Runnable
 	).start ();
 
-	//showUploadProgressdialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
+	//updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
 }
 
 private static
-void showUploadProgressdialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
+void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
 	Long totalBytes = Long.valueOf ( 0 );
 	Long bytesUploaded = Long.valueOf ( 0 );
 	for(int i=0;i< filesToUpload.length;i++) {
