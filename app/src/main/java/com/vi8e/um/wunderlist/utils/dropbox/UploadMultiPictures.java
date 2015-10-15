@@ -76,7 +76,7 @@ private int    mFilesUploaded;
 private File[] mFilesToUpload;
 private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
-private             boolean isCancelled = false;
+private boolean isCancelled = false;
 
 public
 void setIsCancelled ( boolean isCancelled ) {
@@ -114,17 +114,17 @@ void setUpNotification () {
 			( NotificationManager ) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
 
 	Intent intent = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
-	Intent intentCancelUpload = intent;
+	Intent intentCancelUpload = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
 	intentCancelUpload.putExtra ( TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.TRUE );
-	PendingIntent pIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
-PendingIntent pIntentCancel =PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intentCancelUpload, 0 );
 
+	PendingIntent pIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
+	PendingIntent pIntentCancel = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intentCancelUpload, 0 );
 
 
 	mNotificationBuilder.setContentTitle ( "Uploading pictures to the server" )
 	                    .setContentText ( "Upload in progress" )
 	                    .setAutoCancel ( true )
-	                    .setContentIntent ( pIntentCancel )
+	                    .setContentIntent ( pIntent )
 	                    .setPriority ( NotificationCompat.PRIORITY_HIGH )
 	                    .setVisibility ( NotificationCompat.VISIBILITY_PUBLIC )
 	                    .setCategory ( NotificationCompat.CATEGORY_ALARM )
@@ -238,6 +238,15 @@ ProgressListener getUploadProgressListener () {
 	};
 }
 
+public
+void cancelUpload () {
+	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
+	mNotificationBuilder.setContentText ( "" );
+	cancel ( true );
+	setIsCancelled ( true );
+	isCancelled ();
+}
+
 @Override
 protected
 void onPostExecute ( Boolean result ) {
@@ -280,7 +289,7 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 	bytesUploaded += progress[ 0 ];
 
 	int progressUpdate = ( int ) ( ( bytesUploaded / totalBytes ) * 100 );
-	String filesStatus = "Uploading " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length+" pictures";
+	String filesStatus = "Uploading " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length + " pictures";
 	//Log.d ( TAG, "updatingProgress " + progressUpdate + " " + filesStatus );
 	mNotificationBuilder.setProgress ( 100, progressUpdate, false );
 	mNotificationBuilder.setContentText ( filesStatus );

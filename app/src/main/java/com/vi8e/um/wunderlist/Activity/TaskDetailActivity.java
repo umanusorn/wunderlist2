@@ -108,10 +108,11 @@ private static final boolean USE_OAUTH1 = false;
 DropboxAPI<AndroidAuthSession> mApi;
 
 private boolean mLoggedIn;
-public static final int    MAX_IMGS_SELECTION = 15;
-public static final String CANCEL_UPLOAD      = "myMethod";
-public static final String TRUE               = "true";
-private UploadMultiPictures mUploadMultiPictures;
+public static final int                 MAX_IMGS_SELECTION = 15;
+public static final String              CANCEL_UPLOAD      = "myMethod";
+public static final String              TRUE               = "true";
+private static      UploadMultiPictures mUploadMultiPictures;
+public static final String FALSE = "false";
 
 @Override
 protected
@@ -351,7 +352,6 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 					files[ i ] = new File ( uri.toString () );
 					//Log.d ( TAG,"files="+files[i].toString () );
 					i++;
-
 				}
 				mUploadMultiPictures = new UploadMultiPictures ( sContext, mApi, PHOTO_DIR, files );
 				mUploadMultiPictures.execute ();
@@ -410,10 +410,12 @@ void cancelUpload ( Intent intent, UploadMultiPictures uploadMultiPictures ) {
 		if ( intentKey.equals ( TRUE ) ) {
 			Log.d ( TAG, "enter cancel upload" );
 			if ( uploadMultiPictures != null ) {
-				uploadMultiPictures.isCancelled ();
-				uploadMultiPictures.cancel ( true );
-				uploadMultiPictures.setIsCancelled ( true );
+				uploadMultiPictures.cancelUpload ();
+				intent.putExtra ( CANCEL_UPLOAD, FALSE );
 				Log.d ( TAG, "canceled upload" );
+			}
+			else{
+				Log.d ( TAG,"uploadPic is null???" );
 			}
 		}
 	}
