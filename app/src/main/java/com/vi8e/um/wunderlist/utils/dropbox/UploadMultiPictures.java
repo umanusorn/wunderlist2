@@ -107,7 +107,7 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 	mBuilder = new NotificationCompat.Builder ( TaskDetailActivity.thisActivity );
 	mBuilder.setContentTitle ( "Uploading pictures to the server" )
 	        .setContentText ( "Upload in progress" )
-	        .setAutoCancel ( true )
+	        .setAutoCancel ( false )
 	        .addAction ( R.drawable.ic_action_delete, "Call", pIntent )
 	        .setSmallIcon ( R.drawable.ic_action_accept );
 
@@ -244,7 +244,7 @@ ProgressListener getUploadProgressListener () {
 protected
 void onPostExecute ( Boolean result ) {
 	mNotifyManager.cancel ( NOTIFICATION_ID );
-//	mDialog.dismiss ();
+//	mDialog.dismiss ()
 	if ( result ) {
 		showToast ( "Image successfully uploaded" );
 	}
@@ -261,6 +261,13 @@ void onProgressUpdate ( Long... progress ) {
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
 	mBuilder.setCategory ( NotificationCompat.CATEGORY_PROGRESS );
+	//startThreadUpdateNotiProgress ( finalMNotifyManager );
+//	mBuilder.setProgress ( 100, increase, false );
+	updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
+}
+
+private
+void startThreadUpdateNotiProgress ( final NotificationManager finalMNotifyManager ) {
 	new Thread (
 			new Runnable () {
 				@Override
@@ -294,8 +301,6 @@ void onProgressUpdate ( Long... progress ) {
 			}
 // Starts the thread by calling the run() method in its Runnable
 	).start ();
-
-	//updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
 }
 
 private
@@ -304,7 +309,7 @@ void showToast ( String msg ) {
 	error.show ();
 }
 
-private static
+private
 void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
 	Long totalBytes = Long.valueOf ( 0 );
 	Long bytesUploaded = Long.valueOf ( 0 );
@@ -318,7 +323,20 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 	}
 	bytesUploaded += progress[ 0 ];
 
-	dialog.setMessage ( "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length );
-	dialog.setProgress ( ( int ) ( ( bytesUploaded / totalBytes ) * 100 ) );
+
+	int progressUpdate = ( int ) ( ( bytesUploaded / totalBytes ) * 100);
+	String filesStatus = "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length;
+
+	Log.d ( TAG,"updatingProgress "+progressUpdate+" "+filesStatus );
+	mBuilder.setProgress ( 100, progressUpdate, false );
+
+	mBuilder.setContentText ( filesStatus );
+	mNotifyManager.notify ( NOTIFICATION_ID, mBuilder.build () );
+//	mBuilder.notifyAll ();
+//	mBuilder.mNotification.notifyAll ();
+//	mBuilder.build ();
+
+	//dialog.setMessage ( "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length );
+	//dialog.setProgress ( ( int ) ( ( bytesUploaded / totalBytes ) * 100 ) );
 }
 }
