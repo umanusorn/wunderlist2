@@ -77,7 +77,13 @@ private File[] mFilesToUpload;
 private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
 private             boolean isCancelled = false;
-public static final String  TAG         = "UploadMulti";
+
+public
+void setIsCancelled ( boolean isCancelled ) {
+	this.isCancelled = isCancelled;
+}
+
+public static final String TAG = "UploadMulti";
 
 Integer NOTIFICATION_ID = 100;
 NotificationManager mNotifyManager;
@@ -108,15 +114,25 @@ void setUpNotification () {
 			( NotificationManager ) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
 
 	Intent intent = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
+	Intent intentCancelUpload = intent;
+	intentCancelUpload.putExtra ( TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.TRUE );
 	PendingIntent pIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
+PendingIntent pIntentCancel =PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intentCancelUpload, 0 );
+
+
 
 	mNotificationBuilder.setContentTitle ( "Uploading pictures to the server" )
 	                    .setContentText ( "Upload in progress" )
-	                    .setAutoCancel ( false )
-	                    .addAction ( R.drawable.ic_action_delete, "Call", pIntent )
+	                    .setAutoCancel ( true )
+	                    .setContentIntent ( pIntentCancel )
+	                    .setPriority ( NotificationCompat.PRIORITY_HIGH )
+	                    .setVisibility ( NotificationCompat.VISIBILITY_PUBLIC )
+	                    .setCategory ( NotificationCompat.CATEGORY_ALARM )
+	                    .addAction ( R.drawable.ic_action_delete, "Cancel upload", pIntentCancel )
 	                    .setSmallIcon ( R.drawable.ic_action_accept );
 
 }
+
 
 @Override
 protected
@@ -228,7 +244,7 @@ void onPostExecute ( Boolean result ) {
 	mNotifyManager.cancel ( NOTIFICATION_ID );
 //	mDialog.dismiss ()
 	if ( result ) {
-		showToast ( "Image successfully uploaded" );
+		showToast ( "Images successfully uploaded" );
 	}
 	else {
 		showToast ( mErrorMsg );
@@ -240,7 +256,6 @@ protected
 void onProgressUpdate ( Long... progress ) {
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
-	mNotificationBuilder.setCategory ( NotificationCompat.CATEGORY_PROGRESS );
 	updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
 }
 
@@ -264,11 +279,9 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 	}
 	bytesUploaded += progress[ 0 ];
 
-
 	int progressUpdate = ( int ) ( ( bytesUploaded / totalBytes ) * 100 );
-	String filesStatus = "Uploading file " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length;
-
-	Log.d ( TAG, "updatingProgress " + progressUpdate + " " + filesStatus );
+	String filesStatus = "Uploading " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length+" pictures";
+	//Log.d ( TAG, "updatingProgress " + progressUpdate + " " + filesStatus );
 	mNotificationBuilder.setProgress ( 100, progressUpdate, false );
 	mNotificationBuilder.setContentText ( filesStatus );
 	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );

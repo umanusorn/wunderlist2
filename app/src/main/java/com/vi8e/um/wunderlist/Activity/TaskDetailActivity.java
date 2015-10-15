@@ -68,7 +68,7 @@ android.support.v4.app.FragmentManager sFragmentManager;
 Boolean isStar       = false;
 Boolean showComplete = true;
 
-EditText editTextTitle,editTextBottom;
+EditText editTextTitle, editTextBottom;
 public static TaskModel currentTask;
 RelativeLayout noteLayout;
 ImageView      star, checkBoxTask, upload;
@@ -108,7 +108,10 @@ private static final boolean USE_OAUTH1 = false;
 DropboxAPI<AndroidAuthSession> mApi;
 
 private boolean mLoggedIn;
-public static final int MAX_IMGS_SELECTION = 15;
+public static final int    MAX_IMGS_SELECTION = 15;
+public static final String CANCEL_UPLOAD      = "myMethod";
+public static final String TRUE               = "true";
+private UploadMultiPictures mUploadMultiPictures;
 
 @Override
 protected
@@ -141,55 +144,9 @@ void onCreate ( Bundle savedInstanceState ) {
 	Utility.setTaskListViewHeight ( listViewSubTask );
 }
 
-
-public static
-void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
-	String reminderTime = taskModel.getReminderDate ();
-	Log.d ( TAG, "reminderTime= " + reminderTime );
-	if ( reminderTime != null && ! reminderTime.isEmpty () ) {
-		Date date = new Date ();
-		date.setTime ( Long.parseLong ( reminderTime ) );
-		ReminderDialog.setTextViewReminder ( date, reminderText, context );
-	}
-	else {
-		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ) );
-		UiMng.setBlackText ( context, reminderText );
-	}
-}
-
-public static
-SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubTaskAdapter subTaskAdapter, Context context ) {
-	SubtaskSelection where = new SubtaskSelection ();
-	where.taskid ( TaskActivity.currentTask.getId () );
-	Cursor c = where.query ( context.getContentResolver () );
-	c.moveToFirst ();
-	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
-
-	c.moveToFirst ();
-
-	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
-	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
-
-	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-	subTaskAdapter = new SubTaskAdapter ( context, arrayOfList );
-	listView.setAdapter ( subTaskAdapter );
-	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-		ContentValues values = allListValues.get ( i );
-		subTaskAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
-		                                        values.getAsString ( SubtaskColumns.TASKID ),
-		                                        values.getAsString ( SubtaskColumns._ID ),
-		                                           values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
-	}
-
-	Utility.setTaskListViewHeight ( listViewSubTask );
-
-	return subTaskAdapter;
-}
-
 private
 void setView () {
-	Log.d ( "","setView" );
+	Log.d ( "", "setView" );
 	listViewSubTask = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	checkBoxTask = ( ImageView ) findViewById ( R.id.chkBox );
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
@@ -198,22 +155,12 @@ void setView () {
 	noteLayout = ( RelativeLayout ) findViewById ( R.id.noteLayout );
 	addSubTask = ( RelativeLayout ) findViewById ( R.id.addSubTask );
 	calendarLayout = ( RelativeLayout ) findViewById ( R.id.calendatLayout );
-	reminderText = (TextView)findViewById ( R.id.reminder_text_taskDetail );
-  bottomRoot =(RelativeLayout)findViewById ( R.id.bottomBarRoot );
-	editTextBottom=(EditText)findViewById ( R.id.editTextBottom );
-	upload=(ImageView)findViewById ( R.id.upload );
+	reminderText = ( TextView ) findViewById ( R.id.reminder_text_taskDetail );
+	bottomRoot = ( RelativeLayout ) findViewById ( R.id.bottomBarRoot );
+	editTextBottom = ( EditText ) findViewById ( R.id.editTextBottom );
+	upload = ( ImageView ) findViewById ( R.id.upload );
 }
-private void getImages() {
-	Intent intent = new Intent(this, ImagePickerActivity.class);
-	Config config = new Config.Builder()
-			.setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
-			.setTabSelectionIndicatorColor(R.color.blue)
-			.setCameraButtonColor(R.color.green)
-			.setSelectionLimit( MAX_IMGS_SELECTION )    // set photo selection limit. Default unlimited selection.
-			.build();
-	ImagePickerActivity.setConfig ( config );
-	startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
-}
+
 private
 void setViewValues () {
 
@@ -261,7 +208,7 @@ void setViewValues () {
 	addSubTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Log.d ( "","addSubTask" );
+			Log.d ( "", "addSubTask" );
 			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
 		}
 	} );
@@ -285,37 +232,129 @@ void setViewValues () {
 
 }
 
+public static
+void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
+	String reminderTime = taskModel.getReminderDate ();
+	Log.d ( TAG, "reminderTime= " + reminderTime );
+	if ( reminderTime != null && ! reminderTime.isEmpty () ) {
+		Date date = new Date ();
+		date.setTime ( Long.parseLong ( reminderTime ) );
+		ReminderDialog.setTextViewReminder ( date, reminderText, context );
+	}
+	else {
+		reminderText.setText ( context.getResources ().getString ( R.string.reminder_text_task_detail ) );
+		UiMng.setBlackText ( context, reminderText );
+	}
+}
+
+public static
+SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubTaskAdapter subTaskAdapter, Context context ) {
+	SubtaskSelection where = new SubtaskSelection ();
+	where.taskid ( TaskActivity.currentTask.getId () );
+	Cursor c = where.query ( context.getContentResolver () );
+	c.moveToFirst ();
+	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
+
+	c.moveToFirst ();
+
+	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
+	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
+
+	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
+	subTaskAdapter = new SubTaskAdapter ( context, arrayOfList );
+	listView.setAdapter ( subTaskAdapter );
+	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
+		ContentValues values = allListValues.get ( i );
+		subTaskAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
+		                                        values.getAsString ( SubtaskColumns.TASKID ),
+		                                        values.getAsString ( SubtaskColumns._ID ),
+		                                        values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
+	}
+
+	Utility.setTaskListViewHeight ( listViewSubTask );
+
+	return subTaskAdapter;
+}
+
+private
+void getImages () {
+	Intent intent = new Intent ( this, ImagePickerActivity.class );
+	Config config = new Config.Builder ()
+			.setTabBackgroundColor ( R.color.white )    // set tab background color. Default white.
+			.setTabSelectionIndicatorColor ( R.color.blue )
+			.setCameraButtonColor ( R.color.green )
+			.setSelectionLimit ( MAX_IMGS_SELECTION )    // set photo selection limit. Default unlimited selection.
+			.build ();
+	ImagePickerActivity.setConfig ( config );
+	startActivityForResult ( intent, INTENT_REQUEST_GET_IMAGES );
+}
+
+private
+AndroidAuthSession buildSession () {
+	AppKeyPair appKeyPair = new AppKeyPair ( APP_KEY, APP_SECRET );
+
+	AndroidAuthSession session = new AndroidAuthSession ( appKeyPair );
+	loadAuth ( session );
+	return session;
+}
+
+/**
+ * Shows keeping the access keys returned from Trusted Authenticator in a local
+ * store, rather than storing user name & password, and re-authenticating each
+ * time (which is not to be done, ever).
+ */
+private
+void loadAuth ( AndroidAuthSession session ) {
+	SharedPreferences prefs = getSharedPreferences ( ACCOUNT_PREFS_NAME, 0 );
+	String key = prefs.getString ( ACCESS_KEY_NAME, null );
+	String secret = prefs.getString ( ACCESS_SECRET_NAME, null );
+	if ( key == null || secret == null || key.length () == 0 || secret.length () == 0 ) {
+		return;
+	}
+
+	if ( key.equals ( "oauth2:" ) ) {
+		// If the key is set to "oauth2:", then we can assume the token is for OAuth 2.
+		session.setOAuth2AccessToken ( secret );
+	}
+	else {
+		// Still support using old OAuth 1 tokens.
+		session.setAccessTokenPair ( new AccessTokenPair ( key, secret ) );
+	}
+}
+
 @Override
-protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-	super.onActivityResult(requestCode, resultCode, intent);
+protected
+void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
+	super.onActivityResult ( requestCode, resultCode, intent );
 
-	if (resultCode == Activity.RESULT_OK) {
-		Log.d ( TAG,"onActivityResult" );
-		if (requestCode == INTENT_REQUEST_GET_IMAGES) {
-			Parcelable[] parcelableUris = intent.getParcelableArrayExtra( ImagePickerActivity.EXTRA_IMAGE_URIS);
+	if ( resultCode == Activity.RESULT_OK ) {
+		Log.d ( TAG, "onActivityResult" );
+		if ( requestCode == INTENT_REQUEST_GET_IMAGES ) {
+			Parcelable[] parcelableUris = intent.getParcelableArrayExtra ( ImagePickerActivity.EXTRA_IMAGE_URIS );
 
-			if (parcelableUris == null) {
+			if ( parcelableUris == null ) {
 				return;
 			}
 
 			// Java doesn't allow array casting, this is a little hack
-			Uri[] uris = new Uri[parcelableUris.length];
-			System.arraycopy(parcelableUris, 0, uris, 0, parcelableUris.length);
-			File[] files =new File[ parcelableUris.length];
-			if (uris != null) {
+			Uri[] uris = new Uri[ parcelableUris.length ];
+			System.arraycopy ( parcelableUris, 0, uris, 0, parcelableUris.length );
+			File[] files = new File[ parcelableUris.length ];
+			if ( uris != null ) {
 				SessionManagement session;
-				session=new SessionManagement (getApplicationContext());
-				int i=0;
-				for (Uri uri : uris) {
+				session = new SessionManagement ( getApplicationContext () );
+				int i = 0;
+				for ( Uri uri : uris ) {
 					Log.i ( TAG, " uri: " + uri );
 					mMedia.add ( uri );
-					files[i]=new File ( uri.toString () );
+					files[ i ] = new File ( uri.toString () );
 					//Log.d ( TAG,"files="+files[i].toString () );
 					i++;
 
 				}
-				UploadMultiPictures uploadMultiPictures=new UploadMultiPictures ( sContext, mApi, PHOTO_DIR,files);
-				uploadMultiPictures.execute (  );
+				mUploadMultiPictures = new UploadMultiPictures ( sContext, mApi, PHOTO_DIR, files );
+				mUploadMultiPictures.execute ();
 				//UploadPicture upload = new UploadPicture(this, mApi, PHOTO_DIR, file);
 				//upload.execute();
 				//showMedia();
@@ -323,8 +362,6 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
 		}
 	}
 }
-
-
 
 @Override
 protected
@@ -359,6 +396,31 @@ void saveSubTaskAdapterToDb () {
 
 @Override
 protected
+void onNewIntent ( Intent intent ) {
+	super.onNewIntent ( intent );
+	cancelUpload ( intent, mUploadMultiPictures );
+}
+
+private static
+void cancelUpload ( Intent intent, UploadMultiPictures uploadMultiPictures ) {
+
+
+	String intentKey = intent.getStringExtra ( CANCEL_UPLOAD );
+	if ( intentKey != null ) {
+		if ( intentKey.equals ( TRUE ) ) {
+			Log.d ( TAG, "enter cancel upload" );
+			if ( uploadMultiPictures != null ) {
+				uploadMultiPictures.isCancelled ();
+				uploadMultiPictures.cancel ( true );
+				uploadMultiPictures.setIsCancelled ( true );
+				Log.d ( TAG, "canceled upload" );
+			}
+		}
+	}
+}
+
+@Override
+protected
 void
 onResume () {
 	super.onResume ();
@@ -367,26 +429,82 @@ onResume () {
 	setViewValues ();
 	setUpAdapterListView ();
 	dropboxResume ();
+	cancelUpload ( getIntent (), mUploadMultiPictures );
+
 }
 
 public
 void dropboxResume () {
-	AndroidAuthSession session = mApi.getSession();
+	AndroidAuthSession session = mApi.getSession ();
 	// The next part must be inserted in the onResume() method of the
 	// activity from which session.startAuthentication() was called, so
 	// that Dropbox authentication completes properly.
-	if (session.authenticationSuccessful()) {
+	if ( session.authenticationSuccessful () ) {
 		try {
 			// Mandatory call to complete the auth
-			session.finishAuthentication();
+			session.finishAuthentication ();
 
 			// Store it locally in our app for later use
-			storeAuth(session);
-			setLoggedIn(true);
-		} catch (IllegalStateException e) {
-			showToast("Couldn't authenticate with Dropbox:" + e.getLocalizedMessage());
+			storeAuth ( session );
+			setLoggedIn ( true );
+		}
+		catch ( IllegalStateException e ) {
+			showToast ( "Couldn't authenticate with Dropbox:" + e.getLocalizedMessage () );
 			Log.i ( TAG, "Error authenticating", e );
 		}
+	}
+}
+
+/**
+ * Convenience function to change UI state based on being logged in
+ */
+private
+void setLoggedIn ( boolean loggedIn ) {
+	mLoggedIn = loggedIn;
+	if ( loggedIn ) {
+		//mSubmit.setText("Unlink from Dropbox");
+		//mDisplay.setVisibility(View.VISIBLE);
+	}
+	else {
+		//	mSubmit.setText("Link with Dropbox");
+//		mDisplay.setVisibility(View.GONE);
+//		mImage.setImageDrawable ( null );
+	}
+}
+
+private
+void showToast ( String msg ) {
+	Toast error = Toast.makeText ( this, msg, Toast.LENGTH_LONG );
+	error.show ();
+}
+
+/**
+ * Shows keeping the access keys returned from Trusted Authenticator in a local
+ * store, rather than storing user name & password, and re-authenticating each
+ * time (which is not to be done, ever).
+ */
+private
+void storeAuth ( AndroidAuthSession session ) {
+	// Store the OAuth 2 access token, if there is one.
+	String oauth2AccessToken = session.getOAuth2AccessToken ();
+	if ( oauth2AccessToken != null ) {
+		SharedPreferences prefs = getSharedPreferences ( ACCOUNT_PREFS_NAME, 0 );
+		SharedPreferences.Editor edit = prefs.edit ();
+		edit.putString ( ACCESS_KEY_NAME, "oauth2:" );
+		edit.putString ( ACCESS_SECRET_NAME, oauth2AccessToken );
+		edit.commit ();
+		return;
+	}
+	// Store the OAuth 1 access token, if there is one.  This is only necessary if
+	// you're still using OAuth 1.
+	AccessTokenPair oauth1AccessToken = session.getAccessTokenPair ();
+	if ( oauth1AccessToken != null ) {
+		SharedPreferences prefs = getSharedPreferences ( ACCOUNT_PREFS_NAME, 0 );
+		SharedPreferences.Editor edit = prefs.edit ();
+		edit.putString ( ACCESS_KEY_NAME, oauth1AccessToken.key );
+		edit.putString ( ACCESS_SECRET_NAME, oauth1AccessToken.secret );
+		edit.commit ();
+		return;
 	}
 }
 
@@ -413,10 +531,10 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	return super.onOptionsItemSelected ( item );
 }
 
-
-private void logOut() {
+private
+void logOut () {
 	// Remove credentials from the session
-	mApi.getSession().unlink();
+	mApi.getSession ().unlink ();
 
 	// Clear our stored keys
 	clearKeys ();
@@ -424,112 +542,36 @@ private void logOut() {
 	setLoggedIn ( false );
 }
 
-/**
- * Convenience function to change UI state based on being logged in
- */
-private void setLoggedIn(boolean loggedIn) {
-	mLoggedIn = loggedIn;
-	if (loggedIn) {
-		//mSubmit.setText("Unlink from Dropbox");
-		//mDisplay.setVisibility(View.VISIBLE);
-	} else {
-	//	mSubmit.setText("Link with Dropbox");
-//		mDisplay.setVisibility(View.GONE);
-//		mImage.setImageDrawable ( null );
-	}
-}
-
-private void checkAppKeySetup() {
-	// Check to make sure that we have a valid app key
-	if (APP_KEY.startsWith("CHANGE") ||
-	    APP_SECRET.startsWith("CHANGE")) {
-		showToast("You must apply for an app key and secret from developers.dropbox.com, and add them to the DBRoulette ap before trying it.");
-		finish();
-		return;
-	}
-
-	// Check if the app has set up its manifest properly.
-	Intent testIntent = new Intent(Intent.ACTION_VIEW);
-	String scheme = "db-" + APP_KEY;
-	String uri = scheme + "://" + AuthActivity.AUTH_VERSION + "/test";
-	testIntent.setData ( Uri.parse ( uri ) );
-	PackageManager pm = getPackageManager();
-	if (0 == pm.queryIntentActivities(testIntent, 0).size()) {
-		showToast("URL scheme in your app's " +
-		          "manifest is not set up correctly. You should have a " +
-		          "com.dropbox.client2.android.AuthActivity with the " +
-		          "scheme: " + scheme);
-		finish();
-	}
-}
-
-private void showToast(String msg) {
-	Toast error = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-	error.show();
-}
-
-/**
- * Shows keeping the access keys returned from Trusted Authenticator in a local
- * store, rather than storing user name & password, and re-authenticating each
- * time (which is not to be done, ever).
- */
-private void loadAuth(AndroidAuthSession session) {
-	SharedPreferences prefs = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
-	String key = prefs.getString ( ACCESS_KEY_NAME, null );
-	String secret = prefs.getString(ACCESS_SECRET_NAME, null);
-	if (key == null || secret == null || key.length() == 0 || secret.length() == 0) return;
-
-	if (key.equals ( "oauth2:" )) {
-		// If the key is set to "oauth2:", then we can assume the token is for OAuth 2.
-		session.setOAuth2AccessToken(secret);
-	} else {
-		// Still support using old OAuth 1 tokens.
-		session.setAccessTokenPair(new AccessTokenPair (key, secret));
-	}
-}
-
-/**
- * Shows keeping the access keys returned from Trusted Authenticator in a local
- * store, rather than storing user name & password, and re-authenticating each
- * time (which is not to be done, ever).
- */
-private void storeAuth(AndroidAuthSession session) {
-	// Store the OAuth 2 access token, if there is one.
-	String oauth2AccessToken = session.getOAuth2AccessToken();
-	if (oauth2AccessToken != null) {
-		SharedPreferences prefs = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
-		SharedPreferences.Editor edit = prefs.edit();
-		edit.putString(ACCESS_KEY_NAME, "oauth2:");
-		edit.putString(ACCESS_SECRET_NAME, oauth2AccessToken);
-		edit.commit();
-		return;
-	}
-	// Store the OAuth 1 access token, if there is one.  This is only necessary if
-	// you're still using OAuth 1.
-	AccessTokenPair oauth1AccessToken = session.getAccessTokenPair();
-	if (oauth1AccessToken != null) {
-		SharedPreferences prefs = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
-		SharedPreferences.Editor edit = prefs.edit();
-		edit.putString(ACCESS_KEY_NAME, oauth1AccessToken.key);
-		edit.putString(ACCESS_SECRET_NAME, oauth1AccessToken.secret);
-		edit.commit();
-		return;
-	}
-}
-
-private void clearKeys() {
-	SharedPreferences prefs = getSharedPreferences(ACCOUNT_PREFS_NAME, 0);
-	SharedPreferences.Editor edit = prefs.edit();
-	edit.clear();
+private
+void clearKeys () {
+	SharedPreferences prefs = getSharedPreferences ( ACCOUNT_PREFS_NAME, 0 );
+	SharedPreferences.Editor edit = prefs.edit ();
+	edit.clear ();
 	edit.commit ();
 }
 
 private
-AndroidAuthSession buildSession() {
-	AppKeyPair appKeyPair = new AppKeyPair (APP_KEY, APP_SECRET);
+void checkAppKeySetup () {
+	// Check to make sure that we have a valid app key
+	if ( APP_KEY.startsWith ( "CHANGE" ) ||
+	     APP_SECRET.startsWith ( "CHANGE" ) ) {
+		showToast ( "You must apply for an app key and secret from developers.dropbox.com, and add them to the DBRoulette ap before trying it." );
+		finish ();
+		return;
+	}
 
-	AndroidAuthSession session = new AndroidAuthSession (appKeyPair);
-	loadAuth(session);
-	return session;
+	// Check if the app has set up its manifest properly.
+	Intent testIntent = new Intent ( Intent.ACTION_VIEW );
+	String scheme = "db-" + APP_KEY;
+	String uri = scheme + "://" + AuthActivity.AUTH_VERSION + "/test";
+	testIntent.setData ( Uri.parse ( uri ) );
+	PackageManager pm = getPackageManager ();
+	if ( 0 == pm.queryIntentActivities ( testIntent, 0 ).size () ) {
+		showToast ( "URL scheme in your app's " +
+		            "manifest is not set up correctly. You should have a " +
+		            "com.dropbox.client2.android.AuthActivity with the " +
+		            "scheme: " + scheme );
+		finish ();
+	}
 }
 }
