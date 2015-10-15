@@ -1,5 +1,7 @@
 package com.vi8e.um.wunderlist.dialogs;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ListView;
@@ -16,6 +18,9 @@ import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
 import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.dropbox.UploadMultiPictures;
+
+import java.io.File;
 
 
 /**
@@ -132,5 +137,19 @@ void showDialogDeleteComment ( final Activity thisContext, final CommentAdapter 
 }
 
 
-
+public static
+void showUploadProgressDialog ( final UploadMultiPictures uploadMultiPictures, ProgressDialog mDialog, File[] filesToUpload ) {
+	mDialog = new ProgressDialog ( TaskDetailActivity.thisActivity );
+	mDialog.setMax ( 100 );
+	mDialog.setMessage ( "Uploading file 1 / " + filesToUpload.length );
+	mDialog.setProgressStyle ( ProgressDialog.STYLE_HORIZONTAL );
+	mDialog.setProgress ( 0 );
+	mDialog.setButton ( "Cancel", new DialogInterface.OnClickListener () {
+		public
+		void onClick ( DialogInterface dialog, int which ) {
+			uploadMultiPictures.cancel ( true );
+		}
+	} );
+	mDialog.show ();
+}
 }
