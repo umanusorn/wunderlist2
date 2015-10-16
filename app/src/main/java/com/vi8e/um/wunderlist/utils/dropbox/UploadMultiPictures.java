@@ -77,18 +77,10 @@ private File[] mFilesToUpload;
 private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
 private boolean isCancelled = false;
-
-public
-void setIsCancelled ( boolean isCancelled ) {
-	this.isCancelled = isCancelled;
-}
-
 public static final String TAG = "UploadMulti";
-
 Integer NOTIFICATION_ID = 100;
 NotificationManager mNotifyManager;
 final NotificationCompat.Builder mNotificationBuilder;
-
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
 	// We set the context this way so we don't accidentally leak activities
@@ -133,7 +125,6 @@ void setUpNotification () {
 
 }
 
-
 @Override
 protected
 Boolean doInBackground ( Void... params ) {
@@ -148,6 +139,7 @@ Boolean doInBackground ( Void... params ) {
 			FileInputStream fis = new FileInputStream ( file );
 			String path = mPath + file.getName ();
 			mRequest = mApi.putFileRequest ( path, fis, file.length (), null, true, getUploadProgressListener () );
+			//mApi.share (  )
 			mRequest.upload ();
 
 			if ( ! isCancelled ) {
@@ -164,7 +156,7 @@ Boolean doInBackground ( Void... params ) {
 		mErrorMsg = "This app wasn't authenticated properly.";
 	}
 	catch ( DropboxFileSizeException e ) {
-		// File size too big to upload via the API
+		// File size too big to uploadBtn via the API
 		mErrorMsg = "This file is too big to upload";
 	}
 	catch ( DropboxPartialFileException e ) {
@@ -238,20 +230,12 @@ ProgressListener getUploadProgressListener () {
 	};
 }
 
-public
-void cancelUpload () {
-	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
-	mNotificationBuilder.setContentText ( "" );
-	cancel ( true );
-	setIsCancelled ( true );
-	isCancelled ();
-}
-
 @Override
 protected
 void onPostExecute ( Boolean result ) {
 	mNotifyManager.cancel ( NOTIFICATION_ID );
 //	mDialog.dismiss ()
+
 	if ( result ) {
 		showToast ( "Images successfully uploaded" );
 	}
@@ -266,12 +250,8 @@ void onProgressUpdate ( Long... progress ) {
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
 	updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
-}
 
-private
-void showToast ( String msg ) {
-	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
-	error.show ();
+	TaskDetailActivity.setActiveUploadBtn ();
 }
 
 private
@@ -294,5 +274,26 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 	mNotificationBuilder.setProgress ( 100, progressUpdate, false );
 	mNotificationBuilder.setContentText ( filesStatus );
 	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );
+}
+
+private
+void showToast ( String msg ) {
+	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
+	error.show ();
+}
+
+public
+void cancelUpload () {
+	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
+	mNotificationBuilder.setContentText ( "" );
+	cancel ( true );
+	setIsCancelled ( true );
+	isCancelled ();
+	Log.d ( TAG, "done cancel upload" );
+}
+
+public
+void setIsCancelled ( boolean isCancelled ) {
+	this.isCancelled = isCancelled;
 }
 }

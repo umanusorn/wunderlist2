@@ -121,7 +121,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
             // This session wasn't authenticated properly or user unlinked
             mErrorMsg = "This app wasn't authenticated properly.";
         } catch (DropboxFileSizeException e) {
-            // File size too big to upload via the API
+            // File size too big to uploadBtn via the API
             mErrorMsg = "This file is too big to upload";
         } catch (DropboxPartialFileException e) {
             // We canceled the operation

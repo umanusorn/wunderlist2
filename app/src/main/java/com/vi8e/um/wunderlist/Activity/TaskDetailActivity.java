@@ -71,7 +71,7 @@ Boolean showComplete = true;
 EditText editTextTitle, editTextBottom;
 public static TaskModel currentTask;
 RelativeLayout noteLayout;
-ImageView      star, checkBoxTask, upload;
+public static ImageView      star, checkBoxTask, uploadBtn;
 TextView       noteEditText;
 RelativeLayout addSubTask;
 RelativeLayout calendarLayout;
@@ -108,10 +108,10 @@ private static final boolean USE_OAUTH1 = false;
 DropboxAPI<AndroidAuthSession> mApi;
 
 private boolean mLoggedIn;
-public static final int                 MAX_IMGS_SELECTION = 15;
-public static final String              CANCEL_UPLOAD      = "myMethod";
-public static final String              TRUE               = "true";
-private static      UploadMultiPictures mUploadMultiPictures;
+public static final int    MAX_IMGS_SELECTION = 15;
+public static final String CANCEL_UPLOAD      = "myMethod";
+public static final String TRUE               = "true";
+private static UploadMultiPictures mUploadMultiPictures;
 public static final String FALSE = "false";
 
 @Override
@@ -159,7 +159,7 @@ void setView () {
 	reminderText = ( TextView ) findViewById ( R.id.reminder_text_taskDetail );
 	bottomRoot = ( RelativeLayout ) findViewById ( R.id.bottomBarRoot );
 	editTextBottom = ( EditText ) findViewById ( R.id.editTextBottom );
-	upload = ( ImageView ) findViewById ( R.id.upload );
+	uploadBtn = ( ImageView ) findViewById ( R.id.upload );
 }
 
 private
@@ -177,7 +177,7 @@ void setViewValues () {
 	currentTask.setIsComplete ( String.valueOf ( ! currentTask.isComplete () ) );
 
 	setTextViewReminderFromTaskDB ( currentTask, reminderText, sContext );
-	upload.setOnClickListener ( new View.OnClickListener () {
+	uploadBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
 			getImages ();
@@ -353,14 +353,20 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 					//Log.d ( TAG,"files="+files[i].toString () );
 					i++;
 				}
+
 				mUploadMultiPictures = new UploadMultiPictures ( sContext, mApi, PHOTO_DIR, files );
 				mUploadMultiPictures.execute ();
-				//UploadPicture upload = new UploadPicture(this, mApi, PHOTO_DIR, file);
-				//upload.execute();
+				//UploadPicture uploadBtn = new UploadPicture(this, mApi, PHOTO_DIR, file);
+				//uploadBtn.execute();
 				//showMedia();
 			}
 		}
 	}
+}
+public static
+void setActiveUploadBtn () {
+	Log.d ( TAG,"Set red" );
+	TaskDetailActivity.uploadBtn.setColorFilter (sContext.getResources ().getColor ( R.color.red_400 ) );
 }
 
 @Override
@@ -408,11 +414,11 @@ void cancelUpload ( Intent intent, UploadMultiPictures uploadMultiPictures ) {
 	String intentKey = intent.getStringExtra ( CANCEL_UPLOAD );
 	if ( intentKey != null ) {
 		if ( intentKey.equals ( TRUE ) ) {
-			Log.d ( TAG, "enter cancel upload" );
+			Log.d ( TAG, "enter cancel uploadBtn" );
 			if ( uploadMultiPictures != null ) {
 				uploadMultiPictures.cancelUpload ();
 				intent.putExtra ( CANCEL_UPLOAD, FALSE );
-				Log.d ( TAG, "canceled upload" );
+				Log.d ( TAG, "canceled uploadBtn" );
 			}
 			else{
 				Log.d ( TAG,"uploadPic is null???" );

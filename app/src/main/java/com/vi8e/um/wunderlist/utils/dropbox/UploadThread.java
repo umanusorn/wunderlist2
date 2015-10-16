@@ -12,7 +12,7 @@ public UploadThread(String s){
 
 @Override
 public void run() {
-	//your api call to upload file using fileLocation
+	//your api call to uploadBtn file using fileLocation
 }
 /*
 @Override

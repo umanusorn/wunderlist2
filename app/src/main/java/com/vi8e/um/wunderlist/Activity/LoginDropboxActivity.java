@@ -206,7 +206,7 @@ void onResume () {
 public
 void onActivityResult ( int requestCode, int resultCode, Intent data ) {
 	if ( requestCode == NEW_PICTURE ) {
-		// return from file upload
+		// return from file uploadBtn
 		if ( resultCode == Activity.RESULT_OK ) {
 			Uri uri = null;
 			if ( data != null ) {
