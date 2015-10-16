@@ -2,6 +2,7 @@ package com.vi8e.um.wunderlist.dialogs;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ListView;
@@ -28,6 +29,8 @@ import java.io.File;
  */
 public
 class CustomDialog {
+
+public static final String TAG = "CustomDialog";
 
 public static
 void showAddListDialog ( final Activity thisContext, final LandingListAdapter landingListAdapter, final ListView listView ) {
@@ -89,6 +92,30 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activi
 			.
 
 					show ();
+}
+
+public static
+void showCancelUploadDialog ( final Activity thisContext, final Intent intent, final UploadMultiPictures uploadMultiPictures  ) {
+
+	Log.d ( TAG,"showCancelUplaod Dialog ");
+	MaterialDialog diallogDelete = new MaterialDialog.Builder ( thisContext )
+			//.customView ( R.layout.dialog_todo, true )
+			.title ( "Uploading in progress" )
+			//.content ( "\"" + title + "\" " + thisContext.getString ( R.string.content_delete_list ) )
+			.positiveText ( "Cancel the upload" ).callback ( new MaterialDialog.ButtonCallback () {
+				@Override public
+				void onPositive ( MaterialDialog dialog ) {
+					super.onPositive ( dialog );
+
+					if ( uploadMultiPictures != null ) {
+						uploadMultiPictures.cancelUpload ();
+						intent.putExtra ( TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.FALSE );
+						Log.d ( TAG, "canceled uploadBtn" );
+					}
+				}
+			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
+			.negativeText ( "Ok" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
+			.show ();
 }
 
 public static

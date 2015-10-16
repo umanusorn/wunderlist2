@@ -78,6 +78,7 @@ private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
 private boolean isCancelled = false;
 public static final String TAG = "UploadMulti";
+public static boolean isUploading=false;
 Integer NOTIFICATION_ID = 100;
 NotificationManager mNotifyManager;
 final NotificationCompat.Builder mNotificationBuilder;
@@ -234,8 +235,8 @@ ProgressListener getUploadProgressListener () {
 protected
 void onPostExecute ( Boolean result ) {
 	mNotifyManager.cancel ( NOTIFICATION_ID );
-//	mDialog.dismiss ()
-
+	TaskDetailActivity.setInActiveUploadBtn ();
+	isUploading=false;
 	if ( result ) {
 		showToast ( "Images successfully uploaded" );
 	}
@@ -250,8 +251,9 @@ void onProgressUpdate ( Long... progress ) {
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
 	updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
-
+	isUploading=true;
 	TaskDetailActivity.setActiveUploadBtn ();
+
 }
 
 private

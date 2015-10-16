@@ -180,7 +180,18 @@ void setViewValues () {
 	uploadBtn.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			getImages ();
+
+			if(mUploadMultiPictures!=null){
+				if(mUploadMultiPictures.isUploading){
+					CustomDialog.showCancelUploadDialog ( thisActivity,getIntent (),mUploadMultiPictures);
+				}
+				else{
+					getImages ();
+				}
+			}else {
+				getImages ();
+			}
+
 		}
 	} );
 
@@ -278,6 +289,8 @@ SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubT
 	return subTaskAdapter;
 }
 
+
+
 private
 void getImages () {
 	Intent intent = new Intent ( this, ImagePickerActivity.class );
@@ -356,17 +369,20 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 
 				mUploadMultiPictures = new UploadMultiPictures ( sContext, mApi, PHOTO_DIR, files );
 				mUploadMultiPictures.execute ();
-				//UploadPicture uploadBtn = new UploadPicture(this, mApi, PHOTO_DIR, file);
-				//uploadBtn.execute();
-				//showMedia();
 			}
 		}
 	}
 }
 public static
 void setActiveUploadBtn () {
-	Log.d ( TAG,"Set red" );
-	TaskDetailActivity.uploadBtn.setColorFilter (sContext.getResources ().getColor ( R.color.red_400 ) );
+	Log.d ( TAG,"Set red upload btn" );
+	TaskDetailActivity.uploadBtn.setColorFilter ( sContext.getResources ().getColor ( R.color.red_400 ) );
+}
+
+public static
+void setInActiveUploadBtn () {
+	Log.d ( TAG,"Set grey upload btn" );
+	TaskDetailActivity.uploadBtn.setColorFilter (sContext.getResources ().getColor ( R.color.grey_500 ) );
 }
 
 @Override
