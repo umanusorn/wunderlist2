@@ -18,6 +18,7 @@ package com.vi8e.um.wunderlist;
 
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -30,10 +31,14 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
@@ -69,8 +74,13 @@ void enterTaskDetail () {
 //	onRow ( "Category 4" ).onChildView ( withId ( R.id.row_list_root_view ) ).perform ( click () );
 	onView ( withText ("Category 5") )
 			.perform ( click (), closeSoftKeyboard () );
-	onView ( withText ("Task 5-2") )
-			.perform ( click (), closeSoftKeyboard () );
+	onView ( withText ( containsString ( "5-2" ) ) ).perform ( click (), closeSoftKeyboard () );
+
+	ViewInteraction editTextTitle = onView ( withId ( R.id.editTextTitle ) );
+	editTextTitle.perform ( clearText () );
+	editTextTitle.perform ( typeText ( "changed Task 5-2" ) );
+	pressBack ();
+	pressBack ();
 
 }
 
