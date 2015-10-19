@@ -288,10 +288,12 @@ public
 void cancelUpload () {
 	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
 	mNotificationBuilder.setContentText ( "" );
+	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );
 	cancel ( true );
 	setIsCancelled ( true );
 	isCancelled ();
 	Log.d ( TAG, "done cancel upload" );
+	TaskDetailActivity.setInActiveUploadBtn ();
 }
 
 public
