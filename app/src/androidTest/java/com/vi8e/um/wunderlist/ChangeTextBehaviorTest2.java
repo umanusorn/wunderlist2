@@ -25,15 +25,12 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -41,12 +38,13 @@ import static org.junit.Assert.assertThat;
 /**
  * Basic sample for unbundled UiAutomator.
  */
-@RunWith(AndroidJUnit4.class)
-@SdkSuppress(minSdkVersion = 18)
-public class ChangeTextBehaviorTest2 {
+@RunWith( AndroidJUnit4.class )
+@SdkSuppress( minSdkVersion = 18 )
+public
+class ChangeTextBehaviorTest2 {
 
 private static final String BASIC_SAMPLE_PACKAGE
-		= "com.vi8e.um.wunderlist";
+		= "com.vi8e.um.wunderlist2";
 
 private static final int LAUNCH_TIMEOUT = 5000;
 
@@ -89,46 +87,56 @@ void checkPreconditions () {
 public
 void testChangeText_sameActivity () {
 	// Type text and then press the button.
+//	mDevice.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "action_a" ) ).click ();
+	mDevice.findObject ( By.text ( "Category 5" ) ).click ();
+	/*try {
+		mDevice.wait ( 2000 );
+	}
+	catch ( InterruptedException e ) {
+		e.printStackTrace ();
+	}*/
+	mDevice.getCurrentPackageName ();
+	mDevice.findObject ( By.text ( "Task 5-2" ) ).click ();
+
+	//mDevice.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "changeTextBt" ) ).click ();
+
+	// Verify the test is displayed in the Ui
+/*	UiObject2 changedText = mDevice
+			.wait ( Until.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "textToBeChanged" ) ),
+			        500 *//* wait 500ms *//* );
+	assertThat ( changedText.getText (), is ( equalTo ( STRING_TO_BE_TYPED ) ) );*/
+}
+
+/*@Test
+public
+void testChangeText_newActivity () {
+	// Type text and then press the button.
 	mDevice.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "editTextUserInput" ) )
 	       .setText ( STRING_TO_BE_TYPED );
-	mDevice.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "changeTextBt" ) )
+	mDevice.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "activityChangeTextBtn" ) )
 	       .click ();
 
 	// Verify the test is displayed in the Ui
 	UiObject2 changedText = mDevice
-			.wait ( Until.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "textToBeChanged" ) ),
-                        500 /* wait 500ms */);
-        assertThat(changedText.getText(), is(equalTo(STRING_TO_BE_TYPED)));
-    }
+			.wait ( Until.findObject ( By.res ( BASIC_SAMPLE_PACKAGE, "show_text_view" ) ),
+			        500 *//* wait 500ms *//* );
+	assertThat ( changedText.getText (), is ( equalTo ( STRING_TO_BE_TYPED ) ) );
+}*/
 
-    @Test
-    public void testChangeText_newActivity() {
-        // Type text and then press the button.
-        mDevice.findObject( By.res ( BASIC_SAMPLE_PACKAGE, "editTextUserInput" ))
-                .setText(STRING_TO_BE_TYPED);
-        mDevice.findObject( By.res ( BASIC_SAMPLE_PACKAGE, "activityChangeTextBtn" ))
-                .click();
+/**
+ * Uses package manager to find the package name of the device launcher. Usually this package
+ * is "com.android.launcher" but can be different at times. This is a generic solution which
+ * works on all platforms.`
+ */
+private
+String getLauncherPackageName () {
+	// Create launcher Intent
+	final Intent intent = new Intent ( Intent.ACTION_MAIN );
+	intent.addCategory ( Intent.CATEGORY_HOME );
 
-        // Verify the test is displayed in the Ui
-        UiObject2 changedText = mDevice
-                .wait( Until.findObject( By.res ( BASIC_SAMPLE_PACKAGE, "show_text_view" ) ),
-                        500 /* wait 500ms */);
-        assertThat(changedText.getText(), is(equalTo(STRING_TO_BE_TYPED)));
-    }
-
-    /**
-     * Uses package manager to find the package name of the device launcher. Usually this package
-     * is "com.android.launcher" but can be different at times. This is a generic solution which
-     * works on all platforms.`
-     */
-    private String getLauncherPackageName() {
-        // Create launcher Intent
-        final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-
-        // Use PackageManager to get the launcher package name
-        PackageManager pm = InstrumentationRegistry.getContext ().getPackageManager();
-        ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        return resolveInfo.activityInfo.packageName;
-    }
+	// Use PackageManager to get the launcher package name
+	PackageManager pm = InstrumentationRegistry.getContext ().getPackageManager ();
+	ResolveInfo resolveInfo = pm.resolveActivity ( intent, PackageManager.MATCH_DEFAULT_ONLY );
+	return resolveInfo.activityInfo.packageName;
+}
 }

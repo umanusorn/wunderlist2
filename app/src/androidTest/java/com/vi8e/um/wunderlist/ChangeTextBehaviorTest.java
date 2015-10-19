@@ -33,6 +33,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
@@ -65,7 +66,11 @@ public
 void enterTaskDetail () {
 	String testText = "testText";
 	//onData ( allOf ( is ( instanceOf ( Map.class ) ), hasEntry ( equalTo ( "STR" ), is ( "item: 50" ) ) ).perform ( click () ));
-	onRow ( "Category 4" ).onChildView ( withId ( R.id.row_list_root_view ) ).perform ( click () );
+//	onRow ( "Category 4" ).onChildView ( withId ( R.id.row_list_root_view ) ).perform ( click () );
+	onView ( withText ("Category 5") )
+			.perform ( click (), closeSoftKeyboard () );
+	onView ( withText ("Task 5-2") )
+			.perform ( click (), closeSoftKeyboard () );
 
 }
 
