@@ -55,7 +55,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	removeComment.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.deleteAllCommentValues ( mActivity );
+			QueryHelper.deleteAllCommentValues ( getApplicationContext ());
 		}
 	} );
 
