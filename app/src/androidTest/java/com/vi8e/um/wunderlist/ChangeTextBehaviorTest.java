@@ -36,12 +36,14 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.longClick;
 import static android.support.test.espresso.action.ViewActions.swipeDown;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
 
@@ -100,18 +102,27 @@ void enterTaskDetail () {
 		onView ( withText ( "SEND" ) ).perform ( click () );
 	}
 
-	//check that the comment is really created
+
 	Espresso.closeSoftKeyboard ();
-	swipeDown ();
-	swipeDown ();
-	swipeDown ();
-	swipeDown ();
-	swipeDown ();
-	swipeDown ();
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		onView ( withId ( R.id.commentTitle ) ).check ( matches ( withText ( TEST_COMMENT_TEXT + String.valueOf ( i )) ) );
+		swipeDown ();
+	}
+	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+		swipeUp ();
 	}
 
+	/*//check that the comment is really created
+	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+		onView ( withId ( R.id.commentTitle ) ).check ( matches ( withText ( TEST_COMMENT_TEXT + String.valueOf ( i )) ) );
+	}*/
+
+	//delete every comment
+	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+		onView ( allOf ( withId ( R.id.commentTitle ),withText ( TEST_COMMENT_TEXT+String.valueOf ( i ) ) )  ).perform ( longClick () );
+		onView ( withId (  R.id.delete) ).perform ( click () );
+
+
+	}
 
 }
 

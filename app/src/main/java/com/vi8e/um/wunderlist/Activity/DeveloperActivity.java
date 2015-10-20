@@ -20,16 +20,17 @@ class DeveloperActivity extends Activity {
 Activity mActivity;
 private static final int INTENT_REQUEST_GET_IMAGES = 1130;
 
-private void getImages() {
-	Intent intent = new Intent(this, ImagePickerActivity.class);
-	Config config = new Config.Builder()
-			.setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
-			.setTabSelectionIndicatorColor(R.color.blue)
-			.setCameraButtonColor(R.color.green)
-			.setSelectionLimit(2)    // set photo selection limit. Default unlimited selection.
-			.build();
+private
+void getImages () {
+	Intent intent = new Intent ( this, ImagePickerActivity.class );
+	Config config = new Config.Builder ()
+			.setTabBackgroundColor ( R.color.white )    // set tab background color. Default white.
+			.setTabSelectionIndicatorColor ( R.color.blue )
+			.setCameraButtonColor ( R.color.green )
+			.setSelectionLimit ( 2 )    // set photo selection limit. Default unlimited selection.
+			.build ();
 	ImagePickerActivity.setConfig ( config );
-	startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
+	startActivityForResult ( intent, INTENT_REQUEST_GET_IMAGES );
 }
 
 @Override
@@ -44,18 +45,18 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button genListTask = ( Button ) findViewById ( R.id.genListTask );
 	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
-	Button removeComment = (Button)findViewById ( R.id.removeCommentBtn );
-  Button login = (Button)findViewById ( R.id.login );
-	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
-	Button myAccount = (Button)findViewById ( R.id.myAccount );
-	Button signUp = (Button)findViewById ( R.id.signUp );
-	Button testDropbox = (Button)findViewById ( R.id.linkDropbox );
-	Button multiImgChooser = (Button)findViewById ( R.id.multiImgChooser );
+	Button removeComment = ( Button ) findViewById ( R.id.removeCommentBtn );
+	Button login = ( Button ) findViewById ( R.id.login );
+	Button updateProfile = ( Button ) findViewById ( R.id.updateProfile );
+	Button myAccount = ( Button ) findViewById ( R.id.myAccount );
+	Button signUp = ( Button ) findViewById ( R.id.signUp );
+	Button testDropbox = ( Button ) findViewById ( R.id.linkDropbox );
+	Button multiImgChooser = ( Button ) findViewById ( R.id.multiImgChooser );
 
 	removeComment.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			QueryHelper.deleteAllCommentValues ( getApplicationContext ());
+			QueryHelper.deleteAllCommentValues ( getApplicationContext () );
 		}
 	} );
 
@@ -73,11 +74,10 @@ void onCreate ( Bundle savedInstanceState ) {
 	} );
 
 
-
 	testDropbox.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Intent i=new Intent ( getApplicationContext (),LoginDropboxActivity.class);
+			Intent i = new Intent ( getApplicationContext (), LoginDropboxActivity.class );
 			startActivity ( i );
 		}
 	} );
@@ -85,31 +85,31 @@ void onCreate ( Bundle savedInstanceState ) {
 	signUp.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			Intent i=new Intent(getApplicationContext(),RegisterFirstActivity.class);
-			startActivity(i);
+			Intent i = new Intent ( getApplicationContext (), RegisterFirstActivity.class );
+			startActivity ( i );
 		}
 	} );
 
 	myAccount.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			Intent i=new Intent(getApplicationContext(), MyAccountActivity.class);
-			startActivity(i);
+			Intent i = new Intent ( getApplicationContext (), MyAccountActivity.class );
+			startActivity ( i );
 		}
 	} );
 
 	updateProfile.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			Intent i=new Intent(getApplicationContext(), UpdateProfileActivity.class);
-			startActivity(i);
+			Intent i = new Intent ( getApplicationContext (), UpdateProfileActivity.class );
+			startActivity ( i );
 		}
 	} );
 
 	login.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View view ) {
-			Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+			Intent i = new Intent ( getApplicationContext (), LoginActivity.class );
 			startActivity ( i );
 			//startActivityForResult(i, REQUEST_CODE_LOGIN);
 		}
