@@ -38,19 +38,26 @@ void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_dev_database );
 
-
 	Button genRecord = ( Button ) findViewById ( R.id.GenRecordBtn );
 	Button removeLists = ( Button ) findViewById ( R.id.removeListBtn );
 	Button viewDbBtn = ( Button ) findViewById ( R.id.viewDbBtn );
 	Button genListTask = ( Button ) findViewById ( R.id.genListTask );
 	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
+	Button removeComment = (Button)findViewById ( R.id.removeCommentBtn );
   Button login = (Button)findViewById ( R.id.login );
 	Button updateProfile = (Button)findViewById ( R.id.updateProfile );
 	Button myAccount = (Button)findViewById ( R.id.myAccount );
 	Button signUp = (Button)findViewById ( R.id.signUp );
 	Button testDropbox = (Button)findViewById ( R.id.linkDropbox );
 	Button multiImgChooser = (Button)findViewById ( R.id.multiImgChooser );
+
+	removeComment.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			QueryHelper.deleteAllCommentValues ( mActivity );
+		}
+	} );
 
 	multiImgChooser.setOnClickListener ( new View.OnClickListener () {
 		@Override public

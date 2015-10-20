@@ -22,6 +22,7 @@ import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskCursor;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
+import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,12 @@ public static
 void deleteAllListValues ( Context context ) {
 	ListSelection listSelection = new ListSelection ();
 	listSelection.delete ( context.getContentResolver () );
+}
+
+public static
+void deleteAllCommentValues ( Context context ) {
+	TaskCommentSelection taskCommentSelection = new TaskCommentSelection();
+	taskCommentSelection.delete ( context.getContentResolver () );
 }
 
 public static

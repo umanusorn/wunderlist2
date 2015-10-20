@@ -16,6 +16,7 @@
 
 package com.vi8e.um.wunderlist;
 
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
@@ -35,7 +36,9 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -53,6 +56,8 @@ public static final String                            TARGET             = "5-2"
 public              ActivityTestRule<LandingActivity> mActivityRule      = new ActivityTestRule<> (
 		LandingActivity.class );
 public static final String                            ADD_A_COMMENT      = "Add a comment...";
+public static final int                               MAX_COMMENTS       = 10;
+public static final String TEST_COMMENT_TEXT = "testComment text";
 
 @Test
 public
@@ -61,7 +66,7 @@ void newList () {
 	onView ( withId ( R.id.action_a ) )
 			.perform ( click (), closeSoftKeyboard () );
 	onView ( withId ( R.id.action_a ) )
-			.perform ( click ());
+			.perform ( click () );
 	//onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
 	//onView ( withText ("ADD" ) ).perform ( click () );
 	performMaterialDialogOkClick ();
@@ -89,9 +94,22 @@ void enterTaskDetail () {
 	editTextTitle.perform ( typeText ( "changed Task 5-2" ) );
 
 	onView ( withText ( containsString ( ADD_A_COMMENT ) ) ).perform ( click () );
-	for ( int i = 0 ; i < 10 ; i++ ) {
-		onView ( withId ( R.id.editTextComment ) ).perform ( typeText ( String.valueOf ( i ) ) );
+	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+		onView ( withId ( R.id.editTextComment ) ).perform ( clearText () );
+		onView ( withId ( R.id.editTextComment ) ).perform ( typeText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) );
 		onView ( withText ( "SEND" ) ).perform ( click () );
+	}
+
+	//check that the comment is really created
+	Espresso.closeSoftKeyboard ();
+	swipeDown ();
+	swipeDown ();
+	swipeDown ();
+	swipeDown ();
+	swipeDown ();
+	swipeDown ();
+	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+		onView ( withId ( R.id.commentTitle ) ).check ( matches ( withText ( TEST_COMMENT_TEXT + String.valueOf ( i )) ) );
 	}
 
 
