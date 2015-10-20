@@ -109,18 +109,15 @@ void enterTaskDetail () {
 
 	Espresso.closeSoftKeyboard ();
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		swipeDown ();
-	}
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		swipeUp ();
+		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeUp () );
 	}
 
-	/*//check that the comment is really created
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		onView ( withId ( R.id.commentTitle ) ).check ( matches ( withText ( TEST_COMMENT_TEXT + String.valueOf ( i )) ) );
-	}*/
+	for ( int i = MAX_COMMENTS-1; i >=0 ; i-- ) {
+		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeDown () );
+	}
 
-	//delete every comment
+
+	//delete every comment  also test
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( longClick () );
 
