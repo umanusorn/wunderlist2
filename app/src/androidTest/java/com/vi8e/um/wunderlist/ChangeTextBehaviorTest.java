@@ -41,6 +41,7 @@ import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -59,7 +60,8 @@ public              ActivityTestRule<LandingActivity> mActivityRule      = new A
 		LandingActivity.class );
 public static final String                            ADD_A_COMMENT      = "Add a comment...";
 public static final int                               MAX_COMMENTS       = 10;
-public static final String TEST_COMMENT_TEXT = "testComment text";
+public static final String                            TEST_COMMENT_TEXT  = "testComment text";
+public static final int DEFAULT_SLEEP_TIME = 750;
 
 @Test
 public
@@ -69,9 +71,11 @@ void newList () {
 			.perform ( click (), closeSoftKeyboard () );
 	onView ( withId ( R.id.action_a ) )
 			.perform ( click () );
-	//onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
+	onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
 	//onView ( withText ("ADD" ) ).perform ( click () );
+
 	performMaterialDialogOkClick ();
+
 }
 
 /**
@@ -118,12 +122,32 @@ void enterTaskDetail () {
 
 	//delete every comment
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		onView ( allOf ( withId ( R.id.commentTitle ),withText ( TEST_COMMENT_TEXT+String.valueOf ( i ) ) )  ).perform ( longClick () );
-		onView ( withId (  R.id.delete) ).perform ( click () );
+		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( longClick () );
 
+		//if don't wait the test will randomly crashed
+		sleep ();
 
+		onView ( withId ( R.id.delete ) ).perform ( click () );
 	}
 
+}
+
+public
+void sleep () {
+	try {
+		Thread.sleep( DEFAULT_SLEEP_TIME );
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+}
+
+public
+void sleep (int miliSecond) {
+	try {
+		Thread.sleep(miliSecond);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
 }
 
 
