@@ -372,6 +372,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTextBottom"
                 android:layout_centerVertical="true"
+            android:focusable="false"
                 android:text="Add a comment..."
                 android:layout_toLeftOf="@+id/imageView5"
                 android:layout_toStartOf="@+id/imageView5"

@@ -16,32 +16,30 @@
 
 package com.vi8e.um.wunderlist;
 
-import android.support.test.espresso.DataInteraction;
-import android.support.test.espresso.Espresso;
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import android.view.View;
 
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.hamcrest.Matchers.is;
 
 
 @RunWith( AndroidJUnit4.class )
@@ -49,11 +47,12 @@ import static org.hamcrest.Matchers.is;
 public
 class ChangeTextBehaviorTest {
 
-public static final String STRING_TO_BE_TYPED = "Espresso";
-
+public static final String                            STRING_TO_BE_TYPED = "Espresso";
+public static final String                            TARGET             = "5-2";
 @Rule
-public ActivityTestRule<LandingActivity> mActivityRule = new ActivityTestRule<> (
+public              ActivityTestRule<LandingActivity> mActivityRule      = new ActivityTestRule<> (
 		LandingActivity.class );
+public static final String                            ADD_A_COMMENT      = "Add a comment...";
 
 @Test
 public
@@ -61,26 +60,40 @@ void newList () {
 	String testText = "testText";
 	onView ( withId ( R.id.action_a ) )
 			.perform ( click (), closeSoftKeyboard () );
-	//onView ( withHint ( R.string.add_list ) ).perform ( typeTextIntoFocusedView ( testText ) );
+	onView ( withId ( R.id.action_a ) )
+			.perform ( click ());
+	//onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
 	//onView ( withText ("ADD" ) ).perform ( click () );
+	performMaterialDialogOkClick ();
+}
 
+/**
+ * Clicks positive button in visible/active {@link com.afollestad.materialdialogs.MaterialDialog}
+ */
+public static
+void performMaterialDialogOkClick () {
+	onView ( withId ( R.id.buttonDefaultPositive ) ).inRoot ( isDialog () ).perform ( click () );
 }
 
 @Test
 public
 void enterTaskDetail () {
-	String testText = "testText";
 	//onData ( allOf ( is ( instanceOf ( Map.class ) ), hasEntry ( equalTo ( "STR" ), is ( "item: 50" ) ) ).perform ( click () ));
 //	onRow ( "Category 4" ).onChildView ( withId ( R.id.row_list_root_view ) ).perform ( click () );
-	onView ( withText ("Category 5") )
+	onView ( withText ( "Category 5" ) )
 			.perform ( click (), closeSoftKeyboard () );
 	onView ( withText ( containsString ( "5-2" ) ) ).perform ( click (), closeSoftKeyboard () );
 
 	ViewInteraction editTextTitle = onView ( withId ( R.id.editTextTitle ) );
 	editTextTitle.perform ( clearText () );
 	editTextTitle.perform ( typeText ( "changed Task 5-2" ) );
-	pressBack ();
-	pressBack ();
+
+	onView ( withText ( containsString ( ADD_A_COMMENT ) ) ).perform ( click () );
+	for ( int i = 0 ; i < 10 ; i++ ) {
+		onView ( withId ( R.id.editTextComment ) ).perform ( typeText ( String.valueOf ( i ) ) );
+		onView ( withText ( "SEND" ) ).perform ( click () );
+	}
+
 
 }
 
@@ -97,19 +110,64 @@ void changeText_newActivity () {
 	onView ( withId ( R.id.show_text_view ) ).check ( matches ( withText ( STRING_TO_BE_TYPED ) ) );*/
 }
 
-/**
- * Uses {@link Espresso#onData(org.hamcrest.Matcher)} to get a reference to a specific row.
- * <p>
- * Note: A custom matcher can be used to match the content and have more readable code.
- * See the Custom Matcher Sample.
- * </p>
- *
- * @param str the content of the field
- * @return a {@link DataInteraction} referencing the row
- */
-private static
-DataInteraction onRow ( String str ) {
 
-	return onData ( hasEntry ( equalTo ( "Category" ), is ( str ) ) );
+/**
+ * Perform action of waiting for a specific time. Useful when you need
+ * to wait for animations to end and Espresso fails at waiting.
+ * <p/>
+ * E.g.:
+ * onView(isRoot()).perform(waitAtLeast(Sampling.SECONDS_15));
+ *
+ * @param millis
+ * @return
+ */
+public static ViewAction waitAtLeast(final long millis) {
+	return new ViewAction() {
+		@Override
+		public Matcher<View> getConstraints() {
+			return null;
+		}
+
+		@Override
+		public String getDescription() {
+			return "wait for at least " + millis + " millis.";
+		}
+
+		@Override
+		public void perform(final UiController uiController, final View view) {
+			uiController.loopMainThreadUntilIdle();
+			uiController.loopMainThreadForAtLeast(millis);
+		}
+	};
 }
+/**
+ * Perform action of waiting until UI thread is free.
+ * <p/>
+ * E.g.:
+ * onView(isRoot()).perform(waitUntilIdle());
+ *
+ * @return
+ */
+public static
+ViewAction waitUntilIdle() {
+	return new ViewAction() {
+		@Override
+		public
+		Matcher<View> getConstraints() {
+			return null;
+		}
+
+		@Override
+		public String getDescription() {
+			return "wait until UI thread is free";
+		}
+
+		@Override
+		public void perform(final UiController uiController, final View view) {
+			uiController.loopMainThreadUntilIdle();
+		}
+	};
+}
+
+
 }

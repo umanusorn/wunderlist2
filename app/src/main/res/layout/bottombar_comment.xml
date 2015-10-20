@@ -81,7 +81,7 @@
             android:text="SEND"
             android:gravity="center"
             android:layout_centerVertical="true"
-            android:id="@+id/sendComment" android:layout_alignBottom="@+id/editText3"
+            android:id="@+id/sendComment"
             android:layout_alignParentEnd="true"
             />
 </RelativeLayout>
