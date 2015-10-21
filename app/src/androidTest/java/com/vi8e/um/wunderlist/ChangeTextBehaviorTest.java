@@ -79,37 +79,9 @@ private static final String BASIC_SAMPLE_PACKAGE = "com.vi8e.um.wunderlist";
 public static final  String CHANGED              = "changed";
 public static final String CHANGED_TASK_5_2 = "changed Task 5-2";
 
-/*private UiDevice mDevice;
+//private UiDevice mDevice;
 
-@Before
-public
-void startMainActivityFromHomeScreen () {
-	// Initialize UiDevice instance
-	mDevice = UiDevice.getInstance ( InstrumentationRegistry.getInstrumentation () );
 
-	// Start from the home screen
-	mDevice.pressHome ();
-
-	// Wait for launcher
-	final String launcherPackage = getLauncherPackageName ();
-	assertThat ( launcherPackage, notNullValue () );
-	mDevice.wait ( Until.hasObject ( By.pkg ( launcherPackage ).depth ( 0 ) ), LAUNCH_TIMEOUT );
-
-	// Launch the blueprint app
-	Context context = InstrumentationRegistry.getContext ();
-	final Intent intent = context.getPackageManager ()
-	                             .getLaunchIntentForPackage ( BASIC_SAMPLE_PACKAGE );
-	intent.addFlags ( Intent.FLAG_ACTIVITY_CLEAR_TASK );    // Clear out any previous instances
-	context.startActivity ( intent );
-
-	// Wait for the app to appear
-	mDevice.wait ( Until.hasObject ( By.pkg ( BASIC_SAMPLE_PACKAGE ).depth ( 0 ) ), LAUNCH_TIMEOUT );
-}
-
-@Test
-public void checkPreconditions() {
-	assertThat(mDevice, notNullValue());
-}*/
 
 @Test
 public
@@ -148,9 +120,6 @@ void overview () {
 	 * Add 10 Comments and swipe up&down to verify that the comment is really created then longClick on the comments to delete it
 	 */
 
-	/**
-	 * Add 10 comments
-	 */
 	onView ( withText ( containsString ( ADD_A_COMMENT ) ) ).perform ( click () );
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		onView ( withId ( R.id.editTextComment ) ).perform ( clearText () );
@@ -160,7 +129,9 @@ void overview () {
 
 	Espresso.closeSoftKeyboard ();
 
-//too many iteration too much wasted time
+	//too many iteration too much wasted time.
+	//I think will run a short test during the day and run long test when go for lunch,dinner,going off
+	//By set MAX... to 1 or 10 or 20
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		/**
 		 * swipe act only a short distance in some cases it might not see the list below
@@ -194,7 +165,6 @@ void overview () {
 	/**
 	 * create 10 subTasks
 	 */
-
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		onView ( withId ( R.id.addSubTask ) ).perform ( click () );
 		onView ( withHint ( R.string.add_sub_task ) ).perform ( typeText ( TEST_SUB_TASK + i ) );
@@ -215,11 +185,9 @@ void overview () {
 	pressBack ();
 	pressBack ();
 
-	getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );
+	/*getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );
 	onView ( withText ( R.string.view_completed_to_do ) ).perform ( click () );
-	getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );
-
-
+	getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );*/
 }
 
 
