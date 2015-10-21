@@ -112,8 +112,12 @@ void enterTaskDetail () {
 	Espresso.closeSoftKeyboard ();
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		Matcher<View> eachComment = getEachComment ( i );
-		sleep ();
-		onView ( eachComment ).perform ( swipeUp () );
+		//**
+		//swipe act only a short distance in some cases it might not see the list below
+		//this loop gives more distance
+		for ( int k = 0 ; k < 2 ; k++ ) {
+			onView ( eachComment ).perform ( swipeUp () );
+		}
 	}
 
 	for ( int i = MAX_COMMENTS - 1 ; i >= 0 ; i-- ) {
@@ -203,7 +207,9 @@ ViewAction waitUntilIdle () {
 		@Override
 		public
 		Matcher<View> getConstraints () {
-			return  null;
+
+
+			return  	null;
 		}
 
 		@Override
