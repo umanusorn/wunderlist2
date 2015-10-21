@@ -16,7 +16,11 @@
 
 package com.vi8e.um.wunderlist;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -43,6 +47,7 @@ import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -63,17 +68,52 @@ public static final String STRING_TO_BE_TYPED = "Espresso";
 public static final String TARGET             = "5-2";
 
 public static final String ADD_A_COMMENT      = "Add a comment...";
-public static final int    MAX_COMMENTS       = 10;
+public static final int    MAX_COMMENTS       = 1;
 public static final String TEST_COMMENT_TEXT  = "testComment text";
 public static final int    DEFAULT_SLEEP_TIME = 500;
 public static final String TEST_NEW_LIST      = "testNewList";
 public static final String TEST_SUB_TASK      = "test subTask";
 
+private static final int LAUNCH_TIMEOUT = 5000;
+private static final String BASIC_SAMPLE_PACKAGE = "com.vi8e.um.wunderlist";
+
+/*private UiDevice mDevice;
+
+@Before
+public
+void startMainActivityFromHomeScreen () {
+	// Initialize UiDevice instance
+	mDevice = UiDevice.getInstance ( InstrumentationRegistry.getInstrumentation () );
+
+	// Start from the home screen
+	mDevice.pressHome ();
+
+	// Wait for launcher
+	final String launcherPackage = getLauncherPackageName ();
+	assertThat ( launcherPackage, notNullValue () );
+	mDevice.wait ( Until.hasObject ( By.pkg ( launcherPackage ).depth ( 0 ) ), LAUNCH_TIMEOUT );
+
+	// Launch the blueprint app
+	Context context = InstrumentationRegistry.getContext ();
+	final Intent intent = context.getPackageManager ()
+	                             .getLaunchIntentForPackage ( BASIC_SAMPLE_PACKAGE );
+	intent.addFlags ( Intent.FLAG_ACTIVITY_CLEAR_TASK );    // Clear out any previous instances
+	context.startActivity ( intent );
+
+	// Wait for the app to appear
+	mDevice.wait ( Until.hasObject ( By.pkg ( BASIC_SAMPLE_PACKAGE ).depth ( 0 ) ), LAUNCH_TIMEOUT );
+}
+
+@Test
+public void checkPreconditions() {
+	assertThat(mDevice, notNullValue());
+}*/
+
 @Test
 public
 void newList () {
 	String testText = TEST_NEW_LIST;
-	onView ( withId ( R.id.action_a )).perform ( click (), closeSoftKeyboard () );
+	onView ( withId ( R.id.action_a ) ).perform ( click (), closeSoftKeyboard () );
 	onView ( withId ( R.id.action_a ) ).perform ( click () );
 	onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
 	performMaterialDialogClickADD ();
@@ -118,7 +158,7 @@ void enterTaskDetail () {
 
 	Espresso.closeSoftKeyboard ();
 
-
+//too many iteration too much wasted time
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		/**
 		 * swipe act only a short distance in some cases it might not see the list below
@@ -150,19 +190,22 @@ void enterTaskDetail () {
 	pressBack ();
 
 	/**
-	 * test create 10 subTasks
+	 * create 10 subTasks
 	 */
 
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		onView ( withId ( R.id.addSubTask ) ).perform ( click () );
 		onView ( withHint ( R.string.add_sub_task ) ).perform ( typeText ( TEST_SUB_TASK + i ) );
 		performMaterialDialogClickADD ();
+
+		getCheckBox ( i,TEST_SUB_TASK ).perform ( click () );
+		getSubTask ( i ).perform ( click () );
+		getSubTask ( i ).perform ( swipeUp () );
 	}
 
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
 		getSubTask ( i ).perform ( click () );
 	}
-
 
 }
 
@@ -173,9 +216,9 @@ void sleep () {
 }
 
 public
-void sleep ( int miliSecond ) {
+void sleep ( int milSecond ) {
 	try {
-		Thread.sleep ( miliSecond );
+		Thread.sleep ( milSecond );
 	}
 	catch ( InterruptedException e ) {
 		e.printStackTrace ();
@@ -187,8 +230,13 @@ void sleep ( int miliSecond ) {
  * Just simplify the app component
  */
 @NonNull public
+ViewInteraction getCheckBox ( int i ,String hasSiblingString) {
+	return onView ( allOf ( withId ( R.id.chkBox ), hasSibling ( withText ( hasSiblingString+i ) ) ) );
+}
+
+@NonNull public
 ViewInteraction getSubTask ( int i ) {
-	return onView (  allOf ( withId ( R.id.subTaskTitle), withText ( TEST_SUB_TASK+ i ) ));
+	return onView (  allOf ( withText ( TEST_SUB_TASK+ i ) ));
 }
 
 
@@ -274,5 +322,20 @@ ViewAction waitUntilIdle () {
 	};
 }
 
+/**
+ * Uses package manager to find the package name of the device launcher. Usually this package
+ * is "com.android.launcher" but can be different at times. This is a generic solution which
+ * works on all platforms.`
+ */
+private String getLauncherPackageName() {
+	// Create launcher Intent
+	final Intent intent = new Intent(Intent.ACTION_MAIN);
+	intent.addCategory(Intent.CATEGORY_HOME);
+
+	// Use PackageManager to get the launcher package name
+	PackageManager pm = InstrumentationRegistry.getContext().getPackageManager();
+	ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+	return resolveInfo.activityInfo.packageName;
+}
 
 }
