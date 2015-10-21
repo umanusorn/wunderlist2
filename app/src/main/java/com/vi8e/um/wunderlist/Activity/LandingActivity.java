@@ -415,12 +415,10 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		return true;
 	}
 	if ( id == R.id.delete ) {
-
 		deleteSpecificList ( getApplicationContext (), currentList.getId () );
 	}
 
 	if ( id == R.id.duplicateList ) {
-
 		duplicateSpecificList ();
 	}
 

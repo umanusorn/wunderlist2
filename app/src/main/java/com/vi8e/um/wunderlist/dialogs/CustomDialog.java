@@ -52,9 +52,9 @@ public static
 void showAddSubTaskDialog ( final Activity thisContext, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
-			.title ( "Add subTask" )
+			.title ( thisContext.getString( R.string.add_sub_task) )
 			.positiveText ( "ADD" )
-			.input ( "Add subTask", "", new MaterialDialog.InputCallback () {
+			.input ( thisContext.getString( R.string.add_sub_task), "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
 					QueryHelper.addSubTaskToDB ( thisContext, String.valueOf ( charSequence ), TaskActivity.currentTask.getId (), listView );

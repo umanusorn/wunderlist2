@@ -60,7 +60,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 		convertView = LayoutInflater.from ( mContext ).inflate ( R.layout.list_row_landing, parent, false );
 	}
 	listModel.setRootView ( convertView );
-	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
+	final TextView tvTitle = ( TextView ) convertView.findViewById ( R.id.subTaskTitle );
 	TextView tvLateTask = ( TextView ) convertView.findViewById ( R.id.latetask );
 	TextView tvCurrentTask = ( TextView ) convertView.findViewById ( R.id.currentTask );
 	final ListView listView = ( ListView ) convertView.getParent ();

@@ -59,7 +59,7 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 
 	convertView = LayoutInflater.from ( getContext () ).inflate ( R.layout.list_row_sub_task, parent, false );
 	// Lookup view for data population
-	tvTitle = ( TextView ) convertView.findViewById ( R.id.listtitle );
+	tvTitle = ( TextView ) convertView.findViewById ( R.id.subTaskTitle );
 	ImageView chkBox = ( ImageView ) convertView.findViewById ( R.id.chkBox );
 	rootView = ( RelativeLayout ) convertView.findViewById ( R.id.subTaskRootRow );
 	setView ( rowData,chkBox);

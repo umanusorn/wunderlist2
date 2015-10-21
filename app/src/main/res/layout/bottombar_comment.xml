@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView6"
-            android:layout_below="@+id/listtitle"
+            android:layout_below="@+id/subTaskTitle"
             android:layout_toRightOf="@+id/textView2"
             android:layout_toEndOf="@+id/textView2"
             android:src="@drawable/abc_list_pressed_holo_dark"/>

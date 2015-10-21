@@ -103,7 +103,7 @@ android:id="@+id/rowBg"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Large Text"
                         android:singleLine="true"
-                        android:id="@+id/listtitle"
+                        android:id="@+id/subTaskTitle"
                         android:textColor="@color/grey_600"
                         android:textSize="15sp"
                         android:layout_alignParentTop="true"
@@ -120,8 +120,8 @@ android:id="@+id/rowBg"
 
                         android:visibility="gone"
                         android:layout_below="@+id/chkBox"
-                        android:layout_alignLeft="@+id/listtitle"
-                        android:layout_alignStart="@+id/listtitle"
+                        android:layout_alignLeft="@+id/subTaskTitle"
+                        android:layout_alignStart="@+id/subTaskTitle"
                         />
             </LinearLayout>
         </RelativeLayout>

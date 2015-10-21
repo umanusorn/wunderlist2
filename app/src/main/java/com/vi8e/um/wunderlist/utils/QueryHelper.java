@@ -67,6 +67,12 @@ void deleteAllListValues ( Context context ) {
 }
 
 public static
+void deleteAllSubTaskValues ( Context context ) {
+	SubtaskSelection subtaskSelection = new SubtaskSelection();
+	subtaskSelection.delete ( context.getContentResolver () );
+}
+
+public static
 void deleteAllCommentValues ( Context context ) {
 	TaskCommentSelection taskCommentSelection = new TaskCommentSelection();
 	taskCommentSelection.delete ( context.getContentResolver () );

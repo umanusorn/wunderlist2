@@ -45,6 +45,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button genListTask = ( Button ) findViewById ( R.id.genListTask );
 	Button viewDB2Btn = ( Button ) findViewById ( R.id.viewDB2Btn );
 	Button removeTask = ( Button ) findViewById ( R.id.removeTaskBtn );
+	Button removeSubTask = ( Button ) findViewById ( R.id.removeSubTaskBtn );
 	Button removeComment = ( Button ) findViewById ( R.id.removeCommentBtn );
 	Button login = ( Button ) findViewById ( R.id.login );
 	Button updateProfile = ( Button ) findViewById ( R.id.updateProfile );
@@ -52,6 +53,13 @@ void onCreate ( Bundle savedInstanceState ) {
 	Button signUp = ( Button ) findViewById ( R.id.signUp );
 	Button testDropbox = ( Button ) findViewById ( R.id.linkDropbox );
 	Button multiImgChooser = ( Button ) findViewById ( R.id.multiImgChooser );
+
+	removeSubTask.setOnClickListener ( new View.OnClickListener () {
+		@Override public
+		void onClick ( View v ) {
+			QueryHelper.deleteAllSubTaskValues ( getApplicationContext () );
+		}
+	} );
 
 	removeComment.setOnClickListener ( new View.OnClickListener () {
 		@Override public

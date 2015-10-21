@@ -45,7 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
                 android:singleLine = "true"
-                android:id="@+id/listtitle"
+                android:id="@+id/subTaskTitle"
                 android:layout_marginLeft="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_alignBottom="@+id/chkBox"
