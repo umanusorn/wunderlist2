@@ -74,8 +74,10 @@ public static final int    DEFAULT_SLEEP_TIME = 500;
 public static final String TEST_NEW_LIST      = "testNewList";
 public static final String TEST_SUB_TASK      = "test subTask";
 
-private static final int LAUNCH_TIMEOUT = 5000;
+private static final int    LAUNCH_TIMEOUT       = 5000;
 private static final String BASIC_SAMPLE_PACKAGE = "com.vi8e.um.wunderlist";
+public static final  String CHANGED              = "changed";
+public static final String CHANGED_TASK_5_2 = "changed Task 5-2";
 
 /*private UiDevice mDevice;
 
@@ -123,7 +125,7 @@ void newList () {
 
 @Test
 public
-void enterTaskDetail () {
+void overview () {
 	/**
 	 * Remove comments and SubTasks since subTasks cannot be deleted just like WunderList
 	 */
@@ -140,7 +142,7 @@ void enterTaskDetail () {
 
 	ViewInteraction editTextTitle = onView ( withId ( R.id.editTextTitle ) );
 	editTextTitle.perform ( clearText () );
-	editTextTitle.perform ( typeText ( "changed Task 5-2" ) );
+	editTextTitle.perform ( typeText ( CHANGED_TASK_5_2 ) );
 
 	/**
 	 * Add 10 Comments and swipe up&down to verify that the comment is really created then longClick on the comments to delete it
@@ -198,14 +200,25 @@ void enterTaskDetail () {
 		onView ( withHint ( R.string.add_sub_task ) ).perform ( typeText ( TEST_SUB_TASK + i ) );
 		performMaterialDialogClickADD ();
 
-		getCheckBox ( i,TEST_SUB_TASK ).perform ( click () );
+		getCheckBox ( TEST_SUB_TASK + i ).perform ( click () );
 		getSubTask ( i ).perform ( click () );
-		getSubTask ( i ).perform ( swipeUp () );
-	}
 
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		getSubTask ( i ).perform ( click () );
+		String changedSubtaskText =TEST_SUB_TASK + CHANGED +i;
+
+		onView ( withHint ( TEST_SUB_TASK + i ) ).perform (clearText (),  typeText ( changedSubtaskText ) );
+		performMaterialDialogClickADD ();
+
+		getCheckBox ( changedSubtaskText).perform ( click () );
+		getCheckBox ( changedSubtaskText ).perform ( click () );
+
 	}
+	pressBack ();
+	pressBack ();
+
+	getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );
+	onView ( withText ( R.string.view_completed_to_do ) ).perform ( click () );
+	getCheckBox ( CHANGED_TASK_5_2 ).perform ( click () );
+
 
 }
 
@@ -230,8 +243,8 @@ void sleep ( int milSecond ) {
  * Just simplify the app component
  */
 @NonNull public
-ViewInteraction getCheckBox ( int i ,String hasSiblingString) {
-	return onView ( allOf ( withId ( R.id.chkBox ), hasSibling ( withText ( hasSiblingString+i ) ) ) );
+ViewInteraction getCheckBox ( String hasSiblingString ) {
+	return onView ( allOf ( withId ( R.id.chkBox ), hasSibling ( withText ( hasSiblingString) ) ) );
 }
 
 @NonNull public
