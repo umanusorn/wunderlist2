@@ -76,7 +76,7 @@ android {
                     output.outputFile = new File(
                             output.outputFile.parent,
                             //output.outputFile.name.replace(".apk", getDate()+"Beta-${variant.versionName}.apk"))
-                            output.outputFile.name.replace("app-debug.apk", "WunerList-" + getDate() + ".apk"))
+                            output.outputFile.name.replace("app-debug.apk", "MyTask-" + getDate() + ".apk"))
                 }
             }
         }
@@ -91,7 +91,7 @@ android {
 
 def getDate() {
     def date = new Date()
-    def formattedDate = date.format('yyMMdd')
+    def formattedDate = date.format('yyyyMMdd')
     return formattedDate
 }
 
@@ -108,15 +108,17 @@ dependencies {
         transitive = true;
     }
     compile project(':slideDateTimePicker')
-    //testing
+    //testing android > v18
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
     androidTestCompile 'com.android.support:support-annotations:23.0.1'
     androidTestCompile 'com.android.support.test:runner:0.4'
     androidTestCompile 'com.android.support.test:rules:0.4'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
+
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile 'org.robolectric:robolectric:3.0'
+
     compile 'com.android.support:support-annotations:23.0.1'
     //compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1@aar'
     compile 'com.android.support:appcompat-v7:23.0.1'

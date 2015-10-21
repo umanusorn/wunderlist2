@@ -61,19 +61,19 @@ public              ActivityTestRule<LandingActivity> mActivityRule      = new A
 public static final String                            ADD_A_COMMENT      = "Add a comment...";
 public static final int                               MAX_COMMENTS       = 10;
 public static final String                            TEST_COMMENT_TEXT  = "testComment text";
-public static final int DEFAULT_SLEEP_TIME = 750;
+public static final int                               DEFAULT_SLEEP_TIME = 750;
+public static final String                            TEST_NEW_LIST      = "testNewList";
 
 @Test
 public
 void newList () {
-	String testText = "testText";
+	String testText = TEST_NEW_LIST;
 	onView ( withId ( R.id.action_a ) )
 			.perform ( click (), closeSoftKeyboard () );
 	onView ( withId ( R.id.action_a ) )
 			.perform ( click () );
 	onView ( withHint ( R.string.add_list ) ).perform ( typeText ( testText ) );
 	//onView ( withText ("ADD" ) ).perform ( click () );
-
 	performMaterialDialogOkClick ();
 
 }
@@ -112,10 +112,9 @@ void enterTaskDetail () {
 		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeUp () );
 	}
 
-	for ( int i = MAX_COMMENTS-1; i >=0 ; i-- ) {
+	for ( int i = MAX_COMMENTS - 1 ; i >= 0 ; i-- ) {
 		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeDown () );
 	}
-
 
 	//delete every comment  also test
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
@@ -129,21 +128,24 @@ void enterTaskDetail () {
 
 }
 
+
 public
 void sleep () {
 	try {
-		Thread.sleep( DEFAULT_SLEEP_TIME );
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+		Thread.sleep ( DEFAULT_SLEEP_TIME );
+	}
+	catch ( InterruptedException e ) {
+		e.printStackTrace ();
 	}
 }
 
 public
-void sleep (int miliSecond) {
+void sleep ( int miliSecond ) {
 	try {
-		Thread.sleep(miliSecond);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
+		Thread.sleep ( miliSecond );
+	}
+	catch ( InterruptedException e ) {
+		e.printStackTrace ();
 	}
 }
 
@@ -171,25 +173,30 @@ void changeText_newActivity () {
  * @param millis
  * @return
  */
-public static ViewAction waitAtLeast(final long millis) {
-	return new ViewAction() {
+public static
+ViewAction waitAtLeast ( final long millis ) {
+	return new ViewAction () {
 		@Override
-		public Matcher<View> getConstraints() {
+		public
+		Matcher<View> getConstraints () {
 			return null;
 		}
 
 		@Override
-		public String getDescription() {
+		public
+		String getDescription () {
 			return "wait for at least " + millis + " millis.";
 		}
 
 		@Override
-		public void perform(final UiController uiController, final View view) {
-			uiController.loopMainThreadUntilIdle();
-			uiController.loopMainThreadForAtLeast(millis);
+		public
+		void perform ( final UiController uiController, final View view ) {
+			uiController.loopMainThreadUntilIdle ();
+			uiController.loopMainThreadForAtLeast ( millis );
 		}
 	};
 }
+
 /**
  * Perform action of waiting until UI thread is free.
  * <p/>
@@ -199,22 +206,24 @@ public static ViewAction waitAtLeast(final long millis) {
  * @return
  */
 public static
-ViewAction waitUntilIdle() {
-	return new ViewAction() {
+ViewAction waitUntilIdle () {
+	return new ViewAction () {
 		@Override
 		public
-		Matcher<View> getConstraints() {
+		Matcher<View> getConstraints () {
 			return null;
 		}
 
 		@Override
-		public String getDescription() {
+		public
+		String getDescription () {
 			return "wait until UI thread is free";
 		}
 
 		@Override
-		public void perform(final UiController uiController, final View view) {
-			uiController.loopMainThreadUntilIdle();
+		public
+		void perform ( final UiController uiController, final View view ) {
+			uiController.loopMainThreadUntilIdle ();
 		}
 	};
 }

@@ -326,7 +326,7 @@ void onConfigurationChanged ( Configuration newConfig ) {
 protected
 void onPause () {
 	super.onPause ();
-	//setMenuNormal ();
+	setMenuNormal (thisActivity,menu);
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
 	ActivityUi.setInActiveToolBar ( toolbar, sContext );
