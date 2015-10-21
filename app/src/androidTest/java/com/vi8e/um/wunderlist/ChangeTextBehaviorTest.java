@@ -16,6 +16,7 @@
 
 package com.vi8e.um.wunderlist;
 
+import android.support.annotation.NonNull;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -53,16 +54,18 @@ import static org.hamcrest.Matchers.containsString;
 public
 class ChangeTextBehaviorTest {
 
-public static final String                            STRING_TO_BE_TYPED = "Espresso";
-public static final String                            TARGET             = "5-2";
 @Rule
-public              ActivityTestRule<LandingActivity> mActivityRule      = new ActivityTestRule<> (
+public ActivityTestRule<LandingActivity> mActivityRule = new ActivityTestRule<> (
 		LandingActivity.class );
-public static final String                            ADD_A_COMMENT      = "Add a comment...";
-public static final int                               MAX_COMMENTS       = 10;
-public static final String                            TEST_COMMENT_TEXT  = "testComment text";
-public static final int                               DEFAULT_SLEEP_TIME = 750;
-public static final String                            TEST_NEW_LIST      = "testNewList";
+
+public static final String STRING_TO_BE_TYPED = "Espresso";
+public static final String TARGET             = "5-2";
+
+public static final String ADD_A_COMMENT      = "Add a comment...";
+public static final int    MAX_COMMENTS       = 10;
+public static final String TEST_COMMENT_TEXT  = "testComment text";
+public static final int    DEFAULT_SLEEP_TIME = 500;
+public static final String TEST_NEW_LIST      = "testNewList";
 
 @Test
 public
@@ -106,19 +109,22 @@ void enterTaskDetail () {
 		onView ( withText ( "SEND" ) ).perform ( click () );
 	}
 
-
 	Espresso.closeSoftKeyboard ();
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeUp () );
+		Matcher<View> eachComment = getEachComment ( i );
+		sleep ();
+		onView ( eachComment ).perform ( swipeUp () );
 	}
 
 	for ( int i = MAX_COMMENTS - 1 ; i >= 0 ; i-- ) {
-		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( swipeDown () );
+		Matcher<View> eachComment = getEachComment ( i );
+		onView ( eachComment ).perform ( swipeDown () );
 	}
 
 	//delete every comment  also test
 	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
-		onView ( allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) ) ).perform ( longClick () );
+		Matcher<View> eachComment = getEachComment ( i );
+		onView ( eachComment ).perform ( longClick () );
 
 		//if don't wait the test will randomly crashed
 		sleep ();
@@ -128,15 +134,15 @@ void enterTaskDetail () {
 
 }
 
+@NonNull public
+Matcher<View> getEachComment ( int i ) {
+	return allOf ( withId ( R.id.commentTitle ), withText ( TEST_COMMENT_TEXT + String.valueOf ( i ) ) );
+}
+
 
 public
 void sleep () {
-	try {
-		Thread.sleep ( DEFAULT_SLEEP_TIME );
-	}
-	catch ( InterruptedException e ) {
-		e.printStackTrace ();
-	}
+	sleep (DEFAULT_SLEEP_TIME);
 }
 
 public
@@ -148,20 +154,6 @@ void sleep ( int miliSecond ) {
 		e.printStackTrace ();
 	}
 }
-
-
-@Test
-public
-void changeText_newActivity () {
-	// Type text and then press the button.
-/*	onView ( withId ( R.id.editTextUserInput ) ).perform ( typeText ( STRING_TO_BE_TYPED ),
-	                                                       closeSoftKeyboard () );
-	onView ( withId ( R.id.activityChangeTextB  tn ) ).perform ( click () );
-
-	// This view is in a different Activity, no need to tell Espresso.
-	onView ( withId ( R.id.show_text_view ) ).check ( matches ( withText ( STRING_TO_BE_TYPED ) ) );*/
-}
-
 
 /**
  * Perform action of waiting for a specific time. Useful when you need
@@ -211,7 +203,7 @@ ViewAction waitUntilIdle () {
 		@Override
 		public
 		Matcher<View> getConstraints () {
-			return null;
+			return  null;
 		}
 
 		@Override
