@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +65,7 @@ ActionBarDrawerToggle   drawerToggle;
 CoordinatorLayout       rootLayout;
 FloatingActionButton    fabBtn;
 static DynamicListView listView;
-static NestedScrollView nestedScrollView;
+//static NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
@@ -92,7 +91,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 
 	sContext = getApplicationContext ();
-	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
+//	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
 	initToolbar ();
 	initInstances ();
 
@@ -102,8 +101,12 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	int minHeight = ( int ) Utility.getListHeight ( thisActivity );
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
-	nestedScrollView.setMinimumHeight ( minHeight );
-
+	/*nestedScrollView.setMinimumHeight ( minHeight );
+	ViewCompat.setNestedScrollingEnabled ( listView, true );
+	nestedScrollView.setNestedScrollingEnabled ( true );
+	nestedScrollView.setEnabled ( true );
+	nestedScrollView.setSmoothScrollingEnabled ( true );
+	nestedScrollView.setFillViewport ( true );*/
 //	mLandingListAdapter.onClickList ( 0, thisActivity, mLandingListAdapter.getItem ( 0 ));
 
 }
@@ -256,7 +259,7 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, La
 
 int newListViewHeight = 	Utility.setTaskListViewHeight ( listView );
 
-nestedScrollView.setMinimumHeight ( newListViewHeight*2 );
+//nestedScrollView.setMinimumHeight ( newListViewHeight*2 );
 
 
 // Or even append an entire new collection
