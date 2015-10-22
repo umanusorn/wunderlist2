@@ -67,13 +67,13 @@ public ActivityTestRule<LandingActivity> mActivityRule = new ActivityTestRule<> 
 
 
 public static final String ADD_A_COMMENT      = "Add a comment...";
-public static final int    MAX_COMMENTS       = 1;
+public static final int    MAX_LOOP           = 1;
 public static final String TEST_COMMENT_TEXT  = "testComment text";
 public static final int    DEFAULT_SLEEP_TIME = 500;
 public static final String TEST_NEW_LIST      = "testNewList";
 public static final String TEST_SUB_TASK      = "test subTask";
 
-public static final  String CHANGED              = "changed";
+public static final String CHANGED          = "changed";
 public static final String CHANGED_TASK_5_2 = "changed Task 5-2";
 
 /*public static final String STRING_TO_BE_TYPED = "Espresso";
@@ -120,7 +120,7 @@ void overview () {
 	 */
 
 	onView ( withText ( containsString ( ADD_A_COMMENT ) ) ).perform ( click () );
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+	for ( int i = 0 ; i < MAX_LOOP ; i++ ) {
 		onView ( withId ( R.id.editTextComment ) ).perform ( clearText () );
 		onView ( withId ( R.id.editTextComment ) ).perform ( typeText ( TEST_COMMENT_TEXT + i ) );
 		onView ( withText ( "SEND" ) ).perform ( click () );
@@ -131,7 +131,7 @@ void overview () {
 	//too many iteration too much wasted time.
 	//I think will run a short test during the day and run long test when go for lunch,dinner,going off
 	//By set MAX... to 1 or 10 or 20
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+	for ( int i = 0 ; i < MAX_LOOP ; i++ ) {
 		/**
 		 * swipe act only a short distance in some cases it might not see the list below
 		 * this loop gives more distance
@@ -142,14 +142,14 @@ void overview () {
 		}
 	}
 
-	for ( int i = MAX_COMMENTS - 1 ; i >= 0 ; i-- ) {
+	for ( int i = MAX_LOOP - 1 ; i >= 0 ; i-- ) {
 		getEachComment ( i ).perform ( swipeDown () );
 	}
 
 	/**
 	 * delete every comments
 	 */
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+	for ( int i = 0 ; i < MAX_LOOP ; i++ ) {
 		getEachComment ( i ).perform ( longClick () );
 		/**
 		 * if don't wait the test will randomly crashed
@@ -164,7 +164,7 @@ void overview () {
 	/**
 	 * create 10 subTasks
 	 */
-	for ( int i = 0 ; i < MAX_COMMENTS ; i++ ) {
+	for ( int i = 0 ; i < MAX_LOOP ; i++ ) {
 		onView ( withId ( R.id.addSubTask ) ).perform ( click () );
 		onView ( withHint ( R.string.add_sub_task ) ).perform ( typeText ( TEST_SUB_TASK + i ) );
 		performMaterialDialogClickADD ();
@@ -283,7 +283,6 @@ ViewAction waitUntilIdle () {
 		@Override
 		public
 		Matcher<View> getConstraints () {
-
 			return new IsAnything<> ();
 		}
 

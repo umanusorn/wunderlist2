@@ -28,7 +28,38 @@ import com.vi8e.um.wunderlist.R;
 public
 class Utility {
 public static
-void setTaskListViewHeight ( ListView listView ) {
+int setTaskListViewHeight ( ListView listView ) {
+
+	ListAdapter listAdapter = listView.getAdapter ();
+	if ( listAdapter == null ) {
+		// pre-condition
+		return 0;
+	}
+
+	int totalHeight = 0;
+	int desiredWidth = View.MeasureSpec.makeMeasureSpec ( listView.getWidth (), View.MeasureSpec.AT_MOST );
+	for ( int i = 0 ; i < listAdapter.getCount () ; i++ ) {
+		View listItem = listAdapter.getView ( i, null, listView );
+		listItem.measure ( desiredWidth, View.MeasureSpec.UNSPECIFIED );//UNSPECIFIED
+
+		totalHeight += listItem.getMeasuredHeight ();
+		Log.d ( "setTaskListViewHeight","height= "+totalHeight );
+	}
+	ViewGroup.LayoutParams params = listView.getLayoutParams ();
+
+	Log.d ( "setTaskListViewHeight ","height= "+totalHeight+"listAdapter.count "+listAdapter.getCount ()+"x "+listView.getDividerHeight () );
+	totalHeight+=( listView.getDividerHeight () * ( listAdapter.getCount () - 1 ) );
+
+	params.height = totalHeight ;
+	listView.setLayoutParams ( params );
+	Log.d ( "setTaskListViewHeight ", "height= " + totalHeight + "listAdapter.count " + listAdapter.getCount () + "x " + listView.getDividerHeight () );
+	listView.requestLayout ();
+	return totalHeight;
+}
+
+
+public static
+void setListViewHeight ( ListView listView ) {
 
 	ListAdapter listAdapter = listView.getAdapter ();
 	if ( listAdapter == null ) {
@@ -46,11 +77,16 @@ void setTaskListViewHeight ( ListView listView ) {
 		Log.d ( "setTaskListViewHeight","height= "+totalHeight );
 	}
 	ViewGroup.LayoutParams params = listView.getLayoutParams ();
+
+	Log.d ( "setTaskListViewHeight ","height= "+totalHeight+"listAdapter.count "+listAdapter.getCount ()+"x "+listView.getDividerHeight () );
 	totalHeight+=( listView.getDividerHeight () * ( listAdapter.getCount () - 1 ) );
 
-	Log.d ( "setTaskListViewHeight","height= "+totalHeight );
+
+
 	params.height = totalHeight ;
+	params.height= ViewGroup.LayoutParams.WRAP_CONTENT;
 	listView.setLayoutParams ( params );
+	Log.d ( "setTaskListViewHeight ", "height= " + totalHeight + "listAdapter.count " + listAdapter.getCount () + "x " + listView.getDividerHeight () );
 	listView.requestLayout ();
 }
 

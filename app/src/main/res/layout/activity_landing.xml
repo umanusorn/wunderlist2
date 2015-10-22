@@ -53,6 +53,7 @@
             android:layout_height="match_parent"
             android:id="@+id/nested_scroll_view"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
             android:fillViewport="true"
             android:layout_gravity="fill_vertical"
             >
@@ -61,10 +62,16 @@
         <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
                 android:id="@+id/listViewTaskInComplete"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+
+            />
 
     </android.support.v4.widget.NestedScrollView>
 
     <include layout="@layout/floating_action_btn"/>
 
 </android.support.design.widget.CoordinatorLayout>
+
+
+
+    <!--app:layout_behavior="com.vi8e.um.wunderlist.utils.FixedScrollingViewBehavior"-->

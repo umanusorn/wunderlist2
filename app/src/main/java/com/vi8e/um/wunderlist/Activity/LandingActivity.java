@@ -66,7 +66,7 @@ ActionBarDrawerToggle   drawerToggle;
 CoordinatorLayout       rootLayout;
 FloatingActionButton    fabBtn;
 static DynamicListView listView;
-NestedScrollView nestedScrollView;
+static NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
@@ -254,7 +254,10 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, La
 		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
 	}
 
-	Utility.setTaskListViewHeight ( listView );
+int newListViewHeight = 	Utility.setTaskListViewHeight ( listView );
+
+nestedScrollView.setMinimumHeight ( newListViewHeight*2 );
+
 
 // Or even append an entire new collection
 // Fetching some data, data has now returned
