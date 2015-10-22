@@ -69,7 +69,7 @@ static DynamicListView listView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
-static        AppCompatActivity  thisActivity;
+static public        AppCompatActivity  thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
 public static boolean            isLongClick;

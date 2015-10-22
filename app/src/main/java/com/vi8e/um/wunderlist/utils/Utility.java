@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -27,6 +28,8 @@ import com.vi8e.um.wunderlist.R;
  */
 public
 class Utility {
+
+
 public static
 int setTaskListViewHeight ( ListView listView ) {
 
@@ -49,6 +52,13 @@ int setTaskListViewHeight ( ListView listView ) {
 
 	Log.d ( "setTaskListViewHeight ","height= "+totalHeight+"listAdapter.count "+listAdapter.getCount ()+"x "+listView.getDividerHeight () );
 	totalHeight+=( listView.getDividerHeight () * ( listAdapter.getCount () - 1 ) );
+
+	try {
+		totalHeight+=getActionBarHeight ( LandingActivity.thisActivity );
+	}catch ( NullPointerException e ){
+		Log.d ("setTaskListViewHeight" ,"hack to add height only for landingpage" );
+	}
+
 
 	params.height = totalHeight ;
 	listView.setLayoutParams ( params );
