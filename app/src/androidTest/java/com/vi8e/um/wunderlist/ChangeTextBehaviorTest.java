@@ -33,6 +33,7 @@ import android.view.View;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.core.IsAnything;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,8 +65,6 @@ class ChangeTextBehaviorTest {
 public ActivityTestRule<LandingActivity> mActivityRule = new ActivityTestRule<> (
 		LandingActivity.class );
 
-public static final String STRING_TO_BE_TYPED = "Espresso";
-public static final String TARGET             = "5-2";
 
 public static final String ADD_A_COMMENT      = "Add a comment...";
 public static final int    MAX_COMMENTS       = 1;
@@ -74,14 +73,13 @@ public static final int    DEFAULT_SLEEP_TIME = 500;
 public static final String TEST_NEW_LIST      = "testNewList";
 public static final String TEST_SUB_TASK      = "test subTask";
 
-private static final int    LAUNCH_TIMEOUT       = 5000;
-private static final String BASIC_SAMPLE_PACKAGE = "com.vi8e.um.wunderlist";
 public static final  String CHANGED              = "changed";
 public static final String CHANGED_TASK_5_2 = "changed Task 5-2";
 
-//private UiDevice mDevice;
-
-
+/*public static final String STRING_TO_BE_TYPED = "Espresso";
+public static final String TARGET             = "5-2";
+private static final int    LAUNCH_TIMEOUT       = 5000;
+private static final String BASIC_SAMPLE_PACKAGE = "com.vi8e.um.wunderlist";*/
 
 @Test
 public
@@ -104,6 +102,7 @@ void overview () {
 	onView ( withId ( R.id.menu_setting ) ).perform ( click () );
 	onView ( withId ( R.id.removeSubTaskBtn ) ).perform ( click () );
 	onView ( withId ( R.id.removeCommentBtn ) ).perform ( click () );
+	onView ( withId ( R.id.removeCommentBtn ) ).perform ( waitUntilIdle () );
 	pressBack ();
 
 	/**
@@ -206,13 +205,12 @@ void sleep ( int milSecond ) {
 	}
 }
 
-
 /**
  * Just simplify the app component
  */
 @NonNull public
 ViewInteraction getCheckBox ( String hasSiblingString ) {
-	return onView ( allOf ( withId ( R.id.chkBox ), hasSibling ( withText ( hasSiblingString) ) ) );
+	return onView ( allOf ( withId ( R.id.chkBox ), hasSibling ( withText ( hasSiblingString ) ) ) );
 }
 
 @NonNull public
@@ -253,7 +251,7 @@ ViewAction waitAtLeast ( final long millis ) {
 		@Override
 		public
 		Matcher<View> getConstraints () {
-			return null;
+			return new IsAnything<> ();
 		}
 
 		@Override
@@ -286,7 +284,7 @@ ViewAction waitUntilIdle () {
 		public
 		Matcher<View> getConstraints () {
 
-			return null;
+			return new IsAnything<> ();
 		}
 
 		@Override
