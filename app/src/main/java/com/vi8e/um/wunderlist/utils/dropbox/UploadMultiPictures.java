@@ -28,7 +28,6 @@ package com.vi8e.um.wunderlist.utils.dropbox;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -53,6 +52,7 @@ import com.vi8e.um.wunderlist.R;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 /**
@@ -63,25 +63,26 @@ import java.io.FileNotFoundException;
 public
 class UploadMultiPictures extends AsyncTask<Void, Long, Boolean> {
 
-private DropboxAPI<?>  mApi;
-private String         mPath;
-private UploadRequest  mRequest;
-private Context        mContext;
-private ProgressDialog mDialog;
+private DropboxAPI<?> mApi;
+private String        mPath;
+private UploadRequest mRequest;
+private Context       mContext;
+private String        mErrorMsg;
 
-private String mErrorMsg;
+ArrayList<String> uploadFilesPath = new ArrayList<> ();
 
 //new class variables:
 private int    mFilesUploaded;
 private File[] mFilesToUpload;
 private File[] mToBeUploaded;
 private int    mCurrentFileIndex;
-private boolean isCancelled = false;
-public static final String TAG = "UploadMulti";
-public static boolean isUploading=false;
+private             boolean isCancelled = false;
+public static final String  TAG         = "UploadMulti";
+public static       boolean isUploading = false;
 Integer NOTIFICATION_ID = 100;
 NotificationManager mNotifyManager;
 final NotificationCompat.Builder mNotificationBuilder;
+
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
 	// We set the context this way so we don't accidentally leak activities
@@ -140,8 +141,8 @@ Boolean doInBackground ( Void... params ) {
 			FileInputStream fis = new FileInputStream ( file );
 			String path = mPath + file.getName ();
 			mRequest = mApi.putFileRequest ( path, fis, file.length (), null, true, getUploadProgressListener () );
-			//mApi.share (  )
 			mRequest.upload ();
+			uploadFilesPath.add ( path );
 
 			if ( ! isCancelled ) {
 				mFilesUploaded++;
@@ -236,30 +237,53 @@ protected
 void onPostExecute ( Boolean result ) {
 	mNotifyManager.cancel ( NOTIFICATION_ID );
 	TaskDetailActivity.setInActiveUploadBtn ();
-	isUploading=false;
+	isUploading = false;
 	if ( result ) {
 		showToast ( "Images successfully uploaded" );
 	}
 	else {
 		showToast ( mErrorMsg );
 	}
+
+GetDropboxLinks getDropboxLinks = new GetDropboxLinks ();
+	getDropboxLinks.execute (  );
 }
 
+class GetDropboxLinks extends AsyncTask<String, Integer, Long> {
+
+
+	@Override protected
+	Long doInBackground ( String... params ) {
+
+		for ( String filePath :
+				uploadFilesPath ) {
+			DropboxAPI.DropboxLink dropboxLink = null;
+			try {
+				dropboxLink = mApi.share ( filePath );
+			}
+			catch ( DropboxException e ) {
+				e.printStackTrace ();
+			}
+			Log.d ( TAG, "Dropbox link = " + dropboxLink.url + " exp=" + dropboxLink.expires );
+		}
+		return null;
+	}
+}
 @Override
 protected
 void onProgressUpdate ( Long... progress ) {
 // Start a lengthy operation in a background thread
 	final NotificationManager finalMNotifyManager = mNotifyManager;
-	updateProgressOfDialog ( progress, mFilesToUpload, mCurrentFileIndex, mDialog );
-	isUploading=true;
+	updateProgress ( progress, mFilesToUpload, mCurrentFileIndex );
+	isUploading = true;
 	TaskDetailActivity.setActiveUploadBtn ();
 
 }
 
 private
-void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int currentFileIndex, ProgressDialog dialog ) {
-	Long totalBytes = Long.valueOf ( 0 );
-	Long bytesUploaded = Long.valueOf ( 0 );
+void updateProgress ( Long[] progress, File[] filesToUpload, int currentFileIndex ) {
+	Long totalBytes = ( long ) 0;
+	Long bytesUploaded = ( long ) 0;
 	for ( int i = 0 ; i < filesToUpload.length ; i++ ) {
 		Long bytes = filesToUpload[ i ].length ();
 		totalBytes += bytes;
@@ -272,7 +296,6 @@ void updateProgressOfDialog ( Long[] progress, File[] filesToUpload, int current
 
 	int progressUpdate = ( int ) ( ( bytesUploaded / totalBytes ) * 100 );
 	String filesStatus = "Uploading " + ( currentFileIndex + 1 ) + " / " + filesToUpload.length + " pictures";
-	//Log.d ( TAG, "updatingProgress " + progressUpdate + " " + filesStatus );
 	mNotificationBuilder.setProgress ( 100, progressUpdate, false );
 	mNotificationBuilder.setContentText ( filesStatus );
 	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );

@@ -140,5 +140,4 @@ dependencies {
     compile files('libs/httpmime-4.0.3.jar')
     //multi img chooser with cam
     compile 'com.github.jaydeepw:poly-picker:v1.0.22'
-    compile project(':dropboxChooserSDK')
 }

@@ -39,7 +39,6 @@ void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
 	setContentView ( R.layout.activity_dev_database );
 
-	Button genRecord = ( Button ) findViewById ( R.id.GenRecordBtn );
 	Button removeLists = ( Button ) findViewById ( R.id.removeListBtn );
 	Button viewDbBtn = ( Button ) findViewById ( R.id.viewDbBtn );
 	Button genListTask = ( Button ) findViewById ( R.id.genListTask );
