@@ -77,18 +77,19 @@ void setUpNotification () {
 	Intent intentCancelUpload = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
 	intentCancelUpload.putExtra ( TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.TRUE );
 
-	PendingIntent pIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
-	PendingIntent pIntentCancel = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intentCancelUpload, 0 );
+	PendingIntent pendingIntent = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intent, 0 );
+	PendingIntent pendingIntentCancel = PendingIntent.getActivity ( TaskDetailActivity.thisActivity, ( int ) System.currentTimeMillis (), intentCancelUpload,
+	                                                                0 );
 
 
 	mNotificationBuilder.setContentTitle ( "Uploading pictures to the server" )
 	                    .setContentText ( "Upload in progress" )
 	                    .setAutoCancel ( true )
-	                    .setContentIntent ( pIntent )
+	                    .setContentIntent ( pendingIntent )
 	                    .setPriority ( NotificationCompat.PRIORITY_HIGH )
 	                    .setVisibility ( NotificationCompat.VISIBILITY_PUBLIC )
 	                    .setCategory ( NotificationCompat.CATEGORY_ALARM )
-	                    .addAction ( R.drawable.ic_action_delete, "Cancel upload", pIntentCancel )
+	                    .addAction ( R.drawable.ic_action_delete, "Cancel upload", pendingIntentCancel )
 	                    .setSmallIcon ( R.drawable.ic_action_accept );
 
 }
@@ -164,6 +165,7 @@ Boolean doInBackground ( Void... params ) {
 		mErrorMsg = "Unknown error.  Try again.";
 	}
 	catch ( FileNotFoundException e ) {
+		mErrorMsg = "File not found";
 	}
 	return false;
 }
@@ -226,8 +228,7 @@ class GetDropboxLinks extends AsyncTask<String, Integer, Long> {
 	@Override protected
 	Long doInBackground ( String... params ) {
 
-		for ( String filePath :
-				uploadFilesPath ) {
+		for ( String filePath : uploadFilesPath ) {
 			DropboxAPI.DropboxLink dropboxLink = null;
 			try {
 				dropboxLink = mApi.share ( filePath );
