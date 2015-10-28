@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+
 /**
  * Here we show uploading a file in a background thread, trying to show
  * typical exception handling and flow of control for an app that uploads a
@@ -41,20 +42,17 @@ private String        mPath;
 private UploadRequest mRequest;
 private Context       mContext;
 private String        mErrorMsg;
+private int           mCurrentFileIndex;
 
-ArrayList<String> uploadFilesPath = new ArrayList<> ();
-
-//new class variables:
-private int    mFilesUploaded;
 private File[] mFilesToUpload;
 private File[] mToBeUploaded;
-private int    mCurrentFileIndex;
-private             boolean isCancelled = false;
-public static final String  TAG         = "UploadMulti";
-public static       boolean isUploading = false;
-Integer NOTIFICATION_ID = 100;
+public static final String  TAG             = "UploadMulti";
+public static       boolean isUploading     = false;
+final               int     NOTIFICATION_ID = 100;
+
 NotificationManager mNotifyManager;
 final NotificationCompat.Builder mNotificationBuilder;
+ArrayList<String> uploadFilesPath = new ArrayList<> ();
 
 public
 UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, File[] filesToUpload ) {
@@ -63,21 +61,17 @@ UploadMultiPictures ( Context context, DropboxAPI<?> api, String dropboxPath, Fi
 	mApi = api;
 	mPath = dropboxPath;
 
-	//set number of files uploaded to zero.
-	mFilesUploaded = 0;
 	mFilesToUpload = filesToUpload;
 	mToBeUploaded = mFilesToUpload;
 	mCurrentFileIndex = 0;
 
 	mNotificationBuilder = new NotificationCompat.Builder ( TaskDetailActivity.thisActivity );
 	setUpNotification ();
-
 }
 
 public
 void setUpNotification () {
-	mNotifyManager =
-			( NotificationManager ) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
+	mNotifyManager = ( NotificationManager ) mContext.getSystemService ( Context.NOTIFICATION_SERVICE );
 
 	Intent intent = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
 	Intent intentCancelUpload = new Intent ( TaskDetailActivity.thisActivity, TaskDetailActivity.class );
@@ -115,13 +109,6 @@ Boolean doInBackground ( Void... params ) {
 			mRequest = mApi.putFileRequest ( path, fis, file.length (), null, true, getUploadProgressListener () );
 			mRequest.upload ();
 			uploadFilesPath.add ( path );
-
-			if ( ! isCancelled ) {
-				mFilesUploaded++;
-			}
-			else {
-				return false;
-			}
 		}
 		return true;
 	}
@@ -142,20 +129,20 @@ Boolean doInBackground ( Void... params ) {
 		// but we don't do anything special with them here.
 		if ( e.error == DropboxServerException._401_UNAUTHORIZED ) {
 			//todo auto logout?
-			Log.e ( TAG,"Unauthorized, so we should unlink them.  You may want to\n"
-			            + "\t\t\t automatically log the user out in this case." );
+			Log.e ( TAG, "Unauthorized, so we should unlink them.  You may want to\n"
+			             + "\t\t\t automatically log the user out in this case." );
 		}
 		else if ( e.error == DropboxServerException._403_FORBIDDEN ) {
-			Log.e ( TAG,"Not allowed to access this" );
+			Log.e ( TAG, "Not allowed to access this" );
 		}
 		else if ( e.error == DropboxServerException._404_NOT_FOUND ) {
-			Log.e ( TAG," path not found (or if it was the thumbnail, can't be thumbnailed)" );
+			Log.e ( TAG, " path not found (or if it was the thumbnail, can't be thumbnailed)" );
 		}
 		else if ( e.error == DropboxServerException._507_INSUFFICIENT_STORAGE ) {
-			Log.e ( TAG,"user is over quota" );
+			Log.e ( TAG, "user is over quota" );
 		}
 		else {
-			Log.e ( TAG,"something else : ["+e.error +"]");
+			Log.e ( TAG, "something else : [" + e.error + "]" );
 		}
 
 		// This gets the Dropbox error, translated into the user's language
@@ -205,6 +192,18 @@ ProgressListener getUploadProgressListener () {
 	};
 }
 
+public
+void cancelUpload () {
+	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
+	mNotificationBuilder.setContentText ( "" );
+	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );
+	isUploading = false;
+	cancel ( true );
+	isCancelled ();
+	Log.d ( TAG, "done cancel upload" );
+	TaskDetailActivity.setInActiveUploadBtn ();
+}
+
 @Override
 protected
 void onPostExecute ( Boolean result ) {
@@ -218,12 +217,11 @@ void onPostExecute ( Boolean result ) {
 		showToast ( mErrorMsg );
 	}
 
-GetDropboxLinks getDropboxLinks = new GetDropboxLinks ();
-	getDropboxLinks.execute (  );
+	GetDropboxLinks getDropboxLinks = new GetDropboxLinks ();
+	getDropboxLinks.execute ();
 }
 
 class GetDropboxLinks extends AsyncTask<String, Integer, Long> {
-
 
 	@Override protected
 	Long doInBackground ( String... params ) {
@@ -242,6 +240,7 @@ class GetDropboxLinks extends AsyncTask<String, Integer, Long> {
 		return null;
 	}
 }
+
 @Override
 protected
 void onProgressUpdate ( Long... progress ) {
@@ -278,23 +277,5 @@ private
 void showToast ( String msg ) {
 	Toast error = Toast.makeText ( mContext, msg, Toast.LENGTH_LONG );
 	error.show ();
-}
-
-public
-void cancelUpload () {
-	mNotificationBuilder.setContentTitle ( "Upload cancelled" );
-	mNotificationBuilder.setContentText ( "" );
-	mNotifyManager.notify ( NOTIFICATION_ID, mNotificationBuilder.build () );
-	isUploading=false;
-	cancel ( true );
-	setIsCancelled ( true );
-	isCancelled ();
-	Log.d ( TAG, "done cancel upload" );
-	TaskDetailActivity.setInActiveUploadBtn ();
-}
-
-public
-void setIsCancelled ( boolean isCancelled ) {
-	this.isCancelled = isCancelled;
 }
 }
