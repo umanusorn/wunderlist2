@@ -26,15 +26,12 @@
 package com.vi8e.um.wunderlist.Activity;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,10 +47,6 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadPicture;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public
@@ -137,35 +130,6 @@ void toggleLoginDropbox () {
 		else {
 			mApi.getSession ().startOAuth2Authentication ( LoginDropboxActivity.this );
 		}
-	}
-}
-
-public
-void uploadViaCamera () {
-	Intent intent = new Intent ();
-	// Picture from camera
-	intent.setAction ( MediaStore.ACTION_IMAGE_CAPTURE );
-
-	// This is not the right way to do this, but for some reason, having
-	// it store it in
-	// MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
-
-	Date date = new Date ();
-	DateFormat df = new SimpleDateFormat ( "yyyy-MM-dd-kk-mm-ss", Locale.US );
-
-	String newPicFile = df.format ( date ) + ".jpg";
-	String outPath = new File ( Environment.getExternalStorageDirectory (), newPicFile ).getPath ();
-	File outFile = new File ( outPath );
-
-	mCameraFileName = outFile.toString ();
-	Uri outuri = Uri.fromFile ( outFile );
-	intent.putExtra ( MediaStore.EXTRA_OUTPUT, outuri );
-	Log.i ( TAG, "Importing New Picture: " + mCameraFileName );
-	try {
-		startActivityForResult ( intent, NEW_PICTURE );
-	}
-	catch ( ActivityNotFoundException e ) {
-		showToast ( "There doesn't seem to be a camera." );
 	}
 }
 

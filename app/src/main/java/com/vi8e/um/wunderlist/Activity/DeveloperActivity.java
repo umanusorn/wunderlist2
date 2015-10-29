@@ -20,19 +20,6 @@ class DeveloperActivity extends Activity {
 Activity mActivity;
 private static final int INTENT_REQUEST_GET_IMAGES = 1130;
 
-private
-void getImages () {
-	Intent intent = new Intent ( this, ImagePickerActivity.class );
-	Config config = new Config.Builder ()
-			.setTabBackgroundColor ( R.color.white )    // set tab background color. Default white.
-			.setTabSelectionIndicatorColor ( R.color.blue )
-			.setCameraButtonColor ( R.color.green )
-			.setSelectionLimit ( 2 )    // set photo selection limit. Default unlimited selection.
-			.build ();
-	ImagePickerActivity.setConfig ( config );
-	startActivityForResult ( intent, INTENT_REQUEST_GET_IMAGES );
-}
-
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
@@ -158,6 +145,19 @@ void onCreate ( Bundle savedInstanceState ) {
 		}
 	} );
 
+}
+
+private
+void getImages () {
+	Intent intent = new Intent ( this, ImagePickerActivity.class );
+	Config config = new Config.Builder ()
+			.setTabBackgroundColor ( R.color.white )    // set tab background color. Default white.
+			.setTabSelectionIndicatorColor ( R.color.blue )
+			.setCameraButtonColor ( R.color.green )
+			.setSelectionLimit ( 2 )    // set photo selection limit. Default unlimited selection.
+			.build ();
+	ImagePickerActivity.setConfig ( config );
+	startActivityForResult ( intent, INTENT_REQUEST_GET_IMAGES );
 }
 
 @Override
