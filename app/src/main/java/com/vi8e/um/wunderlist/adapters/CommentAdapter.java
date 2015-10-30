@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 
@@ -87,7 +87,7 @@ View.OnClickListener onClickChkBox ( final CommentModel rowData ) {
 
 			//	rowData.setDateTime ( String.valueOf ( ! rowData.getDateTime () ) );
 			Log.d ( TAG,"onClickBox" );
-			Utility.toggleImgCompleteData ( v, rowData, TaskDetailActivity.sContext );
+			UiMng.toggleImgCompleteData(v, rowData, TaskDetailActivity.sContext);
 		}
 	};
 }

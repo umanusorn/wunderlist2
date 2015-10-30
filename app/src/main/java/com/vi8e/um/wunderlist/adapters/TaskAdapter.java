@@ -17,7 +17,7 @@ import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 
@@ -73,8 +73,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	chkBox.setOnClickListener ( onClickChkBox ( rowData ) );
 
 	//todo to be fix late i need only to change the img
-	Utility.toggleImgCompleteData ( chkBox, rowData, getContext () );
-	Utility.toggleImgCompleteData ( chkBox,rowData,getContext () );
+	UiMng.toggleImgCompleteData(chkBox, rowData, getContext());
+	UiMng.toggleImgCompleteData(chkBox, rowData, getContext());
 
 	setUpStar ( rowData, star, res );
 
@@ -89,8 +89,8 @@ View getView ( final int position, View convertView, final ViewGroup parent ) {
 	}
 	catch ( NullPointerException e ) {
 		Log.e ( "error on setonClick", rowData.getTitle () + ":" + e.toString () );
-		Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-		Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
+		UiMng.setTaskListViewHeight(TaskActivity.listViewComplete);
+		UiMng.setTaskListViewHeight(TaskActivity.listViewIncomplete);
 	}
 
 	convertView.setOnClickListener ( onClickTask ( tvTitle, position ) );
@@ -118,8 +118,8 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg Star", rowData.getTitle () + ":" + e.toString () );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
+			UiMng.setTaskListViewHeight(TaskActivity.listViewComplete);
+			UiMng.setTaskListViewHeight(TaskActivity.listViewIncomplete);
 		}
 
 	}
@@ -130,8 +130,8 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 		}
 		catch ( NullPointerException e ) {
 			Log.e ( "error on setBg unStar", rowData.getTitle () + ":" + e.toString () );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
+			UiMng.setTaskListViewHeight(TaskActivity.listViewComplete);
+			UiMng.setTaskListViewHeight(TaskActivity.listViewIncomplete);
 		}
 	}
 }
@@ -139,10 +139,10 @@ void setUpStar ( TaskModel rowData, ImageView star, Resources res ) {
 void onClickStar ( View v, TaskModel rowData ) {
 	if ( ! rowData.isComplete () ) {
 		Log.d ( "setOnClickStar", "" + ! rowData.isComplete () );
-		Utility.toggleImgStarData ( v,
-		                            rowData,
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-		                            res.getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+		UiMng.toggleImgStarData(v,
+				rowData,
+				res.getDrawable(R.mipmap.wl_task_detail_ribbon),
+				res.getDrawable(R.mipmap.wl_task_detail_ribbon_selected));
 	}
 }
 
@@ -197,8 +197,8 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 				TaskActivity.taskAdapterInComplete.insert ( rowData, 0 );
 				TaskActivity.taskAdapterComplete.remove ( rowData );
 			}
-			Utility.setTaskListViewHeight ( TaskActivity.listViewComplete );
-			Utility.setTaskListViewHeight ( TaskActivity.listViewIncomplete );
+			UiMng.setTaskListViewHeight(TaskActivity.listViewComplete);
+			UiMng.setTaskListViewHeight(TaskActivity.listViewIncomplete);
 		}
 	};
 }
@@ -206,7 +206,7 @@ View.OnClickListener onClickChkBox ( final TaskModel rowData ) {
 public
 void addList ( TaskModel object, ListView listView ) {
 	super.add ( object );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setTaskListViewHeight(listView);
 }
 
 }

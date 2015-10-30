@@ -35,7 +35,7 @@ import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +121,7 @@ TaskAdapter setUpAdapterListView ( Context context, ListView listView, TaskAdapt
 		//Log.d ( TAG, " id=" + values.getAsInteger ( TaskColumns._ID ) );
 	}
 	listView.setAdapter ( taskAdapter );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setTaskListViewHeight(listView);
 	return taskAdapter;
 }
 
@@ -164,9 +164,9 @@ View.OnClickListener onCLickStar () {
 	return new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			isStar = Utility.toggleImg ( v,
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon ),
-			                             getResources ().getDrawable ( R.mipmap.wl_task_detail_ribbon_selected ) );
+			isStar = UiMng.toggleImg(v,
+					getResources().getDrawable(R.mipmap.wl_task_detail_ribbon),
+					getResources().getDrawable(R.mipmap.wl_task_detail_ribbon_selected));
 		}
 	};
 }
@@ -345,7 +345,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 			taskAdapterInComplete.remove ( currentTask );
 		}
 
-		Utility.setTaskListViewHeight ( listViewIncomplete );
+		UiMng.setTaskListViewHeight(listViewIncomplete);
 	}
 	setMenuNormal ();
 

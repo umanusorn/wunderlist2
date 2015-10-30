@@ -17,7 +17,7 @@ import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 
@@ -245,6 +245,6 @@ public
 void addList ( ListModel object, ListView listView ) {
 
 	super.add ( object );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setListViewHeight(listView);
 }
 }

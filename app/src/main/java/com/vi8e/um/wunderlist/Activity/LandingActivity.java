@@ -46,7 +46,7 @@ import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +99,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setListView ();
 	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
 
-	int minHeight = ( int ) Utility.getListHeight ( thisActivity );
+	int minHeight = ( int ) UiMng.getListHeight(thisActivity);
 	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
 	/*nestedScrollView.setMinimumHeight ( minHeight );
 	ViewCompat.setNestedScrollingEnabled ( listView, true );
@@ -257,7 +257,7 @@ LandingListAdapter setUpAdapterListView ( Activity activity, Context context, La
 		landingListAdapter.add ( new ListModel ( values.getAsString ( ListColumns._ID ), values.getAsString ( ListColumns.LIST_TITLE ) ) );
 	}
 
-int newListViewHeight = 	Utility.setTaskListViewHeight ( listView );
+int newListViewHeight = 	UiMng.setListViewHeight(listView);
 
 //nestedScrollView.setMinimumHeight ( newListViewHeight*2 );
 
@@ -310,7 +310,7 @@ void initInstances () {
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
 
-	collapsingToolbarLayout.setTitle ( "" + Utility.getVersionName ( getApplication () ) );
+	collapsingToolbarLayout.setTitle ( "" + UiMng.getVersionName(getApplication()) );
 
 }
 
@@ -404,7 +404,7 @@ class OnSwipeDismissCallBack implements OnDismissCallback {
 		}
 		Log.d ( TAG, "onDismiss" );
 		CustomDialog.showDialogDelete ( thisActivity, mLandingListAdapter, listView );
-		Utility.toastOneInstance ( mToast, getApplicationContext () );
+		UiMng.toastOneInstance(mToast, getApplicationContext());
 	}
 
 }

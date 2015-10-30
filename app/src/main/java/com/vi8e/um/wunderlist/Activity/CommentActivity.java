@@ -23,7 +23,7 @@ import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
-import com.vi8e.um.wunderlist.utils.Utility;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,7 +172,7 @@ CommentAdapter setUpAdapterListView ( ListView listView, Context context ) {
 		                                        values.getAsString ( TaskCommentColumns.USER_ID ) )
 		                   );
 	}
-	Utility.setTaskListViewHeight ( listViewSubTask );
+	UiMng.setTaskListViewHeight(listViewSubTask);
 	return commentAdapter;
 }
 

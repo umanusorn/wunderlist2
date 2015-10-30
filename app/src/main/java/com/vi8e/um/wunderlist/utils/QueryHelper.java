@@ -134,7 +134,7 @@ void addSubTaskToDB ( Context context, String title,String taskId,ListView listV
 public static
  void updateListAdapter ( String title, ListView listView, Uri uri ) {
 	LandingActivity.mLandingListAdapter.add ( 0, new ListModel ( getIdFromUri ( uri ), title ) );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setTaskListViewHeight(listView);
 }
 
 
@@ -165,7 +165,7 @@ public static
 void updateListAdapter ( ListModel listModel, ListView listView) {
 
 	LandingActivity.mLandingListAdapter.add ( 0,listModel );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setTaskListViewHeight(listView);
 }
 
 public static
@@ -179,7 +179,7 @@ void addTaskToDB ( Context context, TaskModel taskModel, TaskAdapter taskAdapter
 	Uri uri = addTaskToDB ( context, taskModel );
 	taskModel.setId ( getIdFromUri ( uri ) );
 	taskAdapter.insert ( new TaskModel ( getIdFromUri ( uri ), taskModel ), 0 );
-	Utility.setTaskListViewHeight ( listView );
+	UiMng.setTaskListViewHeight(listView);
 }
 
 public static

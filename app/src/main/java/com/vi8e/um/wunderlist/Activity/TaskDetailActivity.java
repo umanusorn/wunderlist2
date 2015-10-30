@@ -42,7 +42,6 @@ import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.UiMng;
-import com.vi8e.um.wunderlist.utils.Utility;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadMultiPictures;
 
 import java.io.File;
@@ -142,7 +141,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	setView ();
 	setViewValues ();
 	subTaskAdapter.setNotifyOnChange ( true );
-	Utility.setTaskListViewHeight ( listViewSubTask );
+	UiMng.setTaskListViewHeight(listViewSubTask);
 }
 
 private
@@ -160,6 +159,7 @@ void setView () {
 	bottomRoot = ( RelativeLayout ) findViewById ( R.id.bottomBarRoot );
 	editTextBottom = ( EditText ) findViewById ( R.id.editTextBottom );
 	uploadBtn = ( ImageView ) findViewById ( R.id.upload );
+
 }
 
 private
@@ -202,18 +202,18 @@ void setViewValues () {
 		}
 	} );
 
-	Utility.toggleImgCompleteData ( checkBoxTask, currentTask, getApplicationContext () );
+	UiMng.toggleImgCompleteData(checkBoxTask, currentTask, getApplicationContext());
 	checkBoxTask.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Utility.toggleImgCompleteData ( v, currentTask, getApplicationContext () );
+			UiMng.toggleImgCompleteData(v, currentTask, getApplicationContext());
 		}
 	} );
-	Utility.toggleImgStarData ( star, currentTask, getApplicationContext () );
+	UiMng.toggleImgStarData(star, currentTask, getApplicationContext());
 	star.setOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			Utility.toggleImgStarData ( v, currentTask, getApplicationContext () );
+			UiMng.toggleImgStarData(v, currentTask, getApplicationContext());
 		}
 	} );
 
@@ -284,7 +284,7 @@ SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubT
 		                                        values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
 	}
 
-	Utility.setTaskListViewHeight ( listViewSubTask );
+	UiMng.setTaskListViewHeight(listViewSubTask);
 
 	return subTaskAdapter;
 }
