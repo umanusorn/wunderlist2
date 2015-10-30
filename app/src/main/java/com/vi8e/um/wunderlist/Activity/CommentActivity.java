@@ -112,8 +112,13 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 
 public static
 void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, LandingActivity.menu );
+
+	if(menu==null)
+		thisActivity.invalidateOptionsMenu();
+
+	/*menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, LandingActivity.menu );*/
+
 }
 
 public static

@@ -234,6 +234,7 @@ void setUpOnResume () {
 //	mLandingListAdapter.clear ();
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, thisActivity.getApplication (), mLandingListAdapter );
 	ActivityUi.setInActiveToolBar ( toolbar, sContext );
+
 }
 
 public static
@@ -370,9 +371,12 @@ onResume () {
 
 public static
 void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
+	Log.d(TAG,"setMenuNormal");
 	menu.clear ();
 	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, LandingActivity.menu );
 }
+
+
 
 @Override
 public
