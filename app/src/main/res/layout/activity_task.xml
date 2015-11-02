@@ -45,6 +45,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/taskEditLayout"
+        android:layout_margin="3dp"
+        android:background="@drawable/custom_edittext_round_bg"
         >
     <!--android:textColor="@color/white"
                 android:textColorHint="@color/white"-->
@@ -52,9 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
-
-            android:textColor="@color/white"
-
             android:layout_alignParentTop="true"
             android:imeOptions="actionDone"
             android:singleLine="true"

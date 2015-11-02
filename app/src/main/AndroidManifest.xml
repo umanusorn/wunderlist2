@@ -84,22 +84,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing|stateVisible" />
         <activity
-            android:name=".Activity.UpdateProfileActivity"
+            android:name=".Activity.Giants.UpdateProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.RegisterFirstActivity"
+            android:name=".Activity.Giants.RegisterFirstActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.RegisterSecondActivity"
+            android:name=".Activity.Giants.RegisterSecondActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.RegisterThirdActivity"
+            android:name=".Activity.Giants.RegisterThirdActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MyAccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.Giants.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.paypal.android.sdk.payments.PaymentActivity"

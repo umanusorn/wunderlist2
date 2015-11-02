@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Activity;
+package com.vi8e.um.wunderlist.Activity.Giants;
 
 import android.app.DialogFragment;
 import android.content.Intent;

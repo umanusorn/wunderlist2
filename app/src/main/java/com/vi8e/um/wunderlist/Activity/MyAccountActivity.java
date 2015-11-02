@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vi8e.um.wunderlist.Activity.Giants.UpdateProfileActivity;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.MyAccountAdapter;
 import com.vi8e.um.wunderlist.asyncs.AsyncCheckPAssionCard;
