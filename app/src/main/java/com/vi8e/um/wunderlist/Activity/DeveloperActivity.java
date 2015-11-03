@@ -12,7 +12,7 @@ import com.vi8e.um.wunderlist.Activity.Giants.LoginActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.RegisterFirstActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.UpdateProfileActivity;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.recyclerview.MainActivity;
+import com.vi8e.um.wunderlist.recyclerview.RecycleActivityOriginal;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import nl.changer.polypicker.Config;
@@ -45,7 +45,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 	recycleView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			Intent i = new Intent(getApplicationContext(), MainActivity.class);
+			Intent i = new Intent(getApplicationContext(), RecycleActivityOriginal.class);
 			startActivity(i);
 		}
 	});

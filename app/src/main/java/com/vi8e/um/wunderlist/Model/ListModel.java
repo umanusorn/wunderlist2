@@ -9,8 +9,7 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 
 
-public
-class ListModel {
+public class ListModel {
 
 
 String  id;
@@ -22,28 +21,31 @@ boolean isPinned;
 boolean isDisturb;
 String  imgPath;
 
-String  type;
-View rootView;
+String type;
+View   rootView;
 
-public RelativeLayout getRowRootView (){
-	return  (RelativeLayout)getRootView ().findViewById ( R.id.row_list_root_view );
+public ListModel(ContentValues listValues) {
+	setValues(listValues);
 }
-public
-ListModel ( String id, String title ) {
+
+public RelativeLayout getRowRootView() {
+	return (RelativeLayout) getRootView().findViewById(R.id.row_list_root_view);
+}
+
+public ListModel(String id, String title) {
 	//setDefault ();
-	Log.d ( "NewListModel", "id=" + id+"title= "+title );
+	Log.d("NewListModel", "id=" + id + "title= " + title);
 	this.id = id;
 	this.title = title;
 }
 
-public
-ListModel ( String title ) {
-	setDefault ();
+public ListModel(String title) {
+	setDefault();
 	this.title = title;
 
 }
 
-void setDefault () {
+void setDefault() {
 	//this.title = ""; //
 	this.imgPath = "";
 	this.isDisturb = false;
@@ -57,91 +59,83 @@ void setDefault () {
 
 }
 
-public
-ListModel ( ListModel listModel) {
-	this.title = listModel.getTitle ();
-	this.imgPath = listModel.getImgPath ();
-	this.isDisturb = listModel.isDisturb ();
-	this.isPinned = listModel.isPinned ();
-	this.folderId = listModel.getFolderId ();
-	this.numCurrentTask = listModel.getNumCurrentTask ();
-	this.numLateTask = listModel.getNumLateTask ();
-	this.id = listModel.getId ();
+public ListModel(ListModel listModel) {
+	this.title = listModel.getTitle();
+	this.imgPath = listModel.getImgPath();
+	this.isDisturb = listModel.isDisturb();
+	this.isPinned = listModel.isPinned();
+	this.folderId = listModel.getFolderId();
+	this.numCurrentTask = listModel.getNumCurrentTask();
+	this.numLateTask = listModel.getNumLateTask();
+	this.id = listModel.getId();
 
 }
 
-public
-String getTitle () {
+public String getTitle() {
 	return title;
 }
 
-public
-void setTitle ( String title ) {
+public void setTitle(String title) {
 	this.title = title;
 }
 
-public
-String getId () {
+public String getId() {
 	return id;
 }
 
-public
-void setId ( String id ) {
+public void setId(String id) {
 	this.id = id;
 }
 
-public
-int getNumLateTask () {
+public int getNumLateTask() {
 	return numLateTask;
 }
 
-public
-void setNumLateTask ( int numLateTask ) {
+public void setNumLateTask(int numLateTask) {
 	this.numLateTask = numLateTask;
 }
 
-public
-int getNumCurrentTask () {
+public int getNumCurrentTask() {
 	return numCurrentTask;
 }
 
-public
-void setNumCurrentTask ( int numCurrentTask ) {
+public void setNumCurrentTask(int numCurrentTask) {
 	this.numCurrentTask = numCurrentTask;
 }
 
-public
-int getFolderId () {
+public int getFolderId() {
 	return folderId;
 }
 
-public
-void setFolderId ( int folderId ) {
+public void setFolderId(int folderId) {
 	this.folderId = folderId;
 }
 
-public
-boolean isPinned () {
+public boolean isPinned() {
 	return isPinned;
 }
 
-public
-boolean isDisturb () {
+public boolean isDisturb() {
 	return isDisturb;
 }
 
-public
-String getImgPath () {
+public String getImgPath() {
 	return imgPath;
 }
 
-public
-void setImgPath ( String imgPath ) {
+public void setImgPath(String imgPath) {
 	this.imgPath = imgPath;
 }
 
-public
-ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, int folderId, int numCurrentTask, int numLateTask, String id ) {
+public ListModel(String title,
+                 String imgPath,
+                 boolean isDisturb,
+                 boolean isPinned,
+                 int folderId,
+                 int numCurrentTask,
+                 int numLateTask,
+                 String id)
+{
 	this.title = title; //
 	this.imgPath = imgPath;
 	this.isDisturb = isDisturb;
@@ -153,51 +147,61 @@ ListModel ( String title, String imgPath, boolean isDisturb, boolean isPinned, i
 
 }
 
-public
-View getRootView () {
+public View getRootView() {
 	return rootView;
 }
 
-public
-void setRootView ( View rootView ) {
+public void setRootView(View rootView) {
 	this.rootView = rootView;
 }
 
-public
-ContentValues getValues () {
-	ContentValues values = new ContentValues ();
-	values.put ( ListColumns.LIST_TITLE, title );
-	values.put ( ListColumns.IMG_PATH,imgPath );
-	values.put ( ListColumns.ISDISTURB,isDisturb );
+public ContentValues getValues() {
+	ContentValues values = new ContentValues();
+	values.put(ListColumns.LIST_TITLE, title);
+	values.put(ListColumns.IMG_PATH, imgPath);
+	values.put(ListColumns.ISDISTURB, isDisturb);
 
-	values.put ( ListColumns.ISPINNED,isPinned );
-	values.put ( ListColumns.FOLDER_ID,folderId );
-	values.put ( ListColumns.NUM_CURRENT_TASK,numCurrentTask );
+	values.put(ListColumns.ISPINNED, isPinned);
+	values.put(ListColumns.FOLDER_ID, folderId);
+	values.put(ListColumns.NUM_CURRENT_TASK, numCurrentTask);
 
-	values.put ( ListColumns.NUM_LATE_TASK,numLateTask );
+	values.put(ListColumns.NUM_LATE_TASK, numLateTask);
 	//values.put ( ListColumns._ID,id );
 
 	return values;
 }
 
-public
-String getType () {
+
+public ListModel setValues(ContentValues values) {
+	//ContentValues values = new ContentValues ();
+	title = values.getAsString(ListColumns.LIST_TITLE);
+	imgPath = values.getAsString(ListColumns.IMG_PATH);
+	isDisturb = values.getAsBoolean(ListColumns.ISDISTURB);
+
+	isPinned = values.getAsBoolean(ListColumns.ISPINNED);
+	folderId = values.getAsInteger(ListColumns.FOLDER_ID);
+	numCurrentTask = values.getAsInteger(ListColumns.NUM_CURRENT_TASK);
+
+	numLateTask = values.getAsInteger(ListColumns.NUM_LATE_TASK);
+	//values.put ( ListColumns._ID,id );
+
+	return this;
+}
+
+public String getType() {
 
 	return type;
 }
 
-public
-void setType ( String type ) {
+public void setType(String type) {
 	this.type = type;
 }
 
-public
-void setIsPinned ( boolean isPinned ) {
+public void setIsPinned(boolean isPinned) {
 	this.isPinned = isPinned;
 }
 
-public
-void setIsDisturb ( boolean isDisturb ) {
+public void setIsDisturb(boolean isDisturb) {
 	this.isDisturb = isDisturb;
 }
 }

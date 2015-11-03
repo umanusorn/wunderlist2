@@ -22,52 +22,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.logger.Log;
+
+import java.util.ArrayList;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-    private static final String TAG = "CustomAdapter";
+private static final String TAG = "CustomAdapter";
 
-    private String[] mDataSet;
+private ArrayList<ListModel> mDataSet;
 
-    // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
-    /**
-     * Provide a reference to the type of views that you are using (custom ViewHolder)
-     */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+// BEGIN_INCLUDE(recyclerViewSampleViewHolder)
 
-        public ViewHolder(View v) {
-            super(v);
-            // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "Element " + getPosition() + " clicked.");
-                }
-            });
-            textView = (TextView) v.findViewById(R.id.textView);
-        }
+/**
+ * Provide a reference to the type of views that you are using (custom ViewHolder)
+ */
+public static class ViewHolder extends RecyclerView.ViewHolder {
+    private final TextView textView;
 
-        public TextView getTextView() {
-            return textView;
-        }
-    }
-    // END_INCLUDE(recyclerViewSampleViewHolder)
-
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
-     */
-    public CustomAdapter(String[] dataSet) {
-        mDataSet = dataSet;
+    public ViewHolder(View v) {
+        super(v);
+        // Define click listener for the ViewHolder's View.
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Element " + getPosition() + " clicked.");
+            }
+        });
+        textView = (TextView) v.findViewById(R.id.textView);
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
+    public TextView getTextView() {
+        return textView;
+    }
+}
+// END_INCLUDE(recyclerViewSampleViewHolder)
+
+/**
+ * Initialize the dataset of the Adapter.
+ *
+ * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
+ */
+public CustomAdapter(ArrayList<ListModel> dataSet) {
+    mDataSet = dataSet;
+}
+
+// BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -87,13 +91,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
+        viewHolder.getTextView().setText(mDataSet.get(position).getTitle());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mDataSet.size();
     }
 }

@@ -36,9 +36,9 @@ import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
-public class MainActivity extends AppCompatActivity {
+public class RecycleActivityOriginal extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
+    public static final String TAG = "RecycleActivityOriginal";
 
     // Whether the Log Fragment is currently shown
     private boolean mLogShown;

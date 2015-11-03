@@ -79,7 +79,7 @@
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
         <activity
-                android:name=".recyclerview.MainActivity"
+                android:name=".recyclerview.RecycleActivityOriginal"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustNothing|stateVisible" />
         <activity
