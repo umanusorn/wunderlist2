@@ -20,33 +20,6 @@
         android:layout_height="match_parent"
         android:id="@+id/sample_main_layout">
 
-    <ViewAnimator
-            android:id="@+id/sample_output"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1">
-        <!--style="@style/Widget.SampleMessageTile"-->
-        <ScrollView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <!--style="@style/Widget.SampleMessage"-->
-            <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="intro_message"/>
-        </ScrollView>
-
-        <fragment
-                android:name="com.vi8e.um.wunderlist.logger.LogFragment"
-                android:id="@+id/log_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-    </ViewAnimator>
-
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

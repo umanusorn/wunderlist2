@@ -25,7 +25,6 @@ import android.view.MenuItem;
 
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.logger.Log;
-import com.vi8e.um.wunderlist.logger.LogFragment;
 import com.vi8e.um.wunderlist.logger.LogWrapper;
 import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
 
@@ -101,9 +100,9 @@ public class RecycleActivityOriginal extends AppCompatActivity {
         logWrapper.setNext(msgFilter);
 
         // On screen logging via a fragment with a TextView.
-        LogFragment logFragment = (LogFragment) getSupportFragmentManager()
+       /* LogFragment logFragment = (LogFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.log_fragment);
-        msgFilter.setNext(logFragment.getLogView());
+        msgFilter.setNext(logFragment.getLogView());*/
 
         Log.i(TAG, "Ready");
     }

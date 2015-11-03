@@ -47,7 +47,6 @@ public class RecyclerViewFragment extends Fragment {
 private static final String TAG                = "RecyclerViewFragment";
 private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 private static final int    SPAN_COUNT         = 2;
-private static final int    DATASET_COUNT      = 600000;
 
 private enum LayoutManagerType {
 	GRID_LAYOUT_MANAGER,
@@ -102,22 +101,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	mRecyclerView.setAdapter(mAdapter);
 	// END_INCLUDE(initializeRecyclerView)
 
-	mLinearLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.linear_layout_rb);
-	mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			setRecyclerViewLayoutManager(LayoutManagerType.LINEAR_LAYOUT_MANAGER);
-		}
-	});
-
-	mGridLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.grid_layout_rb);
-	mGridLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER);
-		}
-	});
-
 	return rootView;
 }
 
@@ -165,16 +148,11 @@ public void onSaveInstanceState(Bundle savedInstanceState) {
  * from a local content provider or remote server.
  */
 private void initDataset(Context context) {
-	//mDataset = new String[DATASET_COUNT];
-
-
 	Cursor c = QueryHelper.getListValueCursor(context);
 	c.moveToFirst();
-
 	Log.d("setUpAdapter", String.valueOf(c.getCount()));
 	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
 	mDataset = new ArrayList<ListModel>();
-
 	for (ContentValues listValues : allListValues) {
 		mDataset.add(new ListModel(listValues));
 	}
