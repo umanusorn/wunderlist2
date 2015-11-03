@@ -18,7 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:text="Developer page\nThis page won&apos;t show to user"
+            android:text="Developer Page"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TableLayout
@@ -280,7 +282,7 @@
 
                 <TextView
 
-                    android:text="  Dropbox Login \nMulti ImgChoser"
+                    android:text="  Dropbox Login "
                     android:layout_gravity="center"
                     android:textAlignment="center"
 
@@ -304,6 +306,42 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:text="MultipleImgsChooser" />
+            </TableRow>
+            <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+
+                    >
+
+                <TextView
+
+                        android:text="  RecycleView "
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+
+                        android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <Button
+                        android:id="@+id/recyclerViewBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:text="RecycleView" />
+
+                <Button
+                        android:id="@+id/newBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:visibility="gone"
+                        android:text="MultipleImgsChooser" />
             </TableRow>
 
         </TableLayout>

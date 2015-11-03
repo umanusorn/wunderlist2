@@ -79,6 +79,10 @@
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
         <activity
+                android:name=".recyclerview.MainActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustNothing|stateVisible" />
+        <activity
             android:name=".Activity.TaskNoteActivity"
             android:label="@string/title_activity_task_note"
             android:screenOrientation="portrait"
