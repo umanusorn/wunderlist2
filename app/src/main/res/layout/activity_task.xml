@@ -1,27 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:tintMode="src_atop"
-    android:tint="@color/grey_600"
-    android:background="@mipmap/bg_dummy">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:tintMode="src_atop"
+              android:tint="@color/grey_600"
+              android:background="@mipmap/bg_dummy">
 
-    <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            >
-
-        <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:background="@color/transparent_white_50"/>
-    </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/toolbar_transparent"/>
 
 
     <RelativeLayout

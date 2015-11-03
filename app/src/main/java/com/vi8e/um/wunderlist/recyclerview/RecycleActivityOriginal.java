@@ -37,29 +37,29 @@ import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
  */
 public class RecycleActivityOriginal extends AppCompatActivity {
 
-    public static final String TAG = "RecycleActivityOriginal";
+public static final String TAG = "RecycleActivityOriginal";
 
-    // Whether the Log Fragment is currently shown
-    private boolean mLogShown;
+// Whether the Log Fragment is currently shown
+private boolean mLogShown;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing_recycle);
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_landing_recycle);
 
-        if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            RecyclerViewFragment fragment = new RecyclerViewFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }
+    if (savedInstanceState == null) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        RecyclerViewFragment fragment = new RecyclerViewFragment();
+        transaction.replace(R.id.sample_content_fragment, fragment);
+        transaction.commit();
     }
+}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_normal, menu);
-        return true;
-    }
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main_normal, menu);
+    return true;
+}
 /*
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -70,8 +70,8 @@ public class RecycleActivityOriginal extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }*/
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
         /*switch(item.getItemId()) {
             case R.id.menu_toggle_log:
                 mLogShown = !mLogShown;
@@ -84,26 +84,26 @@ public class RecycleActivityOriginal extends AppCompatActivity {
                 supportInvalidateOptionsMenu();
                 return true;
         }*/
-        return super.onOptionsItemSelected(item);
-    }
+    return super.onOptionsItemSelected(item);
+}
 
-    /** Create a chain of targets that will receive log data */
+/** Create a chain of targets that will receive log data */
 
-    public void initializeLogging() {
-        // Wraps Android's native log framework.
-        LogWrapper logWrapper = new LogWrapper();
-        // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
-        Log.setLogNode(logWrapper);
+public void initializeLogging() {
+    // Wraps Android's native log framework.
+    LogWrapper logWrapper = new LogWrapper();
+    // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
+    Log.setLogNode(logWrapper);
 
-        // Filter strips out everything except the message text.
-        MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
-        logWrapper.setNext(msgFilter);
+    // Filter strips out everything except the message text.
+    MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
+    logWrapper.setNext(msgFilter);
 
-        // On screen logging via a fragment with a TextView.
+    // On screen logging via a fragment with a TextView.
        /* LogFragment logFragment = (LogFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.log_fragment);
         msgFilter.setNext(logFragment.getLogView());*/
 
-        Log.i(TAG, "Ready");
-    }
+    Log.i(TAG, "Ready");
+}
 }

@@ -22,11 +22,7 @@
     android:layout_marginRight="10dp"
     android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:text="text"/>
+    <include layout="@layout/list_row_landing">
+
+    </include>
 </FrameLayout>

@@ -53,7 +53,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
                 Log.d(TAG, "Element " + getPosition() + " clicked.");
             }
         });
-        textView = (TextView) v.findViewById(R.id.textView);
+        textView = (TextView) v.findViewById(R.id.subTaskTitle);
     }
 
     public TextView getTextView() {

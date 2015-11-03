@@ -96,7 +96,6 @@ def getDate() {
 }
 
 dependencies {
-
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/jncryptor-1.1.0.jar')
     compile files('libs/PayPalAndroidSDK-2.9.10.jar')
