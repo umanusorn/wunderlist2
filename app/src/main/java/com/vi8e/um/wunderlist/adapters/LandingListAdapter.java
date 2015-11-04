@@ -15,7 +15,7 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAd
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.recyclerview.ListAction;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.UiMng;
 
@@ -72,7 +72,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	tvLateTask.setVisibility ( View.GONE );
 	tvCurrentTask.setText ( String.valueOf ( QueryHelper.getCurrentTaskCount(listModel, mContext) ) );
 
-	convertView.setOnClickListener ( getOnClick ( listModel, mContext, position ) );
+	convertView.setOnClickListener ( ListAction.getOnClick(listModel, mContext, position) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
 
 
@@ -153,29 +153,6 @@ View.OnLongClickListener getOnLongClick ( final ListModel listModel, final int p
 			return false;
 		}
 	};
-}
-
-@NonNull public
-View.OnClickListener getOnClick ( final ListModel listModel, final Context context, final int position ) {
-	return new View.OnClickListener () {
-
-		@Override public
-		void onClick ( View v ) {
-
-			Log.d ( "onClick", "isLongClick=" + LandingActivity.isLongClick );
-
-			onClickList ( position, context, listModel );
-		}
-	};
-}
-
-public
-void onClickList ( int position, Context context, ListModel listModel ) {
-	LandingActivity.setCurrentList ( position, LandingActivity.mLandingListAdapter );
-	//if ( ! isLongClick ) {
-	IntentCaller.taskActivity ( context, listModel );
-	//}
-	LandingActivity.isLongClick = false;
 }
 
 public

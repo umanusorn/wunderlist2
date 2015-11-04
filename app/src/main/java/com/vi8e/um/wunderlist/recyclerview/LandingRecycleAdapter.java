@@ -118,8 +118,10 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	// with that element
 	ListModel listModel = mDataSet.get(position);
 	viewHolder.getTvTitle().setText(listModel.getTitle());
-	viewHolder.getTvCurrentTask().setText(String.valueOf(QueryHelper.getCurrentTaskCount(listModel,mContext) ));
+	viewHolder.getTvCurrentTask().setText(String.valueOf(QueryHelper.getCurrentTaskCount(listModel, mContext)));
 	viewHolder.getTvLateTask().setVisibility(View.GONE);
+	viewHolder.itemView.setOnClickListener(ListAction.getOnClick(listModel,mContext,position));
+
 
 }
 // END_INCLUDE(recyclerViewOnBindViewHolder)
