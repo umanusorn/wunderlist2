@@ -1,4 +1,5 @@
 package com.vi8e.um.wunderlist.utils;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -33,6 +34,15 @@ import java.util.List;
  */
 public
 class QueryHelper {
+
+public static int getCurrentTaskCount ( ListModel listModel, Context context ) {
+	//Log.d ( TAG, "getCurrentTaskCount" );
+	TaskSelection where = new TaskSelection ();
+	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
+	int count = where.count ( context.getContentResolver () );
+	Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
+	return count;
+}
 
 public static
 Cursor getSubTaskValueCursor ( Context context ) {

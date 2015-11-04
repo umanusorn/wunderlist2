@@ -15,8 +15,8 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAd
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.task.TaskSelection;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
@@ -70,7 +70,7 @@ View getView ( final int position, View convertView, ViewGroup parent ) {
 	tvCurrentTask.setText ( String.valueOf ( listModel.getNumCurrentTask () ) );
 	tvLateTask.setText ( String.valueOf ( listModel.getNumLateTask () ) );
 	tvLateTask.setVisibility ( View.GONE );
-	tvCurrentTask.setText ( String.valueOf ( getCurrentTaskCount ( listModel, mContext ) ) );
+	tvCurrentTask.setText ( String.valueOf ( QueryHelper.getCurrentTaskCount(listModel, mContext) ) );
 
 	convertView.setOnClickListener ( getOnClick ( listModel, mContext, position ) );
 	convertView.setOnLongClickListener ( getOnLongClick ( listModel, position ) );
@@ -141,15 +141,6 @@ View getTitleView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 @NonNull @Override public
 View getContentView ( int i, View view, @NonNull ViewGroup viewGroup ) {
 	return null;
-}
-
-int getCurrentTaskCount ( ListModel listModel, Context context ) {
-	Log.d ( TAG, "getCurrentTaskCount" );
-	TaskSelection where = new TaskSelection ();
-	where.listid ( listModel.getId () ).and ().iscomplete ( String.valueOf ( Boolean.FALSE ) );
-	int count = where.count ( context.getContentResolver () );
-	//Log.d ( "getCurrentTaskCount", "listid=" + listModel.getId ()+" count=" +count);
-	return count;
 }
 
 @NonNull private

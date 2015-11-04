@@ -183,6 +183,7 @@ public ListModel setValues(ContentValues values) {
 	numCurrentTask = values.getAsInteger(ListColumns.NUM_CURRENT_TASK);
 
 	numLateTask = values.getAsInteger(ListColumns.NUM_LATE_TASK);
+	id=values.getAsString(ListColumns._ID);
 	//values.put ( ListColumns._ID,id );
 
 	return this;

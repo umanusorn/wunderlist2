@@ -28,7 +28,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
@@ -55,20 +54,14 @@ private enum LayoutManagerType {
 
 protected LayoutManagerType mCurrentLayoutManagerType;
 
-protected RadioButton mLinearLayoutRadioButton;
-protected RadioButton mGridLayoutRadioButton;
-
 protected RecyclerView               mRecyclerView;
-protected CustomAdapter              mAdapter;
+protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
 protected ArrayList<ListModel>       mDataset;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-
-	// Initialize dataset, this data would usually come from a local content provider or
-	// remote server.
 	initDataset(getContext());
 }
 
@@ -86,7 +79,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	// to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
 	// elements are laid out.
 	mLayoutManager = new LinearLayoutManager(getActivity());
-
 	mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
 	if (savedInstanceState != null) {
@@ -96,8 +88,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	}
 	setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-	mAdapter = new CustomAdapter(mDataset);
-	// Set CustomAdapter as the adapter for RecyclerView.
+	mAdapter = new LandingRecycleAdapter(mDataset,getContext());
+	// Set LandingRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
 	// END_INCLUDE(initializeRecyclerView)
 
