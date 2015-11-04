@@ -20,6 +20,7 @@ package com.vi8e.um.wunderlist.recyclerview;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,6 +28,8 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.logger.Log;
 import com.vi8e.um.wunderlist.logger.LogWrapper;
 import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
+import com.vi8e.um.wunderlist.utils.ActivityUi;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -40,11 +43,15 @@ public class RecycleActivityOriginal extends AppCompatActivity {
 public static final String TAG = "RecycleActivityOriginal";
 
 // Whether the Log Fragment is currently shown
-private boolean mLogShown;
+private boolean           mLogShown;
+private AppCompatActivity thisActivity;
+private Menu              menu;
+Toolbar mToolbar;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    thisActivity = this;
     setContentView(R.layout.activity_landing_recycle);
 
     if (savedInstanceState == null) {
@@ -53,11 +60,15 @@ protected void onCreate(Bundle savedInstanceState) {
         transaction.replace(R.id.sample_content_fragment, fragment);
         transaction.commit();
     }
+
+	ActivityUi.setToolBar(thisActivity,mToolbar, UiMng.getVersionName(getApplication()));
 }
 
 @Override
 public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main_normal, menu);
+    // Inflate the menu; this adds items to the action bar if it is present.
+    this.menu = menu;
+    ActivityUi.setMenuNormal(thisActivity, menu);
     return true;
 }
 /*

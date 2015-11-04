@@ -1,8 +1,11 @@
 package com.vi8e.um.wunderlist.utils;
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -16,19 +19,37 @@ import com.vi8e.um.wunderlist.R;
 public
 class ActivityUi {
 public static
-void setToolBar ( final AppCompatActivity listDetailActivity, Toolbar toolbar, String title ) {
-	toolbar = ( Toolbar ) listDetailActivity.findViewById ( R.id.toolbar );
-	listDetailActivity.setSupportActionBar ( toolbar );
+Toolbar initToolbar (Toolbar toolbar,AppCompatActivity appCompatActivity,ActionBar actionBar) {
+	toolbar = ( Toolbar ) appCompatActivity.findViewById ( R.id.toolbar );
+	appCompatActivity.setSupportActionBar(toolbar);
+	actionBar = appCompatActivity.getSupportActionBar();
 	toolbar.setVisibility ( View.VISIBLE );
-	listDetailActivity.getSupportActionBar ().setTitle ( title );
+	return toolbar;
+}
+
+public static
+void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
+	Log.d("", "setMenuNormal");
+	menu.clear ();
+	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+}
+
+public static
+void setToolBar ( final AppCompatActivity activity, Toolbar toolbar, String title ) {
+	toolbar = ( Toolbar ) activity.findViewById ( R.id.toolbar );
+	activity.setSupportActionBar(toolbar);
+
+	toolbar.setVisibility(View.VISIBLE);
+	ActionBar actionBar = activity.getSupportActionBar();
 	toolbar.setTitle ( title );
-	listDetailActivity.getSupportActionBar ().setDisplayShowTitleEnabled ( true );
-	listDetailActivity.getSupportActionBar ().setDisplayHomeAsUpEnabled ( true );
-	listDetailActivity.getSupportActionBar ().setDisplayShowHomeEnabled ( true );
+	actionBar.setTitle(title);
+	actionBar.setDisplayShowTitleEnabled(true);
+	actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setDisplayShowHomeEnabled(true);
 	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
 		@Override public
 		void onClick ( View v ) {
-			listDetailActivity.finish ();
+			activity.finish();
 		}
 	} );
 }

@@ -92,7 +92,7 @@ void onCreate ( Bundle savedInstanceState ) {
 
 	sContext = getApplicationContext ();
 //	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
-	initToolbar ();
+	toolbar = ActivityUi.initToolbar(toolbar,thisActivity,mActionBar);
 	initInstances ();
 
 	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), mLandingListAdapter );
@@ -299,14 +299,6 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 }
 
 private
-void initToolbar () {
-	toolbar = ( Toolbar ) thisActivity.findViewById ( R.id.toolbar );
-	setSupportActionBar ( toolbar );
-	mActionBar = getSupportActionBar ();
-	toolbar.setVisibility ( View.VISIBLE );
-}
-
-private
 void initInstances () {
 	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
 	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
@@ -333,7 +325,7 @@ void onConfigurationChanged ( Configuration newConfig ) {
 protected
 void onPause () {
 	super.onPause ();
-	setMenuNormal (thisActivity,menu);
+	ActivityUi.setMenuNormal(thisActivity, menu);
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
 	ActivityUi.setInActiveToolBar ( toolbar, sContext );
@@ -369,21 +361,13 @@ onResume () {
 
 }
 
-public static
-void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
-	Log.d(TAG,"setMenuNormal");
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, LandingActivity.menu );
-}
-
-
 
 @Override
 public
 boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
-	setMenuNormal ( thisActivity, LandingActivity.menu );
+	ActivityUi.setMenuNormal(thisActivity, LandingActivity.menu);
 	return true;
 }
 
@@ -436,7 +420,7 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		IntentCaller.listDetailActivity ( getApplicationContext (), currentList );
 	}
 
-	setMenuNormal ( thisActivity, menu );
+	ActivityUi.setMenuNormal(thisActivity, menu);
 
 	return super.onOptionsItemSelected ( item );
 }
