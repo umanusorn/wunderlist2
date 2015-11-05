@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;
@@ -32,7 +33,7 @@ import java.util.List;
 public
 class CommentActivity extends AppCompatActivity {
 
-private static final String TAG = TaskDetailActivity.class.getSimpleName ();
+private static final String TAG = TaskDetailActivity.class.getSimpleName();
 Toolbar mToolbar;
 String title = "Comment";
 Context  thisContext;
@@ -46,33 +47,30 @@ public static ListView          listViewSubTask;
 private       Menu              menu;
 
 @Override
-protected
-void onCreate ( Bundle savedInstanceState ) {
-	super.onCreate ( savedInstanceState );
-	setContentView ( R.layout.activity_comment );
-	thisContext = getApplicationContext ();
+protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_comment);
+	thisContext = getApplicationContext();
 	thisActivity = this;
-	mToolbar = ( Toolbar ) findViewById ( R.id.toolbar );
-	setSupportActionBar ( mToolbar );
-	ActivityUi.setToolBar ( this, mToolbar, title );
+	mToolbar = (Toolbar) findViewById(R.id.toolbar);
+	setSupportActionBar(mToolbar);
+	ActivityUi.setToolBar(this, mToolbar, title);
 
-	mToolbar.setBackgroundColor ( getResources ().getColor ( R.color.blue_500 ) );
-	editTextComment = ( EditText ) findViewById ( R.id.editTextComment );
-	sendComment = ( TextView ) findViewById ( R.id.sendComment );
-	sendComment.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View view ) {
-			onClickSend ( editTextComment.getText ().toString () );
+	mToolbar.setBackgroundColor(getResources().getColor(R.color.blue_500));
+	editTextComment = (EditText) findViewById(R.id.editTextComment);
+	sendComment = (TextView) findViewById(R.id.sendComment);
+	sendComment.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View view) {
+			onClickSend(editTextComment.getText().toString());
 		}
-	} );
-	listViewSubTask = ( ListView ) findViewById ( R.id.listViewComment );
+	});
+	listViewSubTask = (ListView) findViewById(R.id.listViewComment);
 	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
 	}*/
-	sCommentAdapter = setUpAdapterListView ( listViewSubTask, thisContext );
-	listViewSubTask.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
-		@Override public
-		boolean onItemLongClick ( AdapterView<?> adapterView, View view, int position, long id ) {
+	sCommentAdapter = setUpAdapterListView(listViewSubTask, thisContext);
+	listViewSubTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+		@Override public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id ) {
 
 			ActivityUi.setMenuComment ( thisActivity, menu );
 			ActivityUi.setActiveList ( ( RelativeLayout ) view, thisContext );

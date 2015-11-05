@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Activity;
+package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -29,6 +29,7 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;

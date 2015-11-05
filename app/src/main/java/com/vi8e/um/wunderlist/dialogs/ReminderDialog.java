@@ -19,7 +19,7 @@ import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.DateTimeHelper;

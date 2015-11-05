@@ -11,7 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;

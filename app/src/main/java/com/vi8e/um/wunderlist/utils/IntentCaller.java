@@ -8,7 +8,7 @@ import com.vi8e.um.wunderlist.Activity.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.ListDetailActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Activity.TaskNoteActivity;
 import com.vi8e.um.wunderlist.Model.ListConst;
 import com.vi8e.um.wunderlist.Model.ListModel;
