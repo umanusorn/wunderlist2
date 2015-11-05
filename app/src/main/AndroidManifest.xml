@@ -36,7 +36,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activity.recyclerview.RecycleActivityOriginal"
+            android:name=".Activity.Landing.LandingRecycleActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>

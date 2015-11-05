@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.vi8e.um.wunderlist.Activity.Giants.LoginActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.RegisterFirstActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.UpdateProfileActivity;
-import com.vi8e.um.wunderlist.Activity.recyclerview.RecycleActivityOriginal;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
@@ -41,11 +40,11 @@ protected void onCreate(Bundle savedInstanceState) {
 	Button signUp = (Button) findViewById(R.id.signUp);
 	Button testDropbox = (Button) findViewById(R.id.linkDropbox);
 	Button multiImgChooser = (Button) findViewById(R.id.multiImgChooser);
-	Button recycleView = (Button) findViewById(R.id.recyclerViewBtn);
+	Button recycleView = (Button) findViewById(R.id.landing);
 
 	recycleView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-			Intent i = new Intent(getApplicationContext(), RecycleActivityOriginal.class);
+			Intent i = new Intent(getApplicationContext(), LandingActivity.class);
 			startActivity(i);
 		}
 	});

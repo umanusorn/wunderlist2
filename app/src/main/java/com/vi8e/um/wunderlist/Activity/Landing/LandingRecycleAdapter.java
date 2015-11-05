@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.Activity.recyclerview;
+package com.vi8e.um.wunderlist.Activity.Landing;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

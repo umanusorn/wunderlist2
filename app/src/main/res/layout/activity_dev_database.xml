@@ -329,11 +329,11 @@
                     android:layout_height="match_parent">
 
                 <Button
-                        android:id="@+id/recyclerViewBtn"
+                        android:id="@+id/landing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="0"
-                        android:text="RecycleView" />
+                        android:text="Old Landing" />
 
                 <Button
                         android:id="@+id/newBtn"

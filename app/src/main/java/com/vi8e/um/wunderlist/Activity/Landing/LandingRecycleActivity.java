@@ -15,7 +15,7 @@
 */
 
 
-package com.vi8e.um.wunderlist.Activity.recyclerview;
+package com.vi8e.um.wunderlist.Activity.Landing;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -39,9 +39,9 @@ import com.vi8e.um.wunderlist.utils.UiMng;
  * For devices with displays with a width of 720dp or greater, the sample log is always visible,
  * on other devices it's visibility is controlled by an item on the Action Bar.
  */
-public class RecycleActivityOriginal extends AppCompatActivity {
+public class LandingRecycleActivity extends AppCompatActivity {
 
-public static final String TAG = "RecycleActivityOriginal";
+public static final String TAG = "LandingRecycleActivity";
 
 // Whether the Log Fragment is currently shown
 private boolean           mLogShown;
