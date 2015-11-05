@@ -41,9 +41,9 @@ import java.util.List;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class RecyclerViewFragment extends Fragment {
+public class LandingRecycleFragment extends Fragment {
 
-private static final String TAG                = "RecyclerViewFragment";
+private static final String TAG                = "LandingRecycleFragment";
 private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 private static final int    SPAN_COUNT         = 2;
 
@@ -53,7 +53,6 @@ private enum LayoutManagerType {
 }
 
 protected LayoutManagerType mCurrentLayoutManagerType;
-
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
@@ -62,7 +61,22 @@ protected ArrayList<ListModel>       mDataset;
 @Override
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	initDataset(getContext());
+	initDataSet(getContext());
+}
+
+/**
+ * Generates Strings for RecyclerView's adapter. This data would usually come
+ * from a local content provider or remote server.
+ */
+private void initDataSet(Context context) {
+	Cursor c = QueryHelper.getListValueCursor(context);
+	c.moveToFirst();
+	Log.d("setUpAdapter", String.valueOf(c.getCount()));
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
+	mDataset = new ArrayList<>();
+	for (ContentValues listValues : allListValues) {
+		mDataset.add(new ListModel(listValues));
+	}
 }
 
 @Override
@@ -135,18 +149,5 @@ public void onSaveInstanceState(Bundle savedInstanceState) {
 	super.onSaveInstanceState(savedInstanceState);
 }
 
-/**
- * Generates Strings for RecyclerView's adapter. This data would usually come
- * from a local content provider or remote server.
- */
-private void initDataset(Context context) {
-	Cursor c = QueryHelper.getListValueCursor(context);
-	c.moveToFirst();
-	Log.d("setUpAdapter", String.valueOf(c.getCount()));
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
-	mDataset = new ArrayList<ListModel>();
-	for (ContentValues listValues : allListValues) {
-		mDataset.add(new ListModel(listValues));
-	}
-}
+
 }

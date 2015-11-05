@@ -107,8 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/scrollView"
-            android:layout_below="@+id/rowBg"
-            android:layout_above="@+id/relativeLayout2">
+            android:layout_below="@+id/rowBg">
 
         <LinearLayout
                 android:orientation="vertical"
@@ -182,6 +181,12 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:layout_centerHorizontal="true"/>
+
+                <FrameLayout
+                        android:id="@+id/content_fragment"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0px"/>
 
             <RelativeLayout
                     android:layout_width="wrap_content"

@@ -18,18 +18,15 @@
 package com.vi8e.um.wunderlist.Activity.Landing;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.logger.Log;
-import com.vi8e.um.wunderlist.logger.LogWrapper;
-import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
+import com.vi8e.um.wunderlist.utils.RecycleUtil;
 import com.vi8e.um.wunderlist.utils.UiMng;
 
 /**
@@ -55,14 +52,8 @@ protected void onCreate(Bundle savedInstanceState) {
     thisActivity = this;
     setContentView(R.layout.activity_landing_recycle);
 
-    if (savedInstanceState == null) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        RecyclerViewFragment fragment = new RecyclerViewFragment();
-        transaction.replace(R.id.sample_content_fragment, fragment);
-        transaction.commit();
-    }
-
-	ActivityUi.setToolBar(thisActivity,mToolbar, UiMng.getVersionName(getApplication()));
+    RecycleUtil.setUpLandingRecycleFragment(savedInstanceState, thisActivity);
+    ActivityUi.setToolBar(thisActivity, mToolbar, UiMng.getVersionName(getApplication()));
 }
 
 @Override
@@ -72,15 +63,6 @@ public boolean onCreateOptionsMenu(Menu menu) {
     ActivityUi.setMenuNormal(thisActivity, menu);
     return true;
 }
-/*
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem logToggle = menu.findItem(R.id.menu_toggle_log);
-        logToggle.setVisible(findViewById(R.id.sample_output) instanceof ViewAnimator);
-        logToggle.setTitle(mLogShown ? R.string.sample_hide_log : R.string.sample_show_log);
-
-        return super.onPrepareOptionsMenu(menu);
-    }*/
 
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {
@@ -106,23 +88,4 @@ public boolean onOptionsItemSelected(MenuItem item) {
     return super.onOptionsItemSelected(item);
 }
 
-/** Create a chain of targets that will receive log data */
-
-public void initializeLogging() {
-    // Wraps Android's native log framework.
-    LogWrapper logWrapper = new LogWrapper();
-    // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
-    Log.setLogNode(logWrapper);
-
-    // Filter strips out everything except the message text.
-    MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
-    logWrapper.setNext(msgFilter);
-
-    // On screen logging via a fragment with a TextView.
-       /* LogFragment logFragment = (LogFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.log_fragment);
-        msgFilter.setNext(logFragment.getLogView());*/
-
-    Log.i(TAG, "Ready");
-}
 }
