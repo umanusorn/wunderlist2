@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                android:id="@+id/row_list_root_view"
-                android:backgroundTintMode="src_atop">
+                android:background="@drawable/list_bg"
+
+                android:id="@+id/row_list_root_view">
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:padding="@dimen/list_row_padding"
+
+            android:background="@drawable/list_bg"
 
 
             >
