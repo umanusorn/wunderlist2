@@ -36,7 +36,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activity.LandingActivity"
+            android:name=".Activity.recyclerview.RecycleActivityOriginal"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -45,6 +45,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name="nl.changer.polypicker.ImagePickerActivity" />
         <meta-data
@@ -79,7 +81,7 @@
             android:windowSoftInputMode="adjustNothing|stateVisible" >
         </activity>
         <activity
-                android:name=".recyclerview.RecycleActivityOriginal"
+                android:name=".Activity.LandingActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustNothing|stateVisible" />
         <activity

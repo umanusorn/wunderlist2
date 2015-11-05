@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.recyclerview;
+package com.vi8e.um.wunderlist.Activity.recyclerview;
 
 import android.content.ContentValues;
 import android.content.Context;

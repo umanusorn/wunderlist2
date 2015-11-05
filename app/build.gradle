@@ -23,22 +23,7 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-task('increaseVersionCode') << {
-    def manifestFile = file("AndroidManifest.xml")
-    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
-    def manifestText = manifestFile.getText()
-    def matcher = pattern.matcher(manifestText)
-    matcher.find()
-    def versionCode = Integer.parseInt(matcher.group(1))
-    def manifestContent = matcher.replaceAll("versionCode=\"" + ++versionCode + "\"")
-    manifestFile.write(manifestContent)
-}
 
-tasks.whenTaskAdded { task ->
-    if (task.name == 'generateReleaseBuildConfig') {
-        task.dependsOn 'increaseVersionCode'
-    }
-}
 
 android {
     useLibrary 'org.apache.http.legacy'
@@ -89,12 +74,6 @@ android {
 }
 
 
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
-    return formattedDate
-}
-
 dependencies {
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/jncryptor-1.1.0.jar')
@@ -142,3 +121,28 @@ dependencies {
     //multi img chooser with cam
     compile 'com.github.jaydeepw:poly-picker:v1.0.22'
 }
+
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
+task('increaseVersionCode') << {
+    def manifestFile = file("AndroidManifest.xml")
+    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+    def manifestText = manifestFile.getText()
+    def matcher = pattern.matcher(manifestText)
+    matcher.find()
+    def versionCode = Integer.parseInt(matcher.group(1))
+    def manifestContent = matcher.replaceAll("versionCode=\"" + ++versionCode + "\"")
+    manifestFile.write(manifestContent)
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'generateReleaseBuildConfig') {
+        task.dependsOn 'increaseVersionCode'
+    }
+}
+

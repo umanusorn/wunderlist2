@@ -15,7 +15,7 @@
 */
 
 
-package com.vi8e.um.wunderlist.recyclerview;
+package com.vi8e.um.wunderlist.Activity.recyclerview;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -29,6 +29,7 @@ import com.vi8e.um.wunderlist.logger.Log;
 import com.vi8e.um.wunderlist.logger.LogWrapper;
 import com.vi8e.um.wunderlist.logger.MessageOnlyLogFilter;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
+import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.UiMng;
 
 /**
@@ -83,18 +84,25 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {
-        /*switch(item.getItemId()) {
-            case R.id.menu_toggle_log:
-                mLogShown = !mLogShown;
-                ViewAnimator output = (ViewAnimator) findViewById(R.id.sample_output);
-                if (mLogShown) {
-                    output.setDisplayedChild(1);
-                } else {
-                    output.setDisplayedChild(0);
-                }
-                supportInvalidateOptionsMenu();
-                return true;
-        }*/
+    int id = item.getItemId ();
+    //noinspection SimplifiableIfStatement
+    if ( id == R.id.menu_setting ) {
+        IntentCaller.developer(thisActivity);
+        return true;
+    }
+    if ( id == R.id.delete ) {
+       // deleteSpecificList ( getApplicationContext (), currentList.getId () );
+    }
+
+    if ( id == R.id.duplicateList ) {
+       // duplicateSpecificList ();
+    }
+
+    if ( id == R.id.menu_edit ) {
+        //IntentCaller.listDetailActivity ( getApplicationContext (), currentList );
+    }
+
+    ActivityUi.setMenuNormal(thisActivity, menu);
     return super.onOptionsItemSelected(item);
 }
 

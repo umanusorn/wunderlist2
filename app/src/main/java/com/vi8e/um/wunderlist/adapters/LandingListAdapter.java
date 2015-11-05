@@ -1,4 +1,5 @@
 package com.vi8e.um.wunderlist.adapters;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.expandablelistitem.ExpandableListItemAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAdapter;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
+import com.vi8e.um.wunderlist.Activity.recyclerview.ListAction;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.recyclerview.ListAction;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.UiMng;
 

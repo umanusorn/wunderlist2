@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.recyclerview;
+package com.vi8e.um.wunderlist.Activity.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -28,7 +28,8 @@ View.OnClickListener getOnClick ( final ListModel listModel, final Context conte
 
 public static
 void onClickList ( int position, Context context, ListModel listModel ) {
-	LandingActivity.setCurrentList ( position, LandingActivity.mLandingListAdapter );
+
+	//LandingActivity.setCurrentList ( position, LandingActivity.mLandingListAdapter );
 	//if ( ! isLongClick ) {
 	IntentCaller.taskActivity(context, listModel);
 	//}

@@ -11,8 +11,8 @@ import android.widget.Button;
 import com.vi8e.um.wunderlist.Activity.Giants.LoginActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.RegisterFirstActivity;
 import com.vi8e.um.wunderlist.Activity.Giants.UpdateProfileActivity;
+import com.vi8e.um.wunderlist.Activity.recyclerview.RecycleActivityOriginal;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.recyclerview.RecycleActivityOriginal;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import nl.changer.polypicker.Config;
