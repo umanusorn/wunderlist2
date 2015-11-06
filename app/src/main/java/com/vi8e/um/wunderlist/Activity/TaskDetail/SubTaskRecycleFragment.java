@@ -42,14 +42,10 @@ import java.util.List;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class TaskDetailRecycleFragment extends Fragment {
+public class SubTaskRecycleFragment extends Fragment {
 
-//todo change
-private static final String TAG                = "LandingRecycleFragment";
+private static final String TAG                = "SubTaskRecycleFragment";
 private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-private static final int    SPAN_COUNT         = 2;
-
-
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
@@ -92,7 +88,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	mAdapter = new LandingRecycleAdapter(mDataSet, getContext());
 	// Set LandingRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
-	// END_INCLUDE(initializeRecyclerView)
 
 	return rootView;
 }
@@ -106,8 +101,24 @@ private void setView(Bundle savedInstanceState, View rootView) {
 	// elements are laid out.
 	mLayoutManager = new LinearLayoutManager(getActivity());
 
+	if (savedInstanceState != null) {
+		// Restore saved layout manager type.
+	}
+	setRecyclerViewLayoutManager();
 }
 
+public void setRecyclerViewLayoutManager() {
+	int scrollPosition = 0;
+	// If a layout manager has already been set, get current scroll position.
+	if (mRecyclerView.getLayoutManager() != null) {
+		scrollPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
+				.findFirstCompletelyVisibleItemPosition();
+	}
+
+	mLayoutManager = new LinearLayoutManager(getActivity());
+	mRecyclerView.setLayoutManager(mLayoutManager);
+	mRecyclerView.scrollToPosition(scrollPosition);
+}
 
 @Override
 public void onSaveInstanceState(Bundle savedInstanceState) {
