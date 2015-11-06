@@ -173,6 +173,14 @@
                 </android.support.v7.widget.CardView>
             </RelativeLayout>
 
+            <FrameLayout
+                    android:id="@+id/content_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:scrollbars="none"
+                    android:layout_above="@+id/bottomBarRoot"
+                    android:layout_below="@+id/rowBg"/>
+
             <ListView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -181,12 +189,6 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:layout_centerHorizontal="true"/>
-
-                <FrameLayout
-                        android:id="@+id/content_fragment"
-                        android:layout_weight="2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0px"/>
 
             <RelativeLayout
                     android:layout_width="wrap_content"
@@ -313,7 +315,7 @@
                 android:tintMode="src_atop"
                 android:tint="@color/grey_600"
                 android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
-                android:layout_alignBottom="@+id/editText3" android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"/>
 
         <ImageView
                 android:layout_width="wrap_content"

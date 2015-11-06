@@ -30,6 +30,7 @@ import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
+import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
@@ -42,6 +43,7 @@ import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.RecycleUtil;
 import com.vi8e.um.wunderlist.utils.UiMng;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadMultiPictures;
 
@@ -59,7 +61,7 @@ public
 class TaskDetailActivity extends AppCompatActivity {
 private static final String TAG = TaskDetailActivity.class.getSimpleName ();
 public static ListView       listViewSubTask;
-public static Activity       thisActivity;
+public static AppCompatActivity       thisActivity;
 public static Context        sContext;
 public static SubTaskAdapter subTaskAdapter;
 public static
@@ -118,10 +120,12 @@ public static final String FALSE = "false";
 protected
 void onCreate ( Bundle savedInstanceState ) {
 	super.onCreate ( savedInstanceState );
-	setContentView ( R.layout.activity_task_detail );
+	setContentView(R.layout.activity_task_detail);
 	sContext = getApplicationContext ();
 	thisActivity = this;
 	currentTask = TaskActivity.currentTask;
+
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.SUB_TASK);
 
 	sFragmentManager = getSupportFragmentManager ();
 	// We create a new AuthSession so that we can use the Dropbox API.

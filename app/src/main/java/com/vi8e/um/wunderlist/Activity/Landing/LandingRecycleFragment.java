@@ -44,7 +44,6 @@ import java.util.List;
 public class LandingRecycleFragment extends Fragment {
 
 private static final String TAG                = "SubTaskRecycleFragment";
-private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
@@ -85,7 +84,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
 	//todo change
 	mAdapter = new LandingRecycleAdapter(mDataSet, getContext());
-	// Set LandingRecycleAdapter as the adapter for RecyclerView.
+	// Set SubTaskRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
 
 	return rootView;

@@ -173,7 +173,7 @@ public ContentValues getValues() {
 
 
 public ListModel setValues(ContentValues values) {
-	//ContentValues values = new ContentValues ();
+	id=values.getAsString(ListColumns._ID);
 	title = values.getAsString(ListColumns.LIST_TITLE);
 	imgPath = values.getAsString(ListColumns.IMG_PATH);
 	isDisturb = values.getAsBoolean(ListColumns.ISDISTURB);
@@ -183,8 +183,7 @@ public ListModel setValues(ContentValues values) {
 	numCurrentTask = values.getAsInteger(ListColumns.NUM_CURRENT_TASK);
 
 	numLateTask = values.getAsInteger(ListColumns.NUM_LATE_TASK);
-	id=values.getAsString(ListColumns._ID);
-	//values.put ( ListColumns._ID,id );
+
 
 	return this;
 }

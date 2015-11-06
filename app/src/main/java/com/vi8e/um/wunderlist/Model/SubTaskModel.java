@@ -20,6 +20,19 @@ SubTaskModel ( String title ) {
 	this.title = title;
 }
 
+public SubTaskModel(ContentValues listValues) {
+	setValues(listValues);
+}
+
+public SubTaskModel setValues(ContentValues values) {
+	id=values.getAsString(SubtaskColumns._ID);
+	title = values.getAsString(SubtaskColumns.SUBTASK_TITLE);
+	taskId=values.getAsString(SubtaskColumns.TASKID);
+	isComplete=values.getAsString(SubtaskColumns.ISCOMPLETE);
+
+	return this;
+}
+
 public
 SubTaskModel ( String title, String taskId, String id, String isComplete ) {
 	//setDefault ();

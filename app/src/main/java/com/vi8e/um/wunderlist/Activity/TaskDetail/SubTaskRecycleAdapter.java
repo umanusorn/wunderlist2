@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.Activity.Landing;
+package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,22 +22,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import java.util.ArrayList;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class LandingRecycleAdapter extends RecyclerView.Adapter<LandingRecycleAdapter.ViewHolder> {
+public class SubTaskRecycleAdapter extends RecyclerView.Adapter<SubTaskRecycleAdapter.ViewHolder> {
 private static final String TAG = "SubTaskRecycleAdapter";
 
-private ArrayList<ListModel> mDataSet;
+private ArrayList<SubTaskModel> mDataSet;
 private Context              mContext;
 
 // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
@@ -47,24 +45,8 @@ private Context              mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 	final TextView tvTitle;
-	TextView tvLateTask;
-	TextView tvCurrentTask;
-	final ListView listView;
-
 	public TextView getTvTitle() {
 		return tvTitle;
-	}
-
-	public TextView getTvLateTask() {
-		return tvLateTask;
-	}
-
-	public TextView getTvCurrentTask() {
-		return tvCurrentTask;
-	}
-
-	public ListView getListView() {
-		return listView;
 	}
 
 	public ViewHolder(View view) {
@@ -77,9 +59,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 			}
 		});
 		tvTitle = (TextView) view.findViewById(R.id.subTaskTitle);
-		tvLateTask = (TextView) view.findViewById(R.id.latetask);
-		tvCurrentTask = (TextView) view.findViewById(R.id.currentTask);
-		listView = (ListView) view.getParent();
+
 	}
 
 }
@@ -89,7 +69,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
  *
  * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
  */
-public LandingRecycleAdapter(ArrayList<ListModel> dataSet, Context context) {
+public SubTaskRecycleAdapter(ArrayList<SubTaskModel> dataSet, Context context) {
 	mDataSet = dataSet;
 	mContext = context;
 }
@@ -107,11 +87,13 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	ListModel listModel = mDataSet.get(position);
+	SubTaskModel listModel = mDataSet.get(position);
 	viewHolder.getTvTitle().setText(listModel.getTitle());
-	viewHolder.getTvCurrentTask().setText(String.valueOf(QueryHelper.getCurrentTaskCount(listModel, mContext)));
-	viewHolder.getTvLateTask().setVisibility(View.GONE);
-	viewHolder.itemView.setOnClickListener(ListAction.getOnClick(listModel, mContext, position));
+	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+
+		}
+	});
 
 }
 

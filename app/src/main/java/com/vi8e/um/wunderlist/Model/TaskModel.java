@@ -96,7 +96,7 @@ ContentValues getValues (){
 	return values;
 }
 
-public void setValues(ContentValues values){
+public TaskModel setValues(ContentValues values){
 	this.setTitle ( values.getAsString ( TaskColumns.TASK_TITLE ) );
 	this.setIsStar ( values.getAsString ( TaskColumns.ISSTAR ) );
 	this.setIsComplete ( values.getAsString ( TaskColumns.ISCOMPLETE ) );
@@ -106,7 +106,7 @@ public void setValues(ContentValues values){
 	this.setCreateDate ( values.getAsString ( TaskColumns.CREATE_DATE ) );
 	this.setDueToDate ( values.getAsString ( TaskColumns.DUETO_DATE ) );
 	this.setReminderDate ( values.getAsString ( TaskColumns.REMINDER_DATE ) );
-
+return this;
 }
 
 public

@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
@@ -40,8 +41,6 @@ public class LandingRecycleActivity extends AppCompatActivity {
 
 public static final String TAG = "LandingRecycleActivity";
 
-// Whether the Log Fragment is currently shown
-private boolean           mLogShown;
 private AppCompatActivity thisActivity;
 private Menu              menu;
 Toolbar mToolbar;
@@ -51,8 +50,7 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     thisActivity = this;
     setContentView(R.layout.activity_landing_recycle);
-
-    RecycleUtil.setUpLandingRecycleFragment(savedInstanceState, thisActivity);
+    RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.LIST);
     ActivityUi.setToolBar(thisActivity, mToolbar, UiMng.getVersionName(getApplication()));
 }
 

@@ -29,10 +29,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vi8e.um.wunderlist.Activity.Landing.LandingRecycleAdapter;
-import com.vi8e.um.wunderlist.Model.ListModel;
+import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.list.ListColumns;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import java.util.ArrayList;
@@ -45,11 +44,10 @@ import java.util.List;
 public class SubTaskRecycleFragment extends Fragment {
 
 private static final String TAG                = "SubTaskRecycleFragment";
-private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 protected RecyclerView               mRecyclerView;
-protected LandingRecycleAdapter      mAdapter;
+protected SubTaskRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
-protected ArrayList<ListModel>       mDataSet;
+protected ArrayList<SubTaskModel>       mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -63,16 +61,16 @@ public void onCreate(Bundle savedInstanceState) {
  */
 private void initDataSet(Context context) {
 	//todo change
-	Cursor c = QueryHelper.getListValueCursor(context);
+	Cursor c = QueryHelper.getSubTaskValueCursor(context);
 	c.moveToFirst();
 	Log.d("setUpAdapter", String.valueOf(c.getCount()));
 
 	//todo change
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
+	List<ContentValues> allSubTaskValues = QueryHelper.getValuesFromCursor(c, SubtaskColumns.ALL_COLUMNS);
 	mDataSet = new ArrayList<>();
-	for (ContentValues listValues : allListValues) {
+	for (ContentValues SubTaskValues : allSubTaskValues) {
 		//todo change
-		mDataSet.add(new ListModel(listValues));
+		mDataSet.add(new SubTaskModel(SubTaskValues));
 	}
 }
 
@@ -85,8 +83,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	setView(savedInstanceState, rootView);
 
 	//todo change
-	mAdapter = new LandingRecycleAdapter(mDataSet, getContext());
-	// Set LandingRecycleAdapter as the adapter for RecyclerView.
+	mAdapter = new SubTaskRecycleAdapter(mDataSet, getContext());
+	// Set SubTaskRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
 
 	return rootView;
