@@ -9,7 +9,7 @@ import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
 
 
-public class ListModel {
+public class ListModel extends SubTaskModel {
 
 
 String  id;

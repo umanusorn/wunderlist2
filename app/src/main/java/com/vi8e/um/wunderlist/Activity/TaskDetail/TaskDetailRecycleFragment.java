@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.Activity.Landing;
+package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vi8e.um.wunderlist.Activity.Landing.LandingRecycleAdapter;
 import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.list.ListColumns;
@@ -41,10 +42,14 @@ import java.util.List;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class LandingRecycleFragment extends Fragment {
+public class TaskDetailRecycleFragment extends Fragment {
 
+//todo change
 private static final String TAG                = "LandingRecycleFragment";
 private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+private static final int    SPAN_COUNT         = 2;
+
+
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
@@ -87,6 +92,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	mAdapter = new LandingRecycleAdapter(mDataSet, getContext());
 	// Set LandingRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
+	// END_INCLUDE(initializeRecyclerView)
 
 	return rootView;
 }
@@ -100,24 +106,8 @@ private void setView(Bundle savedInstanceState, View rootView) {
 	// elements are laid out.
 	mLayoutManager = new LinearLayoutManager(getActivity());
 
-	if (savedInstanceState != null) {
-		// Restore saved layout manager type.
-	}
-	setRecyclerViewLayoutManager();
 }
 
-public void setRecyclerViewLayoutManager() {
-	int scrollPosition = 0;
-	// If a layout manager has already been set, get current scroll position.
-	if (mRecyclerView.getLayoutManager() != null) {
-		scrollPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
-				.findFirstCompletelyVisibleItemPosition();
-	}
-
-	mLayoutManager = new LinearLayoutManager(getActivity());
-	mRecyclerView.setLayoutManager(mLayoutManager);
-	mRecyclerView.scrollToPosition(scrollPosition);
-}
 
 @Override
 public void onSaveInstanceState(Bundle savedInstanceState) {

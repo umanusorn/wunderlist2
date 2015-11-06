@@ -42,6 +42,9 @@ SubTaskModel ( String title, String taskId ) {
 
 }
 
+public SubTaskModel() {
+}
+
 public
 boolean isComplete () {
 	return Boolean.valueOf ( isComplete );

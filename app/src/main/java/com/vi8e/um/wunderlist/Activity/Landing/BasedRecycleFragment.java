@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.Activity.TaskDetail;
+package com.vi8e.um.wunderlist.Activity.Landing;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,19 +41,18 @@ import java.util.List;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class RecyclerViewFragment extends Fragment {
+public class BasedRecycleFragment extends Fragment {
 
-private static final String TAG                = "LandingRecycleFragment";
-private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-private static final int    SPAN_COUNT         = 2;
+private static final String TAG = "LandingRecycleFragment";
+protected static final String KEY_LAYOUT_MANAGER = "layoutManager";
+private static final int SPAN_COUNT = 2;
 
 private enum LayoutManagerType {
 	GRID_LAYOUT_MANAGER,
 	LINEAR_LAYOUT_MANAGER
 }
 
-protected LayoutManagerType mCurrentLayoutManagerType;
-
+protected LayoutManagerType          mCurrentLayoutManagerType;
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
@@ -62,7 +61,22 @@ protected ArrayList<ListModel>       mDataset;
 @Override
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	initDataset(getContext());
+	initDataSet(getContext());
+}
+
+/**
+ * Generates Strings for RecyclerView's adapter. This data would usually come
+ * from a local content provider or remote server.
+ */
+private void initDataSet(Context context) {
+	Cursor c = QueryHelper.getListValueCursor(context);
+	c.moveToFirst();
+	Log.d("setUpAdapter", String.valueOf(c.getCount()));
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
+	mDataset = new ArrayList<>();
+	for (ContentValues listValues : allListValues) {
+		mDataset.add(new ListModel(listValues));
+	}
 }
 
 @Override
@@ -71,8 +85,17 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 {
 	View rootView = inflater.inflate(R.layout.recycler_view_frag, container, false);
 	rootView.setTag(TAG);
+	setView(savedInstanceState, rootView);
+	mAdapter = new LandingRecycleAdapter(mDataset, getContext());
+	// Set LandingRecycleAdapter as the adapter for RecyclerView.
+	mRecyclerView.setAdapter(mAdapter);
+	// END_INCLUDE(initializeRecyclerView)
 
-	// BEGIN_INCLUDE(initializeRecyclerView)
+	return rootView;
+}
+
+private void setView(Bundle savedInstanceState, View rootView) {
+// BEGIN_INCLUDE(initializeRecyclerView)
 	mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
 	// LinearLayoutManager is used here, this will layout the elements in a similar fashion
@@ -87,13 +110,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				.getSerializable(KEY_LAYOUT_MANAGER);
 	}
 	setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-
-	mAdapter = new LandingRecycleAdapter(mDataset, getContext());
-	// Set LandingRecycleAdapter as the adapter for RecyclerView.
-	mRecyclerView.setAdapter(mAdapter);
-	// END_INCLUDE(initializeRecyclerView)
-
-	return rootView;
 }
 
 /**
@@ -135,18 +151,5 @@ public void onSaveInstanceState(Bundle savedInstanceState) {
 	super.onSaveInstanceState(savedInstanceState);
 }
 
-/**
- * Generates Strings for RecyclerView's adapter. This data would usually come
- * from a local content provider or remote server.
- */
-private void initDataset(Context context) {
-	Cursor c = QueryHelper.getListValueCursor(context);
-	c.moveToFirst();
-	Log.d("setUpAdapter", String.valueOf(c.getCount()));
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(c, ListColumns.ALL_COLUMNS);
-	mDataset = new ArrayList<ListModel>();
-	for (ContentValues listValues : allListValues) {
-		mDataset.add(new ListModel(listValues));
-	}
-}
+
 }
