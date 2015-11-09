@@ -1,12 +1,9 @@
 package com.vi8e.um.wunderlist.Activity.Comment;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,16 +18,9 @@ import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adapters.CommentAdapter;
-import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
-import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.RecycleUtil;
-import com.vi8e.um.wunderlist.utils.UiMng;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public
@@ -45,7 +35,6 @@ EditText editTextComment;
 static        int               currentListPosition;
 public static CommentModel      currentList;
 static        AppCompatActivity thisActivity;
-public static CommentAdapter    sCommentAdapter;
 public static ListView          listViewSubTask;
 private       Menu              menu;
 public static        Bundle            thisSavedInstanceState;
@@ -75,7 +64,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	/*for ( int i = 0 ; i < 5 ; i++ ) {
 		onClickSend ( "test"+i );
 	}*/
-	sCommentAdapter = setUpAdapterListView(listViewSubTask, thisContext);
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.COMMENT);
 	listViewSubTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 		@Override public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
@@ -84,7 +73,8 @@ protected void onCreate(Bundle savedInstanceState) {
 			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
 
 			//CustomDialog.showDialogDeleteComment ( thisActivity,sCommentAdapter,position );
-			setCurrentList ( position );
+			//todo
+			//setCurrentList ( position );
 			return false;
 		}
 	} );
@@ -97,7 +87,8 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	int id = item.getItemId ();
 	if ( id == R.id.delete ) {
 
-		deleteCurrentComment ( currentListPosition, thisContext, sCommentAdapter );
+		//todo
+		//deleteCurrentComment ( currentListPosition, thisContext, sCommentAdapter );
 	}
 
 	setMenuNormal ( thisActivity, menu );
@@ -126,8 +117,9 @@ void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
 
 }
 
-public static
-void deleteCurrentComment ( int position, Context context, CommentAdapter commentAdapter ) {
+//todo
+/*public static
+void deleteCurrentComment ( int position, Context context, CommentRecycleAdapter commentAdapter ) {
 	Log.d ( TAG, "pos=" + position );
 	TaskCommentSelection selection = new TaskCommentSelection ();
 	CommentModel commentModel = commentAdapter.getItem ( position );
@@ -135,55 +127,23 @@ void deleteCurrentComment ( int position, Context context, CommentAdapter commen
 	Log.d ( TAG, "id=" + id );
 	selection.id ( Long.parseLong ( id ) );
 	selection.delete ( context );
-
 	commentAdapter.remove ( commentModel );
 	commentAdapter.notifyDataSetChanged ();
 
-}
+}*/
 
-
-public static
+//todo
+/*public static
 void setCurrentList ( final int position ) {
 	//currentList = listModel;
 	currentListPosition = position;
-	currentList = sCommentAdapter.getItem ( position );
-}
+	currentList = sCommentAdapter.getItem(position);
+}*/
 
 void onClickSend ( String title ) {
 	QueryHelper.addCommentToDB ( thisContext, title, TaskActivity.currentTask.getId () );
-	sCommentAdapter = setUpAdapterListView ( listViewSubTask, thisContext );
+	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState, thisActivity, ModelType.COMMENT);
 }
 
-public static
-CommentAdapter setUpAdapterListView ( ListView listView, Context context ) {
-	TaskCommentSelection where = new TaskCommentSelection ();
-	where.taskId ( TaskActivity.currentTask.getId () );
-	Cursor c = where.query ( context.getContentResolver () );
-	c.moveToFirst ();
-	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
-
-	c.moveToFirst ();
-
-	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, TaskCommentColumns.ALL_COLUMNS );
-	ArrayList<CommentModel> arrayOfList = new ArrayList<> ();
-
-	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-	CommentAdapter commentAdapter = new CommentAdapter ( context, arrayOfList );
-	listView.setAdapter ( commentAdapter );
-	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-		ContentValues values = allListValues.get ( i );
-
-		Log.d ( TAG, "comment id=" + values.getAsString ( TaskCommentColumns._ID ) );
-		commentAdapter.add ( new CommentModel ( values.getAsString ( TaskCommentColumns.COMMENT_TITLE ),
-		                                        values.getAsString ( TaskCommentColumns.TASK_ID ),
-		                                        values.getAsString ( TaskCommentColumns._ID ),
-		                                        values.getAsString ( TaskCommentColumns.DATETIME ),
-		                                        values.getAsString ( TaskCommentColumns.USER_ID ) )
-		                   );
-	}
-	UiMng.setTaskListViewHeight(listViewSubTask);
-	return commentAdapter;
-}
 
 }

@@ -10,14 +10,12 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.vi8e.um.wunderlist.Activity.Comment.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adapters.CommentAdapter;
 import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
@@ -44,7 +42,7 @@ void showAddListDialog ( final Activity thisContext, final LandingListAdapter la
 			.input ( thisContext.getString ( R.string.add_list ), "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					QueryHelper.addListToDB ( thisContext, String.valueOf ( charSequence ), listView );
+					QueryHelper.addListToDB(thisContext, String.valueOf(charSequence), listView);
 				}
 			} )
 			.negativeText ( "CANCEL" )
@@ -99,7 +97,7 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final AppCompatActivi
 
 			.
 
-					show ();
+					show();
 }
 
 public static
@@ -108,12 +106,12 @@ void showCancelUploadDialog ( final Activity thisContext, final Intent intent, f
 	Log.d ( TAG,"showCancelUplaod Dialog ");
 	MaterialDialog diallogDelete = new MaterialDialog.Builder ( thisContext )
 			//.customView ( R.layout.dialog_todo, true )
-			.title ( "Uploading in progress" )
+			.title("Uploading in progress")
 			//.content ( "\"" + title + "\" " + thisContext.getString ( R.string.content_delete_list ) )
-			.positiveText ( "Cancel the upload" ).callback ( new MaterialDialog.ButtonCallback () {
+			.positiveText("Cancel the upload").callback ( new MaterialDialog.ButtonCallback () {
 				@Override public
 				void onPositive ( MaterialDialog dialog ) {
-					super.onPositive ( dialog );
+					super.onPositive(dialog);
 
 					if ( uploadMultiPictures != null ) {
 						uploadMultiPictures.cancelUpload ();
@@ -141,8 +139,8 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 				void onPositive ( MaterialDialog dialog ) {
 					super.onPositive ( dialog );
 					LandingActivity.deleteSpecificList ( thisContext, LandingActivity.currentList.getId () );
-					LandingActivity.mLandingListAdapter.notifyDataSetChanged ();
-					LandingActivity.setUpOnResume ();
+					LandingActivity.mLandingListAdapter.notifyDataSetChanged();
+					LandingActivity.setUpOnResume();
 
 				}
 			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
@@ -150,7 +148,8 @@ void showDialogDelete ( final Activity thisContext, final LandingListAdapter lan
 			.show ();
 }
 
-public static
+//todo comment
+/*public static
 void showDialogDeleteComment ( final Activity thisContext, final CommentAdapter sCommentAdapter, final int currentPosition) {
 
 	String title = sCommentAdapter.getItem (currentPosition).getTitle ();
@@ -169,7 +168,7 @@ void showDialogDeleteComment ( final Activity thisContext, final CommentAdapter 
 			} ).positiveColor ( thisContext.getResources ().getColor ( R.color.red_400 ) )
 			.negativeText ( "NO" ).negativeColor ( thisContext.getResources ().getColor ( R.color.blue_400 ) )
 			.show ();
-}
+}*/
 
 
 public static
