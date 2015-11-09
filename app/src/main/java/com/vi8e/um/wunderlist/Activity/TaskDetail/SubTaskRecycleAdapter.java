@@ -18,6 +18,7 @@ package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,13 +43,15 @@ private static final String TAG = "SubTaskRecycleAdapter";
 private ArrayList<SubTaskModel> mDataSet;
 private Context                 mContext;
 
-@NonNull public static View.OnClickListener onClickChkBox(final SubTaskModel rowData) {
+@NonNull public static View.OnClickListener onClickChkBox(final SubTaskModel rowData, final AppCompatActivity activity) {
 	return new View.OnClickListener() {
 		@Override public void onClick(View v) {
 
 			//	rowData.setDateTime ( String.valueOf ( ! rowData.getDateTime () ) );
 			Log.d(TAG, "onClickBox");
+
 			UiMng.toggleImgCompleteData(v, rowData, TaskDetailActivity.sContext);
+			TaskDetailActivity.saveSubTaskToDb(rowData,activity);
 			//Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
 		}
 	};
@@ -108,7 +111,7 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
 	final SubTaskModel rowData = mDataSet.get(position);
 	viewHolder.getTvTitle().setText(rowData.getTitle());
-	UiMng.toggleImgCompleteData(viewHolder.chkBox, rowData, TaskDetailActivity.sContext);
+
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			CustomDialog.showUpdateSubTaskDialog(rowData,
@@ -117,7 +120,9 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 			                                     TaskDetailActivity.listViewSubTask);
 		}
 	});
-	viewHolder.chkBox.setOnClickListener(onClickChkBox(rowData));
+	viewHolder.chkBox.setOnClickListener(onClickChkBox(rowData,TaskDetailActivity.thisActivity));
+
+	UiMng.toggleImgCompleteData(viewHolder.chkBox, rowData, TaskDetailActivity.sContext);
 }
 
 @Override

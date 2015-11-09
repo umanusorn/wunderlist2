@@ -67,7 +67,7 @@ public void setView(final SubTaskModel rowData, ImageView chkBox) {
 	tvTitle.setText(rowData.getTitle());
 	//UiMng.toggleImgCompleteData(chkBox, rowData, TaskDetailActivity.sContext);
 	//Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
-	chkBox.setOnClickListener(SubTaskRecycleAdapter.onClickChkBox(rowData));
+	chkBox.setOnClickListener(SubTaskRecycleAdapter.onClickChkBox(rowData,TaskDetailActivity.thisActivity));
 	rootView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			CustomDialog.showUpdateSubTaskDialog(rowData,

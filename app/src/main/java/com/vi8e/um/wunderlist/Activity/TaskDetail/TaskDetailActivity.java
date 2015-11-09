@@ -153,7 +153,7 @@ void onCreate ( Bundle savedInstanceState ) {
 
 private
 void setView () {
-	Log.d ( "", "setView" );
+	Log.d("", "setView");
 	listViewSubTask = ( ListView ) findViewById ( R.id.listViewTaskInComplete );
 	checkBoxTask = ( ImageView ) findViewById ( R.id.chkBox );
 	editTextTitle = ( EditText ) findViewById ( R.id.editTextTitle );
@@ -175,12 +175,11 @@ void setViewValues () {
 	editTextTitle.setText ( TaskActivity.currentTask.getTitle () );
 	currentTask.setIsStar ( String.valueOf ( ! currentTask.isStar () ) );
 	noteEditText.setText ( String.valueOf ( currentTask.getNote () ) );
-	noteLayout.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			IntentCaller.taskNoteActivity ( getApplicationContext (), currentTask );
+	noteLayout.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			IntentCaller.taskNoteActivity(getApplicationContext(), currentTask);
 		}
-	} );
+	});
 	currentTask.setIsComplete ( String.valueOf ( ! currentTask.isComplete () ) );
 
 	setTextViewReminderFromTaskDB ( currentTask, reminderText, sContext );
@@ -316,7 +315,7 @@ AndroidAuthSession buildSession () {
 	AppKeyPair appKeyPair = new AppKeyPair ( APP_KEY, APP_SECRET );
 
 	AndroidAuthSession session = new AndroidAuthSession ( appKeyPair );
-	loadAuth ( session );
+	loadAuth(session);
 	return session;
 }
 
@@ -350,7 +349,7 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 	super.onActivityResult ( requestCode, resultCode, intent );
 
 	if ( resultCode == Activity.RESULT_OK ) {
-		Log.d ( TAG, "onActivityResult" );
+		Log.d(TAG, "onActivityResult");
 		if ( requestCode == INTENT_REQUEST_GET_IMAGES ) {
 			Parcelable[] parcelableUris = intent.getParcelableArrayExtra ( ImagePickerActivity.EXTRA_IMAGE_URIS );
 
@@ -383,13 +382,13 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 public static
 void setActiveUploadBtn () {
 	Log.d ( TAG,"Set red upload btn" );
-	TaskDetailActivity.uploadBtn.setColorFilter ( sContext.getResources ().getColor ( R.color.red_400 ) );
+	TaskDetailActivity.uploadBtn.setColorFilter(sContext.getResources().getColor(R.color.red_400));
 }
 
 public static
 void setInActiveUploadBtn () {
-	Log.d ( TAG,"Set grey upload btn" );
-	TaskDetailActivity.uploadBtn.setColorFilter (sContext.getResources ().getColor ( R.color.grey_500 ) );
+	Log.d(TAG, "Set grey upload btn");
+	TaskDetailActivity.uploadBtn.setColorFilter(sContext.getResources().getColor(R.color.grey_500));
 }
 
 @Override
@@ -400,8 +399,8 @@ void onPause () {
 	currentTask.setTitle ( editTextTitle.getText ().toString () );
 	String id = currentTask.getId ();
 	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-	getContentResolver ().update ( uri, currentTask.getValues (), null, null );
-	saveSubTaskAdapterToDb ();
+	getContentResolver ().update(uri, currentTask.getValues(), null, null);
+	saveSubTaskAdapterToDb();
 
 }
 
@@ -414,13 +413,16 @@ void saveSubTaskAdapterToDb () {
 		Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
 		//try {
 		getContentResolver ().update ( uri, recordData.getValues (), null, null );
-
-		/*catch ( IllegalArgumentException e ) {
-			Log.e ( "errorOnUpdateData", e.getMessage () );
-			uri = getContentResolver ().insert ( ListColumns.CONTENT_URI, recordData.getValues () );
-			Log.d ( "ChkColumn ", "title" + recordData.getTitle () + "newId=" + uri.getPathSegments ().get ( 1 ) );
-		}*/
 	}
+}
+
+public static
+void saveSubTaskToDb (SubTaskModel subTaskModel,AppCompatActivity thisActivity) {
+
+		String id = subTaskModel.getId ();
+		Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
+		thisActivity.getContentResolver ().update ( uri, subTaskModel.getValues (), null, null );
+
 }
 
 @Override
