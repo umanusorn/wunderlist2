@@ -1,12 +1,10 @@
 package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -34,24 +32,19 @@ import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.Model.TaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.dialogs.CustomDialog;
 import com.vi8e.um.wunderlist.dialogs.ReminderDialog;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
-import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.provider.task.TaskColumns;
 import com.vi8e.um.wunderlist.sharedprefs.SessionManagement;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
-import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.RecycleUtil;
 import com.vi8e.um.wunderlist.utils.UiMng;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadMultiPictures;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 
 import nl.changer.polypicker.Config;
 import nl.changer.polypicker.ImagePickerActivity;
@@ -63,7 +56,6 @@ private static final String TAG = TaskDetailActivity.class.getSimpleName ();
 public static ListView       listViewSubTask;
 public static AppCompatActivity       thisActivity;
 public static Context        sContext;
-public static SubTaskAdapter subTaskAdapter;
 public static
 android.support.v4.app.FragmentManager sFragmentManager;
 
@@ -120,7 +112,7 @@ public static Bundle thisSavedInstanceState;
 @Override
 protected
 void onCreate ( Bundle savedInstanceState ) {
-	super.onCreate ( savedInstanceState );
+	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_task_detail);
 	sContext = getApplicationContext ();
 	thisActivity = this;
@@ -145,9 +137,9 @@ void onCreate ( Bundle savedInstanceState ) {
 		imm.hideSoftInputFromWindow ( view.getWindowToken (), 0 );
 	}
 
-	setView ();
-	setViewValues ();
-	subTaskAdapter.setNotifyOnChange ( true );
+	setView();
+	setViewValues();
+	//subTaskAdapter.setNotifyOnChange ( true );
 	UiMng.setTaskListViewHeight(listViewSubTask);
 }
 
@@ -227,10 +219,10 @@ void setViewValues () {
 		@Override public
 		void onClick ( View v ) {
 			Log.d ( "", "addSubTask" );
-			CustomDialog.showAddSubTaskDialog ( thisActivity, subTaskAdapter, listViewSubTask );
+			CustomDialog.showAddSubTaskDialog ( thisActivity, listViewSubTask );
 		}
 	} );
-	subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
+	//subTaskAdapter = setUpAdapterListView ( this, listViewSubTask, subTaskAdapter, getApplicationContext () );
 
 	editTextBottom.setOnClickListener ( new View.OnClickListener () {
 		@Override public
@@ -252,8 +244,8 @@ void setViewValues () {
 
 public static
 void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText, Context context ) {
-	String reminderTime = taskModel.getReminderDate ();
-	Log.d ( TAG, "reminderTime= " + reminderTime );
+	String reminderTime = taskModel.getReminderDate();
+	Log.d(TAG, "reminderTime= " + reminderTime);
 	if ( reminderTime != null && ! reminderTime.isEmpty () ) {
 		Date date = new Date ();
 		date.setTime ( Long.parseLong ( reminderTime ) );
@@ -265,35 +257,6 @@ void setTextViewReminderFromTaskDB ( TaskModel taskModel, TextView reminderText,
 	}
 }
 
-public static
-SubTaskAdapter setUpAdapterListView ( Activity activity, ListView listView, SubTaskAdapter subTaskAdapter, Context context ) {
-	SubtaskSelection where = new SubtaskSelection ();
-	where.taskid ( TaskActivity.currentTask.getId () );
-	Cursor c = where.query ( context.getContentResolver () );
-	c.moveToFirst ();
-	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
-
-	c.moveToFirst ();
-
-	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
-	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
-
-	//landingListAdapter = new LandingListAdapter ( activity, arrayOfList );
-	subTaskAdapter = new SubTaskAdapter ( context, arrayOfList );
-	listView.setAdapter ( subTaskAdapter );
-	for ( int i = 0 ; i < allListValues.size () ; i++ ) {
-		ContentValues values = allListValues.get ( i );
-		subTaskAdapter.add ( new SubTaskModel ( values.getAsString ( SubtaskColumns.SUBTASK_TITLE ),
-		                                        values.getAsString ( SubtaskColumns.TASKID ),
-		                                        values.getAsString ( SubtaskColumns._ID ),
-		                                        values.getAsString ( SubtaskColumns.ISCOMPLETE ) ) );
-	}
-
-	UiMng.setTaskListViewHeight(listViewSubTask);
-
-	return subTaskAdapter;
-}
 
 
 
@@ -307,7 +270,7 @@ void getImages () {
 			.setSelectionLimit ( MAX_IMGS_SELECTION )    // set photo selection limit. Default unlimited selection.
 			.build ();
 	ImagePickerActivity.setConfig ( config );
-	startActivityForResult ( intent, INTENT_REQUEST_GET_IMAGES );
+	startActivityForResult(intent, INTENT_REQUEST_GET_IMAGES);
 }
 
 private
@@ -339,14 +302,14 @@ void loadAuth ( AndroidAuthSession session ) {
 	}
 	else {
 		// Still support using old OAuth 1 tokens.
-		session.setAccessTokenPair ( new AccessTokenPair ( key, secret ) );
+		session.setAccessTokenPair(new AccessTokenPair(key, secret));
 	}
 }
 
 @Override
 protected
 void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
-	super.onActivityResult ( requestCode, resultCode, intent );
+	super.onActivityResult(requestCode, resultCode, intent);
 
 	if ( resultCode == Activity.RESULT_OK ) {
 		Log.d(TAG, "onActivityResult");
@@ -381,7 +344,7 @@ void onActivityResult ( int requestCode, int resultCode, Intent intent ) {
 }
 public static
 void setActiveUploadBtn () {
-	Log.d ( TAG,"Set red upload btn" );
+	Log.d(TAG, "Set red upload btn");
 	TaskDetailActivity.uploadBtn.setColorFilter(sContext.getResources().getColor(R.color.red_400));
 }
 
@@ -399,11 +362,12 @@ void onPause () {
 	currentTask.setTitle ( editTextTitle.getText ().toString () );
 	String id = currentTask.getId ();
 	Uri uri = Uri.parse ( String.valueOf ( TaskColumns.CONTENT_URI ) + "/" + id );
-	getContentResolver ().update(uri, currentTask.getValues(), null, null);
-	saveSubTaskAdapterToDb();
+	getContentResolver().update(uri, currentTask.getValues(), null, null);
+	//saveSubTaskAdapterToDb();
 
 }
 
+/*
 private
 void saveSubTaskAdapterToDb () {
 	for ( int i = 0 ; i < subTaskAdapter.getCount () ; i++ ) {
@@ -415,13 +379,14 @@ void saveSubTaskAdapterToDb () {
 		getContentResolver ().update ( uri, recordData.getValues (), null, null );
 	}
 }
+*/
 
 public static
 void saveSubTaskToDb (SubTaskModel subTaskModel,AppCompatActivity thisActivity) {
 
 		String id = subTaskModel.getId ();
 		Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
-		thisActivity.getContentResolver ().update ( uri, subTaskModel.getValues (), null, null );
+		thisActivity.getContentResolver().update(uri, subTaskModel.getValues(), null, null);
 
 }
 
@@ -457,11 +422,12 @@ protected
 void
 onResume () {
 	super.onResume ();
-	Log.d ( "OnResume", "" );
-	setView ();
-	setViewValues ();
-	setUpAdapterListView ();
-	dropboxResume ();
+	Log.d("OnResume", "");
+	setView();
+	setViewValues();
+	//setUpAdapterListView();
+	RecycleUtil.setUpRecycleFragment(thisSavedInstanceState,thisActivity,ModelType.SUB_TASK);
+	dropboxResume();
 	cancelUpload ( getIntent (), mUploadMultiPictures );
 
 }
@@ -507,7 +473,7 @@ void setLoggedIn ( boolean loggedIn ) {
 
 private
 void showToast ( String msg ) {
-	Toast error = Toast.makeText ( this, msg, Toast.LENGTH_LONG );
+	Toast error = Toast.makeText(this, msg, Toast.LENGTH_LONG);
 	error.show ();
 }
 
@@ -541,10 +507,10 @@ void storeAuth ( AndroidAuthSession session ) {
 	}
 }
 
-public static
+/*public static
 SubTaskAdapter setUpAdapterListView () {
 	return setUpAdapterListView ( thisActivity, listViewSubTask, subTaskAdapter, sContext );
-}
+}*/
 
 @Override
 public

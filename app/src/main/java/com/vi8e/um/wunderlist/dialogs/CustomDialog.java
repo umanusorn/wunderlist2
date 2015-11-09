@@ -1,4 +1,5 @@
 package com.vi8e.um.wunderlist.dialogs;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -18,7 +19,6 @@ import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;
 import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
-import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 import com.vi8e.um.wunderlist.utils.RecycleUtil;
@@ -52,7 +52,7 @@ void showAddListDialog ( final Activity thisContext, final LandingListAdapter la
 }
 
 public static
-void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
+void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final ListView listView ) {
 	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisActivity )
 			//.customView ( R.layout.dialog_todo, true )
 			.title ( thisActivity.getString(R.string.add_sub_task) )
@@ -60,8 +60,11 @@ void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final SubTaskA
 			.input ( thisActivity.getString(R.string.add_sub_task), "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					QueryHelper.addSubTaskToDB ( thisActivity, String.valueOf ( charSequence ), TaskActivity.currentTask.getId (), listView );
-					TaskDetailActivity.setUpAdapterListView();
+					QueryHelper.addSubTaskToDB(thisActivity,
+					                           String.valueOf(charSequence),
+					                           TaskActivity.currentTask.getId(),
+					                           listView);
+					//TaskDetailActivity.setUpAdapterListView();
 					RecycleUtil.setUpRecycleFragment(TaskDetailActivity.thisSavedInstanceState, thisActivity, ModelType.SUB_TASK);
 					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
 					//Utility.setTaskListViewHeight ( listView );
@@ -73,7 +76,7 @@ void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final SubTaskA
 
 
 public static
-void showUpdateSubTaskDialog ( final SubTaskModel rowData, final AppCompatActivity activity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
+void showUpdateSubTaskDialog ( final SubTaskModel rowData, final AppCompatActivity activity, final ListView listView ) {
 	new MaterialDialog.Builder ( activity )
 			.title ( "Edit" )
 			.positiveText ( "ACCEPT" )
@@ -84,8 +87,8 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final AppCompatActivi
 					         rowData.setTitle ( String.valueOf ( charSequence ) );
 					         String id = rowData.getId ();
 					         Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
-					         activity.getContentResolver ().update ( uri, rowData.getValues (), null, null );
-					         TaskDetailActivity.setUpAdapterListView();
+					         activity.getContentResolver ().update(uri, rowData.getValues(), null, null);
+					         //TaskDetailActivity.setUpAdapterListView();
 					         RecycleUtil.setUpRecycleFragment(TaskDetailActivity.thisSavedInstanceState,activity,ModelType.SUB_TASK);
 				         }
 			         }

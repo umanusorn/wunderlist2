@@ -17,6 +17,7 @@ import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.dialogs.CustomDialog;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 
@@ -65,14 +66,12 @@ public View getView(final int position, View convertView, final ViewGroup parent
 
 public void setView(final SubTaskModel rowData, ImageView chkBox) {
 	tvTitle.setText(rowData.getTitle());
-	//UiMng.toggleImgCompleteData(chkBox, rowData, TaskDetailActivity.sContext);
-	//Utility.toggleImgCompleteData ( chkBox, rowData, TaskDetailActivity.sContext );
+	UiMng.toggleImgCompleteData(chkBox, rowData, TaskDetailActivity.sContext);
 	chkBox.setOnClickListener(SubTaskRecycleAdapter.onClickChkBox(rowData,TaskDetailActivity.thisActivity));
 	rootView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
 			CustomDialog.showUpdateSubTaskDialog(rowData,
 			                                     TaskDetailActivity.thisActivity,
-			                                     TaskDetailActivity.subTaskAdapter,
 			                                     TaskDetailActivity.listViewSubTask);
 		}
 	});

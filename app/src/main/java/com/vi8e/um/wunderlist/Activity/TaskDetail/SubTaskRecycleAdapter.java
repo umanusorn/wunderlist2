@@ -116,7 +116,6 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 		@Override public void onClick(View v) {
 			CustomDialog.showUpdateSubTaskDialog(rowData,
 			                                     TaskDetailActivity.thisActivity,
-			                                     TaskDetailActivity.subTaskAdapter,
 			                                     TaskDetailActivity.listViewSubTask);
 		}
 	});
