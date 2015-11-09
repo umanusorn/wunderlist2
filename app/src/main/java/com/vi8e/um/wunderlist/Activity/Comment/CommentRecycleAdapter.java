@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Model.SubTaskModel;
+import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.R;
 
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ import java.util.ArrayList;
  * Provide views to RecyclerView with data from mDataSet.
  */
 public class CommentRecycleAdapter extends RecyclerView.Adapter<CommentRecycleAdapter.ViewHolder> {
-private static final String TAG = "SubTaskRecycleAdapter";
+private static final String TAG = "CommentRecycleAdapter";
 
-private ArrayList<SubTaskModel> mDataSet;
+private ArrayList<CommentModel> mDataSet;
 private Context              mContext;
 
 // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
@@ -58,7 +58,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 				Log.d(TAG, "Element " + getPosition() + " clicked.");
 			}
 		});
-		tvTitle = (TextView) view.findViewById(R.id.subTaskTitle);
+		tvTitle = (TextView) view.findViewById(R.id.commentTitle);
 
 	}
 
@@ -69,7 +69,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
  *
  * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
  */
-public CommentRecycleAdapter(ArrayList<SubTaskModel> dataSet, Context context) {
+public CommentRecycleAdapter(ArrayList<CommentModel> dataSet, Context context) {
 	mDataSet = dataSet;
 	mContext = context;
 }
@@ -79,7 +79,7 @@ public CommentRecycleAdapter(ArrayList<SubTaskModel> dataSet, Context context) {
 public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 	// Create a new view.
 	View v = LayoutInflater.from(viewGroup.getContext())
-	                       .inflate(R.layout.recycle_landing, viewGroup, false);
+	                       .inflate(R.layout.recycle_comment, viewGroup, false);
 	return new ViewHolder(v);
 }
 
@@ -87,7 +87,7 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	SubTaskModel listModel = mDataSet.get(position);
+	CommentModel listModel = mDataSet.get(position);
 	viewHolder.getTvTitle().setText(listModel.getTitle());
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {

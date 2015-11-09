@@ -30,9 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetail.SubTaskRecycleAdapter;
 import com.vi8e.um.wunderlist.Model.CommentModel;
-import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
@@ -49,9 +47,9 @@ public class CommentRecycleFragment extends Fragment {
 
 private static final String TAG                = "CommentRecycleFragment";
 protected RecyclerView               mRecyclerView;
-protected SubTaskRecycleAdapter      mAdapter;
+protected CommentRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;
-protected ArrayList<SubTaskModel>       mDataSet;
+protected ArrayList<CommentModel>       mDataSet;
 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -76,9 +74,9 @@ private void initDataSet(Context context) {
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
 
 	//todo change
-	List<ContentValues> allSubTaskValues = QueryHelper.getValuesFromCursor(c, TaskCommentColumns.ALL_COLUMNS);
+	List<ContentValues> allCommentValues = QueryHelper.getValuesFromCursor(c, TaskCommentColumns.ALL_COLUMNS);
 	mDataSet = new ArrayList<>();
-	for (ContentValues commentValue : allSubTaskValues) {
+	for (ContentValues commentValue : allCommentValues) {
 		//todo change
 		mDataSet.add(new CommentModel(commentValue));
 	}
@@ -93,8 +91,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	setView(savedInstanceState, rootView);
 
 	//todo change
-	mAdapter = new SubTaskRecycleAdapter(mDataSet, getContext());
-	// Set SubTaskRecycleAdapter as the adapter for RecyclerView.
+	mAdapter = new CommentRecycleAdapter(mDataSet, getContext());
+	// Set CommentRecycleAdapter as the adapter for RecyclerView.
 	mRecyclerView.setAdapter(mAdapter);
 
 	return rootView;
