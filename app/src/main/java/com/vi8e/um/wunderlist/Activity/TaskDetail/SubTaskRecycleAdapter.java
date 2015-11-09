@@ -64,11 +64,9 @@ private Context                 mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 	final TextView tvTitle;
-
 	public TextView getTvTitle() {
 		return tvTitle;
 	}
-
 	ImageView chkBox;
 
 	public ViewHolder(View view) {
@@ -120,7 +118,7 @@ public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 		}
 	});
 	viewHolder.chkBox.setOnClickListener(onClickChkBox(rowData,TaskDetailActivity.thisActivity));
-
+	UiMng.toggleImgCompleteData(viewHolder.chkBox, rowData, TaskDetailActivity.sContext);
 	UiMng.toggleImgCompleteData(viewHolder.chkBox, rowData, TaskDetailActivity.sContext);
 }
 
