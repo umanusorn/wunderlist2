@@ -29,9 +29,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
+import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import java.util.ArrayList;
@@ -61,9 +63,17 @@ public void onCreate(Bundle savedInstanceState) {
  */
 private void initDataSet(Context context) {
 	//todo change
-	Cursor c = QueryHelper.getSubTaskValueCursor(context);
-	c.moveToFirst();
-	Log.d("setUpAdapter", String.valueOf(c.getCount()));
+	SubtaskSelection where = new SubtaskSelection ();
+	where.taskid (TaskActivity.currentTask.getId());
+	Cursor c = where.query ( context.getContentResolver () );
+	c.moveToFirst ();
+	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
+
+	c.moveToFirst ();
+
+	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
+	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
+	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
 
 	//todo change
 	List<ContentValues> allSubTaskValues = QueryHelper.getValuesFromCursor(c, SubtaskColumns.ALL_COLUMNS);
