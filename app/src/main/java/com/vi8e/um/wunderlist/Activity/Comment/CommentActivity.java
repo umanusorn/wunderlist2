@@ -1,4 +1,4 @@
-package com.vi8e.um.wunderlist.Activity;
+package com.vi8e.um.wunderlist.Activity.Comment;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,14 +16,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.CommentModel;
+import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
 import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.RecycleUtil;
 import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ static        AppCompatActivity thisActivity;
 public static CommentAdapter    sCommentAdapter;
 public static ListView          listViewSubTask;
 private       Menu              menu;
+public static        Bundle            thisSavedInstanceState;
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	mToolbar = (Toolbar) findViewById(R.id.toolbar);
 	setSupportActionBar(mToolbar);
 	ActivityUi.setToolBar(this, mToolbar, title);
+
+	thisSavedInstanceState = savedInstanceState;
+	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.COMMENT);
 
 	mToolbar.setBackgroundColor(getResources().getColor(R.color.blue_500));
 	editTextComment = (EditText) findViewById(R.id.editTextComment);
@@ -70,9 +77,9 @@ protected void onCreate(Bundle savedInstanceState) {
 	}*/
 	sCommentAdapter = setUpAdapterListView(listViewSubTask, thisContext);
 	listViewSubTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-		@Override public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id ) {
+		@Override public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-			ActivityUi.setMenuComment ( thisActivity, menu );
+			ActivityUi.setMenuComment(thisActivity, menu);
 			ActivityUi.setActiveList ( ( RelativeLayout ) view, thisContext );
 			//ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), thisContext);
 

@@ -28,6 +28,20 @@ CommentModel ( String title, String taskId, String id, String dateTime, String u
 	this.userId = userId;
 }
 
+public CommentModel(ContentValues listValues) {
+	setValues(listValues);
+}
+
+public CommentModel setValues(ContentValues values) {
+	id=values.getAsString(TaskCommentColumns._ID);
+	title = values.getAsString(TaskCommentColumns.COMMENT_TITLE);
+	taskId=values.getAsString(TaskCommentColumns.TASK_ID);
+	userId=values.getAsString(TaskCommentColumns.USER_ID);
+	dateTime=values.getAsString(TaskCommentColumns.DATETIME);
+
+	return this;
+}
+
 public
 CommentModel ( String title, String taskId ) {
 	super (title);

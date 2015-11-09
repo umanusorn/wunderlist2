@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.vi8e.um.wunderlist.Activity.CommentActivity">
+        tools:context="com.vi8e.um.wunderlist.Activity.Comment.CommentActivity">
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -13,6 +13,18 @@
     <include layout="@layout/activity_toolbar"
         android:id="@+id/include2" />
     <include layout="@layout/bottombar_comment" android:id="@+id/include"/>
+
+    <FrameLayout
+            android:id="@+id/recycle_content_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="none"
+
+            android:layout_below="@+id/include2"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/include"
+            />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +32,7 @@
         android:choiceMode="multipleChoice"
         android:layout_below="@+id/include2"
         android:layout_alignParentStart="true"
+        android:visibility="gone"
         android:layout_above="@+id/include" />
 </RelativeLayout>
 

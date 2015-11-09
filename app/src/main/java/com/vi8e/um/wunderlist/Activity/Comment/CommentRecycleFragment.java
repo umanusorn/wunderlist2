@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.vi8e.um.wunderlist.Activity.TaskDetail;
+package com.vi8e.um.wunderlist.Activity.Comment;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -30,10 +30,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
+import com.vi8e.um.wunderlist.Activity.TaskDetail.SubTaskRecycleAdapter;
+import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
-import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
-import com.vi8e.um.wunderlist.provider.subtask.SubtaskSelection;
+import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentColumns;
+import com.vi8e.um.wunderlist.provider.taskcomment.TaskCommentSelection;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import java.util.List;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class SubTaskRecycleFragment extends Fragment {
+public class CommentRecycleFragment extends Fragment {
 
 private static final String TAG                = "CommentRecycleFragment";
 protected RecyclerView               mRecyclerView;
@@ -63,8 +65,8 @@ public void onCreate(Bundle savedInstanceState) {
  */
 private void initDataSet(Context context) {
 	//todo change
-	SubtaskSelection where = new SubtaskSelection ();
-	where.taskid (TaskActivity.currentTask.getId());
+	TaskCommentSelection where = new TaskCommentSelection ();
+	where.taskId(TaskActivity.currentTask.getId());
 	Cursor c = where.query ( context.getContentResolver () );
 	c.moveToFirst ();
 	Log.d ( TAG, "setUpAdapter" + String.valueOf ( c.getCount () ) );
@@ -72,15 +74,13 @@ private void initDataSet(Context context) {
 	c.moveToFirst ();
 
 	Log.d ( "setUpAdapter", String.valueOf ( c.getCount () ) );
-	List<ContentValues> allListValues = QueryHelper.getValuesFromCursor ( c, SubtaskColumns.ALL_COLUMNS );
-	ArrayList<SubTaskModel> arrayOfList = new ArrayList<> ();
 
 	//todo change
-	List<ContentValues> allSubTaskValues = QueryHelper.getValuesFromCursor(c, SubtaskColumns.ALL_COLUMNS);
+	List<ContentValues> allSubTaskValues = QueryHelper.getValuesFromCursor(c, TaskCommentColumns.ALL_COLUMNS);
 	mDataSet = new ArrayList<>();
-	for (ContentValues SubTaskValues : allSubTaskValues) {
+	for (ContentValues commentValue : allSubTaskValues) {
 		//todo change
-		mDataSet.add(new SubTaskModel(SubTaskValues));
+		mDataSet.add(new CommentModel(commentValue));
 	}
 }
 

@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
 
         tools:showIn="@layout/activity_comment"
-        tools:context="com.vi8e.um.wunderlist.Activity.CommentActivity">
+        tools:context="com.vi8e.um.wunderlist.Activity.Comment.CommentActivity">
 
 
 

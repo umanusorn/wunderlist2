@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.vi8e.um.wunderlist.Activity.Comment.CommentRecycleFragment;
 import com.vi8e.um.wunderlist.Activity.Landing.LandingRecycleFragment;
 import com.vi8e.um.wunderlist.Activity.TaskDetail.SubTaskRecycleFragment;
 import com.vi8e.um.wunderlist.Model.ModelType;
@@ -34,12 +35,12 @@ public static void setUpRecycleFragment(Bundle savedInstanceState, AppCompatActi
 
 				break;
 			case ModelType.COMMENT:
-
+				fragment = new CommentRecycleFragment();
 				break;
 			default:
 				Log.e(TAG,"ModelType ERROR:"+modelType);
 		}
-		transaction.replace(R.id.content_fragment, fragment);
+		transaction.replace(R.id.recycle_content_fragment, fragment);
 		transaction.commit();
 	}
 }

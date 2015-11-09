@@ -174,7 +174,7 @@
             </RelativeLayout>
 
             <FrameLayout
-                    android:id="@+id/content_fragment"
+                    android:id="@+id/recycle_content_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="190dp"
                     android:scrollbars="none"

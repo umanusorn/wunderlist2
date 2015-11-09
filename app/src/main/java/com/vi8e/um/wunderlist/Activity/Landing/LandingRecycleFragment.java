@@ -43,7 +43,7 @@ import java.util.List;
  */
 public class LandingRecycleFragment extends Fragment {
 
-private static final String TAG                = "SubTaskRecycleFragment";
+private static final String TAG                = "CommentRecycleFragment";
 protected RecyclerView               mRecyclerView;
 protected LandingRecycleAdapter      mAdapter;
 protected RecyclerView.LayoutManager mLayoutManager;

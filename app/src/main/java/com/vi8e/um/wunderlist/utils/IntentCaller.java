@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.vi8e.um.wunderlist.Activity.CommentActivity;
+import com.vi8e.um.wunderlist.Activity.Comment.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.DeveloperActivity;
 import com.vi8e.um.wunderlist.Activity.ListDetailActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
