@@ -73,7 +73,7 @@ void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final SubTaskA
 
 
 public static
-void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
+void showUpdateSubTaskDialog ( final SubTaskModel rowData, final AppCompatActivity activity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
 	new MaterialDialog.Builder ( activity )
 			.title ( "Edit" )
 			.positiveText ( "ACCEPT" )
@@ -85,7 +85,8 @@ void showUpdateSubTaskDialog ( final SubTaskModel rowData, final Activity activi
 					         String id = rowData.getId ();
 					         Uri uri = Uri.parse ( String.valueOf ( SubtaskColumns.CONTENT_URI ) + "/" + id );
 					         activity.getContentResolver ().update ( uri, rowData.getValues (), null, null );
-					         TaskDetailActivity.setUpAdapterListView ();
+					         TaskDetailActivity.setUpAdapterListView();
+					         RecycleUtil.setUpRecycleFragment(TaskDetailActivity.thisSavedInstanceState,activity,ModelType.SUB_TASK);
 				         }
 			         }
 			       )

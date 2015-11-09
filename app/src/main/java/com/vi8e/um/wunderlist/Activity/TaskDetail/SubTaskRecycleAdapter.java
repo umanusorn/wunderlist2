@@ -17,15 +17,19 @@
 package com.vi8e.um.wunderlist.Activity.TaskDetail;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
+import com.vi8e.um.wunderlist.utils.UiMng;
 
 import java.util.ArrayList;
 
@@ -36,7 +40,19 @@ public class SubTaskRecycleAdapter extends RecyclerView.Adapter<SubTaskRecycleAd
 private static final String TAG = "SubTaskRecycleAdapter";
 
 private ArrayList<SubTaskModel> mDataSet;
-private Context              mContext;
+private Context                 mContext;
+
+@NonNull public static View.OnClickListener onClickChkBox(final SubTaskModel rowData) {
+	return new View.OnClickListener() {
+		@Override public void onClick(View v) {
+
+			//	rowData.setDateTime ( String.valueOf ( ! rowData.getDateTime () ) );
+			Log.d(TAG, "onClickBox");
+			UiMng.toggleImgCompleteData(v, rowData, TaskDetailActivity.sContext);
+			//Utility.setTaskListViewHeight ( TaskDetailActivity.listViewSubTask );
+		}
+	};
+}
 
 // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
 
@@ -45,9 +61,12 @@ private Context              mContext;
  */
 public static class ViewHolder extends RecyclerView.ViewHolder {
 	final TextView tvTitle;
+
 	public TextView getTvTitle() {
 		return tvTitle;
 	}
+
+	ImageView chkBox;
 
 	public ViewHolder(View view) {
 		super(view);
@@ -59,6 +78,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 			}
 		});
 		tvTitle = (TextView) view.findViewById(R.id.subTaskTitle);
+		chkBox = (ImageView) view.findViewById(R.id.chkBox);
 
 	}
 }
@@ -86,14 +106,18 @@ public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 @Override
 public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 	Log.d(TAG, "Element " + position + " set.");
-	SubTaskModel listModel = mDataSet.get(position);
-	viewHolder.getTvTitle().setText(listModel.getTitle());
+	final SubTaskModel rowData = mDataSet.get(position);
+	viewHolder.getTvTitle().setText(rowData.getTitle());
+	UiMng.toggleImgCompleteData(viewHolder.chkBox, rowData, TaskDetailActivity.sContext);
 	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 		@Override public void onClick(View v) {
-
+			CustomDialog.showUpdateSubTaskDialog(rowData,
+			                                     TaskDetailActivity.thisActivity,
+			                                     TaskDetailActivity.subTaskAdapter,
+			                                     TaskDetailActivity.listViewSubTask);
 		}
 	});
-
+	viewHolder.chkBox.setOnClickListener(onClickChkBox(rowData));
 }
 
 @Override
