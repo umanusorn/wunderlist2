@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -12,6 +13,7 @@ import com.vi8e.um.wunderlist.Activity.CommentActivity;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
 import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
+import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.Model.SubTaskModel;
 import com.vi8e.um.wunderlist.R;
 import com.vi8e.um.wunderlist.adapters.CommentAdapter;
@@ -19,6 +21,7 @@ import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
 import com.vi8e.um.wunderlist.adapters.SubTaskAdapter;
 import com.vi8e.um.wunderlist.provider.subtask.SubtaskColumns;
 import com.vi8e.um.wunderlist.utils.QueryHelper;
+import com.vi8e.um.wunderlist.utils.RecycleUtil;
 import com.vi8e.um.wunderlist.utils.dropbox.UploadMultiPictures;
 
 import java.io.File;
@@ -49,22 +52,23 @@ void showAddListDialog ( final Activity thisContext, final LandingListAdapter la
 }
 
 public static
-void showAddSubTaskDialog ( final Activity thisContext, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
-	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisContext )
+void showAddSubTaskDialog ( final AppCompatActivity thisActivity, final SubTaskAdapter subTaskAdapter, final ListView listView ) {
+	MaterialDialog scoreDialog = new MaterialDialog.Builder ( thisActivity )
 			//.customView ( R.layout.dialog_todo, true )
-			.title ( thisContext.getString( R.string.add_sub_task) )
+			.title ( thisActivity.getString(R.string.add_sub_task) )
 			.positiveText ( "ADD" )
-			.input ( thisContext.getString( R.string.add_sub_task), "", new MaterialDialog.InputCallback () {
+			.input ( thisActivity.getString(R.string.add_sub_task), "", new MaterialDialog.InputCallback () {
 				@Override public
 				void onInput ( MaterialDialog materialDialog, CharSequence charSequence ) {
-					QueryHelper.addSubTaskToDB ( thisContext, String.valueOf ( charSequence ), TaskActivity.currentTask.getId (), listView );
-					TaskDetailActivity.setUpAdapterListView ();
+					QueryHelper.addSubTaskToDB ( thisActivity, String.valueOf ( charSequence ), TaskActivity.currentTask.getId (), listView );
+					TaskDetailActivity.setUpAdapterListView();
+					RecycleUtil.setUpRecycleFragment(TaskDetailActivity.thisSavedInstanceState, thisActivity, ModelType.SUB_TASK);
 					//landingListAdapter.addList ( new ListModel ( String.valueOf ( charSequence ) ), listView );
 					//Utility.setTaskListViewHeight ( listView );
 				}
 			} )
-			.negativeText ( "CANCEL" )
-			.show ();
+			.negativeText("CANCEL")
+			.show();
 }
 
 

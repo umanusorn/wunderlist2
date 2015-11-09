@@ -115,6 +115,7 @@ public static final String CANCEL_UPLOAD      = "myMethod";
 public static final String TRUE               = "true";
 private static UploadMultiPictures mUploadMultiPictures;
 public static final String FALSE = "false";
+public static Bundle thisSavedInstanceState;
 
 @Override
 protected
@@ -125,6 +126,7 @@ void onCreate ( Bundle savedInstanceState ) {
 	thisActivity = this;
 	currentTask = TaskActivity.currentTask;
 
+	thisSavedInstanceState =savedInstanceState;
 	RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.SUB_TASK);
 
 	sFragmentManager = getSupportFragmentManager ();
