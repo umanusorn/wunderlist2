@@ -61,7 +61,6 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 		tvTitle = (TextView) view.findViewById(R.id.subTaskTitle);
 
 	}
-
 }
 
 /**
