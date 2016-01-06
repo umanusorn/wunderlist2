@@ -123,6 +123,14 @@ void setActiveListBgColor ( int position ) {
 }
 
 public static
+void setActiveListBgColor( int position ,LandingListAdapter landingListAdapter,Context context) {
+	RelativeLayout rowListRootView = landingListAdapter.getItem(position).getRowRootView ();
+	rowListRootView.setBackgroundColor ( context.getResources ().getColor ( R.color.blue_400_trans50 ) );
+	rowListRootView.setAlpha((float) 1.0);
+}
+
+
+public static
 void setInActiveListBgColor ( int position ,LandingListAdapter landingListAdapter,Context context) {
 	RelativeLayout rowListRootView = landingListAdapter.getItem ( position ).getRowRootView ();
 	rowListRootView.setBackgroundColor ( context.getResources ().getColor ( R.color.white ) );

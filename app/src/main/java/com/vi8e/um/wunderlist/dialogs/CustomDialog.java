@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.vi8e.um.wunderlist.Activity.LandingActivity;
@@ -115,7 +116,8 @@ void showCancelUploadDialog ( final Activity thisContext, final Intent intent, f
 
 					if ( uploadMultiPictures != null ) {
 						uploadMultiPictures.cancelUpload ();
-						intent.putExtra ( TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.FALSE );
+						intent.putExtra(TaskDetailActivity.CANCEL_UPLOAD, TaskDetailActivity.FALSE);
+						Toast.makeText(thisContext,"Upload canceled",Toast.LENGTH_SHORT).show();
 						Log.d ( TAG, "canceled uploadBtn" );
 					}
 				}

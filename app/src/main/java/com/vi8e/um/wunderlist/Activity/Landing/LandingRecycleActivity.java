@@ -18,17 +18,22 @@
 package com.vi8e.um.wunderlist.Activity.Landing;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
+import com.vi8e.um.wunderlist.Model.ListModel;
 import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.R;
+import com.vi8e.um.wunderlist.adapters.LandingListAdapter;
+import com.vi8e.um.wunderlist.dialogs.CustomDialog;
 import com.vi8e.um.wunderlist.utils.ActivityUi;
 import com.vi8e.um.wunderlist.utils.IntentCaller;
 import com.vi8e.um.wunderlist.utils.RecycleUtil;
-import com.vi8e.um.wunderlist.utils.UiMng;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -45,13 +50,21 @@ private AppCompatActivity thisActivity;
 private Menu              menu;
 Toolbar mToolbar;
 
+public static ListModel          currentList;
+static        ActionBar          mActionBar;
+public static LandingListAdapter mLandingListAdapter;
+public static int                currentListPosition;
+public static boolean            isLongClick;
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     thisActivity = this;
     setContentView(R.layout.activity_landing_recycle);
     RecycleUtil.setUpRecycleFragment(savedInstanceState, thisActivity, ModelType.LIST);
-    ActivityUi.setToolBar(thisActivity, mToolbar, UiMng.getVersionName(getApplication()));
+    // ActivityUi.setToolBar(thisActivity, mToolbar, UiMng.getVersionName(getApplication()));
+    ActivityUi.setToolBar(thisActivity, mToolbar, "MyTask");
+  /*  setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );*/
 }
 
 @Override
@@ -64,26 +77,72 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId ();
+    int id = item.getItemId();
     //noinspection SimplifiableIfStatement
-    if ( id == R.id.menu_setting ) {
+    if (id == R.id.menu_setting) {
         IntentCaller.developer(thisActivity);
         return true;
     }
-    if ( id == R.id.delete ) {
-       // deleteSpecificList ( getApplicationContext (), currentList.getId () );
+    if (id == R.id.delete) {
+        // deleteSpecificList ( getApplicationContext (), currentList.getId () );
     }
 
-    if ( id == R.id.duplicateList ) {
-       // duplicateSpecificList ();
+    if (id == R.id.duplicateList) {
+        //duplicateSpecificList();
     }
 
-    if ( id == R.id.menu_edit ) {
+    if (id == R.id.menu_edit) {
         //IntentCaller.listDetailActivity ( getApplicationContext (), currentList );
     }
 
     ActivityUi.setMenuNormal(thisActivity, menu);
     return super.onOptionsItemSelected(item);
 }
+
+private
+void setFloatingActionBtnClickListener ( View view, final ListView listView, final LandingListAdapter landingListAdapter ) {
+    com.getbase.floatingactionbutton.FloatingActionButton newListBtn
+        = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_a );
+    com.getbase.floatingactionbutton.FloatingActionButton toDoBtn = ( com.getbase.floatingactionbutton.FloatingActionButton ) view.findViewById ( R.id.action_b );
+
+    newListBtn.setOnClickListener ( new View.OnClickListener () {
+        @Override public
+        void onClick ( View v ) {
+            CustomDialog.showAddListDialog(thisActivity, landingListAdapter, listView);
+        }
+    } );
+    toDoBtn.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View v) {
+            CustomDialog.showAddListDialog(thisActivity, landingListAdapter, listView);
+        }
+    });
+}
+
+
+/*
+private void duplicateSpecificList() {
+    ListModel newListModel = new ListModel(currentList);
+    newListModel.setTitle(newListModel.getTitle() + " Copy");
+    Uri uri = QueryHelper.addListToDB(getApplicationContext(), newListModel);
+    //listSelection.delete ( getApplicationContext () );
+
+    TaskSelection taskSelection = new TaskSelection();
+    taskSelection.listid(currentList.getId());
+
+    TaskCursor taskCursor = taskSelection.query(getApplicationContext());
+
+    taskCursor.moveToFirst();
+
+    List<ContentValues> allListValues = QueryHelper.getValuesFromCursor(taskCursor, TaskColumns.ALL_COLUMNS);
+    for (int i = 0; i < allListValues.size(); i++) {
+        ContentValues values = allListValues.get ( i );
+        Log.d(TAG, "duplicating " + values.getAsString(TaskColumns.TASK_TITLE));
+        values.put ( TaskColumns.LISTID, uri.getPathSegments ().get ( 1 ) );
+        QueryHelper.addTaskToDB ( getApplicationContext (), new TaskModel( values ) );
+    }
+    QueryHelper.updateListAdapter(newListModel, listView);
+}
+*/
+
 
 }

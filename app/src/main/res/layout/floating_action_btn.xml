@@ -31,6 +31,7 @@
                 fab:fab_colorNormal="@color/blue_500"
                 android:tintMode="src_atop"
                 android:tint="@color/white"
+                android:visibility="gone"
                 fab:fab_title="1"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

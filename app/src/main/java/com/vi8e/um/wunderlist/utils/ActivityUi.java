@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.vi8e.um.wunderlist.Activity.LandingActivity;
 import com.vi8e.um.wunderlist.R;
 
 
@@ -23,15 +24,16 @@ Toolbar initToolbar (Toolbar toolbar,AppCompatActivity appCompatActivity,ActionB
 	toolbar = ( Toolbar ) appCompatActivity.findViewById ( R.id.toolbar );
 	appCompatActivity.setSupportActionBar(toolbar);
 	actionBar = appCompatActivity.getSupportActionBar();
-	toolbar.setVisibility ( View.VISIBLE );
+	toolbar.setVisibility(View.VISIBLE);
 	return toolbar;
 }
 
 public static
 void setMenuNormal ( AppCompatActivity thisActivity, Menu menu ) {
 	Log.d("", "setMenuNormal");
-	menu.clear ();
-	thisActivity.getMenuInflater ().inflate ( R.menu.menu_main_normal, menu );
+	menu.clear();
+	thisActivity.getMenuInflater ().inflate(R.menu.menu_main_normal, menu);
+
 }
 
 public static
@@ -46,27 +48,31 @@ void setToolBar ( final AppCompatActivity activity, Toolbar toolbar, String titl
 	actionBar.setDisplayShowTitleEnabled(true);
 	actionBar.setDisplayHomeAsUpEnabled(true);
 	actionBar.setDisplayShowHomeEnabled(true);
-	toolbar.setNavigationOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
+	toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
 			activity.finish();
 		}
-	} );
+	});
 }
 
 public static
 void setActiveToolBar (AppCompatActivity thisActivity,Toolbar toolbar,String title,Context context) {
 
 	//toolbar
-	thisActivity.getSupportActionBar ().setTitle ( title );
+	thisActivity.getSupportActionBar ().setTitle(title);
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.blue_400 ) ) );
 }
 
 public static
 void setInActiveToolBar (Toolbar toolbar,Context context) {
 
-	toolbar.setTitle ( "" );
+	toolbar.setTitle ( "MyTask" );
 	toolbar.setBackgroundDrawable ( new ColorDrawable ( context.getResources ().getColor ( R.color.transparent ) ) );
+	try{
+		LandingActivity.collapsingToolbarLayout.setTitle("MyTask");
+	}catch (Exception e){
+		Log.e("name",e.toString());
+	}
 }
 
 public static

@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -57,25 +58,24 @@ import io.fabric.sdk.android.Fabric;
 public
 class LandingActivity extends AppCompatActivity {
 
-private static final String TAG = LandingActivity.class.getSimpleName ();
-static Toolbar toolbar;
-static Context sContext;
-CollapsingToolbarLayout collapsingToolbarLayout;
-ActionBarDrawerToggle   drawerToggle;
-CoordinatorLayout       rootLayout;
-FloatingActionButton    fabBtn;
-static DynamicListView listView;
+private static final String TAG = LandingActivity.class.getSimpleName();
+static        Toolbar                 toolbar;
+static        Context                 sContext;
+public static CollapsingToolbarLayout collapsingToolbarLayout;
+ActionBarDrawerToggle drawerToggle;
+CoordinatorLayout     rootLayout;
+FloatingActionButton  fabBtn;
+static        DynamicListView    listView;
 //static NestedScrollView nestedScrollView;
 public static ListModel          currentList;
 static        ActionBar          mActionBar;
 public static LandingListAdapter mLandingListAdapter;
-static public        AppCompatActivity  thisActivity;
+static public AppCompatActivity  thisActivity;
 static        Menu               menu;
 public static int                currentListPosition;
 public static boolean            isLongClick;
 
-public static
-boolean isDragging () {
+public static boolean isDragging() {
 	return isDragging;
 }
 
@@ -83,24 +83,33 @@ private static boolean isDragging;
 private static final int INITIAL_DELAY_MILLIS = 100;
 
 @Override
-protected
-void onCreate ( Bundle savedInstanceState ) {
-	super.onCreate ( savedInstanceState );
-	Fabric.with ( this, new Crashlytics () );
-	setContentView ( R.layout.activity_landing );
+protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	Fabric.with(this, new Crashlytics());
+	setContentView(R.layout.activity_landing_can_collapse);
+	//setContentView(R.layout.activity_landing_drag_swipe);
 	thisActivity = this;
 
-	sContext = getApplicationContext ();
+	sContext = getApplicationContext();
 //	nestedScrollView = ( NestedScrollView ) findViewById ( R.id.nested_scroll_view );
-	toolbar = ActivityUi.initToolbar(toolbar,thisActivity,mActionBar);
-	initInstances ();
+	toolbar = ActivityUi.initToolbar(toolbar, thisActivity, mActionBar);
 
-	mLandingListAdapter = setUpAdapterListView ( thisActivity, getApplication (), mLandingListAdapter );
-	setListView ();
-	setFloatingActionBtnClickListener ( getWindow ().getDecorView ().findViewById ( android.R.id.content ), listView, mLandingListAdapter );
+	rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
+	collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+	//collapsingToolbarLayout.setTitle ( "" + UiMng.getVersionName(getApplication()) );
+//	collapsingToolbarLayout.setTitle("MyTask");
+	toolbar.setTitle("MyTask");
 
-	int minHeight = ( int ) UiMng.getListHeight(thisActivity);
-	Log.d ( TAG, "minHeight Of NestedScroll= " + minHeight );
+
+	Log.d(TAG, "test0012");
+	mLandingListAdapter = setUpAdapterListView(thisActivity, getApplication(), mLandingListAdapter);
+	setListView();
+	setFloatingActionBtnClickListener(getWindow().getDecorView().findViewById(android.R.id.content),
+	                                  listView,
+	                                  mLandingListAdapter);
+
+	int minHeight = (int) UiMng.getListHeight(thisActivity);
+	Log.d(TAG, "minHeight Of NestedScroll= " + minHeight);
 	/*nestedScrollView.setMinimumHeight ( minHeight );
 	ViewCompat.setNestedScrollingEnabled ( listView, true );
 	nestedScrollView.setNestedScrollingEnabled ( true );
@@ -111,22 +120,23 @@ void onCreate ( Bundle savedInstanceState ) {
 
 }
 
-private
-void setListView () {
-	listView = ( DynamicListView ) findViewById ( R.id.listViewTaskInComplete );
+private void setListView() {
+	listView = (DynamicListView) findViewById(R.id.listViewTaskInComplete);
 	ArrayAdapter<ListModel> adapter = mLandingListAdapter;
 
-	SimpleSwipeUndoAdapter simpleSwipeUndoAdapter = new SimpleSwipeUndoAdapter ( adapter, this, new OnSwipeDismissCallBack ( adapter ) );
-	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter ( simpleSwipeUndoAdapter );
-	animAdapter.setAbsListView ( listView );
+	SimpleSwipeUndoAdapter
+			simpleSwipeUndoAdapter =
+			new SimpleSwipeUndoAdapter(adapter, this, new OnSwipeDismissCallBack(adapter));
+	AlphaInAnimationAdapter animAdapter = new AlphaInAnimationAdapter(simpleSwipeUndoAdapter);
+	animAdapter.setAbsListView(listView);
 
-	assert animAdapter.getViewAnimator () != null;
-	animAdapter.getViewAnimator ().setInitialDelayMillis ( INITIAL_DELAY_MILLIS );
+	assert animAdapter.getViewAnimator() != null;
+	animAdapter.getViewAnimator().setInitialDelayMillis(INITIAL_DELAY_MILLIS);
 
-	listView.setAdapter ( animAdapter );
+	listView.setAdapter(animAdapter);
 
-	listView.enableDragAndDrop ();
-	listView.setDraggableManager ( new TouchViewDraggableManager ( R.id.list_row_draganddrop_touchview ) );
+	listView.enableDragAndDrop();
+	listView.setDraggableManager(new TouchViewDraggableManager(R.id.list_row_draganddrop_touchview ) );
 	listView.setOnItemMovedListener ( new MyOnItemMovedListener () );
 	listView.setOnItemLongClickListener ( new MyOnItemLongClickListener ( listView ) );
 
@@ -156,16 +166,24 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 	boolean onItemLongClick ( final AdapterView<?> parent, final View view, final int position, final long id ) {
 		Log.d ( TAG, "onItemLongClick" );
 
-		setCurrentList ( position, mLandingListAdapter );
-		ActivityUi.setMenuList ( thisActivity, menu );
-		ActivityUi.setActiveList ( currentList.getRowRootView (), sContext );
-		ActivityUi.setActiveToolBar ( thisActivity, toolbar, currentList.getTitle (), sContext );
+		setCurrentList(position, mLandingListAdapter);
+		ActivityUi.setMenuList(thisActivity, menu);
+		ActivityUi.setActiveList(currentList.getRowRootView(), sContext);
+		ActivityUi.setActiveToolBar(thisActivity, toolbar, currentList.getTitle(), sContext);
+		try {
+			collapsingToolbarLayout.setTitle(currentList.getTitle());
+		}catch (Exception e){
+			Log.e(TAG,e.toString());
+		}
+		view.setBackgroundColor(Color.BLUE);
 
 		if ( listView != null ) {
 			Log.d ( TAG, "StartDrag position=" + position );
 			try {
+				//todo drag here
 				listView.startDragging ( position - listView.getHeaderViewsCount () );
-				LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
+				//LandingListAdapter.setInActiveListBgColor ( position, mLandingListAdapter, thisActivity );
+				LandingListAdapter.setActiveListBgColor(position, mLandingListAdapter, thisActivity);
 				isDragging = true;
 			}
 			catch ( ClassCastException e ) {
@@ -174,6 +192,8 @@ class MyOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
 			catch ( IllegalStateException e ) {
 				Log.e ( TAG, e.getMessage () );
 			}
+
+
 		}
 		return true;
 	}
@@ -290,35 +310,25 @@ void setFloatingActionBtnClickListener ( View view, final ListView listView, fin
 			CustomDialog.showAddListDialog ( thisActivity, landingListAdapter, listView );
 		}
 	} );
-	toDoBtn.setOnClickListener ( new View.OnClickListener () {
-		@Override public
-		void onClick ( View v ) {
-			CustomDialog.showAddListDialog ( thisActivity, landingListAdapter, listView );
+	toDoBtn.setOnClickListener(new View.OnClickListener() {
+		@Override public void onClick(View v) {
+			CustomDialog.showAddListDialog(thisActivity, landingListAdapter, listView);
 		}
-	} );
-}
-
-private
-void initInstances () {
-	rootLayout = ( CoordinatorLayout ) findViewById ( R.id.rootLayout );
-	collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById ( R.id.collapsingToolbarLayout );
-
-	collapsingToolbarLayout.setTitle ( "" + UiMng.getVersionName(getApplication()) );
-
+	});
 }
 
 @Override
 public
 void onPostCreate ( Bundle savedInstanceState ) {
-	super.onPostCreate ( savedInstanceState );
+	super.onPostCreate(savedInstanceState);
 //	drawerToggle.syncState ();
 }
 
 @Override
 public
 void onConfigurationChanged ( Configuration newConfig ) {
-	super.onConfigurationChanged ( newConfig );
-	drawerToggle.onConfigurationChanged ( newConfig );
+	super.onConfigurationChanged(newConfig);
+	drawerToggle.onConfigurationChanged(newConfig);
 }
 
 @Override
@@ -328,9 +338,11 @@ void onPause () {
 	ActivityUi.setMenuNormal(thisActivity, menu);
 
 	Log.d ( "Main", "EnterOnPause dataCount" + mLandingListAdapter.getCount () );
-	ActivityUi.setInActiveToolBar ( toolbar, sContext );
-	saveListAdapterToDb ();
+	ActivityUi.setInActiveToolBar(toolbar, sContext);
+	saveListAdapterToDb();
 }
+
+
 
 private
 void saveListAdapterToDb () {
@@ -368,6 +380,7 @@ boolean onCreateOptionsMenu ( Menu menu ) {
 	// Inflate the menu; this adds items to the action bar if it is present.
 	this.menu = menu;
 	ActivityUi.setMenuNormal(thisActivity, LandingActivity.menu);
+
 	return true;
 }
 
@@ -409,7 +422,8 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 		return true;
 	}
 	if ( id == R.id.delete ) {
-		deleteSpecificList ( getApplicationContext (), currentList.getId () );
+		CustomDialog.showDialogDelete(thisActivity, mLandingListAdapter, listView);
+		//deleteSpecificList ( getApplicationContext (), currentList.getId () );
 	}
 
 	if ( id == R.id.duplicateList ) {
@@ -421,7 +435,8 @@ boolean onOptionsItemSelected ( MenuItem item ) {
 	}
 
 	ActivityUi.setMenuNormal(thisActivity, menu);
-
+ActivityUi.setInActiveToolBar(toolbar, getApplicationContext());
+	collapsingToolbarLayout.setTitle("MyTask");
 	return super.onOptionsItemSelected ( item );
 }
 

@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vi8e.um.wunderlist.Activity.TaskActivity;
-import com.vi8e.um.wunderlist.Activity.TaskDetail.TaskDetailActivity;
 import com.vi8e.um.wunderlist.Model.CommentModel;
 import com.vi8e.um.wunderlist.Model.ModelType;
 import com.vi8e.um.wunderlist.R;
@@ -26,7 +25,7 @@ import com.vi8e.um.wunderlist.utils.RecycleUtil;
 public
 class CommentActivity extends AppCompatActivity {
 
-private static final String TAG = TaskDetailActivity.class.getSimpleName();
+private final String TAG = this.getClass().getSimpleName();
 Toolbar mToolbar;
 String title = "Comment";
 Context  thisContext;

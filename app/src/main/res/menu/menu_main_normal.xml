@@ -13,6 +13,7 @@
           android:title="Search"
           android:orderInCategory="100"
           android:icon="@mipmap/wl_icon_search_mag"
+          android:visible="false"
           app:showAsAction="always"
           />
 </menu>
